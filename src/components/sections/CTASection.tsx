@@ -26,7 +26,7 @@ export function CTASection() {
           className="relative rounded-3xl overflow-hidden p-8 md:p-16"
         >
           {/* Background gradient */}
-          <div className="absolute inset-0 bg-gradient-to-br from-amber-500 via-orange-500 to-amber-600" />
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-500 via-cyan-500 to-blue-600" />
 
           {/* Pattern overlay */}
           <div
@@ -94,7 +94,7 @@ export function CTASection() {
                   href="https://estatehive.in"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-white text-amber-600 font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5"
+                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-white text-blue-600 font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5"
                 >
                   Visit EstateHive.in
                   <ArrowRight className="w-4 h-4" />

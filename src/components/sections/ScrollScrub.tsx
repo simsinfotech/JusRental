@@ -259,7 +259,7 @@ export function ScrollScrub() {
                           opacity: Math.min(1, opacity * 1.5),
                         }}
                       >
-                        <span className="inline-block text-sm font-medium uppercase tracking-[0.2em] text-amber-300 drop-shadow-lg">
+                        <span className="inline-block text-sm font-medium uppercase tracking-[0.2em] text-cyan-300 drop-shadow-lg">
                           {scene.kicker}
                         </span>
                       </div>

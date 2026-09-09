@@ -8,6 +8,7 @@ import {
   Play,
   MapPin,
   Home,
+  Building2,
   IndianRupee,
   CalendarDays,
   Search,
@@ -24,7 +25,7 @@ import { useAnimateInView } from '@/hooks/useAnimateInView';
 import { AnimatedCounter } from '@/components/ui/AnimatedCounter';
 import { AREAS, WHATSAPP_URL } from '@/lib/constants';
 
-const searchTabs = ['Rent', 'Buy', 'PG / Hostel'] as const;
+const propertyTypes = ['Apartment', 'Villa', 'Independent House'];
 
 const locations = [
   'Koramangala',
@@ -64,10 +65,10 @@ const stats = [
 const popularAreas = AREAS.slice(0, 4);
 
 export function HeroSection() {
-  const [activeTab, setActiveTab] = useState(0);
   const [selectedLocation, setSelectedLocation] = useState('');
   const [selectedBhk, setSelectedBhk] = useState('');
   const [selectedBudget, setSelectedBudget] = useState('');
+  const [selectedType, setSelectedType] = useState('');
   const { ref: trustRef, controls: trustControls } = useAnimateInView(0.2);
   const { ref: statsRef, controls: statsControls } = useAnimateInView(0.2);
 
@@ -98,8 +99,8 @@ export function HeroSection() {
             >
               {/* Kicker */}
               <motion.div variants={fadeInUp} className="flex items-center gap-3">
-                <div className="w-10 h-px bg-amber-400" />
-                <span className="text-sm font-medium uppercase tracking-[0.2em] text-amber-400">
+                <div className="w-10 h-px bg-cyan-400" />
+                <span className="text-sm font-medium uppercase tracking-[0.2em] text-cyan-400">
                   Your Home Awaits
                 </span>
               </motion.div>
@@ -110,7 +111,7 @@ export function HeroSection() {
                 className="text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] font-bold font-[family-name:var(--font-heading)] leading-[1.08] text-white"
               >
                 Homes That Feel{' '}
-                <span className="bg-gradient-to-r from-amber-300 to-orange-400 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">
                   Like Yours
                 </span>
               </motion.h1>
@@ -129,7 +130,7 @@ export function HeroSection() {
               <motion.div variants={fadeInUp} className="flex flex-wrap items-center gap-4 pt-2">
                 <a
                   href={WHATSAPP_URL}
-                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40 transition-all duration-300 hover:-translate-y-0.5"
+                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-300 hover:-translate-y-0.5"
                 >
                   Find Your Home
                   <ArrowRight className="w-4 h-4" />
@@ -154,25 +155,28 @@ export function HeroSection() {
               className="w-full max-w-sm mx-auto lg:mx-0 shrink-0"
             >
               <div className="rounded-2xl bg-white/10 backdrop-blur-xl border border-white/15 p-5 shadow-2xl shadow-black/20">
-                {/* Tabs */}
-                <div className="flex gap-1 mb-5 bg-white/5 rounded-lg p-1">
-                  {searchTabs.map((tab, i) => (
-                    <button
-                      key={tab}
-                      onClick={() => setActiveTab(i)}
-                      className={`flex-1 py-2.5 text-sm font-medium rounded-lg transition-all duration-300 cursor-pointer ${
-                        activeTab === i
-                          ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-lg'
-                          : 'text-white/60 hover:text-white/80'
-                      }`}
-                    >
-                      {tab}
-                    </button>
-                  ))}
-                </div>
-
                 {/* Form Fields */}
                 <div className="space-y-3">
+                  {/* Property Type */}
+                  <div>
+                    <label className="text-xs font-medium text-white/50 uppercase tracking-wider mb-1.5 block">
+                      Property Type
+                    </label>
+                    <div className="relative">
+                      <Home className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
+                      <select
+                        value={selectedType}
+                        onChange={(e) => setSelectedType(e.target.value)}
+                        className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-white/8 border border-white/10 text-white placeholder:text-white/40 focus:outline-none focus:border-cyan-400/50 focus:ring-1 focus:ring-cyan-400/20 transition-all appearance-none cursor-pointer"
+                      >
+                        <option value="" className="bg-slate-800">All types</option>
+                        {propertyTypes.map((t) => (
+                          <option key={t} value={t} className="bg-slate-800">{t}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
                   {/* Location */}
                   <div>
                     <label className="text-xs font-medium text-white/50 uppercase tracking-wider mb-1.5 block">
@@ -183,7 +187,7 @@ export function HeroSection() {
                       <select
                         value={selectedLocation}
                         onChange={(e) => setSelectedLocation(e.target.value)}
-                        className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-white/8 border border-white/10 text-white placeholder:text-white/40 focus:outline-none focus:border-amber-400/50 focus:ring-1 focus:ring-amber-400/20 transition-all appearance-none cursor-pointer"
+                        className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-white/8 border border-white/10 text-white placeholder:text-white/40 focus:outline-none focus:border-cyan-400/50 focus:ring-1 focus:ring-cyan-400/20 transition-all appearance-none cursor-pointer"
                       >
                         <option value="" className="bg-slate-800">Select area</option>
                         {locations.map((loc) => (
@@ -200,11 +204,11 @@ export function HeroSection() {
                         BHK Type
                       </label>
                       <div className="relative">
-                        <Home className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
+                        <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
                         <select
                           value={selectedBhk}
                           onChange={(e) => setSelectedBhk(e.target.value)}
-                          className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-white/8 border border-white/10 text-white placeholder:text-white/40 focus:outline-none focus:border-amber-400/50 focus:ring-1 focus:ring-amber-400/20 transition-all appearance-none cursor-pointer"
+                          className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-white/8 border border-white/10 text-white placeholder:text-white/40 focus:outline-none focus:border-cyan-400/50 focus:ring-1 focus:ring-cyan-400/20 transition-all appearance-none cursor-pointer"
                         >
                           <option value="" className="bg-slate-800">Any</option>
                           {bhkOptions.map((b) => (
@@ -222,7 +226,7 @@ export function HeroSection() {
                         <select
                           value={selectedBudget}
                           onChange={(e) => setSelectedBudget(e.target.value)}
-                          className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-white/8 border border-white/10 text-white placeholder:text-white/40 focus:outline-none focus:border-amber-400/50 focus:ring-1 focus:ring-amber-400/20 transition-all appearance-none cursor-pointer"
+                          className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-white/8 border border-white/10 text-white placeholder:text-white/40 focus:outline-none focus:border-cyan-400/50 focus:ring-1 focus:ring-cyan-400/20 transition-all appearance-none cursor-pointer"
                         >
                           <option value="" className="bg-slate-800">Any range</option>
                           {budgetOptions.map((b) => (
@@ -242,13 +246,13 @@ export function HeroSection() {
                       <CalendarDays className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
                       <input
                         type="date"
-                        className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-white/8 border border-white/10 text-white focus:outline-none focus:border-amber-400/50 focus:ring-1 focus:ring-amber-400/20 transition-all cursor-pointer [color-scheme:dark]"
+                        className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-white/8 border border-white/10 text-white focus:outline-none focus:border-cyan-400/50 focus:ring-1 focus:ring-cyan-400/20 transition-all cursor-pointer [color-scheme:dark]"
                       />
                     </div>
                   </div>
 
                   {/* Search Button */}
-                  <button className="w-full py-3 rounded-lg bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold flex items-center justify-center gap-2 shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40 transition-all duration-300 hover:-translate-y-0.5 cursor-pointer">
+                  <button className="w-full py-3 rounded-lg bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold flex items-center justify-center gap-2 shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-300 hover:-translate-y-0.5 cursor-pointer">
                     <Search className="w-4 h-4" />
                     Search Homes
                   </button>
@@ -336,8 +340,8 @@ export function HeroSection() {
                 variants={fadeInUp}
                 className="flex items-center gap-3"
               >
-                <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-amber-500/10 to-orange-500/10 flex items-center justify-center shrink-0">
-                  <badge.icon className="w-5 h-5 text-amber-600" />
+                <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-500/10 to-cyan-500/10 flex items-center justify-center shrink-0">
+                  <badge.icon className="w-5 h-5 text-blue-600" />
                 </div>
                 <div>
                   <p className="text-sm font-semibold">{badge.label}</p>

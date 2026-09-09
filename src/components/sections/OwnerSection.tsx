@@ -101,8 +101,8 @@ export function OwnerSection() {
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
                 >
-                  <div className="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center shrink-0">
-                    <b.icon className="w-5 h-5 text-amber-600" />
+                  <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center shrink-0">
+                    <b.icon className="w-5 h-5 text-blue-600" />
                   </div>
                   <span className="text-[var(--muted)]">{b.text}</span>
                 </motion.div>
@@ -117,7 +117,7 @@ export function OwnerSection() {
           <motion.div variants={slideInRight}>
             <GlassCard gradient>
               <div className="flex items-center gap-2 mb-6">
-                <IndianRupee className="w-5 h-5 text-orange-500" />
+                <IndianRupee className="w-5 h-5 text-cyan-500" />
                 <h3 className="text-lg font-semibold font-[family-name:var(--font-heading)]">
                   Rental Estimator
                 </h3>
@@ -133,7 +133,7 @@ export function OwnerSection() {
                       onClick={() => setSelectedBHK(bhk)}
                       className={`px-4 py-2 rounded-xl text-sm font-medium transition-all cursor-pointer ${
                         selectedBHK === bhk
-                          ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white'
+                          ? 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white'
                           : 'bg-surface-light text-[var(--muted)] hover:bg-surface-lighter'
                       }`}
                     >
@@ -153,7 +153,7 @@ export function OwnerSection() {
                       onClick={() => setSelectedArea(area)}
                       className={`px-4 py-2 rounded-xl text-sm font-medium transition-all cursor-pointer ${
                         selectedArea === area
-                          ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white'
+                          ? 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white'
                           : 'bg-surface-light text-[var(--muted)] hover:bg-surface-lighter'
                       }`}
                     >
@@ -164,7 +164,7 @@ export function OwnerSection() {
               </div>
 
               {/* Estimate */}
-              <div className="p-6 rounded-2xl bg-gradient-to-br from-amber-500/10 to-orange-500/10 border border-amber-500/20 text-center">
+              <div className="p-6 rounded-2xl bg-gradient-to-br from-blue-500/10 to-cyan-500/10 border border-blue-500/20 text-center">
                 <p className="text-sm text-[var(--muted)] mb-2">Estimated Monthly Rent</p>
                 <motion.p
                   key={estimate}
