@@ -49,9 +49,9 @@ export function Footer() {
               <Image
                 src="/images/logo.png"
                 alt="JusRental"
-                width={120}
-                height={32}
-                className="h-7 w-auto"
+                width={180}
+                height={46}
+                className="h-11 w-auto"
               />
             </a>
             <p className="text-sm text-[var(--muted)] mb-4">
@@ -117,7 +117,7 @@ export function Footer() {
               <li>
                 <a href={WHATSAPP_URL} className="flex items-start gap-2 text-sm text-[var(--muted)] hover:text-[var(--foreground)] transition-colors">
                   <Phone className="w-4 h-4 mt-0.5 shrink-0" />
-                  +91 98765 43210
+                  +91 90363 17765
                 </a>
               </li>
               <li>
@@ -129,7 +129,7 @@ export function Footer() {
               <li>
                 <span className="flex items-start gap-2 text-sm text-[var(--muted)]">
                   <MapPin className="w-4 h-4 mt-0.5 shrink-0" />
-                  HSR Layout, Bangalore 560102
+                  Bengaluru 560077, Karnataka, India
                 </span>
               </li>
             </ul>

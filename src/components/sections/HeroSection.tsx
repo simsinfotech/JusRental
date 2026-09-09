@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
 import { motion } from 'motion/react';
 import {
   ArrowRight,
@@ -16,14 +15,11 @@ import {
   Headphones,
   BadgePercent,
   Lock,
-  Star,
-  ChevronLeft,
-  ChevronRight,
 } from 'lucide-react';
 import { fadeInUp, staggerContainer } from '@/lib/animations';
 import { useAnimateInView } from '@/hooks/useAnimateInView';
 import { AnimatedCounter } from '@/components/ui/AnimatedCounter';
-import { AREAS, WHATSAPP_URL } from '@/lib/constants';
+import { WHATSAPP_URL } from '@/lib/constants';
 
 const propertyTypes = ['Apartment', 'Villa', 'Independent House'];
 
@@ -62,8 +58,6 @@ const stats = [
   { value: 98, suffix: '%', label: 'Satisfaction Rate' },
 ];
 
-const popularAreas = AREAS.slice(0, 4);
-
 export function HeroSection() {
   const [selectedLocation, setSelectedLocation] = useState('');
   const [selectedBhk, setSelectedBhk] = useState('');
@@ -98,8 +92,7 @@ export function HeroSection() {
               className="space-y-6 max-w-xl shrink-0"
             >
               {/* Kicker */}
-              <motion.div variants={fadeInUp} className="flex items-center gap-3">
-                <div className="w-10 h-px bg-cyan-400" />
+              <motion.div variants={fadeInUp}>
                 <span className="text-sm font-medium uppercase tracking-[0.2em] text-cyan-400">
                   Your Home Awaits
                 </span>
@@ -264,64 +257,6 @@ export function HeroSection() {
 
         {/* Bottom gradient */}
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[var(--background)] to-transparent z-10" />
-      </section>
-
-      {/* ─── POPULAR AREAS ─── */}
-      <section className="relative -mt-20 z-20 pb-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between mb-6">
-            <div>
-              <h2 className="text-xl font-bold font-[family-name:var(--font-heading)]">
-                Popular Areas
-              </h2>
-              <p className="text-sm text-[var(--muted)]">
-                Explore top neighborhoods in Bangalore
-              </p>
-            </div>
-            <div className="flex gap-2">
-              <button className="w-9 h-9 rounded-full border border-glass-border flex items-center justify-center hover:bg-surface-light transition-colors cursor-pointer">
-                <ChevronLeft className="w-4 h-4" />
-              </button>
-              <button className="w-9 h-9 rounded-full border border-glass-border flex items-center justify-center hover:bg-surface-light transition-colors cursor-pointer">
-                <ChevronRight className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {popularAreas.map((area) => (
-              <motion.a
-                key={area.id}
-                href="#areas"
-                className="group relative rounded-2xl overflow-hidden aspect-[4/3] block"
-                whileHover={{ y: -4 }}
-                transition={{ type: 'spring', stiffness: 300 }}
-              >
-                <Image
-                  src={area.image}
-                  alt={area.name}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
-                  sizes="(max-width: 768px) 50vw, 25vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <div className="flex items-center gap-1 mb-1">
-                    <Star className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
-                    <span className="text-xs font-medium text-white/90">4.8</span>
-                  </div>
-                  <h3 className="font-semibold text-white font-[family-name:var(--font-heading)]">
-                    {area.name}
-                  </h3>
-                  <p className="text-xs text-white/70 flex items-center gap-1 mt-0.5">
-                    <MapPin className="w-3 h-3" />
-                    {area.properties} properties &middot; {area.priceRange}
-                  </p>
-                </div>
-              </motion.a>
-            ))}
-          </div>
-        </div>
       </section>
 
       {/* ─── TRUST BADGES ─── */}

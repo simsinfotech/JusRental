@@ -5,7 +5,6 @@ import { motion, useScroll, useMotionValueEvent } from 'motion/react';
 import Image from 'next/image';
 import { Menu } from 'lucide-react';
 import { NAV_LINKS, WHATSAPP_URL } from '@/lib/constants';
-import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { Button } from '@/components/ui/Button';
 import { MobileMenu } from './MobileMenu';
 
@@ -71,7 +70,6 @@ export function Navbar() {
 
             {/* Actions */}
             <div className={`flex items-center gap-3 ${scrolled ? '' : 'text-white'}`}>
-              <ThemeToggle />
               <div className="hidden md:block">
                 <a
                   href={WHATSAPP_URL}

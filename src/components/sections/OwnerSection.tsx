@@ -46,7 +46,7 @@ export function OwnerSection() {
         style={{ y: imgY }}
       >
         <Image
-          src="/images/owner-property.png"
+          src="/images/pexels-maxavans-5087046.jpg"
           alt=""
           fill
           className="object-cover"
@@ -74,7 +74,7 @@ export function OwnerSection() {
             {/* Building image card */}
             <div className="relative rounded-2xl overflow-hidden aspect-[16/9] mb-8 group">
               <Image
-                src="/images/owner-property.png"
+                src="/images/pexels-maxavans-5087046.jpg"
                 alt="Modern Bengaluru apartment building at dusk"
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"

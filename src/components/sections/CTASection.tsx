@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { ExternalLink, ArrowRight, Building2, TrendingUp, Users, Globe } from 'lucide-react';
+import { ExternalLink, Building2, TrendingUp, Users, Globe } from 'lucide-react';
 import { fadeInUp, staggerContainer } from '@/lib/animations';
 import { useAnimateInView } from '@/hooks/useAnimateInView';
 
@@ -54,13 +54,6 @@ export function CTASection() {
           <div className="relative z-10 flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
             {/* Left text */}
             <div className="flex-1 text-center lg:text-left">
-              <motion.div variants={fadeInUp} className="flex items-center gap-2 justify-center lg:justify-start mb-4">
-                <div className="w-8 h-px bg-white/60" />
-                <span className="text-sm font-medium uppercase tracking-[0.15em] text-white/80">
-                  From the makers of JusRental
-                </span>
-              </motion.div>
-
               <motion.h2
                 variants={fadeInUp}
                 className="text-3xl md:text-4xl lg:text-5xl font-bold font-[family-name:var(--font-heading)] text-white mb-4"
@@ -72,9 +65,9 @@ export function CTASection() {
                 variants={fadeInUp}
                 className="text-lg text-white/85 max-w-lg mb-6"
               >
-                Your complete real estate platform. Whether you are buying your first home,
-                selling a property, or looking for commercial space — EstateHive connects you
-                with verified listings and trusted agents across India.
+                JusRental is powered by EstateHive.in — India&apos;s complete real estate platform
+                for buying, selling, and renting properties. From verified listings to trusted
+                agents, EstateHive is the backbone behind everything we do.
               </motion.p>
 
               {/* Highlights grid */}
@@ -95,15 +88,6 @@ export function CTASection() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-white text-blue-600 font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5"
-                >
-                  Visit EstateHive.in
-                  <ArrowRight className="w-4 h-4" />
-                </a>
-                <a
-                  href="https://estatehive.in"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white/10 text-white border border-white/20 font-medium hover:bg-white/20 transition-all duration-300"
                 >
                   <ExternalLink className="w-4 h-4" />
                   Learn More
@@ -128,7 +112,7 @@ export function CTASection() {
                   EstateHive.in
                 </h3>
                 <p className="text-sm text-white/70 mb-5">
-                  India&apos;s smarter way to buy, sell &amp; rent real estate.
+                  The parent platform powering JusRental &amp; more.
                 </p>
                 <div className="flex items-center justify-center gap-4 text-white/60 text-xs">
                   <span className="flex items-center gap-1">
