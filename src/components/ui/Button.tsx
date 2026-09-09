@@ -12,11 +12,11 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variants = {
   primary:
-    'bg-gradient-to-r from-primary to-accent text-white shadow-lg shadow-primary/25 hover:shadow-primary/40',
+    'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40',
   secondary:
     'bg-surface-light text-[var(--foreground)] border border-glass-border hover:bg-surface-lighter',
   outline:
-    'border border-primary/50 text-primary hover:bg-primary/10',
+    'border border-amber-500/50 text-amber-600 hover:bg-amber-500/10',
   ghost:
     'text-[var(--foreground)] hover:bg-black/5 dark:hover:bg-white/5',
 };

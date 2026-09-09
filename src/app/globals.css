@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-primary: #3b82f6;
-  --color-primary-dark: #2563eb;
-  --color-primary-light: #60a5fa;
-  --color-accent: #06b6d4;
-  --color-accent-dark: #0891b2;
+  --color-primary: #f59e0b;
+  --color-primary-dark: #d97706;
+  --color-primary-light: #fbbf24;
+  --color-accent: #ea580c;
+  --color-accent-dark: #c2410c;
   --color-surface: #ffffff;
   --color-surface-light: #f1f5f9;
   --color-surface-lighter: #e2e8f0;
@@ -35,7 +35,7 @@
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--color-primary) transparent;
+  scrollbar-color: #f59e0b transparent;
 }
 
 html {
@@ -98,11 +98,11 @@ body {
 }
 
 .hover-glow:hover {
-  box-shadow: 0 0 30px rgba(59, 130, 246, 0.12), 0 0 60px rgba(6, 182, 212, 0.06);
+  box-shadow: 0 0 30px rgba(245, 158, 11, 0.12), 0 0 60px rgba(234, 88, 12, 0.06);
 }
 
 [data-theme="dark"] .hover-glow:hover {
-  box-shadow: 0 0 30px rgba(59, 130, 246, 0.2), 0 0 60px rgba(6, 182, 212, 0.1);
+  box-shadow: 0 0 30px rgba(245, 158, 11, 0.2), 0 0 60px rgba(234, 88, 12, 0.1);
 }
 
 /* Floating blob */

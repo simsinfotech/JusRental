@@ -41,7 +41,7 @@ export function SectionHeading({
       {badge && (
         <motion.span
           variants={fadeInUp}
-          className="inline-block mb-4 px-4 py-1.5 rounded-full text-sm font-medium bg-primary/10 text-primary border border-primary/20"
+          className="inline-block mb-4 px-4 py-1.5 rounded-full text-sm font-medium bg-amber-500/10 text-amber-600 border border-amber-500/20"
         >
           {badge}
         </motion.span>

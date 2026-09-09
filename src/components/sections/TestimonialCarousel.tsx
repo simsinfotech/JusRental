@@ -38,7 +38,7 @@ export default function TestimonialCarousel() {
       {TESTIMONIALS.map((t) => (
         <SwiperSlide key={t.id} className="py-4">
           <GlassCard className="h-full">
-            <Quote className="w-8 h-8 text-primary/30 mb-4" />
+            <Quote className="w-8 h-8 text-amber-500/30 mb-4" />
             <p className="text-[var(--foreground)] leading-relaxed mb-6">
               &ldquo;{t.content}&rdquo;
             </p>

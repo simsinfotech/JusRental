@@ -57,7 +57,7 @@ export function AIMatchingSection() {
           <motion.div variants={fadeInUp}>
             <GlassCard className="space-y-6">
               <div className="flex items-center gap-2 mb-2">
-                <SlidersHorizontal className="w-5 h-5 text-primary" />
+                <SlidersHorizontal className="w-5 h-5 text-amber-600" />
                 <h3 className="text-lg font-semibold font-[family-name:var(--font-heading)]">
                   Your Preferences
                 </h3>
@@ -73,7 +73,7 @@ export function AIMatchingSection() {
                       onClick={() => setSelectedBHK(opt)}
                       className={`px-4 py-2 rounded-xl text-sm font-medium transition-all cursor-pointer ${
                         selectedBHK === opt
-                          ? 'bg-gradient-to-r from-primary to-accent text-white'
+                          ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white'
                           : 'bg-surface-light text-[var(--muted)] hover:bg-surface-lighter'
                       }`}
                     >
@@ -95,7 +95,7 @@ export function AIMatchingSection() {
                       onClick={() => setSelectedBudget(opt)}
                       className={`px-4 py-2 rounded-xl text-sm font-medium transition-all cursor-pointer ${
                         selectedBudget === opt
-                          ? 'bg-gradient-to-r from-primary to-accent text-white'
+                          ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white'
                           : 'bg-surface-light text-[var(--muted)] hover:bg-surface-lighter'
                       }`}
                     >
@@ -115,7 +115,7 @@ export function AIMatchingSection() {
                       onClick={() => toggleAmenity(opt)}
                       className={`px-3 py-1.5 rounded-lg text-sm transition-all cursor-pointer ${
                         selectedAmenities.includes(opt)
-                          ? 'bg-primary/20 text-primary border border-primary/30'
+                          ? 'bg-amber-500/20 text-amber-600 border border-amber-500/30'
                           : 'bg-surface-light text-[var(--muted)] hover:bg-surface-lighter border border-transparent'
                       }`}
                     >
@@ -139,7 +139,7 @@ export function AIMatchingSection() {
           <motion.div variants={fadeInUp}>
             <GlassCard className="h-full flex flex-col">
               <div className="flex items-center gap-2 mb-6">
-                <Sparkles className="w-5 h-5 text-accent" />
+                <Sparkles className="w-5 h-5 text-orange-500" />
                 <h3 className="text-lg font-semibold font-[family-name:var(--font-heading)]">
                   AI Matches
                 </h3>
@@ -161,8 +161,8 @@ export function AIMatchingSection() {
                         className="flex items-center justify-between p-4 rounded-xl bg-surface-light hover:bg-surface-lighter transition-colors"
                       >
                         <div className="flex items-center gap-3">
-                          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-                            <MapPin className="w-5 h-5 text-primary" />
+                          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500/20 to-orange-500/20 flex items-center justify-center">
+                            <MapPin className="w-5 h-5 text-amber-600" />
                           </div>
                           <div>
                             <p className="font-medium text-sm">{result.title}</p>
@@ -187,8 +187,8 @@ export function AIMatchingSection() {
                     className="flex-1 flex items-center justify-center text-center"
                   >
                     <div>
-                      <div className="w-20 h-20 mx-auto rounded-full bg-primary/10 flex items-center justify-center mb-4 animate-pulse">
-                        <Sparkles className="w-8 h-8 text-primary" />
+                      <div className="w-20 h-20 mx-auto rounded-full bg-amber-500/10 flex items-center justify-center mb-4 animate-pulse">
+                        <Sparkles className="w-8 h-8 text-amber-600" />
                       </div>
                       <p className="text-[var(--muted)]">
                         Set your preferences and click &ldquo;Find Matches&rdquo; to see AI-curated results
