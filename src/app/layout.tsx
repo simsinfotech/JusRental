@@ -21,6 +21,10 @@ export const metadata: Metadata = {
   description:
     'Discover 1200+ verified rental properties across 25+ Bangalore neighborhoods. Zero brokerage. AI-powered matching. Move in hassle-free.',
   keywords: ['Bangalore rentals', 'no brokerage', 'rental homes', 'PG', 'flats for rent'],
+  icons: {
+    icon: '/images/monogram.png',
+    apple: '/images/monogram.png',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
