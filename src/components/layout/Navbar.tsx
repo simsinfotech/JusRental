@@ -43,9 +43,9 @@ export function Navbar() {
               <Image
                 src="/images/logo.png"
                 alt="JusRental"
-                width={140}
-                height={36}
-                className={`h-8 w-auto transition-all duration-300 ${
+                width={180}
+                height={46}
+                className={`h-11 w-auto transition-all duration-300 ${
                   scrolled ? '' : 'brightness-0 invert'
                 }`}
                 priority
