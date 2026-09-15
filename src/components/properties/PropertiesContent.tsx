@@ -70,18 +70,28 @@ export function PropertiesContent({
   const totalPages = Math.ceil(properties.length / ITEMS_PER_PAGE);
   const paged = properties.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE);
 
+  const startItem = (page - 1) * ITEMS_PER_PAGE + 1;
+  const endItem = Math.min(page * ITEMS_PER_PAGE, properties.length);
+
   return (
     <section className="py-8 md:py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top bar */}
         <div className="flex items-center justify-between mb-6">
-          <button
-            onClick={() => setMobileFiltersOpen(true)}
-            className="lg:hidden flex items-center gap-2 px-4 py-2 rounded-lg border border-glass-border text-sm cursor-pointer"
-          >
-            <SlidersHorizontal className="w-4 h-4" />
-            Filters
-          </button>
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => setMobileFiltersOpen(true)}
+              className="lg:hidden flex items-center gap-2 px-4 py-2 rounded-lg border border-glass-border text-sm cursor-pointer"
+            >
+              <SlidersHorizontal className="w-4 h-4" />
+              Filters
+            </button>
+            {properties.length > 0 && (
+              <p className="text-sm text-[var(--muted)] hidden sm:block">
+                Showing {startItem}–{endItem} of {properties.length} properties in North Bangalore
+              </p>
+            )}
+          </div>
 
           <div className="flex items-center gap-2 ml-auto">
             <ArrowUpDown className="w-4 h-4 text-[var(--muted)]" />
@@ -110,9 +120,16 @@ export function PropertiesContent({
           />
 
           <div className="flex-1">
+            {/* Mobile result count */}
+            {properties.length > 0 && (
+              <p className="text-sm text-[var(--muted)] mb-4 sm:hidden">
+                Showing {startItem}–{endItem} of {properties.length} properties
+              </p>
+            )}
+
             {paged.length > 0 ? (
               <>
-                <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+                <div className="flex flex-col gap-5">
                   {paged.map((property) => (
                     <PropertyCard key={property.id} property={property} />
                   ))}
