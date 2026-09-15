@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Home, MapPin, IndianRupee, ImagePlus, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { Home, MapPin, IndianRupee, ImagePlus, AlertCircle, CheckCircle2, Eye } from 'lucide-react';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { createSupabaseBrowser } from '@/lib/supabase-browser';
 
@@ -142,7 +142,7 @@ export default function AddPropertyPage() {
 
       {/* Step indicator */}
       <div className="flex items-center gap-2 mb-8">
-        {[1, 2, 3].map((s) => (
+        {[1, 2, 3, 4].map((s) => (
           <div key={s} className="flex items-center gap-2">
             <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
               step >= s
@@ -151,11 +151,11 @@ export default function AddPropertyPage() {
             }`}>
               {s}
             </div>
-            {s < 3 && <div className={`w-12 h-0.5 ${step > s ? 'bg-blue-500' : 'bg-surface-light'}`} />}
+            {s < 4 && <div className={`w-12 h-0.5 ${step > s ? 'bg-blue-500' : 'bg-surface-light'}`} />}
           </div>
         ))}
         <span className="ml-2 text-sm text-[var(--muted)]">
-          {step === 1 ? 'Basic Info' : step === 2 ? 'Details' : 'Images'}
+          {step === 1 ? 'Basic Info' : step === 2 ? 'Details' : step === 3 ? 'Images' : 'Preview'}
         </span>
       </div>
 
@@ -428,13 +428,128 @@ export default function AddPropertyPage() {
                   Back
                 </button>
                 <button
-                  type="submit"
-                  disabled={loading}
-                  className="px-8 py-2.5 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold shadow-lg cursor-pointer disabled:opacity-50"
+                  type="button"
+                  onClick={() => setStep(4)}
+                  className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-medium cursor-pointer"
                 >
-                  {loading ? 'Submitting...' : 'Submit Property'}
+                  Next
                 </button>
               </div>
+            </div>
+          </GlassCard>
+        )}
+
+        {/* Step 4: Preview */}
+        {step === 4 && (
+          <GlassCard hover={false}>
+            <div className="flex items-center gap-2 mb-6">
+              <Eye className="w-5 h-5 text-blue-600" />
+              <h2 className="text-lg font-semibold">Review Your Property</h2>
+            </div>
+
+            <h3 className="text-xl font-bold mb-4">{form.title}</h3>
+
+            <div className="grid sm:grid-cols-2 gap-x-6 gap-y-3 mb-6">
+              <div>
+                <span className="text-xs text-[var(--muted)]">Location</span>
+                <p className="font-semibold">{form.location}</p>
+              </div>
+              <div>
+                <span className="text-xs text-[var(--muted)]">Area</span>
+                <p className="font-semibold">{form.area}</p>
+              </div>
+              <div>
+                <span className="text-xs text-[var(--muted)]">Rent</span>
+                <p className="font-semibold">₹{Number(form.price).toLocaleString()}/mo</p>
+              </div>
+              <div>
+                <span className="text-xs text-[var(--muted)]">BHK</span>
+                <p className="font-semibold">{form.bhk} BHK</p>
+              </div>
+              <div>
+                <span className="text-xs text-[var(--muted)]">Sqft</span>
+                <p className="font-semibold">{form.sqft} sqft</p>
+              </div>
+              <div>
+                <span className="text-xs text-[var(--muted)]">Deposit</span>
+                <p className="font-semibold">{form.deposit ? `₹${Number(form.deposit).toLocaleString()}` : `₹${(Number(form.price) * 2).toLocaleString()} (2x rent)`}</p>
+              </div>
+              <div>
+                <span className="text-xs text-[var(--muted)]">Property Type</span>
+                <p className="font-semibold">{form.type}</p>
+              </div>
+              <div>
+                <span className="text-xs text-[var(--muted)]">Furnished</span>
+                <p className="font-semibold">{form.furnished}</p>
+              </div>
+              <div>
+                <span className="text-xs text-[var(--muted)]">Floor</span>
+                <p className="font-semibold">{form.floor || '—'}</p>
+              </div>
+              <div>
+                <span className="text-xs text-[var(--muted)]">Facing</span>
+                <p className="font-semibold">{form.facing}</p>
+              </div>
+              <div>
+                <span className="text-xs text-[var(--muted)]">Sharing Type</span>
+                <p className="font-semibold">{form.sharingType}</p>
+              </div>
+            </div>
+
+            {form.description && (
+              <div className="mb-6">
+                <span className="text-xs text-[var(--muted)]">Description</span>
+                <p className="mt-1 text-sm leading-relaxed">{form.description}</p>
+              </div>
+            )}
+
+            {form.amenities.length > 0 && (
+              <div className="mb-6">
+                <span className="text-xs text-[var(--muted)] block mb-2">Amenities</span>
+                <div className="flex flex-wrap gap-2">
+                  {form.amenities.map((a) => (
+                    <span key={a} className="px-3 py-1.5 rounded-lg text-sm font-medium bg-blue-500/10 text-blue-600">
+                      {a}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <div className="mb-6">
+              <span className="text-xs text-[var(--muted)] block mb-2">Images</span>
+              {images.length > 0 ? (
+                <div className="flex flex-wrap gap-2">
+                  {images.map((img, i) => (
+                    <div key={i} className="w-20 h-20 rounded-lg overflow-hidden border border-glass-border">
+                      <img
+                        src={URL.createObjectURL(img)}
+                        alt={`Preview ${i + 1}`}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-sm text-[var(--muted)]">(Default image will be used)</p>
+              )}
+            </div>
+
+            <div className="flex justify-between">
+              <button
+                type="button"
+                onClick={() => setStep(3)}
+                className="px-6 py-2.5 rounded-xl border border-glass-border text-sm font-medium cursor-pointer"
+              >
+                Back
+              </button>
+              <button
+                type="submit"
+                disabled={loading}
+                className="px-8 py-2.5 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold shadow-lg cursor-pointer disabled:opacity-50"
+              >
+                {loading ? 'Submitting...' : 'Submit Property'}
+              </button>
             </div>
           </GlassCard>
         )}
