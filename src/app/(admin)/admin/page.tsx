@@ -71,7 +71,7 @@ export default async function AdminDashboardPage() {
     <div>
       <div className="flex items-center gap-3 mb-8">
         <LayoutDashboard className="w-6 h-6 text-red-600" />
-        <h1 className="text-2xl font-bold font-[family-name:var(--font-space-grotesk)]">Admin Dashboard</h1>
+        <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">Admin Dashboard</h1>
       </div>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">

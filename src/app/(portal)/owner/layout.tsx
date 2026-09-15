@@ -48,7 +48,7 @@ export default function OwnerLayout({ children }: { children: React.ReactNode })
         </button>
         <Link href="/" className="flex items-center gap-2">
           <Image src="/images/monogram.png" alt="JusRental" width={28} height={28} />
-          <span className="font-semibold font-[family-name:var(--font-space-grotesk)]">Owner Portal</span>
+          <span className="font-semibold font-[family-name:var(--font-heading)]">Owner Portal</span>
         </Link>
         <div className="w-9" />
       </div>
@@ -66,7 +66,7 @@ export default function OwnerLayout({ children }: { children: React.ReactNode })
           <div className="p-4 flex items-center justify-between border-b border-glass-border">
             <Link href="/" className="flex items-center gap-2">
               <Image src="/images/monogram.png" alt="JusRental" width={32} height={32} />
-              <span className="font-semibold font-[family-name:var(--font-space-grotesk)]">Owner Portal</span>
+              <span className="font-semibold font-[family-name:var(--font-heading)]">Owner Portal</span>
             </Link>
             <button onClick={() => setSidebarOpen(false)} className="lg:hidden p-1 rounded-lg hover:bg-surface-light cursor-pointer">
               <X className="w-4 h-4" />

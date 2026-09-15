@@ -21,7 +21,7 @@ export default async function OwnerPropertiesPage() {
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center gap-3">
           <Home className="w-6 h-6 text-blue-600" />
-          <h1 className="text-2xl font-bold font-[family-name:var(--font-space-grotesk)]">My Properties</h1>
+          <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">My Properties</h1>
         </div>
         <Link
           href="/owner/properties/new"
@@ -38,7 +38,7 @@ export default async function OwnerPropertiesPage() {
             <GlassCard key={p.id} hover={false}>
               <div className="flex items-start justify-between mb-3">
                 <div>
-                  <h3 className="font-semibold font-[family-name:var(--font-space-grotesk)]">{p.title}</h3>
+                  <h3 className="font-semibold font-[family-name:var(--font-heading)]">{p.title}</h3>
                   <p className="text-sm text-[var(--muted)] flex items-center gap-1 mt-1">
                     <MapPin className="w-3 h-3" />
                     {p.location}

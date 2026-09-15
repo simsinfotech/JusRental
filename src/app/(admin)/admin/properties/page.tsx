@@ -155,7 +155,7 @@ export default function AdminPropertiesPage() {
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center gap-3">
           <Home className="w-6 h-6 text-red-600" />
-          <h1 className="text-2xl font-bold font-[family-name:var(--font-space-grotesk)]">Properties</h1>
+          <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">Properties</h1>
           <span className="text-sm text-[var(--muted)]">({properties.length})</span>
         </div>
         <Link

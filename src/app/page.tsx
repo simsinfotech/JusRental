@@ -12,23 +12,21 @@ import {
   fetchFeaturedProperties,
   fetchAreas,
   fetchTestimonials,
-  fetchKeyFeatures,
   fetchBlogPosts,
 } from '@/lib/dal';
 
 export default async function Home() {
-  const [properties, areas, testimonials, features, blogPosts] = await Promise.all([
+  const [properties, areas, testimonials, blogPosts] = await Promise.all([
     fetchFeaturedProperties(6),
     fetchAreas(),
     fetchTestimonials(),
-    fetchKeyFeatures(),
     fetchBlogPosts(),
   ]);
 
   return (
     <>
       <HeroSection />
-      <KeyFeaturesSection features={features} />
+      <KeyFeaturesSection />
       <PropertyShowcase properties={properties} />
       <AreaExplorer areas={areas} />
       <AIMatchingSection />

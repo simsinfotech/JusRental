@@ -106,7 +106,7 @@ export default function AdminSEOPage() {
     <div>
       <div className="flex items-center gap-3 mb-8">
         <Search className="w-6 h-6 text-red-600" />
-        <h1 className="text-2xl font-bold font-[family-name:var(--font-space-grotesk)]">SEO Management</h1>
+        <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">SEO Management</h1>
       </div>
 
       {message && (
@@ -120,7 +120,7 @@ export default function AdminSEOPage() {
 
       {/* SEO Score */}
       <div className="glass-card p-6 mb-6">
-        <h2 className="text-lg font-semibold font-[family-name:var(--font-space-grotesk)] mb-4">
+        <h2 className="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">
           SEO Health Score
         </h2>
         <div className="flex items-center gap-6 mb-4">

@@ -125,13 +125,13 @@ export default function OwnerProfilePage() {
     <div>
       <div className="flex items-center gap-3 mb-8">
         <User className="w-6 h-6 text-blue-600" />
-        <h1 className="text-2xl font-bold font-[family-name:var(--font-space-grotesk)]">My Profile</h1>
+        <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">My Profile</h1>
       </div>
 
       {/* Profile Form */}
       <form onSubmit={handleSubmit}>
         <GlassCard hover={false} className="mb-6">
-          <h2 className="text-lg font-semibold font-[family-name:var(--font-space-grotesk)] mb-4">
+          <h2 className="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">
             Personal Information
           </h2>
 
@@ -207,7 +207,7 @@ export default function OwnerProfilePage() {
       {/* Change Password */}
       <form onSubmit={handlePasswordChange}>
         <GlassCard hover={false}>
-          <h2 className="text-lg font-semibold font-[family-name:var(--font-space-grotesk)] mb-4 flex items-center gap-2">
+          <h2 className="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4 flex items-center gap-2">
             <Lock className="w-5 h-5" />
             Change Password
           </h2>

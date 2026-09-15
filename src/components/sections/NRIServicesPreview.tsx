@@ -12,28 +12,34 @@ import {
 } from 'lucide-react';
 import { fadeInUp, staggerContainer } from '@/lib/animations';
 import { useAnimateInView } from '@/hooks/useAnimateInView';
-import { SectionHeading } from '@/components/ui/SectionHeading';
-import { GlassCard } from '@/components/ui/GlassCard';
 
 const highlights = [
-  { icon: Users, title: 'Tenant Discovery', desc: 'Verified tenants from our 5,000+ pool' },
-  { icon: FileText, title: 'Legal Support', desc: 'Rental agreements & registration' },
-  { icon: IndianRupee, title: 'Rent Collection', desc: 'Automated monthly transfers' },
-  { icon: Wrench, title: 'Maintenance', desc: 'Property upkeep & inspections' },
+  { icon: Users, title: 'Tenant Discovery', desc: 'Verified tenants from our 5,000+ pool', color: 'bg-blue-50 text-blue-600' },
+  { icon: FileText, title: 'Legal Support', desc: 'Rental agreements & registration', color: 'bg-emerald-50 text-emerald-600' },
+  { icon: IndianRupee, title: 'Rent Collection', desc: 'Automated monthly transfers', color: 'bg-amber-50 text-amber-600' },
+  { icon: Wrench, title: 'Maintenance', desc: 'Property upkeep & inspections', color: 'bg-purple-50 text-purple-600' },
 ];
 
 export function NRIServicesPreview() {
   const { ref, controls } = useAnimateInView(0.1);
 
   return (
-    <section className="section-padding relative overflow-hidden">
+    <section className="py-16 md:py-24 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionHeading
-          badge="NRI Property Management"
-          title="Own Property in Bangalore? We Manage It."
-          highlight="We Manage It."
-          subtitle="Complete end-to-end property management for NRI owners. From tenant finding to rent collection, all handled remotely."
-        />
+        {/* Section Header */}
+        <div className="text-center mb-12">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#006194]/10 text-[#006194] text-sm font-medium mb-4">
+            <Globe className="w-3.5 h-3.5" />
+            NRI Property Management
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold font-[family-name:var(--font-heading)] text-[#131b2e] mb-4">
+            Own Property in Bangalore?{' '}
+            <span className="text-[#006194]">We Manage It.</span>
+          </h2>
+          <p className="text-[#3f4850] max-w-2xl mx-auto">
+            Complete end-to-end property management for NRI owners. From tenant finding to rent collection, all handled remotely.
+          </p>
+        </div>
 
         <motion.div
           ref={ref}
@@ -44,15 +50,15 @@ export function NRIServicesPreview() {
         >
           {highlights.map((item) => (
             <motion.div key={item.title} variants={fadeInUp}>
-              <GlassCard className="h-full text-center group" whileHover={{ y: -4 }}>
-                <div className="w-12 h-12 mx-auto rounded-xl bg-gradient-to-br from-blue-500/10 to-cyan-500/10 flex items-center justify-center mb-3 group-hover:from-blue-500/20 group-hover:to-cyan-500/20 transition-colors">
-                  <item.icon className="w-6 h-6 text-blue-600" />
+              <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 p-6 text-center group h-full">
+                <div className={`w-14 h-14 rounded-full ${item.color} flex items-center justify-center mx-auto mb-4`}>
+                  <item.icon className="w-6 h-6" />
                 </div>
-                <h3 className="font-semibold font-[family-name:var(--font-heading)] mb-1">
+                <h3 className="font-semibold font-[family-name:var(--font-heading)] text-[#131b2e] mb-1">
                   {item.title}
                 </h3>
-                <p className="text-sm text-[var(--muted)]">{item.desc}</p>
-              </GlassCard>
+                <p className="text-sm text-[#3f4850]">{item.desc}</p>
+              </div>
             </motion.div>
           ))}
         </motion.div>
@@ -60,7 +66,7 @@ export function NRIServicesPreview() {
         <div className="text-center">
           <Link
             href="/nri-services"
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-300 hover:-translate-y-0.5"
+            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-[#006194] hover:bg-[#005080] text-white font-semibold shadow-lg shadow-[#006194]/20 transition-all duration-300 hover:-translate-y-0.5"
           >
             <Globe className="w-4 h-4" />
             Explore NRI Services

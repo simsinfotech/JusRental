@@ -137,7 +137,7 @@ export default function AddPropertyPage() {
     <div>
       <div className="flex items-center gap-3 mb-8">
         <Home className="w-6 h-6 text-blue-600" />
-        <h1 className="text-2xl font-bold font-[family-name:var(--font-space-grotesk)]">Add New Property</h1>
+        <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">Add New Property</h1>
       </div>
 
       {/* Step indicator */}

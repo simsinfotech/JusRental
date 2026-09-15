@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Space_Grotesk, Inter } from 'next/font/google';
+import { Plus_Jakarta_Sans, Inter } from 'next/font/google';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
 import { SmoothScrollProvider } from '@/components/providers/SmoothScrollProvider';
 import { GTMProvider } from '@/components/providers/GTMProvider';
@@ -7,8 +7,8 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import './globals.css';
 
-const spaceGrotesk = Space_Grotesk({
-  variable: '--font-space-grotesk',
+const plusJakarta = Plus_Jakarta_Sans({
+  variable: '--font-plus-jakarta',
   subsets: ['latin'],
   display: 'swap',
 });
@@ -34,7 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${spaceGrotesk.variable} ${inter.variable} antialiased`}
+      className={`${plusJakarta.variable} ${inter.variable} antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-screen bg-[var(--background)] text-[var(--foreground)]" suppressHydrationWarning>

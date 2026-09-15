@@ -13,7 +13,7 @@ interface ChartDataItem {
 export function AdminDashboardCharts({ chartData }: { chartData: ChartDataItem[] }) {
   return (
     <div className="glass-card p-6">
-      <h2 className="text-lg font-semibold font-[family-name:var(--font-space-grotesk)] mb-6">
+      <h2 className="text-lg font-semibold font-[family-name:var(--font-heading)] mb-6">
         Leads — Last 30 Days
       </h2>
       <div className="h-72">

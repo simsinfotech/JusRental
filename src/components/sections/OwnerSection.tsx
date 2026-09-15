@@ -1,21 +1,17 @@
 'use client';
 
-import { useState, useRef } from 'react';
-import Image from 'next/image';
+import { useState } from 'react';
 import Link from 'next/link';
-import { motion, useScroll, useTransform } from 'motion/react';
-import { TrendingUp, CheckCircle2, Users, Shield, IndianRupee } from 'lucide-react';
+import { motion } from 'motion/react';
+import { TrendingUp, CheckCircle2, Users, Shield, IndianRupee, Home } from 'lucide-react';
 import { fadeInUp, staggerContainer, slideInLeft, slideInRight } from '@/lib/animations';
 import { useAnimateInView } from '@/hooks/useAnimateInView';
-import { SectionHeading } from '@/components/ui/SectionHeading';
-import { GlassCard } from '@/components/ui/GlassCard';
-import { Button } from '@/components/ui/Button';
 
 const benefits = [
-  { icon: Users, text: 'Access to 5,000+ verified tenants' },
-  { icon: Shield, text: 'Tenant background verification' },
-  { icon: TrendingUp, text: 'Market-rate rental pricing' },
-  { icon: CheckCircle2, text: 'Hassle-free agreement & move-in' },
+  'Access to 5,000+ verified tenants',
+  'Tenant background verification included',
+  'Market-rate rental pricing analysis',
+  'Hassle-free agreement & move-in',
 ];
 
 const bhkRentMap: Record<string, Record<string, string>> = {
@@ -24,117 +20,81 @@ const bhkRentMap: Record<string, Record<string, string>> = {
   '3 BHK': { Hennur: '₹28,000 - ₹42,000', Hebbal: '₹32,000 - ₹50,000', Yelahanka: '₹22,000 - ₹38,000', Thanisandra: '₹25,000 - ₹40,000', Jakkur: '₹24,000 - ₹38,000', Horamavu: '₹22,000 - ₹35,000' },
 };
 
+const areaKeys = Object.keys(bhkRentMap['2 BHK']);
+
 export function OwnerSection() {
   const { ref, controls } = useAnimateInView(0.1);
   const [selectedBHK, setSelectedBHK] = useState('2 BHK');
   const [selectedArea, setSelectedArea] = useState('Hennur');
-  const sectionRef = useRef<HTMLElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start end', 'end start'],
-  });
-  const imgY = useTransform(scrollYProgress, [0, 1], ['-10%', '10%']);
 
   const estimate = bhkRentMap[selectedBHK]?.[selectedArea] || '₹15,000 - ₹25,000';
 
   return (
-    <section id="owners" ref={sectionRef} className="section-padding relative overflow-hidden">
-      {/* Parallax background image */}
-      <motion.div
-        className="absolute inset-0 z-0 opacity-[0.07]"
-        style={{ y: imgY }}
-      >
-        <Image
-          src="/images/pexels-maxavans-5087046.jpg"
-          alt=""
-          fill
-          className="object-cover"
-          sizes="100vw"
-        />
-      </motion.div>
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionHeading
-          badge="For Property Owners"
-          title="List Your Property, Find Tenants Fast"
-          highlight="Fast"
-          subtitle="Join 400+ property owners who trust JusRental to find quality tenants."
-        />
-
+    <section id="owners" className="py-16 md:py-24 bg-[#0F172A]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           ref={ref}
           variants={staggerContainer}
           initial="hidden"
           animate={controls}
-          className="grid lg:grid-cols-2 gap-8 items-center"
+          className="grid lg:grid-cols-2 gap-12 items-center"
         >
-          {/* Benefits + building image */}
+          {/* Left — Owner Proposition */}
           <motion.div variants={slideInLeft} className="space-y-6">
-            {/* Building image card */}
-            <div className="relative rounded-2xl overflow-hidden aspect-[16/9] mb-8 group">
-              <Image
-                src="/images/pexels-maxavans-5087046.jpg"
-                alt="Modern Bengaluru apartment building at dusk"
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-              <div className="absolute bottom-4 left-4 right-4">
-                <p className="text-white font-semibold font-[family-name:var(--font-heading)] text-lg">
-                  Your property deserves the best tenants
-                </p>
-              </div>
-            </div>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-cyan-400 text-sm font-medium">
+              <Home className="w-3.5 h-3.5" />
+              For Property Owners
+            </span>
 
-            <h3 className="text-2xl font-bold font-[family-name:var(--font-heading)]">
-              Why owners love <span className="text-gradient">JusRental</span>
-            </h3>
-            <div className="space-y-4">
-              {benefits.map((b, i) => (
-                <motion.div
-                  key={b.text}
-                  className="flex items-center gap-4"
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                >
-                  <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center shrink-0">
-                    <b.icon className="w-5 h-5 text-blue-600" />
-                  </div>
-                  <span className="text-[var(--muted)]">{b.text}</span>
-                </motion.div>
+            <h2 className="text-3xl md:text-4xl font-bold font-[family-name:var(--font-heading)] text-white">
+              List Your Property,{' '}
+              <span className="text-cyan-400">Find Tenants Fast</span>
+            </h2>
+
+            <p className="text-white/60 text-lg">
+              Join 400+ property owners who trust JusRental to find quality tenants. Zero hassle, maximum returns.
+            </p>
+
+            <div className="space-y-3">
+              {benefits.map((text) => (
+                <div key={text} className="flex items-center gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-cyan-400 shrink-0" />
+                  <span className="text-white/80">{text}</span>
+                </div>
               ))}
             </div>
-            <Button href="/list-property" size="lg">
-              List Your Property
-            </Button>
+
+            <Link
+              href="/list-property"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-white text-[#0F172A] font-semibold hover:bg-slate-100 transition-all duration-300 hover:-translate-y-0.5"
+            >
+              <Home className="w-4 h-4" />
+              List Your Property Free
+            </Link>
           </motion.div>
 
-          {/* Rental Estimator */}
+          {/* Right — Rental Estimator */}
           <motion.div variants={slideInRight}>
-            <GlassCard gradient>
+            <div className="bg-white rounded-2xl p-6 md:p-8 shadow-xl">
               <div className="flex items-center gap-2 mb-6">
-                <IndianRupee className="w-5 h-5 text-cyan-500" />
-                <h3 className="text-lg font-semibold font-[family-name:var(--font-heading)]">
+                <IndianRupee className="w-5 h-5 text-[#006194]" />
+                <h3 className="text-lg font-semibold font-[family-name:var(--font-heading)] text-[#131b2e]">
                   Rental Estimator
                 </h3>
               </div>
 
               {/* BHK */}
-              <div className="mb-4">
-                <label className="text-sm text-[var(--muted)] mb-2 block">Property Type</label>
-                <div className="flex gap-2">
+              <div className="mb-5">
+                <label className="text-sm text-[#3f4850] mb-2 block font-medium">Property Type</label>
+                <div className="grid grid-cols-3 gap-2">
                   {Object.keys(bhkRentMap).map((bhk) => (
                     <button
                       key={bhk}
                       onClick={() => setSelectedBHK(bhk)}
-                      className={`px-4 py-2 rounded-xl text-sm font-medium transition-all cursor-pointer ${
+                      className={`px-3 py-2.5 rounded-lg text-sm font-medium transition-all cursor-pointer border text-center ${
                         selectedBHK === bhk
-                          ? 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white'
-                          : 'bg-surface-light text-[var(--muted)] hover:bg-surface-lighter'
+                          ? 'bg-[#006194] text-white border-[#006194]'
+                          : 'bg-slate-50 text-[#3f4850] border-slate-200 hover:border-[#006194]/30'
                       }`}
                     >
                       {bhk}
@@ -145,16 +105,16 @@ export function OwnerSection() {
 
               {/* Area */}
               <div className="mb-6">
-                <label className="text-sm text-[var(--muted)] mb-2 block">Location</label>
-                <div className="flex flex-wrap gap-2">
-                  {Object.keys(bhkRentMap['2 BHK']).map((area) => (
+                <label className="text-sm text-[#3f4850] mb-2 block font-medium">Location</label>
+                <div className="grid grid-cols-3 gap-2">
+                  {areaKeys.map((area) => (
                     <button
                       key={area}
                       onClick={() => setSelectedArea(area)}
-                      className={`px-4 py-2 rounded-xl text-sm font-medium transition-all cursor-pointer ${
+                      className={`px-3 py-2.5 rounded-lg text-sm font-medium transition-all cursor-pointer border text-center ${
                         selectedArea === area
-                          ? 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white'
-                          : 'bg-surface-light text-[var(--muted)] hover:bg-surface-lighter'
+                          ? 'bg-[#006194] text-white border-[#006194]'
+                          : 'bg-slate-50 text-[#3f4850] border-slate-200 hover:border-[#006194]/30'
                       }`}
                     >
                       {area}
@@ -164,21 +124,29 @@ export function OwnerSection() {
               </div>
 
               {/* Estimate */}
-              <div className="p-6 rounded-2xl bg-gradient-to-br from-blue-500/10 to-cyan-500/10 border border-blue-500/20 text-center">
-                <p className="text-sm text-[var(--muted)] mb-2">Estimated Monthly Rent</p>
+              <div className="p-5 rounded-xl bg-slate-50 border border-slate-200 text-center mb-5">
+                <p className="text-sm text-[#3f4850] mb-2">Estimated Monthly Rent</p>
                 <motion.p
                   key={estimate}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="text-3xl font-bold text-gradient"
+                  className="text-3xl font-bold text-[#006194]"
                 >
                   {estimate}
                 </motion.p>
-                <p className="text-xs text-[var(--muted)] mt-2">
+                <p className="text-xs text-[#707881] mt-2">
                   Based on current market rates for {selectedBHK} in {selectedArea}
                 </p>
               </div>
-            </GlassCard>
+
+              <Link
+                href="/list-property"
+                className="w-full py-3 rounded-xl bg-[#006194] hover:bg-[#005080] text-white font-semibold flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer"
+              >
+                <TrendingUp className="w-4 h-4" />
+                List With This Estimate
+              </Link>
+            </div>
           </motion.div>
         </motion.div>
       </div>

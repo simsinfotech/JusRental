@@ -99,7 +99,7 @@ export default function AdminSettingsPage() {
     <div>
       <div className="flex items-center gap-3 mb-8">
         <Settings className="w-6 h-6 text-red-600" />
-        <h1 className="text-2xl font-bold font-[family-name:var(--font-space-grotesk)]">Site Settings</h1>
+        <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">Site Settings</h1>
       </div>
 
       {message && (

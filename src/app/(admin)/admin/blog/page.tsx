@@ -64,7 +64,7 @@ export default function AdminBlogPage() {
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center gap-3">
           <FileText className="w-6 h-6 text-red-600" />
-          <h1 className="text-2xl font-bold font-[family-name:var(--font-space-grotesk)]">Blog Posts</h1>
+          <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">Blog Posts</h1>
           <span className="text-sm text-[var(--muted)]">({posts.length})</span>
         </div>
         <Link

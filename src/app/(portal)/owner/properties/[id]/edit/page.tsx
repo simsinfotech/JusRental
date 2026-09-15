@@ -101,7 +101,7 @@ export default function EditPropertyPage({ params }: { params: Promise<{ id: str
     <div>
       <div className="flex items-center gap-3 mb-8">
         <Home className="w-6 h-6 text-blue-600" />
-        <h1 className="text-2xl font-bold font-[family-name:var(--font-space-grotesk)]">Edit Property</h1>
+        <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">Edit Property</h1>
       </div>
 
       {error && (

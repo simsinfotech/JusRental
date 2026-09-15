@@ -35,7 +35,7 @@ export default async function OwnerDashboard() {
     <div>
       <div className="flex items-center gap-3 mb-8">
         <LayoutDashboard className="w-6 h-6 text-blue-600" />
-        <h1 className="text-2xl font-bold font-[family-name:var(--font-space-grotesk)]">Dashboard</h1>
+        <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">Dashboard</h1>
       </div>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
@@ -55,7 +55,7 @@ export default async function OwnerDashboard() {
       </div>
 
       <GlassCard hover={false}>
-        <h2 className="text-lg font-semibold font-[family-name:var(--font-space-grotesk)] mb-4">
+        <h2 className="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4">
           Quick Actions
         </h2>
         <div className="grid sm:grid-cols-2 gap-3">

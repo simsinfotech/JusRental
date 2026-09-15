@@ -75,7 +75,7 @@ export default function AdminAddPropertyPage() {
           <ArrowLeft className="w-5 h-5" />
         </button>
         <Home className="w-6 h-6 text-red-600" />
-        <h1 className="text-2xl font-bold font-[family-name:var(--font-space-grotesk)]">Add Property</h1>
+        <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">Add Property</h1>
       </div>
 
       {error && (

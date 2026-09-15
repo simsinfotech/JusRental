@@ -20,7 +20,7 @@ export default async function OwnerAgreementPage() {
     <div>
       <div className="flex items-center gap-3 mb-8">
         <FileText className="w-6 h-6 text-blue-600" />
-        <h1 className="text-2xl font-bold font-[family-name:var(--font-space-grotesk)]">Rental Agreements</h1>
+        <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">Rental Agreements</h1>
       </div>
 
       {properties && properties.length > 0 ? (
@@ -29,7 +29,7 @@ export default async function OwnerAgreementPage() {
             <GlassCard key={property.id} hover={false}>
               <div className="flex items-start justify-between">
                 <div>
-                  <h3 className="font-semibold font-[family-name:var(--font-space-grotesk)]">{property.title}</h3>
+                  <h3 className="font-semibold font-[family-name:var(--font-heading)]">{property.title}</h3>
                   <p className="text-sm text-[var(--muted)] mt-1">{property.location}</p>
                 </div>
                 <Badge variant={property.status === 'active' ? 'success' : 'warning'}>
@@ -63,7 +63,7 @@ export default async function OwnerAgreementPage() {
       )}
 
       <GlassCard hover={false} className="mt-6">
-        <h3 className="font-semibold font-[family-name:var(--font-space-grotesk)] mb-3">
+        <h3 className="font-semibold font-[family-name:var(--font-heading)] mb-3">
           How Agreements Work
         </h3>
         <div className="space-y-3">

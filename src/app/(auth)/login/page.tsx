@@ -42,7 +42,7 @@ function LoginForm() {
         <Link href="/" className="inline-block mb-4">
           <Image src="/images/monogram.png" alt="JusRental" width={48} height={48} />
         </Link>
-        <h1 className="text-2xl font-bold font-[family-name:var(--font-space-grotesk)] text-white">
+        <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)] text-white">
           Welcome Back
         </h1>
         <p className="text-sm text-white/60 mt-1">Sign in to your JusRental account</p>

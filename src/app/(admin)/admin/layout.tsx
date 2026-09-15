@@ -50,7 +50,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </button>
         <Link href="/admin" className="flex items-center gap-2">
           <Shield className="w-5 h-5 text-red-500" />
-          <span className="font-semibold font-[family-name:var(--font-space-grotesk)]">Admin Panel</span>
+          <span className="font-semibold font-[family-name:var(--font-heading)]">Admin Panel</span>
         </Link>
         <div className="w-9" />
       </div>
@@ -67,7 +67,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <Link href="/admin" className="flex items-center gap-2">
               <Image src="/images/monogram.png" alt="JusRental" width={32} height={32} />
               <div>
-                <span className="font-semibold font-[family-name:var(--font-space-grotesk)] text-sm">JusRental</span>
+                <span className="font-semibold font-[family-name:var(--font-heading)] text-sm">JusRental</span>
                 <span className="ml-1 px-1.5 py-0.5 rounded text-[10px] font-bold bg-red-500/10 text-red-500">ADMIN</span>
               </div>
             </Link>

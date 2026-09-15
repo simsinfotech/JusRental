@@ -66,7 +66,7 @@ export default function AdminNewBlogPage() {
           <ArrowLeft className="w-5 h-5" />
         </button>
         <FileText className="w-6 h-6 text-red-600" />
-        <h1 className="text-2xl font-bold font-[family-name:var(--font-space-grotesk)]">New Blog Post</h1>
+        <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">New Blog Post</h1>
       </div>
 
       {error && (

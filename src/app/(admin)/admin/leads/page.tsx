@@ -78,7 +78,7 @@ export default function AdminLeadsPage() {
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center gap-3">
           <Users className="w-6 h-6 text-red-600" />
-          <h1 className="text-2xl font-bold font-[family-name:var(--font-space-grotesk)]">Leads</h1>
+          <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">Leads</h1>
         </div>
         <button
           onClick={exportCSV}

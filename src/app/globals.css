@@ -12,7 +12,7 @@
   --color-glass-border: rgba(0, 0, 0, 0.06);
 
   --font-sans: var(--font-inter);
-  --font-heading: var(--font-space-grotesk);
+  --font-heading: var(--font-plus-jakarta);
 }
 
 /* Light mode (default — matching reference site) */
