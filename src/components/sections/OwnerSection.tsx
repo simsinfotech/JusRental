@@ -19,15 +19,15 @@ const benefits = [
 ];
 
 const bhkRentMap: Record<string, Record<string, string>> = {
-  '1 BHK': { Koramangala: '₹14,000 - ₹20,000', Indiranagar: '₹16,000 - ₹24,000', 'HSR Layout': '₹12,000 - ₹18,000', Whitefield: '₹10,000 - ₹16,000' },
-  '2 BHK': { Koramangala: '₹22,000 - ₹35,000', Indiranagar: '₹28,000 - ₹45,000', 'HSR Layout': '₹18,000 - ₹30,000', Whitefield: '₹16,000 - ₹28,000' },
-  '3 BHK': { Koramangala: '₹35,000 - ₹55,000', Indiranagar: '₹40,000 - ₹65,000', 'HSR Layout': '₹30,000 - ₹48,000', Whitefield: '₹25,000 - ₹42,000' },
+  '1 BHK': { Hennur: '₹10,000 - ₹16,000', Hebbal: '₹12,000 - ₹18,000', Yelahanka: '₹8,000 - ₹14,000', Thanisandra: '₹9,000 - ₹15,000' },
+  '2 BHK': { Hennur: '₹18,000 - ₹28,000', Hebbal: '₹22,000 - ₹35,000', Yelahanka: '₹15,000 - ₹25,000', Thanisandra: '₹16,000 - ₹26,000' },
+  '3 BHK': { Hennur: '₹28,000 - ₹42,000', Hebbal: '₹32,000 - ₹50,000', Yelahanka: '₹22,000 - ₹38,000', Thanisandra: '₹25,000 - ₹40,000' },
 };
 
 export function OwnerSection() {
   const { ref, controls } = useAnimateInView(0.1);
   const [selectedBHK, setSelectedBHK] = useState('2 BHK');
-  const [selectedArea, setSelectedArea] = useState('Koramangala');
+  const [selectedArea, setSelectedArea] = useState('Hennur');
   const sectionRef = useRef<HTMLElement>(null);
 
   const { scrollYProgress } = useScroll({
