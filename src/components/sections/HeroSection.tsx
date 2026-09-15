@@ -9,7 +9,6 @@ import {
   Home,
   Building2,
   IndianRupee,
-  CalendarDays,
   Search,
   ShieldCheck,
   Headphones,
@@ -24,14 +23,21 @@ import { WHATSAPP_URL } from '@/lib/constants';
 const propertyTypes = ['Apartment', 'Villa', 'Independent House'];
 
 const locations = [
-  'Koramangala',
-  'Indiranagar',
-  'HSR Layout',
-  'Whitefield',
-  'Electronic City',
-  'Marathahalli',
-  'Jayanagar',
-  'BTM Layout',
+  'Hennur',
+  'Hebbal',
+  'Jakkur',
+  'Bellary Road (Airport Road)',
+  'Yelahanka',
+  'Yelahanka New Town',
+  'Bagalur',
+  'Devanahalli',
+  'Narayanapura',
+  'Horamavu',
+  'Thanisandra',
+  'Chikkajhala',
+  'Vidya Nagar Cross',
+  'Byrathi',
+  'Sadahalli',
 ];
 
 const bhkOptions = ['1 BHK', '2 BHK', '3 BHK', '4+ BHK'];
@@ -227,20 +233,6 @@ export function HeroSection() {
                           ))}
                         </select>
                       </div>
-                    </div>
-                  </div>
-
-                  {/* Move-in Date */}
-                  <div>
-                    <label className="text-xs font-medium text-white/50 uppercase tracking-wider mb-1.5 block">
-                      Move-in Date
-                    </label>
-                    <div className="relative">
-                      <CalendarDays className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
-                      <input
-                        type="date"
-                        className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-white/8 border border-white/10 text-white focus:outline-none focus:border-cyan-400/50 focus:ring-1 focus:ring-cyan-400/20 transition-all cursor-pointer [color-scheme:dark]"
-                      />
                     </div>
                   </div>
 

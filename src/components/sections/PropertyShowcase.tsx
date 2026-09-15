@@ -10,7 +10,7 @@ import { GlassCard } from '@/components/ui/GlassCard';
 import { Badge } from '@/components/ui/Badge';
 import { ImageGallery } from '@/components/ui/ImageGallery';
 import { Button } from '@/components/ui/Button';
-import { PROPERTIES, WHATSAPP_URL } from '@/lib/constants';
+import { PROPERTIES, getPropertyWhatsAppURL } from '@/lib/constants';
 
 const Tilt = dynamic(() => import('react-parallax-tilt'), { ssr: false });
 
@@ -117,7 +117,7 @@ export function PropertyShowcase() {
                         </span>
                         <span className="text-sm text-[var(--muted)]">/month</span>
                       </div>
-                      <Button href={WHATSAPP_URL} size="sm">
+                      <Button href={getPropertyWhatsAppURL(property.title, property.location, property.price)} size="sm">
                         Enquire
                       </Button>
                     </div>

@@ -1,7 +1,12 @@
 import type { Property, Testimonial, Area, Stat, Step, Feature, NavLink } from '@/types';
 
-export const WHATSAPP_NUMBER = '919876543210';
+export const WHATSAPP_NUMBER = '919036317765';
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=Hi%2C%20I%27m%20interested%20in%20renting%20a%20property%20in%20Bangalore`;
+
+export function getPropertyWhatsAppURL(title: string, location: string, price: number) {
+  const message = `Hi, I'm interested in the property: ${title} at ${location} (₹${price.toLocaleString()}/month). Please share more details.`;
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+}
 
 export const NAV_LINKS: NavLink[] = [
   { label: 'How It Works', href: '#how-it-works' },
@@ -66,49 +71,91 @@ export const FEATURES: Feature[] = [
 export const PROPERTIES: Property[] = [
   {
     id: '1',
-    title: 'Modern 2BHK in Koramangala',
-    location: 'Koramangala 4th Block, Bangalore',
-    price: 28000,
-    bhk: 2,
-    sqft: 1100,
-    furnished: 'Furnished',
-    images: [
-      '/images/property-1.jpg',
-      '/images/property-1b.jpg',
-    ],
-    amenities: ['WiFi', 'Gym', 'Parking', 'Power Backup'],
-    verified: true,
-    available: true,
-  },
-  {
-    id: '2',
-    title: 'Spacious 3BHK in Indiranagar',
-    location: '12th Main, Indiranagar, Bangalore',
+    title: 'Prestige Shantiniketan 3BHK',
+    location: 'Whitefield Main Road, Whitefield',
     price: 45000,
     bhk: 3,
-    sqft: 1650,
+    sqft: 1850,
     furnished: 'Semi-Furnished',
     images: [
-      '/images/property-2.jpg',
-      '/images/property-2b.jpg',
+      '/images/scene-1.png',
     ],
     amenities: ['Pool', 'Gym', 'Parking', 'Security'],
     verified: true,
     available: true,
   },
   {
-    id: '3',
-    title: 'Cozy 1BHK in HSR Layout',
-    location: 'HSR Layout Sector 2, Bangalore',
-    price: 16000,
-    bhk: 1,
-    sqft: 650,
+    id: '2',
+    title: 'Sobha Dream Acres 2BHK',
+    location: 'Panathur Road, Marathahalli',
+    price: 28000,
+    bhk: 2,
+    sqft: 1180,
     furnished: 'Furnished',
     images: [
-      '/images/property-3.jpg',
-      '/images/property-3b.jpg',
+      '/images/scene-2.png',
     ],
-    amenities: ['WiFi', 'Power Backup', 'Water Purifier'],
+    amenities: ['WiFi', 'Gym', 'Parking', 'Power Backup'],
+    verified: true,
+    available: true,
+  },
+  {
+    id: '3',
+    title: 'Brigade Gateway 2BHK',
+    location: 'Rajajinagar, Near Orion Mall',
+    price: 35000,
+    bhk: 2,
+    sqft: 1250,
+    furnished: 'Furnished',
+    images: [
+      '/images/scene-3.png',
+    ],
+    amenities: ['Pool', 'Security', 'Power Backup', 'Gym'],
+    verified: true,
+    available: true,
+  },
+  {
+    id: '4',
+    title: 'Salarpuria Sattva 1BHK',
+    location: 'HSR Layout Sector 2',
+    price: 18000,
+    bhk: 1,
+    sqft: 680,
+    furnished: 'Furnished',
+    images: [
+      '/images/scene-4.png',
+    ],
+    amenities: ['WiFi', 'Power Backup', 'Water Purifier', 'Security'],
+    verified: true,
+    available: true,
+  },
+  {
+    id: '5',
+    title: 'Puravankara Sunflower 3BHK',
+    location: 'Rajajinagar, Bangalore',
+    price: 42000,
+    bhk: 3,
+    sqft: 1700,
+    furnished: 'Semi-Furnished',
+    images: [
+      '/images/scene-5.png',
+    ],
+    amenities: ['Parking', 'Gym', 'Pool', 'Power Backup'],
+    verified: true,
+    available: true,
+  },
+  {
+    id: '6',
+    title: 'Mantri Serenity 2BHK',
+    location: 'Kanakapura Road, JP Nagar',
+    price: 25000,
+    bhk: 2,
+    sqft: 1050,
+    furnished: 'Semi-Furnished',
+    images: [
+      '/images/scene-1.png',
+    ],
+    amenities: ['Security', 'Parking', 'Power Backup', 'Gym'],
     verified: true,
     available: true,
   },
