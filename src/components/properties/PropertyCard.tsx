@@ -1,28 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import { MapPin, Heart, Wifi, Dumbbell, Car, Zap, Waves, Shield, Droplets, AirVent, ArrowUpDown, ArrowRight } from 'lucide-react';
-import { GlassCard } from '@/components/ui/GlassCard';
+import { MapPin, Heart, ShieldCheck, ArrowRight, Camera } from 'lucide-react';
 import { ImageGallery } from '@/components/ui/ImageGallery';
 import type { Property } from '@/types';
-
-const amenityIcons: Record<string, React.ElementType> = {
-  WiFi: Wifi,
-  Gym: Dumbbell,
-  Parking: Car,
-  'Power Backup': Zap,
-  Pool: Waves,
-  Security: Shield,
-  'Water Purifier': Droplets,
-  AC: AirVent,
-  Lift: ArrowUpDown,
-};
-
-const sharingTypeColors: Record<string, string> = {
-  Family: 'bg-blue-500/10 text-blue-600 border-blue-500/20',
-  Bachelor: 'bg-purple-500/10 text-purple-600 border-purple-500/20',
-  Any: 'bg-cyan-500/10 text-cyan-600 border-cyan-500/20',
-};
 
 interface PropertyCardProps {
   property: Property;
@@ -31,99 +12,60 @@ interface PropertyCardProps {
 export function PropertyCard({ property }: PropertyCardProps) {
   return (
     <Link href={`/properties/${property.id}`}>
-      <GlassCard className="overflow-hidden p-0 group" hover>
-        <div className="flex flex-col md:flex-row">
-          {/* Image section */}
-          <div className="relative md:w-[320px] lg:w-[360px] flex-shrink-0">
-            <ImageGallery images={property.images} alt={property.title} />
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-              }}
-              className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center hover:bg-white transition-colors cursor-pointer"
-              aria-label="Save property"
-            >
-              <Heart className="w-4 h-4 text-gray-600 hover:text-red-500 transition-colors" />
-            </button>
-            {property.verified && (
-              <div className="absolute top-3 left-3 z-10">
-                <span className="px-2.5 py-1 rounded-full bg-green-500/90 backdrop-blur-sm text-white text-xs font-medium">
-                  Verified
-                </span>
-              </div>
-            )}
+      <div className="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col h-full border border-slate-100">
+        {/* Image */}
+        <div className="relative h-44 w-full overflow-hidden">
+          <ImageGallery images={property.images} alt={property.title} />
+          {property.verified && (
+            <span className="absolute top-2.5 left-2.5 z-10 inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#16A34A] text-white text-[11px] font-bold">
+              <ShieldCheck className="w-3 h-3" />
+              Verified
+            </span>
+          )}
+          <span className="absolute bottom-2.5 right-2.5 z-10 px-2 py-0.5 rounded bg-[#0F172A]/75 backdrop-blur-sm text-white text-[11px] font-semibold">
+            {property.area}
+          </span>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+            }}
+            className="absolute top-2.5 right-2.5 z-10 w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center hover:bg-white transition-colors cursor-pointer"
+            aria-label="Save property"
+          >
+            <Heart className="w-4 h-4 text-slate-500 hover:text-red-500 transition-colors" />
+          </button>
+        </div>
+
+        {/* Content */}
+        <div className="p-4 flex flex-col flex-1 justify-between gap-2">
+          <div>
+            <h4 className="text-sm font-semibold font-[family-name:var(--font-heading)] text-[#131b2e] truncate group-hover:text-[#006194] transition-colors">
+              {property.title}
+            </h4>
+            <p className="text-xs text-[#3f4850] truncate flex items-center gap-1 mt-0.5">
+              <MapPin className="w-3 h-3 shrink-0" />
+              {property.location}
+            </p>
+            <div className="flex items-center gap-2 mt-2 text-[#3f4850] text-[11px]">
+              <span className="px-1.5 py-0.5 rounded bg-[#F1F5F9] font-medium">{property.bhk} BHK</span>
+              <span className="px-1.5 py-0.5 rounded bg-[#F1F5F9] font-medium">{property.sqft} sqft</span>
+              <span className="px-1.5 py-0.5 rounded bg-[#F1F5F9] font-medium">{property.furnished}</span>
+            </div>
           </div>
-
-          {/* Content section */}
-          <div className="flex-1 p-5 flex flex-col justify-between min-w-0">
-            {/* Top area */}
+          <div className="pt-2 flex items-center justify-between mt-2 border-t border-slate-100">
             <div>
-              <h3 className="text-lg font-semibold font-[family-name:var(--font-heading)] mb-1.5 group-hover:text-blue-600 transition-colors line-clamp-1">
-                {property.title}
-              </h3>
-
-              <div className="flex items-center gap-1.5 text-sm text-[var(--muted)] mb-3">
-                <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
-                <span className="line-clamp-1">{property.location}</span>
-              </div>
-
-              {/* Tags row */}
-              <div className="flex flex-wrap gap-2 mb-3">
-                <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${sharingTypeColors[property.sharingType] || sharingTypeColors.Any}`}>
-                  {property.sharingType}
-                </span>
-                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border bg-blue-500/10 text-blue-600 border-blue-500/20">
-                  {property.bhk} BHK
-                </span>
-                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border bg-surface-light text-[var(--muted)] border-glass-border">
-                  {property.furnished}
-                </span>
-              </div>
-
-              {/* Details row */}
-              <div className="flex items-center gap-3 text-sm text-[var(--foreground)] mb-3">
-                <span>{property.sqft} sqft</span>
-                <span className="text-[var(--muted)]">&middot;</span>
-                <span>{property.floor} Floor</span>
-                <span className="text-[var(--muted)]">&middot;</span>
-                <span>{property.facing} Facing</span>
-              </div>
-
-              {/* Amenity icons */}
-              <div className="flex items-center gap-3 mb-4">
-                {property.amenities.slice(0, 5).map((amenity) => {
-                  const Icon = amenityIcons[amenity];
-                  if (!Icon) return null;
-                  return (
-                    <span
-                      key={amenity}
-                      title={amenity}
-                      className="w-8 h-8 rounded-lg bg-surface-light flex items-center justify-center"
-                    >
-                      <Icon className="w-4 h-4 text-[var(--muted)]" />
-                    </span>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Bottom area - price + CTA */}
-            <div className="flex items-center justify-between pt-3 border-t border-glass-border">
-              <div>
-                <span className="text-2xl font-bold text-gradient">
-                  ₹{property.price.toLocaleString()}
-                </span>
-                <span className="text-sm text-[var(--muted)]">/month</span>
-              </div>
-              <span className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-sm font-semibold shadow-lg shadow-blue-500/20 group-hover:shadow-blue-500/40 transition-all duration-300">
-                Explore
-                <ArrowRight className="w-4 h-4" />
+              <span className="text-lg font-extrabold text-[#0369A1] font-[family-name:var(--font-heading)]">
+                ₹{property.price.toLocaleString()}
               </span>
+              <span className="text-xs text-[#3f4850]">/mo</span>
             </div>
+            <span className="px-3 py-1.5 rounded-lg bg-[#F1F5F9] hover:bg-[#006194] hover:text-white text-[#131b2e] text-sm font-medium transition-colors">
+              Explore
+            </span>
           </div>
         </div>
-      </GlassCard>
+      </div>
     </Link>
   );
 }
