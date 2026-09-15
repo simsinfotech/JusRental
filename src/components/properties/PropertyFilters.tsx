@@ -27,6 +27,7 @@ const budgetRanges = [
   { label: '₹45K - ₹55K', min: '45000', max: '55000' },
   { label: '₹55K - ₹65K', min: '55000', max: '65000' },
   { label: '₹65K - ₹75K', min: '65000', max: '75000' },
+  { label: '₹75K+', min: '75000', max: '' },
 ];
 
 export function PropertyFilters({

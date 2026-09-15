@@ -49,6 +49,7 @@ const budgetOptions = [
   '₹45K - ₹55K',
   '₹55K - ₹65K',
   '₹65K - ₹75K',
+  '₹75K+',
 ];
 
 const trustBadges = [
@@ -71,6 +72,7 @@ const budgetToParams: Record<string, { min: string; max: string }> = {
   '₹45K - ₹55K': { min: '45000', max: '55000' },
   '₹55K - ₹65K': { min: '55000', max: '65000' },
   '₹65K - ₹75K': { min: '65000', max: '75000' },
+  '₹75K+': { min: '75000', max: '' },
 };
 
 export function HeroSection() {
