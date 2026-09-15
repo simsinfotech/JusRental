@@ -44,7 +44,7 @@ export function CTASection() {
                 className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 text-white/90 text-sm font-medium mb-4"
               >
                 <Globe className="w-3.5 h-3.5" />
-                Parent Platform
+                Our Network
               </motion.span>
 
               <motion.h2
