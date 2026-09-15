@@ -2,11 +2,10 @@
 
 import dynamic from 'next/dynamic';
 import { motion } from 'motion/react';
-import { Star, Quote } from 'lucide-react';
 import { fadeInUp } from '@/lib/animations';
 import { useAnimateInView } from '@/hooks/useAnimateInView';
 import { SectionHeading } from '@/components/ui/SectionHeading';
-import { TESTIMONIALS } from '@/lib/constants';
+import type { Testimonial } from '@/types';
 
 const SwiperCarousel = dynamic(() => import('./TestimonialCarousel'), {
   ssr: false,
@@ -17,7 +16,11 @@ const SwiperCarousel = dynamic(() => import('./TestimonialCarousel'), {
   ),
 });
 
-export function TestimonialsSection() {
+interface TestimonialsSectionProps {
+  testimonials: Testimonial[];
+}
+
+export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) {
   const { ref, controls } = useAnimateInView(0.1);
 
   return (
@@ -36,7 +39,7 @@ export function TestimonialsSection() {
           initial="hidden"
           animate={controls}
         >
-          <SwiperCarousel />
+          <SwiperCarousel testimonials={testimonials} />
         </motion.div>
       </div>
     </section>

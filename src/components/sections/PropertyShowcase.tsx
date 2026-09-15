@@ -1,8 +1,9 @@
 'use client';
 
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 import { motion } from 'motion/react';
-import { MapPin, Maximize2, Wifi, Dumbbell, Car, Zap, Waves, Shield, Droplets } from 'lucide-react';
+import { MapPin, Maximize2, Wifi, Dumbbell, Car, Zap, Waves, Shield, Droplets, ArrowRight } from 'lucide-react';
 import { fadeInUp, staggerContainer } from '@/lib/animations';
 import { useAnimateInView } from '@/hooks/useAnimateInView';
 import { SectionHeading } from '@/components/ui/SectionHeading';
@@ -10,7 +11,8 @@ import { GlassCard } from '@/components/ui/GlassCard';
 import { Badge } from '@/components/ui/Badge';
 import { ImageGallery } from '@/components/ui/ImageGallery';
 import { Button } from '@/components/ui/Button';
-import { PROPERTIES, getPropertyWhatsAppURL } from '@/lib/constants';
+import { getPropertyWhatsAppURL } from '@/lib/constants';
+import type { Property } from '@/types';
 
 const Tilt = dynamic(() => import('react-parallax-tilt'), { ssr: false });
 
@@ -24,7 +26,11 @@ const amenityIcons: Record<string, React.ElementType> = {
   'Water Purifier': Droplets,
 };
 
-export function PropertyShowcase() {
+interface PropertyShowcaseProps {
+  properties: Property[];
+}
+
+export function PropertyShowcase({ properties }: PropertyShowcaseProps) {
   const { ref, controls } = useAnimateInView(0.1);
 
   return (
@@ -44,7 +50,7 @@ export function PropertyShowcase() {
           animate={controls}
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {PROPERTIES.map((property) => (
+          {properties.map((property) => (
             <motion.div key={property.id} variants={fadeInUp}>
               <Tilt
                 tiltMaxAngleX={5}
@@ -127,6 +133,16 @@ export function PropertyShowcase() {
             </motion.div>
           ))}
         </motion.div>
+
+        <div className="mt-10 text-center">
+          <Link
+            href="/properties"
+            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-300 hover:-translate-y-0.5"
+          >
+            View All Properties
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
       </div>
     </section>
   );

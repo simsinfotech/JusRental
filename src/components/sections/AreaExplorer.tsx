@@ -1,15 +1,20 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion } from 'motion/react';
 import { MapPin, ArrowRight } from 'lucide-react';
 import { fadeInUp, staggerContainer } from '@/lib/animations';
 import { useAnimateInView } from '@/hooks/useAnimateInView';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Badge } from '@/components/ui/Badge';
-import { AREAS, WHATSAPP_URL } from '@/lib/constants';
+import type { Area } from '@/types';
 
-export function AreaExplorer() {
+interface AreaExplorerProps {
+  areas: Area[];
+}
+
+export function AreaExplorer({ areas }: AreaExplorerProps) {
   const { ref, controls } = useAnimateInView(0.1);
 
   return (
@@ -29,12 +34,12 @@ export function AreaExplorer() {
           animate={controls}
           className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6"
         >
-          {AREAS.map((area) => (
-            <motion.a
+          {areas.map((area) => (
+            <Link
               key={area.id}
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={`/properties?area=${encodeURIComponent(area.name)}`}
+            >
+            <motion.div
               variants={fadeInUp}
               whileHover={{ y: -6 }}
               className="group relative rounded-2xl overflow-hidden aspect-[4/3] cursor-pointer"
@@ -83,7 +88,8 @@ export function AreaExplorer() {
                   </motion.div>
                 </div>
               </div>
-            </motion.a>
+            </motion.div>
+            </Link>
           ))}
         </motion.div>
       </div>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion } from 'motion/react';
 import {
   ArrowRight,
@@ -64,13 +65,34 @@ const stats = [
   { value: 98, suffix: '%', label: 'Satisfaction Rate' },
 ];
 
+const budgetToParams: Record<string, { min: string; max: string }> = {
+  '₹5K - ₹10K': { min: '5000', max: '10000' },
+  '₹10K - ₹20K': { min: '10000', max: '20000' },
+  '₹20K - ₹35K': { min: '20000', max: '35000' },
+  '₹35K - ₹50K': { min: '35000', max: '50000' },
+  '₹50K+': { min: '50000', max: '' },
+};
+
 export function HeroSection() {
+  const router = useRouter();
   const [selectedLocation, setSelectedLocation] = useState('');
   const [selectedBhk, setSelectedBhk] = useState('');
   const [selectedBudget, setSelectedBudget] = useState('');
   const [selectedType, setSelectedType] = useState('');
   const { ref: trustRef, controls: trustControls } = useAnimateInView(0.2);
   const { ref: statsRef, controls: statsControls } = useAnimateInView(0.2);
+
+  const handleSearch = () => {
+    const params = new URLSearchParams();
+    if (selectedType) params.set('type', selectedType);
+    if (selectedLocation) params.set('area', selectedLocation);
+    if (selectedBhk) params.set('bhk', selectedBhk.replace(' BHK', '').replace('+', ''));
+    if (selectedBudget && budgetToParams[selectedBudget]) {
+      params.set('budgetMin', budgetToParams[selectedBudget].min);
+      if (budgetToParams[selectedBudget].max) params.set('budgetMax', budgetToParams[selectedBudget].max);
+    }
+    router.push(`/properties${params.toString() ? `?${params.toString()}` : ''}`);
+  };
 
   return (
     <>
@@ -237,7 +259,10 @@ export function HeroSection() {
                   </div>
 
                   {/* Search Button */}
-                  <button className="w-full py-3 rounded-lg bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold flex items-center justify-center gap-2 shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-300 hover:-translate-y-0.5 cursor-pointer">
+                  <button
+                    onClick={handleSearch}
+                    className="w-full py-3 rounded-lg bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold flex items-center justify-center gap-2 shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-300 hover:-translate-y-0.5 cursor-pointer"
+                  >
                     <Search className="w-4 h-4" />
                     Search Homes
                   </button>

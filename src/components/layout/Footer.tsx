@@ -1,41 +1,40 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { Mail, Phone, MapPin, Globe, MessageCircle, ExternalLink, Share2 } from 'lucide-react';
 import { WHATSAPP_URL } from '@/lib/constants';
 
 const footerLinks = {
   company: [
-    { label: 'About Us', href: '#' },
-    { label: 'Careers', href: '#' },
-    { label: 'Blog', href: '#' },
-    { label: 'Press', href: '#' },
+    { label: 'About Us', href: '/contact' },
+    { label: 'Blog', href: '/blog' },
+    { label: 'Contact', href: '/contact' },
+    { label: 'Rental Agreement', href: '/rental-agreement' },
   ],
   tenants: [
-    { label: 'Browse Properties', href: '#properties' },
-    { label: 'Explore Areas', href: '#areas' },
-    { label: 'How It Works', href: '#how-it-works' },
-    { label: 'FAQs', href: '#' },
+    { label: 'Browse Properties', href: '/properties' },
+    { label: 'Book a Visit', href: '/book-visit' },
+    { label: 'Rent Estimator', href: '/rent-estimator' },
+    { label: 'NRI Services', href: '/nri-services' },
   ],
   owners: [
-    { label: 'List Your Property', href: '#owners' },
-    { label: 'Owner Dashboard', href: '#' },
-    { label: 'Rental Estimator', href: '#owners' },
-    { label: 'Owner FAQs', href: '#' },
+    { label: 'List Your Property', href: '/list-property' },
+    { label: 'Rental Estimator', href: '/rent-estimator' },
+    { label: 'Owner Tips', href: '/blog' },
+    { label: 'NRI Services', href: '/nri-services' },
   ],
   legal: [
     { label: 'Privacy Policy', href: '#' },
     { label: 'Terms of Service', href: '#' },
     { label: 'Refund Policy', href: '#' },
-    { label: 'Cookie Policy', href: '#' },
   ],
 };
 
 const socials = [
-  { icon: Globe, href: '#', label: 'Website' },
-  { icon: MessageCircle, href: '#', label: 'WhatsApp' },
-  { icon: ExternalLink, href: '#', label: 'LinkedIn' },
-  { icon: Share2, href: '#', label: 'Share' },
+  { icon: Globe, href: 'https://estatehive.in', label: 'Website' },
+  { icon: MessageCircle, href: WHATSAPP_URL, label: 'WhatsApp' },
+  { icon: ExternalLink, href: 'https://estatehive.in', label: 'LinkedIn' },
 ];
 
 export function Footer() {
@@ -45,7 +44,7 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8 lg:gap-12">
           {/* Brand column */}
           <div className="col-span-2 md:col-span-1">
-            <a href="#" className="flex items-center gap-2 mb-4">
+            <Link href="/" className="flex items-center gap-2 mb-4">
               <Image
                 src="/images/logo.png"
                 alt="JusRental"
@@ -53,7 +52,7 @@ export function Footer() {
                 height={46}
                 className="h-11 w-auto"
               />
-            </a>
+            </Link>
             <p className="text-sm text-[var(--muted)] mb-4">
               AI-matched, verified rental homes in Bangalore. Zero tenant brokerage, closing handled for you.
             </p>
@@ -62,6 +61,8 @@ export function Footer() {
                 <a
                   key={social.label}
                   href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-9 h-9 rounded-lg bg-surface-light hover:bg-blue-500/20 flex items-center justify-center transition-colors"
                   aria-label={social.label}
                 >
@@ -77,9 +78,9 @@ export function Footer() {
             <ul className="space-y-2">
               {footerLinks.company.map((link) => (
                 <li key={link.label}>
-                  <a href={link.href} className="text-sm text-[var(--muted)] hover:text-[var(--foreground)] transition-colors">
+                  <Link href={link.href} className="text-sm text-[var(--muted)] hover:text-[var(--foreground)] transition-colors">
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -90,9 +91,9 @@ export function Footer() {
             <ul className="space-y-2">
               {footerLinks.tenants.map((link) => (
                 <li key={link.label}>
-                  <a href={link.href} className="text-sm text-[var(--muted)] hover:text-[var(--foreground)] transition-colors">
+                  <Link href={link.href} className="text-sm text-[var(--muted)] hover:text-[var(--foreground)] transition-colors">
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -103,9 +104,9 @@ export function Footer() {
             <ul className="space-y-2">
               {footerLinks.owners.map((link) => (
                 <li key={link.label}>
-                  <a href={link.href} className="text-sm text-[var(--muted)] hover:text-[var(--foreground)] transition-colors">
+                  <Link href={link.href} className="text-sm text-[var(--muted)] hover:text-[var(--foreground)] transition-colors">
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

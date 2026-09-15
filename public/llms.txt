@@ -1,0 +1,32 @@
+# JusRental — Rental Property Platform for Bangalore
+
+## About
+JusRental is a zero-brokerage rental property platform focused on North Bangalore.
+We connect property owners directly with verified tenants.
+
+## Website Structure
+- / — Homepage with property showcase, area explorer, testimonials
+- /properties — Browse verified rental properties with filters
+- /properties/[id] — Individual property detail page
+- /list-property — Property owners can list their rental property
+- /rent-estimator — Estimate rental rates by area and BHK
+- /blog — Rental tips, market trends, neighbourhood guides
+- /blog/[slug] — Individual blog post
+- /contact — Contact form and WhatsApp
+- /book-visit — Schedule a property visit
+- /nri-services — Services for Non-Resident Indians
+- /rental-agreement — Rental agreement information
+
+## Key Features
+- 100% verified property listings
+- Zero brokerage for tenants
+- WhatsApp-first communication
+- NRI-friendly services
+- Real-time availability updates
+
+## Coverage Areas
+North Bangalore: Hennur, Hebbal, Yelahanka, Thanisandra, Devanahalli, Horamavu
+
+## Contact
+WhatsApp: +91 90363 17765
+Website: https://jusrental.com

@@ -1,16 +1,18 @@
 'use client';
 
 import { motion, AnimatePresence } from 'motion/react';
-import { X } from 'lucide-react';
+import Link from 'next/link';
+import { X, User, LogIn } from 'lucide-react';
 import { NAV_LINKS, WHATSAPP_URL } from '@/lib/constants';
 import { Button } from '@/components/ui/Button';
 
 interface MobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
+  isLoggedIn?: boolean;
 }
 
-export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
+export function MobileMenu({ isOpen, onClose, isLoggedIn }: MobileMenuProps) {
   return (
     <AnimatePresence>
       {isOpen && (
@@ -40,15 +42,37 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             </button>
             <nav className="mt-8 flex flex-col gap-2">
               {NAV_LINKS.map((link) => (
-                <a
+                <Link
                   key={link.href}
                   href={link.href}
                   onClick={onClose}
                   className="px-4 py-3 rounded-xl text-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
+
+              <div className="mt-2 pt-2 border-t border-glass-border">
+                {isLoggedIn ? (
+                  <Link
+                    href="/owner"
+                    onClick={onClose}
+                    className="flex items-center gap-3 px-4 py-3 rounded-xl text-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors text-blue-600"
+                  >
+                    <User className="w-5 h-5" />
+                    My Portal
+                  </Link>
+                ) : (
+                  <Link
+                    href="/login"
+                    onClick={onClose}
+                    className="flex items-center gap-3 px-4 py-3 rounded-xl text-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
+                  >
+                    <LogIn className="w-5 h-5" />
+                    Login
+                  </Link>
+                )}
+              </div>
             </nav>
             <div className="mt-auto">
               <Button href={WHATSAPP_URL} className="w-full">

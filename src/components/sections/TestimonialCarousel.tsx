@@ -5,13 +5,17 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Autoplay, Pagination } from 'swiper/modules';
 import { Star, Quote } from 'lucide-react';
 import { GlassCard } from '@/components/ui/GlassCard';
-import { TESTIMONIALS } from '@/lib/constants';
+import type { Testimonial } from '@/types';
 
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 
-export default function TestimonialCarousel() {
+interface TestimonialCarouselProps {
+  testimonials: Testimonial[];
+}
+
+export default function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) {
   return (
     <Swiper
       modules={[EffectCoverflow, Autoplay, Pagination]}
@@ -35,7 +39,7 @@ export default function TestimonialCarousel() {
         1024: { slidesPerView: 2.5, spaceBetween: 30 },
       }}
     >
-      {TESTIMONIALS.map((t) => (
+      {testimonials.map((t) => (
         <SwiperSlide key={t.id} className="py-4">
           <GlassCard className="h-full">
             <Quote className="w-8 h-8 text-blue-500/30 mb-4" />

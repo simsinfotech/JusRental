@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { TrendingUp, CheckCircle2, Users, Shield, IndianRupee } from 'lucide-react';
 import { fadeInUp, staggerContainer, slideInLeft, slideInRight } from '@/lib/animations';
@@ -9,7 +10,6 @@ import { useAnimateInView } from '@/hooks/useAnimateInView';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { Button } from '@/components/ui/Button';
-import { WHATSAPP_URL } from '@/lib/constants';
 
 const benefits = [
   { icon: Users, text: 'Access to 5,000+ verified tenants' },
@@ -19,9 +19,9 @@ const benefits = [
 ];
 
 const bhkRentMap: Record<string, Record<string, string>> = {
-  '1 BHK': { Hennur: '₹10,000 - ₹16,000', Hebbal: '₹12,000 - ₹18,000', Yelahanka: '₹8,000 - ₹14,000', Thanisandra: '₹9,000 - ₹15,000' },
-  '2 BHK': { Hennur: '₹18,000 - ₹28,000', Hebbal: '₹22,000 - ₹35,000', Yelahanka: '₹15,000 - ₹25,000', Thanisandra: '₹16,000 - ₹26,000' },
-  '3 BHK': { Hennur: '₹28,000 - ₹42,000', Hebbal: '₹32,000 - ₹50,000', Yelahanka: '₹22,000 - ₹38,000', Thanisandra: '₹25,000 - ₹40,000' },
+  '1 BHK': { Hennur: '₹10,000 - ₹16,000', Hebbal: '₹12,000 - ₹18,000', Yelahanka: '₹8,000 - ₹14,000', Thanisandra: '₹9,000 - ₹15,000', Jakkur: '₹9,000 - ₹15,000', Horamavu: '₹8,000 - ₹14,000' },
+  '2 BHK': { Hennur: '₹18,000 - ₹28,000', Hebbal: '₹22,000 - ₹35,000', Yelahanka: '₹15,000 - ₹25,000', Thanisandra: '₹16,000 - ₹26,000', Jakkur: '₹16,000 - ₹25,000', Horamavu: '₹14,000 - ₹22,000' },
+  '3 BHK': { Hennur: '₹28,000 - ₹42,000', Hebbal: '₹32,000 - ₹50,000', Yelahanka: '₹22,000 - ₹38,000', Thanisandra: '₹25,000 - ₹40,000', Jakkur: '₹24,000 - ₹38,000', Horamavu: '₹22,000 - ₹35,000' },
 };
 
 export function OwnerSection() {
@@ -108,7 +108,7 @@ export function OwnerSection() {
                 </motion.div>
               ))}
             </div>
-            <Button href={WHATSAPP_URL} size="lg">
+            <Button href="/list-property" size="lg">
               List Your Property
             </Button>
           </motion.div>
