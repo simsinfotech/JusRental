@@ -44,11 +44,11 @@ const locations = [
 const bhkOptions = ['1 BHK', '2 BHK', '3 BHK', '4+ BHK'];
 
 const budgetOptions = [
-  '₹5K - ₹10K',
-  '₹10K - ₹20K',
-  '₹20K - ₹35K',
-  '₹35K - ₹50K',
-  '₹50K+',
+  '₹25K - ₹35K',
+  '₹35K - ₹45K',
+  '₹45K - ₹55K',
+  '₹55K - ₹65K',
+  '₹65K - ₹75K',
 ];
 
 const trustBadges = [
@@ -66,11 +66,11 @@ const stats = [
 ];
 
 const budgetToParams: Record<string, { min: string; max: string }> = {
-  '₹5K - ₹10K': { min: '5000', max: '10000' },
-  '₹10K - ₹20K': { min: '10000', max: '20000' },
-  '₹20K - ₹35K': { min: '20000', max: '35000' },
-  '₹35K - ₹50K': { min: '35000', max: '50000' },
-  '₹50K+': { min: '50000', max: '' },
+  '₹25K - ₹35K': { min: '25000', max: '35000' },
+  '₹35K - ₹45K': { min: '35000', max: '45000' },
+  '₹45K - ₹55K': { min: '45000', max: '55000' },
+  '₹55K - ₹65K': { min: '55000', max: '65000' },
+  '₹65K - ₹75K': { min: '65000', max: '75000' },
 };
 
 export function HeroSection() {

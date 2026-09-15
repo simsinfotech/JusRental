@@ -22,11 +22,11 @@ interface PropertyFiltersProps {
 const bhkOptions = ['1', '2', '3', '4'];
 const furnishOptions = ['Furnished', 'Semi-Furnished', 'Unfurnished'];
 const budgetRanges = [
-  { label: 'Under ₹15K', min: '0', max: '15000' },
-  { label: '₹15K - ₹25K', min: '15000', max: '25000' },
   { label: '₹25K - ₹35K', min: '25000', max: '35000' },
-  { label: '₹35K - ₹50K', min: '35000', max: '50000' },
-  { label: '₹50K+', min: '50000', max: '' },
+  { label: '₹35K - ₹45K', min: '35000', max: '45000' },
+  { label: '₹45K - ₹55K', min: '45000', max: '55000' },
+  { label: '₹55K - ₹65K', min: '55000', max: '65000' },
+  { label: '₹65K - ₹75K', min: '65000', max: '75000' },
 ];
 
 export function PropertyFilters({
