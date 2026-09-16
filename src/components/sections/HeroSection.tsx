@@ -151,7 +151,28 @@ export function HeroSection() {
             className="w-full max-w-4xl mx-auto"
           >
             <div className="rounded-2xl bg-white/10 backdrop-blur-xl border border-white/15 p-5 md:p-6 shadow-2xl shadow-black/20">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+                {/* City */}
+                <div>
+                  <label className="text-xs font-medium text-white/60 uppercase tracking-wider mb-1.5 block">
+                    City
+                  </label>
+                  <div className="relative">
+                    <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                    <select
+                      className={selectClasses}
+                      defaultValue="Bangalore"
+                    >
+                      <option value="Bangalore">Bangalore</option>
+                      <option disabled>Chennai (Coming Soon)</option>
+                      <option disabled>Hyderabad (Coming Soon)</option>
+                      <option disabled>Mumbai (Coming Soon)</option>
+                      <option disabled>Delhi (Coming Soon)</option>
+                    </select>
+                    <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                  </div>
+                </div>
+
                 {/* Property Type */}
                 <div>
                   <label className="text-xs font-medium text-white/60 uppercase tracking-wider mb-1.5 block">
@@ -173,10 +194,10 @@ export function HeroSection() {
                   </div>
                 </div>
 
-                {/* Location */}
+                {/* Area */}
                 <div>
                   <label className="text-xs font-medium text-white/60 uppercase tracking-wider mb-1.5 block">
-                    Location
+                    Area
                   </label>
                   <div className="relative">
                     <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
