@@ -38,15 +38,11 @@ export function AIMatchingSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-100 text-purple-700 text-sm font-medium mb-4">
-            <Sparkles className="w-3.5 h-3.5" />
-            AI-Powered
-          </span>
           <h2 className="text-3xl md:text-4xl font-bold font-[family-name:var(--font-heading)] text-[#131b2e] mb-4">
             <span className="text-[#006194]">Smart</span> Property Matching
           </h2>
           <p className="text-[#3f4850] max-w-2xl mx-auto">
-            Tell us what you want. Our AI finds the perfect match in seconds.
+            Tell us what you want. We find the perfect match in seconds.
           </p>
         </div>
 

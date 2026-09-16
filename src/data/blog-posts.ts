@@ -121,7 +121,7 @@ We charge a flat ₹599 one-time fee. That's it. No hidden charges, no percentag
 ### What's Included in ₹599
 
 1. **Verified property listings** with real photos
-2. **AI-powered matching** to find homes that fit your needs
+2. **Smart matching** to find homes that fit your needs
 3. **Scheduled property visits** at your convenience
 4. **WhatsApp support** throughout the process
 5. **Rental agreement assistance**

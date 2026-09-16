@@ -9,7 +9,6 @@ import {
   Headphones,
   BadgePercent,
   Lock,
-  Sparkles,
   Home,
   MapPin,
   Building2,
@@ -123,14 +122,6 @@ export function HeroSection() {
             animate="visible"
             className="text-center max-w-4xl mx-auto mb-10"
           >
-            {/* AI Super Badge */}
-            <motion.div variants={fadeInUp} className="mb-6">
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/15 text-sm text-white/90">
-                <Sparkles className="w-4 h-4 text-cyan-400" />
-                AI-Powered Home Matching
-              </span>
-            </motion.div>
-
             {/* Main Headline */}
             <motion.h1
               variants={fadeInUp}
