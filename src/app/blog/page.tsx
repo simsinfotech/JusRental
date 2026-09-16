@@ -2,6 +2,8 @@ import { fetchBlogPosts, fetchBlogCategories } from '@/lib/dal';
 import { BlogContent } from '@/components/sections/BlogContent';
 import { PageHero } from '@/components/layout/PageHero';
 
+export const dynamic = 'force-dynamic';
+
 export default async function BlogPage() {
   const [posts, categories] = await Promise.all([
     fetchBlogPosts(),
