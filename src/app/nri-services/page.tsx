@@ -2,6 +2,8 @@ import { fetchNRIServices } from '@/lib/dal';
 import { NRIServicesContent } from '@/components/sections/NRIServicesContent';
 import { PageHero } from '@/components/layout/PageHero';
 
+export const dynamic = 'force-dynamic';
+
 export default async function NRIServicesPage() {
   const services = await fetchNRIServices();
 

@@ -2,6 +2,8 @@ import { fetchRentData, fetchRentAreas } from '@/lib/dal';
 import { RentEstimatorContent } from '@/components/sections/RentEstimatorContent';
 import { PageHero } from '@/components/layout/PageHero';
 
+export const dynamic = 'force-dynamic';
+
 export default async function RentEstimatorPage() {
   const [rentData, rentAreas] = await Promise.all([
     fetchRentData(),
