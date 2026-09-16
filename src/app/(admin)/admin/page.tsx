@@ -32,9 +32,9 @@ export default async function AdminDashboardPage() {
   const totalViews = properties?.reduce((sum, p) => sum + (p.views_count || 0), 0) || 0;
 
   const stats = [
-    { label: 'Total Properties', value: propertiesCount || 0, icon: Home, color: 'text-blue-600 bg-blue-500/10' },
+    { label: 'Total Properties', value: propertiesCount || 0, icon: Home, color: 'text-[#006194] bg-[#006194]/10' },
     { label: 'Active Listings', value: activeCount || 0, icon: TrendingUp, color: 'text-green-600 bg-green-500/10' },
-    { label: 'Total Views', value: totalViews, icon: Eye, color: 'text-cyan-600 bg-cyan-500/10' },
+    { label: 'Total Views', value: totalViews, icon: Eye, color: 'text-[#006194] bg-[#006194]/10' },
     { label: 'Contact Leads', value: contactsCount || 0, icon: Users, color: 'text-purple-600 bg-purple-500/10' },
     { label: 'Visit Requests', value: visitsCount || 0, icon: Calendar, color: 'text-orange-600 bg-orange-500/10' },
     { label: 'Listing Requests', value: listingReqCount || 0, icon: Home, color: 'text-pink-600 bg-pink-500/10' },

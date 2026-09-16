@@ -9,13 +9,13 @@ export function BlogPostContent({ content }: BlogPostContentProps) {
     <div className="prose prose-lg max-w-none
       prose-headings:font-[family-name:var(--font-heading)] prose-headings:text-[var(--foreground)]
       prose-p:text-[var(--muted)] prose-p:leading-relaxed
-      prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline
+      prose-a:text-[#006194] prose-a:no-underline hover:prose-a:underline
       prose-strong:text-[var(--foreground)]
       prose-li:text-[var(--muted)]
       prose-table:text-sm
       prose-th:bg-surface-light prose-th:px-4 prose-th:py-2 prose-th:text-left prose-th:font-medium
       prose-td:px-4 prose-td:py-2 prose-td:border-t prose-td:border-glass-border
-      prose-code:text-blue-600 prose-code:bg-blue-500/10 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded
+      prose-code:text-[#006194] prose-code:bg-[#006194]/10 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded
       prose-hr:border-glass-border
     ">
       {content.split('\n').map((line, i) => {

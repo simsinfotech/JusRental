@@ -19,7 +19,7 @@ const features = [
     icon: BadgeIndianRupee,
     title: 'Zero Brokerage',
     description: 'No hidden fees or commissions. What you see is what you pay.',
-    color: 'bg-blue-50 text-blue-600',
+    color: 'bg-blue-50 text-[#006194]',
   },
   {
     icon: ShieldCheck,

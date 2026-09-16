@@ -124,7 +124,7 @@ export default function OwnerProfilePage() {
   return (
     <div>
       <div className="flex items-center gap-3 mb-8">
-        <User className="w-6 h-6 text-blue-600" />
+        <User className="w-6 h-6 text-[#006194]" />
         <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">My Profile</h1>
       </div>
 
@@ -194,7 +194,7 @@ export default function OwnerProfilePage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="flex items-center gap-2 px-8 py-2.5 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold cursor-pointer disabled:opacity-50"
+                className="flex items-center gap-2 px-8 py-2.5 rounded-xl bg-[#006194] text-white font-semibold cursor-pointer disabled:opacity-50"
               >
                 <Save className="w-4 h-4" />
                 {loading ? 'Saving...' : 'Save Profile'}

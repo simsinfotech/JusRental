@@ -118,8 +118,8 @@ export default function ListPropertyPage() {
               <motion.div key={b.title} variants={fadeInUp}>
                 <GlassCard className="h-full" whileHover={{ y: -4 }}>
                   <div className="flex items-start gap-4">
-                    <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-500/10 to-cyan-500/10 flex items-center justify-center shrink-0">
-                      <b.icon className="w-5 h-5 text-blue-600" />
+                    <div className="w-11 h-11 rounded-xl bg-[#006194]/10 flex items-center justify-center shrink-0">
+                      <b.icon className="w-5 h-5 text-[#006194]" />
                     </div>
                     <div>
                       <h3 className="font-semibold font-[family-name:var(--font-heading)] mb-1">{b.title}</h3>
@@ -154,12 +154,12 @@ export default function ListPropertyPage() {
                 <GlassCard
                   gradient={plan.highlighted}
                   hover={false}
-                  className={`h-full ${plan.highlighted ? 'ring-2 ring-blue-500/30' : ''}`}
+                  className={`h-full ${plan.highlighted ? 'ring-2 ring-[#006194]/30' : ''}`}
                 >
                   <div className="flex items-center gap-3 mb-4">
                     <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
                       plan.highlighted
-                        ? 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white'
+                        ? 'bg-[#006194] text-white'
                         : 'bg-surface-light'
                     }`}>
                       <plan.icon className="w-5 h-5" />
@@ -173,7 +173,7 @@ export default function ListPropertyPage() {
                   <ul className="space-y-2.5 mb-6">
                     {plan.features.map((f) => (
                       <li key={f} className="flex items-start gap-2 text-sm">
-                        <CheckCircle2 className={`w-4 h-4 shrink-0 mt-0.5 ${plan.highlighted ? 'text-blue-500' : 'text-green-500'}`} />
+                        <CheckCircle2 className={`w-4 h-4 shrink-0 mt-0.5 ${plan.highlighted ? 'text-[#006194]' : 'text-green-500'}`} />
                         <span className="text-[var(--muted)]">{f}</span>
                       </li>
                     ))}
@@ -185,7 +185,7 @@ export default function ListPropertyPage() {
                     rel="noopener noreferrer"
                     className={`w-full flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
                       plan.highlighted
-                        ? 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40'
+                        ? 'bg-[#006194] text-white shadow-lg shadow-[#006194]/25 hover:shadow-[#006194]/40'
                         : 'border border-glass-border hover:bg-surface-lighter text-[var(--foreground)]'
                     }`}
                   >
@@ -221,7 +221,7 @@ export default function ListPropertyPage() {
               </p>
               <button
                 onClick={() => setSubmitted(false)}
-                className="px-6 py-2.5 rounded-xl border border-blue-500/50 text-blue-600 font-medium hover:bg-blue-500/10 transition-all cursor-pointer"
+                className="px-6 py-2.5 rounded-xl border border-[#006194]/50 text-[#006194] font-medium hover:bg-[#006194]/10 transition-all cursor-pointer"
               >
                 Submit Another
               </button>
@@ -242,7 +242,7 @@ export default function ListPropertyPage() {
                     name="name"
                     required
                     placeholder="Full name"
-                    className="w-full px-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/50 transition-all"
+                    className="w-full px-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-[#006194]/20 focus:border-[#006194]/50 transition-all"
                   />
                 </div>
                 <div>
@@ -252,7 +252,7 @@ export default function ListPropertyPage() {
                     name="phone"
                     required
                     placeholder="+91 XXXXX XXXXX"
-                    className="w-full px-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/50 transition-all"
+                    className="w-full px-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-[#006194]/20 focus:border-[#006194]/50 transition-all"
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
@@ -260,7 +260,7 @@ export default function ListPropertyPage() {
                     <label className="text-sm font-medium mb-1.5 block">Property Type</label>
                     <select
                       name="propertyType"
-                      className="w-full px-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/50 transition-all appearance-none cursor-pointer"
+                      className="w-full px-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-[#006194]/20 focus:border-[#006194]/50 transition-all appearance-none cursor-pointer"
                     >
                       <option value="">Select</option>
                       <option value="Apartment">Apartment</option>
@@ -272,7 +272,7 @@ export default function ListPropertyPage() {
                     <label className="text-sm font-medium mb-1.5 block">BHK</label>
                     <select
                       name="bhk"
-                      className="w-full px-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/50 transition-all appearance-none cursor-pointer"
+                      className="w-full px-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-[#006194]/20 focus:border-[#006194]/50 transition-all appearance-none cursor-pointer"
                     >
                       <option value="">Select</option>
                       <option value="1">1 BHK</option>
@@ -288,13 +288,13 @@ export default function ListPropertyPage() {
                     type="text"
                     name="area"
                     placeholder="e.g. Hennur, Hebbal"
-                    className="w-full px-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/50 transition-all"
+                    className="w-full px-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-[#006194]/20 focus:border-[#006194]/50 transition-all"
                   />
                 </div>
                 <button
                   type="submit"
                   disabled={isPending}
-                  className="w-full py-3 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-300 hover:-translate-y-0.5 cursor-pointer disabled:opacity-50"
+                  className="w-full py-3 rounded-xl bg-[#006194] text-white font-semibold shadow-lg shadow-[#006194]/25 hover:shadow-[#006194]/40 transition-all duration-300 hover:-translate-y-0.5 cursor-pointer disabled:opacity-50"
                 >
                   {isPending ? 'Submitting...' : 'Submit Request'}
                 </button>

@@ -19,8 +19,8 @@ export function PageHero({ title, subtitle, breadcrumbs }: PageHeroProps) {
   return (
     <section className="relative bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#0f172a] pt-28 pb-12 md:pt-32 md:pb-16 overflow-hidden">
       {/* Decorative blobs */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-72 h-72 bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-0 right-0 w-96 h-96 bg-[#006194]/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-72 h-72 bg-[#006194]/10 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div

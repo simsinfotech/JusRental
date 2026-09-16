@@ -85,8 +85,8 @@ export function ImageUpload({
         onDrop={handleDrop}
         className={`flex flex-col items-center justify-center p-8 rounded-xl border-2 border-dashed transition-all cursor-pointer ${
           dragOver
-            ? 'border-blue-500 bg-blue-500/10'
-            : 'border-glass-border hover:border-blue-500/50 hover:bg-surface-light'
+            ? 'border-[#006194] bg-[#006194]/10'
+            : 'border-glass-border hover:border-[#006194]/50 hover:bg-surface-light'
         } ${uploading ? 'opacity-50 pointer-events-none' : ''}`}
       >
         <input

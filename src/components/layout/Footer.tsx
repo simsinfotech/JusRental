@@ -65,7 +65,7 @@ export function Footer() {
                 <ShieldCheck className="w-3 h-3" />
                 100% Verified
               </span>
-              <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-cyan-500/10 text-cyan-400 text-xs font-medium">
+              <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-[#006194]/10 text-[#006194] text-xs font-medium">
                 <BadgePercent className="w-3 h-3" />
                 Zero Brokerage
               </span>

@@ -67,7 +67,7 @@ function BookVisitContent() {
               </p>
               <button
                 onClick={() => setSubmitted(false)}
-                className="px-6 py-2.5 rounded-xl border border-blue-500/50 text-blue-600 font-medium hover:bg-blue-500/10 transition-all cursor-pointer"
+                className="px-6 py-2.5 rounded-xl border border-[#006194]/50 text-[#006194] font-medium hover:bg-[#006194]/10 transition-all cursor-pointer"
               >
                 Book Another Visit
               </button>
@@ -94,7 +94,7 @@ function BookVisitContent() {
                       name="name"
                       required
                       placeholder="Your full name"
-                      className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/50 transition-all"
+                      className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-[#006194]/20 focus:border-[#006194]/50 transition-all"
                     />
                   </div>
                 </div>
@@ -108,7 +108,7 @@ function BookVisitContent() {
                       name="phone"
                       required
                       placeholder="+91 XXXXX XXXXX"
-                      className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/50 transition-all"
+                      className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-[#006194]/20 focus:border-[#006194]/50 transition-all"
                     />
                   </div>
                 </div>
@@ -121,7 +121,7 @@ function BookVisitContent() {
                       type="email"
                       name="email"
                       placeholder="your@email.com"
-                      className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/50 transition-all"
+                      className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-[#006194]/20 focus:border-[#006194]/50 transition-all"
                     />
                   </div>
                 </div>
@@ -135,7 +135,7 @@ function BookVisitContent() {
                         type="date"
                         name="preferredDate"
                         required
-                        className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/50 transition-all"
+                        className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-[#006194]/20 focus:border-[#006194]/50 transition-all"
                       />
                     </div>
                   </div>
@@ -146,7 +146,7 @@ function BookVisitContent() {
                       <select
                         name="preferredTime"
                         required
-                        className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/50 transition-all appearance-none cursor-pointer"
+                        className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-[#006194]/20 focus:border-[#006194]/50 transition-all appearance-none cursor-pointer"
                       >
                         <option value="">Select</option>
                         <option value="9:00 AM - 11:00 AM">9:00 AM - 11:00 AM</option>
@@ -167,7 +167,7 @@ function BookVisitContent() {
                       defaultValue={propertyTitle ? `I'd like to visit: ${propertyTitle}` : ''}
                       placeholder="Any specific requirements or questions..."
                       rows={3}
-                      className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/50 transition-all resize-none"
+                      className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-[#006194]/20 focus:border-[#006194]/50 transition-all resize-none"
                     />
                   </div>
                 </div>
@@ -175,7 +175,7 @@ function BookVisitContent() {
                 <button
                   type="submit"
                   disabled={isPending}
-                  className="w-full py-3 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-300 hover:-translate-y-0.5 cursor-pointer disabled:opacity-50"
+                  className="w-full py-3 rounded-xl bg-[#006194] text-white font-semibold shadow-lg shadow-[#006194]/25 hover:shadow-[#006194]/40 transition-all duration-300 hover:-translate-y-0.5 cursor-pointer disabled:opacity-50"
                 >
                   {isPending ? 'Submitting...' : 'Book Visit'}
                 </button>

@@ -20,12 +20,12 @@ export default async function OwnerPropertiesPage() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center gap-3">
-          <Home className="w-6 h-6 text-blue-600" />
+          <Home className="w-6 h-6 text-[#006194]" />
           <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">My Properties</h1>
         </div>
         <Link
           href="/owner/properties/new"
-          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-medium text-sm shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all"
+          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#006194] text-white font-medium text-sm shadow-lg shadow-[#006194]/25 hover:shadow-[#006194]/40 transition-all"
         >
           <Plus className="w-4 h-4" />
           Add Property
@@ -67,7 +67,7 @@ export default async function OwnerPropertiesPage() {
                 </span>
                 <Link
                   href={`/owner/properties/${p.id}/edit`}
-                  className="text-sm text-blue-600 font-medium hover:underline"
+                  className="text-sm text-[#006194] font-medium hover:underline"
                 >
                   Edit
                 </Link>
@@ -82,7 +82,7 @@ export default async function OwnerPropertiesPage() {
           <p className="text-[var(--muted)] mb-4">Add your first property to start getting tenants.</p>
           <Link
             href="/owner/properties/new"
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-medium"
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#006194] text-white font-medium"
           >
             <Plus className="w-4 h-4" />
             Add Property

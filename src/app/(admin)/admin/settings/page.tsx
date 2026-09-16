@@ -115,7 +115,7 @@ export default function AdminSettingsPage() {
         {/* General Settings */}
         <div className="glass-card p-6 space-y-4">
           <div className="flex items-center gap-2 mb-2">
-            <Globe className="w-5 h-5 text-blue-600" />
+            <Globe className="w-5 h-5 text-[#006194]" />
             <h2 className="text-lg font-semibold">General</h2>
           </div>
 
@@ -150,7 +150,7 @@ export default function AdminSettingsPage() {
         {/* Social Links */}
         <div className="glass-card p-6 space-y-4">
           <div className="flex items-center gap-2 mb-2">
-            <Share2 className="w-5 h-5 text-blue-600" />
+            <Share2 className="w-5 h-5 text-[#006194]" />
             <h2 className="text-lg font-semibold">Social Media</h2>
           </div>
 

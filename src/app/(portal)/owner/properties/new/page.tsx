@@ -136,7 +136,7 @@ export default function AddPropertyPage() {
   return (
     <div>
       <div className="flex items-center gap-3 mb-8">
-        <Home className="w-6 h-6 text-blue-600" />
+        <Home className="w-6 h-6 text-[#006194]" />
         <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">Add New Property</h1>
       </div>
 
@@ -146,12 +146,12 @@ export default function AddPropertyPage() {
           <div key={s} className="flex items-center gap-2">
             <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
               step >= s
-                ? 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white'
+                ? 'bg-[#006194] text-white'
                 : 'bg-surface-light text-[var(--muted)]'
             }`}>
               {s}
             </div>
-            {s < 4 && <div className={`w-12 h-0.5 ${step > s ? 'bg-blue-500' : 'bg-surface-light'}`} />}
+            {s < 4 && <div className={`w-12 h-0.5 ${step > s ? 'bg-[#006194]' : 'bg-surface-light'}`} />}
           </div>
         ))}
         <span className="ml-2 text-sm text-[var(--muted)]">
@@ -180,7 +180,7 @@ export default function AddPropertyPage() {
                   value={form.title}
                   onChange={(e) => setForm({ ...form, title: e.target.value })}
                   placeholder="e.g. Prestige Lake Ridge 3BHK"
-                  className="w-full px-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
+                  className="w-full px-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-[#006194]/20 transition-all"
                 />
               </div>
               <div className="grid sm:grid-cols-2 gap-4">
@@ -192,7 +192,7 @@ export default function AddPropertyPage() {
                     value={form.location}
                     onChange={(e) => setForm({ ...form, location: e.target.value })}
                     placeholder="e.g. Hennur Main Road, Hennur"
-                    className="w-full px-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
+                    className="w-full px-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-[#006194]/20 transition-all"
                   />
                 </div>
                 <div>
@@ -203,7 +203,7 @@ export default function AddPropertyPage() {
                     value={form.area}
                     onChange={(e) => setForm({ ...form, area: e.target.value })}
                     placeholder="e.g. Hennur"
-                    className="w-full px-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
+                    className="w-full px-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-[#006194]/20 transition-all"
                   />
                 </div>
               </div>
@@ -216,7 +216,7 @@ export default function AddPropertyPage() {
                     value={form.price}
                     onChange={(e) => setForm({ ...form, price: e.target.value })}
                     placeholder="25000"
-                    className="w-full px-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
+                    className="w-full px-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-[#006194]/20 transition-all"
                   />
                 </div>
                 <div>
@@ -225,7 +225,7 @@ export default function AddPropertyPage() {
                     required
                     value={form.bhk}
                     onChange={(e) => setForm({ ...form, bhk: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all cursor-pointer"
+                    className="w-full px-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-[#006194]/20 transition-all cursor-pointer"
                   >
                     <option value="">Select</option>
                     {[1, 2, 3, 4, 5].map((n) => (
@@ -241,7 +241,7 @@ export default function AddPropertyPage() {
                     value={form.sqft}
                     onChange={(e) => setForm({ ...form, sqft: e.target.value })}
                     placeholder="1200"
-                    className="w-full px-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
+                    className="w-full px-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-[#006194]/20 transition-all"
                   />
                 </div>
                 <div>
@@ -251,7 +251,7 @@ export default function AddPropertyPage() {
                     value={form.deposit}
                     onChange={(e) => setForm({ ...form, deposit: e.target.value })}
                     placeholder="50000"
-                    className="w-full px-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
+                    className="w-full px-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-[#006194]/20 transition-all"
                   />
                 </div>
               </div>
@@ -259,7 +259,7 @@ export default function AddPropertyPage() {
                 <button
                   type="button"
                   onClick={() => setStep(2)}
-                  className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-medium cursor-pointer"
+                  className="px-6 py-2.5 rounded-xl bg-[#006194] text-white font-medium cursor-pointer"
                 >
                   Next
                 </button>
@@ -347,7 +347,7 @@ export default function AddPropertyPage() {
                       onClick={() => toggleAmenity(a)}
                       className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all cursor-pointer ${
                         form.amenities.includes(a)
-                          ? 'bg-blue-500 text-white'
+                          ? 'bg-[#006194] text-white'
                           : 'bg-surface-light text-[var(--muted)] hover:bg-surface-lighter'
                       }`}
                     >
@@ -367,7 +367,7 @@ export default function AddPropertyPage() {
                 <button
                   type="button"
                   onClick={() => setStep(3)}
-                  className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-medium cursor-pointer"
+                  className="px-6 py-2.5 rounded-xl bg-[#006194] text-white font-medium cursor-pointer"
                 >
                   Next
                 </button>
@@ -430,7 +430,7 @@ export default function AddPropertyPage() {
                 <button
                   type="button"
                   onClick={() => setStep(4)}
-                  className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-medium cursor-pointer"
+                  className="px-6 py-2.5 rounded-xl bg-[#006194] text-white font-medium cursor-pointer"
                 >
                   Next
                 </button>
@@ -443,7 +443,7 @@ export default function AddPropertyPage() {
         {step === 4 && (
           <GlassCard hover={false}>
             <div className="flex items-center gap-2 mb-6">
-              <Eye className="w-5 h-5 text-blue-600" />
+              <Eye className="w-5 h-5 text-[#006194]" />
               <h2 className="text-lg font-semibold">Review Your Property</h2>
             </div>
 
@@ -508,7 +508,7 @@ export default function AddPropertyPage() {
                 <span className="text-xs text-[var(--muted)] block mb-2">Amenities</span>
                 <div className="flex flex-wrap gap-2">
                   {form.amenities.map((a) => (
-                    <span key={a} className="px-3 py-1.5 rounded-lg text-sm font-medium bg-blue-500/10 text-blue-600">
+                    <span key={a} className="px-3 py-1.5 rounded-lg text-sm font-medium bg-[#006194]/10 text-[#006194]">
                       {a}
                     </span>
                   ))}
@@ -546,7 +546,7 @@ export default function AddPropertyPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="px-8 py-2.5 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold shadow-lg cursor-pointer disabled:opacity-50"
+                className="px-8 py-2.5 rounded-xl bg-[#006194] text-white font-semibold shadow-lg cursor-pointer disabled:opacity-50"
               >
                 {loading ? 'Submitting...' : 'Submit Property'}
               </button>

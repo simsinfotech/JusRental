@@ -57,7 +57,7 @@ export function MobileMenu({ isOpen, onClose, isLoggedIn }: MobileMenuProps) {
                   <Link
                     href="/owner"
                     onClick={onClose}
-                    className="flex items-center gap-3 px-4 py-3 rounded-xl text-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors text-blue-600"
+                    className="flex items-center gap-3 px-4 py-3 rounded-xl text-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors text-[#006194]"
                   >
                     <User className="w-5 h-5" />
                     My Portal

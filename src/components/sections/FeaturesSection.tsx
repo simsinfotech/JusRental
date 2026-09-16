@@ -54,7 +54,7 @@ export function FeaturesSection() {
                 transition={{ type: 'spring', stiffness: 300 }}
               >
                 <motion.div
-                  className="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-blue-500/10 to-cyan-500/10 flex items-center justify-center mb-6 group-hover:from-blue-500/20 group-hover:to-cyan-500/20 transition-colors"
+                  className="w-20 h-20 mx-auto rounded-2xl bg-[#006194]/10 flex items-center justify-center mb-6 group-hover:from-[#006194]/20 group-hover:to-[#006194]/20 transition-colors"
                   whileHover={{ rotate: [0, -5, 5, 0], scale: 1.1 }}
                   transition={{ duration: 0.5 }}
                 >

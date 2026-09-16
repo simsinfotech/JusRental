@@ -110,7 +110,7 @@ export function PaymentButton({
     <button
       onClick={handlePayment}
       disabled={loading}
-      className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all cursor-pointer disabled:opacity-50"
+      className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#006194] text-white font-semibold shadow-lg shadow-[#006194]/25 hover:shadow-[#006194]/40 transition-all cursor-pointer disabled:opacity-50"
     >
       <CreditCard className="w-4 h-4" />
       {loading ? 'Processing...' : label}

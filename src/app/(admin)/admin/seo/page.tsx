@@ -157,7 +157,7 @@ export default function AdminSEOPage() {
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="glass-card p-6 space-y-4">
           <div className="flex items-center gap-2 mb-2">
-            <Globe className="w-5 h-5 text-blue-600" />
+            <Globe className="w-5 h-5 text-[#006194]" />
             <h2 className="text-lg font-semibold">Default Meta Tags</h2>
           </div>
 
@@ -182,7 +182,7 @@ export default function AdminSEOPage() {
           {/* SEO Preview */}
           <div className="p-4 rounded-xl bg-surface-light">
             <p className="text-xs text-[var(--muted)] mb-2">Google Preview</p>
-            <p className="text-blue-600 text-base font-medium truncate">{form.defaultTitle || 'Page Title'}</p>
+            <p className="text-[#006194] text-base font-medium truncate">{form.defaultTitle || 'Page Title'}</p>
             <p className="text-green-700 text-xs">https://jusrental.com</p>
             <p className="text-sm text-[var(--muted)] line-clamp-2 mt-0.5">{form.defaultDescription || 'Page description...'}</p>
           </div>
@@ -190,7 +190,7 @@ export default function AdminSEOPage() {
 
         <div className="glass-card p-6 space-y-4">
           <div className="flex items-center gap-2 mb-2">
-            <Code className="w-5 h-5 text-blue-600" />
+            <Code className="w-5 h-5 text-[#006194]" />
             <h2 className="text-lg font-semibold">Tracking & Verification</h2>
           </div>
 

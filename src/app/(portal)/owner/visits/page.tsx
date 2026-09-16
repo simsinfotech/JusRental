@@ -35,7 +35,7 @@ export default async function OwnerVisitsPage() {
   return (
     <div>
       <div className="flex items-center gap-3 mb-8">
-        <Calendar className="w-6 h-6 text-blue-600" />
+        <Calendar className="w-6 h-6 text-[#006194]" />
         <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">Visit Requests</h1>
       </div>
 

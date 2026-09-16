@@ -14,7 +14,7 @@ import { fadeInUp, staggerContainer } from '@/lib/animations';
 import { useAnimateInView } from '@/hooks/useAnimateInView';
 
 const highlights = [
-  { icon: Users, title: 'Tenant Discovery', desc: 'Verified tenants from our 5,000+ pool', color: 'bg-blue-50 text-blue-600' },
+  { icon: Users, title: 'Tenant Discovery', desc: 'Verified tenants from our 5,000+ pool', color: 'bg-blue-50 text-[#006194]' },
   { icon: FileText, title: 'Legal Support', desc: 'Rental agreements & registration', color: 'bg-emerald-50 text-emerald-600' },
   { icon: IndianRupee, title: 'Rent Collection', desc: 'Automated monthly transfers', color: 'bg-amber-50 text-amber-600' },
   { icon: Wrench, title: 'Maintenance', desc: 'Property upkeep & inspections', color: 'bg-purple-50 text-purple-600' },

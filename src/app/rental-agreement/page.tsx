@@ -82,7 +82,7 @@ export default function RentalAgreementPage() {
             </div>
             <GlassCard gradient hover={false} className="p-8">
               <div className="flex items-center gap-3 mb-4">
-                <AlertCircle className="w-6 h-6 text-cyan-500" />
+                <AlertCircle className="w-6 h-6 text-[#006194]" />
                 <h3 className="text-lg font-semibold font-[family-name:var(--font-heading)]">
                   Important Note
                 </h3>
@@ -118,7 +118,7 @@ export default function RentalAgreementPage() {
           >
             {steps.map((step, i) => (
               <motion.div key={step.title} variants={fadeInUp} className="text-center">
-                <div className="w-14 h-14 mx-auto rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-xl font-bold flex items-center justify-center mb-4">
+                <div className="w-14 h-14 mx-auto rounded-full bg-[#006194] text-white text-xl font-bold flex items-center justify-center mb-4">
                   {i + 1}
                 </div>
                 <h3 className="font-semibold font-[family-name:var(--font-heading)] mb-2">{step.title}</h3>
@@ -163,7 +163,7 @@ export default function RentalAgreementPage() {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-300 hover:-translate-y-0.5"
+            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-[#006194] text-white font-semibold shadow-lg shadow-[#006194]/25 hover:shadow-[#006194]/40 transition-all duration-300 hover:-translate-y-0.5"
           >
             <FileText className="w-4 h-4" />
             Get Agreement Assistance

@@ -41,7 +41,7 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
             className={cn(
               'w-10 h-10 rounded-lg text-sm font-medium transition-all cursor-pointer',
               currentPage === page
-                ? 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white shadow-lg shadow-blue-500/25'
+                ? 'bg-[#006194] text-white shadow-lg shadow-[#006194]/25'
                 : 'border border-glass-border hover:bg-surface-light text-[var(--muted)]'
             )}
           >

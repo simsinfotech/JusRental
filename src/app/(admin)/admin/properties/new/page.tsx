@@ -171,7 +171,7 @@ export default function AdminAddPropertyPage() {
             {AMENITY_OPTIONS.map((a) => (
               <button key={a} type="button" onClick={() => toggleAmenity(a)}
                 className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all cursor-pointer ${
-                  form.amenities.includes(a) ? 'bg-blue-500 text-white' : 'bg-surface-light text-[var(--muted)]'
+                  form.amenities.includes(a) ? 'bg-[#006194] text-white' : 'bg-surface-light text-[var(--muted)]'
                 }`}>
                 {a}
               </button>

@@ -48,7 +48,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     <>
       {/* Hero */}
       <section className="relative bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#0f172a] pt-28 pb-8 md:pt-32 md:pb-10">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#006194]/10 rounded-full blur-[120px] pointer-events-none" />
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <Breadcrumb items={[{ label: 'Blog', href: '/blog' }, { label: post.title }]} />
           <Link
@@ -78,7 +78,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
           {/* Meta */}
           <div className="flex flex-wrap items-center gap-4 mb-6">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-medium bg-blue-500/10 text-blue-600 border border-blue-500/20">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-medium bg-[#006194]/10 text-[#006194] border border-[#006194]/20">
               <Tag className="w-3.5 h-3.5" />
               {post.category}
             </span>
@@ -139,7 +139,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                         />
                       </div>
                       <div className="p-4">
-                        <h3 className="font-semibold font-[family-name:var(--font-heading)] group-hover:text-blue-600 transition-colors line-clamp-2">
+                        <h3 className="font-semibold font-[family-name:var(--font-heading)] group-hover:text-[#006194] transition-colors line-clamp-2">
                           {rp.title}
                         </h3>
                         <p className="text-sm text-[var(--muted)] mt-1">{rp.readTime} min read</p>

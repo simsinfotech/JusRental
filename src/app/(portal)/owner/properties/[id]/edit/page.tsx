@@ -100,7 +100,7 @@ export default function EditPropertyPage({ params }: { params: Promise<{ id: str
   return (
     <div>
       <div className="flex items-center gap-3 mb-8">
-        <Home className="w-6 h-6 text-blue-600" />
+        <Home className="w-6 h-6 text-[#006194]" />
         <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">Edit Property</h1>
       </div>
 
@@ -187,7 +187,7 @@ export default function EditPropertyPage({ params }: { params: Promise<{ id: str
                 {AMENITY_OPTIONS.map((a) => (
                   <button key={a} type="button" onClick={() => toggleAmenity(a)}
                     className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all cursor-pointer ${
-                      form.amenities.includes(a) ? 'bg-blue-500 text-white' : 'bg-surface-light text-[var(--muted)]'
+                      form.amenities.includes(a) ? 'bg-[#006194] text-white' : 'bg-surface-light text-[var(--muted)]'
                     }`}>
                     {a}
                   </button>
@@ -204,7 +204,7 @@ export default function EditPropertyPage({ params }: { params: Promise<{ id: str
             </div>
             <div className="flex justify-end">
               <button type="submit" disabled={loading}
-                className="flex items-center gap-2 px-8 py-2.5 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold cursor-pointer disabled:opacity-50">
+                className="flex items-center gap-2 px-8 py-2.5 rounded-xl bg-[#006194] text-white font-semibold cursor-pointer disabled:opacity-50">
                 <Save className="w-4 h-4" />
                 {loading ? 'Saving...' : 'Save Changes'}
               </button>

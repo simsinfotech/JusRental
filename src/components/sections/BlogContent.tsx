@@ -34,7 +34,7 @@ export function BlogContent({ posts, categories }: BlogContentProps) {
               onClick={() => setActiveCategory(cat)}
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-all cursor-pointer ${
                 activeCategory === cat
-                  ? 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white'
+                  ? 'bg-[#006194] text-white'
                   : 'bg-surface-light text-[var(--muted)] hover:bg-surface-lighter'
               }`}
             >
@@ -64,14 +64,14 @@ export function BlogContent({ posts, categories }: BlogContentProps) {
                       sizes="(max-width: 768px) 100vw, 33vw"
                     />
                     <div className="absolute top-3 left-3">
-                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-blue-500/90 text-white">
+                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-[#006194]/90 text-white">
                         <Tag className="w-3 h-3" />
                         {post.category}
                       </span>
                     </div>
                   </div>
                   <div className="p-5">
-                    <h3 className="text-lg font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-blue-600 transition-colors line-clamp-2">
+                    <h3 className="text-lg font-semibold font-[family-name:var(--font-heading)] mb-2 group-hover:text-[#006194] transition-colors line-clamp-2">
                       {post.title}
                     </h3>
                     <p className="text-sm text-[var(--muted)] mb-4 line-clamp-2">
@@ -85,7 +85,7 @@ export function BlogContent({ posts, categories }: BlogContentProps) {
                         </span>
                         <span>{post.publishedDate}</span>
                       </div>
-                      <span className="text-blue-600 font-medium flex items-center gap-1 group-hover:underline">
+                      <span className="text-[#006194] font-medium flex items-center gap-1 group-hover:underline">
                         Read <ArrowRight className="w-3 h-3" />
                       </span>
                     </div>

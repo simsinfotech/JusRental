@@ -98,7 +98,7 @@ export function PropertiesContent({
             <select
               value={sort}
               onChange={(e) => updateParams('sort', e.target.value)}
-              className="px-3 py-2 rounded-lg border border-glass-border bg-surface text-sm cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+              className="px-3 py-2 rounded-lg border border-glass-border bg-surface text-sm cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#006194]/20"
             >
               {sortOptions.map((opt) => (
                 <option key={opt.value} value={opt.value}>
@@ -153,7 +153,7 @@ export function PropertiesContent({
                 </p>
                 <button
                   onClick={clearFilters}
-                  className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-medium cursor-pointer"
+                  className="px-6 py-2.5 rounded-xl bg-[#006194] text-white font-medium cursor-pointer"
                 >
                   Clear All Filters
                 </button>

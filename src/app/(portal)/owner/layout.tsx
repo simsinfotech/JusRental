@@ -83,7 +83,7 @@ export default function OwnerLayout({ children }: { children: React.ReactNode })
                   onClick={() => setSidebarOpen(false)}
                   className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
                     isActive
-                      ? 'bg-gradient-to-r from-blue-500/10 to-cyan-500/10 text-blue-600 border border-blue-500/20'
+                      ? 'bg-[#006194]/10 text-[#006194] border border-[#006194]/20'
                       : 'text-[var(--muted)] hover:bg-surface-light hover:text-[var(--foreground)]'
                   }`}
                 >
@@ -97,7 +97,7 @@ export default function OwnerLayout({ children }: { children: React.ReactNode })
 
           <div className="p-4 border-t border-glass-border">
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 flex items-center justify-center text-white text-sm font-bold">
+              <div className="w-8 h-8 rounded-full bg-[#006194] flex items-center justify-center text-white text-sm font-bold">
                 {userName?.charAt(0)?.toUpperCase() || 'U'}
               </div>
               <div className="flex-1 min-w-0">

@@ -89,7 +89,7 @@ export default function ContactPage() {
                   </p>
                   <button
                     onClick={() => setSubmitted(false)}
-                    className="px-6 py-2.5 rounded-xl border border-blue-500/50 text-blue-600 font-medium hover:bg-blue-500/10 transition-all cursor-pointer"
+                    className="px-6 py-2.5 rounded-xl border border-[#006194]/50 text-[#006194] font-medium hover:bg-[#006194]/10 transition-all cursor-pointer"
                   >
                     Send Another Message
                   </button>
@@ -115,7 +115,7 @@ export default function ContactPage() {
                             name="name"
                             required
                             placeholder="Your name"
-                            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/50 transition-all"
+                            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-[#006194]/20 focus:border-[#006194]/50 transition-all"
                           />
                         </div>
                       </div>
@@ -128,7 +128,7 @@ export default function ContactPage() {
                             name="phone"
                             required
                             placeholder="+91 XXXXX XXXXX"
-                            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/50 transition-all"
+                            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-[#006194]/20 focus:border-[#006194]/50 transition-all"
                           />
                         </div>
                       </div>
@@ -142,7 +142,7 @@ export default function ContactPage() {
                           type="email"
                           name="email"
                           placeholder="your@email.com"
-                          className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/50 transition-all"
+                          className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-[#006194]/20 focus:border-[#006194]/50 transition-all"
                         />
                       </div>
                     </div>
@@ -154,7 +154,7 @@ export default function ContactPage() {
                         name="subject"
                         required
                         placeholder="What is this about?"
-                        className="w-full px-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/50 transition-all"
+                        className="w-full px-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-[#006194]/20 focus:border-[#006194]/50 transition-all"
                       />
                     </div>
 
@@ -167,7 +167,7 @@ export default function ContactPage() {
                           required
                           placeholder="Tell us how we can help..."
                           rows={5}
-                          className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/50 transition-all resize-none"
+                          className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-glass-border bg-surface-light focus:outline-none focus:ring-2 focus:ring-[#006194]/20 focus:border-[#006194]/50 transition-all resize-none"
                         />
                       </div>
                     </div>
@@ -175,7 +175,7 @@ export default function ContactPage() {
                     <button
                       type="submit"
                       disabled={isPending}
-                      className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-300 hover:-translate-y-0.5 cursor-pointer disabled:opacity-50"
+                      className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-[#006194] text-white font-semibold shadow-lg shadow-[#006194]/25 hover:shadow-[#006194]/40 transition-all duration-300 hover:-translate-y-0.5 cursor-pointer disabled:opacity-50"
                     >
                       <Send className="w-4 h-4" />
                       {isPending ? 'Sending...' : 'Send Message'}
@@ -190,8 +190,8 @@ export default function ContactPage() {
               {contactInfo.map((info) => (
                 <GlassCard key={info.title} hover={false}>
                   <div className="flex items-start gap-4">
-                    <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-500/10 to-cyan-500/10 flex items-center justify-center shrink-0">
-                      <info.icon className="w-5 h-5 text-blue-600" />
+                    <div className="w-11 h-11 rounded-xl bg-[#006194]/10 flex items-center justify-center shrink-0">
+                      <info.icon className="w-5 h-5 text-[#006194]" />
                     </div>
                     <div>
                       <h3 className="font-semibold font-[family-name:var(--font-heading)] mb-1">{info.title}</h3>
@@ -200,7 +200,7 @@ export default function ContactPage() {
                           href={info.href}
                           target={info.href.startsWith('http') ? '_blank' : undefined}
                           rel={info.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                          className="text-sm text-[var(--muted)] hover:text-blue-600 transition-colors"
+                          className="text-sm text-[var(--muted)] hover:text-[#006194] transition-colors"
                         >
                           {info.detail}
                         </a>

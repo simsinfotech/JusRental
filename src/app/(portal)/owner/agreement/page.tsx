@@ -19,7 +19,7 @@ export default async function OwnerAgreementPage() {
   return (
     <div>
       <div className="flex items-center gap-3 mb-8">
-        <FileText className="w-6 h-6 text-blue-600" />
+        <FileText className="w-6 h-6 text-[#006194]" />
         <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">Rental Agreements</h1>
       </div>
 
@@ -73,7 +73,7 @@ export default async function OwnerAgreementPage() {
             { icon: Download, text: 'Both parties sign digitally — download anytime' },
           ].map((step, i) => (
             <div key={i} className="flex items-start gap-3 text-sm text-[var(--muted)]">
-              <step.icon className="w-4 h-4 mt-0.5 text-blue-600 shrink-0" />
+              <step.icon className="w-4 h-4 mt-0.5 text-[#006194] shrink-0" />
               <span>{step.text}</span>
             </div>
           ))}

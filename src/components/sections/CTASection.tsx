@@ -66,7 +66,7 @@ export function CTASection() {
               <motion.div variants={fadeInUp} className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-8">
                 {features.map((text) => (
                   <div key={text} className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-cyan-300 shrink-0" />
+                    <CheckCircle2 className="w-4 h-4 text-white/90 shrink-0" />
                     <span className="text-sm text-white/90">{text}</span>
                   </div>
                 ))}

@@ -23,7 +23,7 @@ export function RentEstimatorContent({ rentData, rentAreas, bhkOptions }: RentEs
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <GlassCard gradient hover={false} className="p-8">
           <div className="flex items-center gap-2 mb-6">
-            <IndianRupee className="w-6 h-6 text-cyan-500" />
+            <IndianRupee className="w-6 h-6 text-[#006194]" />
             <h2 className="text-xl font-semibold font-[family-name:var(--font-heading)]">
               Estimate Monthly Rent
             </h2>
@@ -42,7 +42,7 @@ export function RentEstimatorContent({ rentData, rentAreas, bhkOptions }: RentEs
                   onClick={() => setSelectedBHK(bhk)}
                   className={`px-5 py-2.5 rounded-xl text-sm font-medium transition-all cursor-pointer ${
                     selectedBHK === bhk
-                      ? 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white shadow-lg shadow-blue-500/25'
+                      ? 'bg-[#006194] text-white shadow-lg shadow-[#006194]/25'
                       : 'bg-surface-light text-[var(--muted)] hover:bg-surface-lighter'
                   }`}
                 >
@@ -65,7 +65,7 @@ export function RentEstimatorContent({ rentData, rentAreas, bhkOptions }: RentEs
                   onClick={() => setSelectedArea(area)}
                   className={`px-4 py-2 rounded-xl text-sm font-medium transition-all cursor-pointer ${
                     selectedArea === area
-                      ? 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white shadow-lg shadow-blue-500/25'
+                      ? 'bg-[#006194] text-white shadow-lg shadow-[#006194]/25'
                       : 'bg-surface-light text-[var(--muted)] hover:bg-surface-lighter'
                   }`}
                 >
@@ -76,7 +76,7 @@ export function RentEstimatorContent({ rentData, rentAreas, bhkOptions }: RentEs
           </div>
 
           {/* Result */}
-          <div className="p-8 rounded-2xl bg-gradient-to-br from-blue-500/10 to-cyan-500/10 border border-blue-500/20 text-center">
+          <div className="p-8 rounded-2xl bg-[#006194]/10 border border-[#006194]/20 text-center">
             <p className="text-sm text-[var(--muted)] mb-2">Estimated Monthly Rent</p>
             <motion.p
               key={`${selectedBHK}-${selectedArea}`}

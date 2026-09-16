@@ -113,8 +113,8 @@ export default function AdminLeadsPage() {
             <div key={lead.id as string} className="glass-card p-4">
               <div className="flex items-start justify-between mb-3">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center">
-                    <User className="w-5 h-5 text-blue-600" />
+                  <div className="w-10 h-10 rounded-full bg-[#006194]/10 flex items-center justify-center">
+                    <User className="w-5 h-5 text-[#006194]" />
                   </div>
                   <div>
                     <p className="font-semibold">{lead.name as string}</p>
@@ -132,13 +132,13 @@ export default function AdminLeadsPage() {
                 {lead.phone ? (
                   <div className="flex items-center gap-2 text-[var(--muted)]">
                     <Phone className="w-3.5 h-3.5" />
-                    <a href={`tel:${lead.phone}`} className="hover:text-blue-600">{String(lead.phone)}</a>
+                    <a href={`tel:${lead.phone}`} className="hover:text-[#006194]">{String(lead.phone)}</a>
                   </div>
                 ) : null}
                 {lead.email ? (
                   <div className="flex items-center gap-2 text-[var(--muted)]">
                     <Mail className="w-3.5 h-3.5" />
-                    <a href={`mailto:${lead.email}`} className="hover:text-blue-600">{String(lead.email)}</a>
+                    <a href={`mailto:${lead.email}`} className="hover:text-[#006194]">{String(lead.email)}</a>
                   </div>
                 ) : null}
                 {lead.preferred_date ? (
@@ -177,7 +177,7 @@ export default function AdminLeadsPage() {
                     }}
                     className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-all cursor-pointer capitalize ${
                       lead.status === s
-                        ? 'bg-blue-500 text-white'
+                        ? 'bg-[#006194] text-white'
                         : 'bg-surface-light text-[var(--muted)] hover:text-[var(--foreground)]'
                     }`}
                   >

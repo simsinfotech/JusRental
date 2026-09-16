@@ -55,8 +55,8 @@ export function NRIServicesContent({ services }: NRIServicesContentProps) {
               return (
                 <motion.div key={service.title} variants={fadeInUp}>
                   <GlassCard className="h-full" whileHover={{ y: -4 }}>
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/10 to-cyan-500/10 flex items-center justify-center mb-4">
-                      <Icon className="w-6 h-6 text-blue-600" />
+                    <div className="w-12 h-12 rounded-xl bg-[#006194]/10 flex items-center justify-center mb-4">
+                      <Icon className="w-6 h-6 text-[#006194]" />
                     </div>
                     <h3 className="text-lg font-semibold font-[family-name:var(--font-heading)] mb-2">
                       {service.title}
@@ -90,7 +90,7 @@ export function NRIServicesContent({ services }: NRIServicesContentProps) {
           >
             {howItWorks.map((item) => (
               <motion.div key={item.step} variants={fadeInUp} className="text-center">
-                <div className="w-14 h-14 mx-auto rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-xl font-bold flex items-center justify-center mb-4">
+                <div className="w-14 h-14 mx-auto rounded-full bg-[#006194] text-white text-xl font-bold flex items-center justify-center mb-4">
                   {item.step}
                 </div>
                 <h3 className="font-semibold font-[family-name:var(--font-heading)] mb-2">{item.title}</h3>
@@ -105,7 +105,7 @@ export function NRIServicesContent({ services }: NRIServicesContentProps) {
       <section className="py-12 md:py-16">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <GlassCard gradient hover={false} className="py-12">
-            <Globe className="w-12 h-12 mx-auto text-blue-600 mb-4" />
+            <Globe className="w-12 h-12 mx-auto text-[#006194] mb-4" />
             <h2 className="text-2xl md:text-3xl font-bold font-[family-name:var(--font-heading)] mb-3">
               Ready to Get Started?
             </h2>
@@ -117,7 +117,7 @@ export function NRIServicesContent({ services }: NRIServicesContentProps) {
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-300 hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-[#006194] text-white font-semibold shadow-lg shadow-[#006194]/25 hover:shadow-[#006194]/40 transition-all duration-300 hover:-translate-y-0.5"
               >
                 <Phone className="w-4 h-4" />
                 Contact Us on WhatsApp

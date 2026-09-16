@@ -41,14 +41,14 @@ export function OwnerSection() {
         >
           {/* Left — Owner Proposition */}
           <motion.div variants={slideInLeft} className="space-y-6">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-cyan-400 text-sm font-medium">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-[#006194] text-sm font-medium">
               <Home className="w-3.5 h-3.5" />
               For Property Owners
             </span>
 
             <h2 className="text-3xl md:text-4xl font-bold font-[family-name:var(--font-heading)] text-white">
               List Your Property,{' '}
-              <span className="text-cyan-400">Find Tenants Fast</span>
+              <span className="text-[#006194]">Find Tenants Fast</span>
             </h2>
 
             <p className="text-white/60 text-lg">
@@ -58,7 +58,7 @@ export function OwnerSection() {
             <div className="space-y-3">
               {benefits.map((text) => (
                 <div key={text} className="flex items-center gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-cyan-400 shrink-0" />
+                  <CheckCircle2 className="w-5 h-5 text-[#006194] shrink-0" />
                   <span className="text-white/80">{text}</span>
                 </div>
               ))}

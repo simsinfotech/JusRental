@@ -47,7 +47,7 @@ export function PropertyFilters({
         {hasFilters && (
           <button
             onClick={onClear}
-            className="text-sm text-blue-600 hover:underline cursor-pointer"
+            className="text-sm text-[#006194] hover:underline cursor-pointer"
           >
             Clear all
           </button>
@@ -66,7 +66,7 @@ export function PropertyFilters({
               onClick={() => onChange('type', filters.type === t ? '' : t)}
               className={`px-3 py-1.5 rounded-lg text-sm transition-all cursor-pointer ${
                 filters.type === t
-                  ? 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white'
+                  ? 'bg-[#006194] text-white'
                   : 'bg-surface-light text-[var(--muted)] hover:bg-surface-lighter'
               }`}
             >
@@ -86,7 +86,7 @@ export function PropertyFilters({
               onClick={() => onChange('bhk', filters.bhk === b ? '' : b)}
               className={`px-3 py-1.5 rounded-lg text-sm transition-all cursor-pointer ${
                 filters.bhk === b
-                  ? 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white'
+                  ? 'bg-[#006194] text-white'
                   : 'bg-surface-light text-[var(--muted)] hover:bg-surface-lighter'
               }`}
             >
@@ -116,7 +116,7 @@ export function PropertyFilters({
                 }}
                 className={`px-3 py-2 rounded-lg text-sm text-left transition-all cursor-pointer ${
                   isActive
-                    ? 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white'
+                    ? 'bg-[#006194] text-white'
                     : 'bg-surface-light text-[var(--muted)] hover:bg-surface-lighter'
                 }`}
               >
@@ -137,7 +137,7 @@ export function PropertyFilters({
               onClick={() => onChange('area', filters.area === area ? '' : area)}
               className={`px-3 py-1.5 rounded-lg text-sm transition-all cursor-pointer ${
                 filters.area === area
-                  ? 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white'
+                  ? 'bg-[#006194] text-white'
                   : 'bg-surface-light text-[var(--muted)] hover:bg-surface-lighter'
               }`}
             >
@@ -157,7 +157,7 @@ export function PropertyFilters({
               onClick={() => onChange('furnished', filters.furnished === f ? '' : f)}
               className={`px-3 py-1.5 rounded-lg text-sm transition-all cursor-pointer ${
                 filters.furnished === f
-                  ? 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white'
+                  ? 'bg-[#006194] text-white'
                   : 'bg-surface-light text-[var(--muted)] hover:bg-surface-lighter'
               }`}
             >

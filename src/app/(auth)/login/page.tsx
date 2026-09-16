@@ -66,7 +66,7 @@ function LoginForm() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@example.com"
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-white/10 bg-white/5 text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500/50 transition-all"
+              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-white/10 bg-white/5 text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-[#006194]/30 focus:border-[#006194]/50 transition-all"
             />
           </div>
         </div>
@@ -81,7 +81,7 @@ function LoginForm() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Your password"
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-white/10 bg-white/5 text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500/50 transition-all"
+              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-white/10 bg-white/5 text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-[#006194]/30 focus:border-[#006194]/50 transition-all"
             />
           </div>
         </div>
@@ -89,7 +89,7 @@ function LoginForm() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-300 hover:-translate-y-0.5 cursor-pointer disabled:opacity-50"
+          className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-[#006194] text-white font-semibold shadow-lg shadow-[#006194]/25 hover:shadow-[#006194]/40 transition-all duration-300 hover:-translate-y-0.5 cursor-pointer disabled:opacity-50"
         >
           <LogIn className="w-4 h-4" />
           {loading ? 'Signing in...' : 'Sign In'}
@@ -98,7 +98,7 @@ function LoginForm() {
 
       <div className="mt-6 text-center text-sm text-white/50">
         Don&apos;t have an account?{' '}
-        <Link href="/signup" className="text-blue-400 hover:text-blue-300 font-medium">
+        <Link href="/signup" className="text-[#0080c4] hover:text-[#0080c4] font-medium">
           Sign Up
         </Link>
       </div>
