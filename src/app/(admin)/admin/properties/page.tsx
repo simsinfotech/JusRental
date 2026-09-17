@@ -47,15 +47,31 @@ export default function AdminPropertiesPage() {
   useEffect(() => { loadProperties(); }, []);
 
   const handleStatusChange = async (id: string, status: string) => {
-    const supabase = createSupabaseBrowser();
-    await supabase.from('js_properties').update({ status }).eq('id', id);
+    const res = await fetch('/api/properties/update-status', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id, status }),
+    });
+    if (!res.ok) {
+      const data = await res.json();
+      alert(data.error || 'Failed to update status');
+      return;
+    }
     loadProperties();
   };
 
   const handleDelete = async (id: string) => {
     if (!confirm('Are you sure you want to delete this property?')) return;
-    const supabase = createSupabaseBrowser();
-    await supabase.from('js_properties').delete().eq('id', id);
+    const res = await fetch('/api/properties/delete', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id }),
+    });
+    if (!res.ok) {
+      const data = await res.json();
+      alert(data.error || 'Failed to delete property');
+      return;
+    }
     loadProperties();
   };
 
