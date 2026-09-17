@@ -31,24 +31,19 @@ export function LeadPopup({ isOpen, onClose }: LeadPopupProps) {
         throw new Error('Webhook URL not configured');
       }
 
-      const res = await fetch(webhookUrl, {
+      await fetch(webhookUrl, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
         mode: 'no-cors',
+        body: new URLSearchParams(data),
       });
 
-      // With no-cors mode, we can't read the response, so treat as success
+      // With no-cors mode, the response is always opaque — treat as success
       // if no network error was thrown
-      if (res.type === 'opaque' || res.ok) {
-        setFormState('success');
-        localStorage.setItem('jusrental_lead_captured', 'true');
-        setTimeout(() => {
-          onClose();
-        }, 2000);
-      } else {
-        throw new Error('Failed to submit');
-      }
+      setFormState('success');
+      localStorage.setItem('jusrental_lead_captured', 'true');
+      setTimeout(() => {
+        onClose();
+      }, 2000);
     } catch {
       setFormState('error');
       setErrorMessage('Something went wrong. Please try again.');
