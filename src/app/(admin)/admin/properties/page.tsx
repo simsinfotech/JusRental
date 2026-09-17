@@ -35,17 +35,16 @@ export default function AdminPropertiesPage() {
       .select('id, title, location, area, price, bhk, type, status, verified, views_count, created_at')
       .order('created_at', { ascending: false });
 
-    setProperties((data as PropertyRow[]) || []);
+    // Normalize null/undefined status to 'pending'
+    const normalized = ((data as PropertyRow[]) || []).map((p) => ({
+      ...p,
+      status: p.status || 'pending',
+    }));
+    setProperties(normalized);
     setLoading(false);
   };
 
   useEffect(() => { loadProperties(); }, []);
-
-  const handleVerify = async (id: string, verified: boolean) => {
-    const supabase = createSupabaseBrowser();
-    await supabase.from('js_properties').update({ verified }).eq('id', id);
-    loadProperties();
-  };
 
   const handleStatusChange = async (id: string, status: string) => {
     const supabase = createSupabaseBrowser();
@@ -110,50 +109,42 @@ export default function AdminPropertiesPage() {
       key: 'actions',
       label: 'Actions',
       render: (item: PropertyRow) => (
-        <div className="flex items-center gap-1">
-          {item.status === 'pending' && (
+        <div className="flex items-center gap-2">
+          {item.status === 'pending' ? (
             <button
               onClick={(e) => { e.stopPropagation(); handleStatusChange(item.id, 'active'); }}
-              className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-green-500/10 text-green-600 hover:bg-green-500/20 transition-colors cursor-pointer text-xs font-medium"
-              title="Approve property"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-green-600 text-white hover:bg-green-700 transition-colors cursor-pointer text-xs font-semibold shadow-sm"
+              title="Approve property — makes it visible on the website"
             >
-              <LuShieldCheck className="w-3.5 h-3.5" />
+              <LuShieldCheck className="w-4 h-4" />
               Approve
             </button>
-          )}
-          {item.status === 'active' && (
+          ) : item.status === 'active' ? (
             <button
               onClick={(e) => { e.stopPropagation(); handleStatusChange(item.id, 'inactive'); }}
-              className="p-1.5 rounded-lg text-[var(--muted)] hover:bg-surface-light transition-colors cursor-pointer"
-              title="Deactivate"
+              className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-yellow-500/10 text-yellow-600 hover:bg-yellow-500/20 transition-colors cursor-pointer text-xs font-medium"
+              title="Deactivate — hides from the website"
             >
-              <LuCircleX className="w-4 h-4" />
+              <LuCircleX className="w-3.5 h-3.5" />
+              Deactivate
             </button>
-          )}
-          {item.status === 'inactive' && (
+          ) : (
             <button
               onClick={(e) => { e.stopPropagation(); handleStatusChange(item.id, 'active'); }}
-              className="p-1.5 rounded-lg text-green-600 hover:bg-green-500/10 transition-colors cursor-pointer"
-              title="Activate"
+              className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-green-500/10 text-green-600 hover:bg-green-500/20 transition-colors cursor-pointer text-xs font-medium"
+              title="Activate — makes it visible on the website"
             >
-              <LuCircleCheck className="w-4 h-4" />
+              <LuCircleCheck className="w-3.5 h-3.5" />
+              Activate
             </button>
           )}
           <button
-            onClick={(e) => { e.stopPropagation(); handleVerify(item.id, !item.verified); }}
-            className={`p-1.5 rounded-lg transition-colors cursor-pointer ${
-              item.verified ? 'text-green-600 hover:bg-green-500/10' : 'text-[var(--muted)] hover:bg-surface-light'
-            }`}
-            title={item.verified ? 'Unverify' : 'Verify'}
-          >
-            <LuCircleCheck className="w-4 h-4" />
-          </button>
-          <button
             onClick={(e) => { e.stopPropagation(); handleDelete(item.id); }}
-            className="p-1.5 rounded-lg text-red-500 hover:bg-red-500/10 transition-colors cursor-pointer"
-            title="Delete"
+            className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-red-500/10 text-red-600 hover:bg-red-500/20 transition-colors cursor-pointer text-xs font-medium"
+            title="Delete property permanently"
           >
-            <LuTrash2 className="w-4 h-4" />
+            <LuTrash2 className="w-3.5 h-3.5" />
+            Delete
           </button>
         </div>
       ),
