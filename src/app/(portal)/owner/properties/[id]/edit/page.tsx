@@ -2,7 +2,7 @@
 
 import { useEffect, useState, use } from 'react';
 import { useRouter } from 'next/navigation';
-import { LuHouse, LuCircleAlert, LuSave } from 'react-icons/lu';
+import { LuHouse, LuCircleAlert, LuSave, LuShieldCheck } from 'react-icons/lu';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { createSupabaseBrowser } from '@/lib/supabase-browser';
 
@@ -17,6 +17,7 @@ export default function EditPropertyPage({ params }: { params: Promise<{ id: str
   const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(true);
   const [error, setError] = useState('');
+  const [status, setStatus] = useState('');
   const [form, setForm] = useState({
     title: '', location: '', area: '', price: '', bhk: '', sqft: '',
     type: 'Apartment', furnished: 'Semi-Furnished', description: '',
@@ -38,6 +39,7 @@ export default function EditPropertyPage({ params }: { params: Promise<{ id: str
         .single();
 
       if (data) {
+        setStatus(data.status || 'pending');
         setForm({
           title: data.title, location: data.location, area: data.area,
           price: data.price.toString(), bhk: data.bhk.toString(), sqft: data.sqft.toString(),

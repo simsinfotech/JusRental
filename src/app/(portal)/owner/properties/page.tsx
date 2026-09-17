@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { LuHouse, LuPlus, LuEye, LuMapPin, LuTrash2 } from 'react-icons/lu';
+import { LuHouse, LuPlus, LuEye, LuMapPin, LuTrash2, LuShieldCheck } from 'react-icons/lu';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { Badge } from '@/components/ui/Badge';
 import { createSupabaseBrowser } from '@/lib/supabase-browser';
@@ -42,6 +42,12 @@ export default function OwnerPropertiesPage() {
   };
 
   useEffect(() => { loadProperties(); }, []);
+
+  const handleApprove = async (id: string) => {
+    const supabase = createSupabaseBrowser();
+    await supabase.from('js_properties').update({ status: 'active' }).eq('id', id);
+    loadProperties();
+  };
 
   const handleDelete = async (id: string) => {
     if (!confirm('Are you sure you want to delete this property?')) return;
@@ -108,6 +114,15 @@ export default function OwnerPropertiesPage() {
                   {p.views_count || 0} views
                 </span>
                 <div className="flex items-center gap-3">
+                  {(!p.status || p.status === 'pending') && (
+                    <button
+                      onClick={() => handleApprove(p.id)}
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-green-600 text-white hover:bg-green-700 transition-colors cursor-pointer text-xs font-semibold shadow-sm"
+                    >
+                      <LuShieldCheck className="w-4 h-4" />
+                      Approve
+                    </button>
+                  )}
                   <button
                     onClick={() => handleDelete(p.id)}
                     className="flex items-center gap-1 text-sm text-red-500 hover:text-red-600 font-medium cursor-pointer"
