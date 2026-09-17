@@ -3,6 +3,7 @@
 import { useEffect, useState, use } from 'react';
 import { useRouter } from 'next/navigation';
 import { LuHouse, LuSave, LuCircleAlert, LuArrowLeft, LuCircleCheck } from 'react-icons/lu';
+import { ImageUpload } from '@/components/ui/ImageUpload';
 import { createSupabaseBrowser } from '@/lib/supabase-browser';
 
 const PROPERTY_TYPES = ['Apartment', 'Villa', 'Independent House'];
@@ -18,6 +19,7 @@ export default function AdminPropertyDetailPage({ params }: { params: Promise<{ 
   const [fetching, setFetching] = useState(true);
   const [message, setMessage] = useState<{ type: 'error' | 'success'; text: string } | null>(null);
 
+  const [images, setImages] = useState<string[]>([]);
   const [form, setForm] = useState({
     title: '', location: '', area: '', price: '', bhk: '', sqft: '',
     type: 'Apartment', furnished: 'Semi-Furnished', description: '',
@@ -36,6 +38,7 @@ export default function AdminPropertyDetailPage({ params }: { params: Promise<{ 
         .single();
 
       if (data) {
+        setImages(data.images || []);
         setForm({
           title: data.title, location: data.location, area: data.area,
           price: data.price.toString(), bhk: data.bhk.toString(), sqft: data.sqft.toString(),
@@ -76,6 +79,7 @@ export default function AdminPropertyDetailPage({ params }: { params: Promise<{ 
         sharing_type: form.sharingType, amenities: form.amenities,
         available: form.available, verified: form.verified,
         status: form.status,
+        images: images.length > 0 ? images : ['/images/scene-1.png'],
       })
       .eq('id', id);
 
@@ -222,6 +226,11 @@ export default function AdminPropertyDetailPage({ params }: { params: Promise<{ 
                 className="w-4 h-4 rounded" />
               <span className="text-sm font-medium">Verified</span>
             </label>
+          </div>
+
+          <div>
+            <label className="text-sm font-medium mb-3 block">Property Images</label>
+            <ImageUpload images={images} onChange={setImages} folder="admin" />
           </div>
 
           <div className="flex justify-end">

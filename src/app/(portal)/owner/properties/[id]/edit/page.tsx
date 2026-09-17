@@ -4,6 +4,7 @@ import { useEffect, useState, use } from 'react';
 import { useRouter } from 'next/navigation';
 import { LuHouse, LuCircleAlert, LuSave, LuShieldCheck } from 'react-icons/lu';
 import { GlassCard } from '@/components/ui/GlassCard';
+import { ImageUpload } from '@/components/ui/ImageUpload';
 import { createSupabaseBrowser } from '@/lib/supabase-browser';
 
 const PROPERTY_TYPES = ['Apartment', 'Villa', 'Independent House'];
@@ -18,6 +19,7 @@ export default function EditPropertyPage({ params }: { params: Promise<{ id: str
   const [fetching, setFetching] = useState(true);
   const [error, setError] = useState('');
   const [status, setStatus] = useState('');
+  const [images, setImages] = useState<string[]>([]);
   const [form, setForm] = useState({
     title: '', location: '', area: '', price: '', bhk: '', sqft: '',
     type: 'Apartment', furnished: 'Semi-Furnished', description: '',
@@ -40,6 +42,7 @@ export default function EditPropertyPage({ params }: { params: Promise<{ id: str
 
       if (data) {
         setStatus(data.status || 'pending');
+        setImages(data.images || []);
         setForm({
           title: data.title, location: data.location, area: data.area,
           price: data.price.toString(), bhk: data.bhk.toString(), sqft: data.sqft.toString(),
@@ -78,6 +81,7 @@ export default function EditPropertyPage({ params }: { params: Promise<{ id: str
         deposit: parseInt(form.deposit), floor: form.floor, facing: form.facing,
         sharing_type: form.sharingType, amenities: form.amenities,
         available: form.available,
+        images: images.length > 0 ? images : ['/images/scene-1.png'],
       })
       .eq('id', id);
 
@@ -195,6 +199,10 @@ export default function EditPropertyPage({ params }: { params: Promise<{ id: str
                   </button>
                 ))}
               </div>
+            </div>
+            <div>
+              <label className="text-sm font-medium mb-3 block">Property Images</label>
+              <ImageUpload images={images} onChange={setImages} folder="owner" />
             </div>
             <div className="flex items-center gap-3">
               <label className="flex items-center gap-2 cursor-pointer">
