@@ -26,19 +26,14 @@ export function LeadPopup({ isOpen, onClose }: LeadPopupProps) {
     };
 
     try {
-      const webhookUrl = process.env.NEXT_PUBLIC_GOOGLE_SHEET_WEBHOOK;
-      if (!webhookUrl) {
-        throw new Error('Webhook URL not configured');
-      }
-
-      await fetch(webhookUrl, {
+      const res = await fetch('/api/leads/capture', {
         method: 'POST',
-        mode: 'no-cors',
-        body: new URLSearchParams(data),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
       });
 
-      // With no-cors mode, the response is always opaque — treat as success
-      // if no network error was thrown
+      if (!res.ok) throw new Error('Failed to submit');
+
       setFormState('success');
       localStorage.setItem('jusrental_lead_captured', 'true');
       setTimeout(() => {
