@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { createSupabaseServer } from '@/lib/supabase-ssr';
 import { LuLayoutDashboard, LuHouse, LuEye, LuCalendar } from 'react-icons/lu';
 import { GlassCard } from '@/components/ui/GlassCard';
@@ -26,9 +27,9 @@ export default async function OwnerDashboard() {
   const totalViews = properties?.reduce((sum, p) => sum + (p.views_count || 0), 0) || 0;
 
   const stats = [
-    { label: 'My Properties', value: propertiesCount || 0, icon: LuHouse, color: 'text-[#006194] bg-[#006194]/10' },
-    { label: 'Total Views', value: totalViews, icon: LuEye, color: 'text-[#006194] bg-[#006194]/10' },
-    { label: 'Visit Requests', value: visitsCount || 0, icon: LuCalendar, color: 'text-green-600 bg-green-500/10' },
+    { label: 'My Properties', value: propertiesCount || 0, icon: LuHouse, color: 'text-[#006194] bg-[#006194]/10', href: '/owner/properties' },
+    { label: 'Total Views', value: totalViews, icon: LuEye, color: 'text-[#006194] bg-[#006194]/10', href: '/owner/properties' },
+    { label: 'Visit Requests', value: visitsCount || 0, icon: LuCalendar, color: 'text-green-600 bg-green-500/10', href: '/owner/visits' },
   ];
 
   return (
@@ -40,17 +41,19 @@ export default async function OwnerDashboard() {
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
         {stats.map((stat) => (
-          <GlassCard key={stat.label} hover={false}>
-            <div className="flex items-center gap-4">
-              <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${stat.color}`}>
-                <stat.icon className="w-6 h-6" />
+          <Link key={stat.label} href={stat.href}>
+            <GlassCard hover>
+              <div className="flex items-center gap-4">
+                <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${stat.color}`}>
+                  <stat.icon className="w-6 h-6" />
+                </div>
+                <div>
+                  <p className="text-sm text-[var(--muted)]">{stat.label}</p>
+                  <p className="text-2xl font-bold">{stat.value}</p>
+                </div>
               </div>
-              <div>
-                <p className="text-sm text-[var(--muted)]">{stat.label}</p>
-                <p className="text-2xl font-bold">{stat.value}</p>
-              </div>
-            </div>
-          </GlassCard>
+            </GlassCard>
+          </Link>
         ))}
       </div>
 
