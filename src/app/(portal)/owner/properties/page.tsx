@@ -1,20 +1,62 @@
-import { createSupabaseServer } from '@/lib/supabase-ssr';
+'use client';
+
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { LuHouse, LuPlus, LuEye, LuMapPin } from 'react-icons/lu';
+import { LuHouse, LuPlus, LuEye, LuMapPin, LuTrash2 } from 'react-icons/lu';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { Badge } from '@/components/ui/Badge';
+import { createSupabaseBrowser } from '@/lib/supabase-browser';
 
-export default async function OwnerPropertiesPage() {
-  const supabase = await createSupabaseServer();
-  const { data: { user } } = await supabase.auth.getUser();
+interface PropertyRow {
+  id: string;
+  title: string;
+  location: string;
+  area: string;
+  price: number;
+  bhk: number;
+  sqft: number;
+  status: string;
+  verified: boolean;
+  views_count: number;
+}
 
-  if (!user) return null;
+export default function OwnerPropertiesPage() {
+  const router = useRouter();
+  const [properties, setProperties] = useState<PropertyRow[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const { data: properties } = await supabase
-    .from('js_properties')
-    .select('*')
-    .eq('owner_id', user.id)
-    .order('created_at', { ascending: false });
+  const loadProperties = async () => {
+    const supabase = createSupabaseBrowser();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return;
+
+    const { data } = await supabase
+      .from('js_properties')
+      .select('id, title, location, area, price, bhk, sqft, status, verified, views_count')
+      .eq('owner_id', user.id)
+      .order('created_at', { ascending: false });
+
+    setProperties((data as PropertyRow[]) || []);
+    setLoading(false);
+  };
+
+  useEffect(() => { loadProperties(); }, []);
+
+  const handleDelete = async (id: string) => {
+    if (!confirm('Are you sure you want to delete this property?')) return;
+    const supabase = createSupabaseBrowser();
+    await supabase.from('js_properties').delete().eq('id', id);
+    loadProperties();
+  };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-20">
+        <div className="text-[var(--muted)]">Loading properties...</div>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -32,7 +74,7 @@ export default async function OwnerPropertiesPage() {
         </Link>
       </div>
 
-      {properties && properties.length > 0 ? (
+      {properties.length > 0 ? (
         <div className="grid md:grid-cols-2 gap-4">
           {properties.map((p) => (
             <GlassCard key={p.id} hover={false}>
@@ -46,8 +88,8 @@ export default async function OwnerPropertiesPage() {
                 </div>
                 <div className="flex gap-2">
                   {p.verified && <Badge variant="success">Verified</Badge>}
-                  <Badge variant={p.status === 'active' ? 'info' : 'warning'}>
-                    {p.status || 'active'}
+                  <Badge variant={p.status === 'active' ? 'info' : p.status === 'pending' ? 'warning' : 'default'}>
+                    {p.status === 'pending' ? 'Pending Approval' : p.status || 'active'}
                   </Badge>
                 </div>
               </div>
@@ -65,12 +107,21 @@ export default async function OwnerPropertiesPage() {
                   <LuEye className="w-3.5 h-3.5" />
                   {p.views_count || 0} views
                 </span>
-                <Link
-                  href={`/owner/properties/${p.id}/edit`}
-                  className="text-sm text-[#006194] font-medium hover:underline"
-                >
-                  Edit
-                </Link>
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={() => handleDelete(p.id)}
+                    className="flex items-center gap-1 text-sm text-red-500 hover:text-red-600 font-medium cursor-pointer"
+                  >
+                    <LuTrash2 className="w-3.5 h-3.5" />
+                    Delete
+                  </button>
+                  <Link
+                    href={`/owner/properties/${p.id}/edit`}
+                    className="text-sm text-[#006194] font-medium hover:underline"
+                  >
+                    Edit
+                  </Link>
+                </div>
               </div>
             </GlassCard>
           ))}

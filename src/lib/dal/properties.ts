@@ -6,7 +6,8 @@ export async function fetchProperties(filters?: PropertyFilters): Promise<Proper
   let query = supabase
     .from('js_properties')
     .select('*')
-    .eq('available', true);
+    .eq('available', true)
+    .eq('status', 'active');
 
   if (filters?.type) {
     query = query.eq('type', filters.type);
@@ -76,6 +77,7 @@ export async function fetchFeaturedProperties(limit = 6): Promise<Property[]> {
     .from('js_properties')
     .select('*')
     .eq('available', true)
+    .eq('status', 'active')
     .eq('verified', true)
     .order('posted_date', { ascending: false })
     .limit(limit);
@@ -97,6 +99,7 @@ export async function fetchSimilarProperties(
     .select('*')
     .neq('id', property.id)
     .eq('available', true)
+    .eq('status', 'active')
     .or(`area.eq.${property.area},bhk.eq.${property.bhk}`)
     .limit(limit);
 
@@ -112,7 +115,8 @@ export async function fetchAllAreas(): Promise<string[]> {
   const { data, error } = await supabase
     .from('js_properties')
     .select('area')
-    .eq('available', true);
+    .eq('available', true)
+    .eq('status', 'active');
 
   if (error) return [];
 
@@ -124,7 +128,8 @@ export async function fetchAllTypes(): Promise<string[]> {
   const { data, error } = await supabase
     .from('js_properties')
     .select('type')
-    .eq('available', true);
+    .eq('available', true)
+    .eq('status', 'active');
 
   if (error) return [];
 

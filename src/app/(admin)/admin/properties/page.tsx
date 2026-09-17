@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { LuHouse, LuPlus, LuCircleCheck, LuCircleX, LuTrash2, LuEye } from 'react-icons/lu';
+import { LuHouse, LuPlus, LuCircleCheck, LuCircleX, LuTrash2, LuEye, LuShieldCheck } from 'react-icons/lu';
 import { DataTable } from '@/components/admin/DataTable';
 import { StatusBadge } from '@/components/admin/StatusBadge';
 import { createSupabaseBrowser } from '@/lib/supabase-browser';
@@ -111,6 +111,34 @@ export default function AdminPropertiesPage() {
       label: 'Actions',
       render: (item: PropertyRow) => (
         <div className="flex items-center gap-1">
+          {item.status === 'pending' && (
+            <button
+              onClick={(e) => { e.stopPropagation(); handleStatusChange(item.id, 'active'); }}
+              className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-green-500/10 text-green-600 hover:bg-green-500/20 transition-colors cursor-pointer text-xs font-medium"
+              title="Approve property"
+            >
+              <LuShieldCheck className="w-3.5 h-3.5" />
+              Approve
+            </button>
+          )}
+          {item.status === 'active' && (
+            <button
+              onClick={(e) => { e.stopPropagation(); handleStatusChange(item.id, 'inactive'); }}
+              className="p-1.5 rounded-lg text-[var(--muted)] hover:bg-surface-light transition-colors cursor-pointer"
+              title="Deactivate"
+            >
+              <LuCircleX className="w-4 h-4" />
+            </button>
+          )}
+          {item.status === 'inactive' && (
+            <button
+              onClick={(e) => { e.stopPropagation(); handleStatusChange(item.id, 'active'); }}
+              className="p-1.5 rounded-lg text-green-600 hover:bg-green-500/10 transition-colors cursor-pointer"
+              title="Activate"
+            >
+              <LuCircleCheck className="w-4 h-4" />
+            </button>
+          )}
           <button
             onClick={(e) => { e.stopPropagation(); handleVerify(item.id, !item.verified); }}
             className={`p-1.5 rounded-lg transition-colors cursor-pointer ${
@@ -119,16 +147,6 @@ export default function AdminPropertiesPage() {
             title={item.verified ? 'Unverify' : 'Verify'}
           >
             <LuCircleCheck className="w-4 h-4" />
-          </button>
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              handleStatusChange(item.id, item.status === 'active' ? 'inactive' : 'active');
-            }}
-            className="p-1.5 rounded-lg text-[var(--muted)] hover:bg-surface-light transition-colors cursor-pointer"
-            title={item.status === 'active' ? 'Deactivate' : 'Activate'}
-          >
-            <LuCircleX className="w-4 h-4" />
           </button>
           <button
             onClick={(e) => { e.stopPropagation(); handleDelete(item.id); }}
