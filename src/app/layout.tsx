@@ -3,8 +3,7 @@ import { Plus_Jakarta_Sans, Inter } from 'next/font/google';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
 import { SmoothScrollProvider } from '@/components/providers/SmoothScrollProvider';
 import { GTMProvider } from '@/components/providers/GTMProvider';
-import { Navbar } from '@/components/layout/Navbar';
-import { Footer } from '@/components/layout/Footer';
+import { LayoutShell } from '@/components/layout/LayoutShell';
 import './globals.css';
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -41,9 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProvider>
           <SmoothScrollProvider>
             <GTMProvider />
-            <Navbar />
-            <main>{children}</main>
-            <Footer />
+            <LayoutShell>{children}</LayoutShell>
           </SmoothScrollProvider>
         </ThemeProvider>
       </body>
