@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ChevronUp, ChevronDown, ChevronLeft, ChevronRight, Search } from 'lucide-react';
+import { LuChevronUp, LuChevronDown, LuChevronLeft, LuChevronRight, LuSearch } from 'react-icons/lu';
 
 interface Column<T> {
   key: string;
@@ -71,7 +71,7 @@ export function DataTable<T extends Record<string, unknown>>({
     <div>
       {searchable && (
         <div className="mb-4 relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--muted)]" />
+          <LuSearch className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--muted)]" />
           <input
             type="text"
             value={search}
@@ -95,7 +95,7 @@ export function DataTable<T extends Record<string, unknown>>({
                   <span className="flex items-center gap-1">
                     {col.label}
                     {col.sortable && sortKey === col.key && (
-                      sortDir === 'asc' ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />
+                      sortDir === 'asc' ? <LuChevronUp className="w-3 h-3" /> : <LuChevronDown className="w-3 h-3" />
                     )}
                   </span>
                 </th>
@@ -141,7 +141,7 @@ export function DataTable<T extends Record<string, unknown>>({
               disabled={page === 0}
               className="p-2 rounded-lg hover:bg-surface-light disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed"
             >
-              <ChevronLeft className="w-4 h-4" />
+              <LuChevronLeft className="w-4 h-4" />
             </button>
             <span>
               {page + 1} / {totalPages}
@@ -151,7 +151,7 @@ export function DataTable<T extends Record<string, unknown>>({
               disabled={page >= totalPages - 1}
               className="p-2 rounded-lg hover:bg-surface-light disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed"
             >
-              <ChevronRight className="w-4 h-4" />
+              <LuChevronRight className="w-4 h-4" />
             </button>
           </div>
         </div>

@@ -1,11 +1,11 @@
 'use client';
 
-import { type LucideIcon } from 'lucide-react';
+import type { IconType } from 'react-icons';
 
 interface AdminCardProps {
   label: string;
   value: string | number;
-  icon: LucideIcon;
+  icon: IconType;
   color: string;
   change?: string;
 }

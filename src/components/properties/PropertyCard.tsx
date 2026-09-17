@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { MapPin, Heart, ShieldCheck, ArrowRight, Camera } from 'lucide-react';
+import { LuMapPin, LuHeart, LuShieldCheck, LuArrowRight, LuCamera } from 'react-icons/lu';
 import { ImageGallery } from '@/components/ui/ImageGallery';
 import type { Property } from '@/types';
 
@@ -18,7 +18,7 @@ export function PropertyCard({ property }: PropertyCardProps) {
           <ImageGallery images={property.images} alt={property.title} />
           {property.verified && (
             <span className="absolute top-2.5 left-2.5 z-10 inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#16A34A] text-white text-[11px] font-bold">
-              <ShieldCheck className="w-3 h-3" />
+              <LuShieldCheck className="w-3 h-3" />
               Verified
             </span>
           )}
@@ -33,7 +33,7 @@ export function PropertyCard({ property }: PropertyCardProps) {
             className="absolute top-2.5 right-2.5 z-10 w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center hover:bg-white transition-colors cursor-pointer"
             aria-label="Save property"
           >
-            <Heart className="w-4 h-4 text-slate-500 hover:text-red-500 transition-colors" />
+            <LuHeart className="w-4 h-4 text-slate-500 hover:text-red-500 transition-colors" />
           </button>
         </div>
 
@@ -44,7 +44,7 @@ export function PropertyCard({ property }: PropertyCardProps) {
               {property.title}
             </h4>
             <p className="text-xs text-[#3f4850] truncate flex items-center gap-1 mt-0.5">
-              <MapPin className="w-3 h-3 shrink-0" />
+              <LuMapPin className="w-3 h-3 shrink-0" />
               {property.location}
             </p>
             <div className="flex items-center gap-2 mt-2 text-[#3f4850] text-[11px]">

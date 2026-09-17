@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Home, MapPin, IndianRupee, ImagePlus, AlertCircle, CheckCircle2, Eye } from 'lucide-react';
+import { LuHouse, LuMapPin, LuIndianRupee, LuImagePlus, LuCircleAlert, LuCircleCheckBig, LuEye } from 'react-icons/lu';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { createSupabaseBrowser } from '@/lib/supabase-browser';
 
@@ -136,7 +136,7 @@ export default function AddPropertyPage() {
   return (
     <div>
       <div className="flex items-center gap-3 mb-8">
-        <Home className="w-6 h-6 text-[#006194]" />
+        <LuHouse className="w-6 h-6 text-[#006194]" />
         <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">Add New Property</h1>
       </div>
 
@@ -161,7 +161,7 @@ export default function AddPropertyPage() {
 
       {error && (
         <div className="mb-4 flex items-center gap-2 p-3 rounded-xl bg-red-500/10 text-red-600 text-sm">
-          <AlertCircle className="w-4 h-4 shrink-0" />
+          <LuCircleAlert className="w-4 h-4 shrink-0" />
           {error}
         </div>
       )}
@@ -382,11 +382,11 @@ export default function AddPropertyPage() {
             <h2 className="text-lg font-semibold mb-6">Property Images</h2>
             <div className="space-y-4">
               <div className="border-2 border-dashed border-glass-border rounded-2xl p-8 text-center">
-                <ImagePlus className="w-12 h-12 mx-auto text-[var(--muted)] mb-4" />
+                <LuImagePlus className="w-12 h-12 mx-auto text-[var(--muted)] mb-4" />
                 <p className="text-sm text-[var(--muted)] mb-2">Drag & drop images or click to browse</p>
                 <p className="text-xs text-[var(--muted)] mb-4">Max 5 images, JPEG/PNG</p>
                 <label className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-surface-light text-sm font-medium cursor-pointer hover:bg-surface-lighter transition-all">
-                  <ImagePlus className="w-4 h-4" />
+                  <LuImagePlus className="w-4 h-4" />
                   Choose Files
                   <input
                     type="file"
@@ -443,7 +443,7 @@ export default function AddPropertyPage() {
         {step === 4 && (
           <GlassCard hover={false}>
             <div className="flex items-center gap-2 mb-6">
-              <Eye className="w-5 h-5 text-[#006194]" />
+              <LuEye className="w-5 h-5 text-[#006194]" />
               <h2 className="text-lg font-semibold">Review Your Property</h2>
             </div>
 

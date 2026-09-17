@@ -1,6 +1,6 @@
 'use client';
 
-import { X } from 'lucide-react';
+import { LuX } from 'react-icons/lu';
 import { ALL_AREAS, ALL_TYPES } from '@/data/properties';
 
 interface PropertyFiltersProps {
@@ -187,7 +187,7 @@ export function PropertyFilters({
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-semibold">Filters</h3>
               <button onClick={onMobileClose} className="p-2 cursor-pointer">
-                <X className="w-5 h-5" />
+                <LuX className="w-5 h-5" />
               </button>
             </div>
             {content}

@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { Mail, Phone, MapPin, Globe, MessageCircle, ExternalLink, ShieldCheck, BadgePercent, Clock } from 'lucide-react';
+import { LuMail, LuPhone, LuMapPin, LuGlobe, LuMessageCircle, LuExternalLink, LuShieldCheck, LuBadgePercent, LuClock } from 'react-icons/lu';
 import { WHATSAPP_URL } from '@/lib/constants';
 
 const footerLinks = {
@@ -34,9 +34,9 @@ const footerLinks = {
 };
 
 const socials = [
-  { icon: Globe, href: 'https://estatehive.in', label: 'Website' },
-  { icon: MessageCircle, href: WHATSAPP_URL, label: 'WhatsApp' },
-  { icon: ExternalLink, href: 'https://estatehive.in', label: 'LinkedIn' },
+  { icon: LuGlobe, href: 'https://estatehive.in', label: 'Website' },
+  { icon: LuMessageCircle, href: WHATSAPP_URL, label: 'WhatsApp' },
+  { icon: LuExternalLink, href: 'https://estatehive.in', label: 'LinkedIn' },
 ];
 
 export function Footer() {
@@ -62,11 +62,11 @@ export function Footer() {
             {/* Inline Badges */}
             <div className="flex flex-wrap gap-2 mb-4">
               <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-emerald-500/10 text-emerald-400 text-xs font-medium">
-                <ShieldCheck className="w-3 h-3" />
+                <LuShieldCheck className="w-3 h-3" />
                 100% Verified
               </span>
               <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-[#006194]/10 text-[#006194] text-xs font-medium">
-                <BadgePercent className="w-3 h-3" />
+                <LuBadgePercent className="w-3 h-3" />
                 Zero Brokerage
               </span>
             </div>
@@ -135,25 +135,25 @@ export function Footer() {
             <ul className="space-y-3">
               <li>
                 <span className="flex items-start gap-2 text-sm text-white/50">
-                  <MapPin className="w-4 h-4 mt-0.5 shrink-0 text-white/40" />
+                  <LuMapPin className="w-4 h-4 mt-0.5 shrink-0 text-white/40" />
                   Bengaluru 560077, Karnataka, India
                 </span>
               </li>
               <li>
                 <a href={WHATSAPP_URL} className="flex items-start gap-2 text-sm text-white/50 hover:text-white transition-colors">
-                  <Phone className="w-4 h-4 mt-0.5 shrink-0 text-white/40" />
+                  <LuPhone className="w-4 h-4 mt-0.5 shrink-0 text-white/40" />
                   +91 90363 17765
                 </a>
               </li>
               <li>
                 <a href="mailto:hello@jusrental.com" className="flex items-start gap-2 text-sm text-white/50 hover:text-white transition-colors">
-                  <Mail className="w-4 h-4 mt-0.5 shrink-0 text-white/40" />
+                  <LuMail className="w-4 h-4 mt-0.5 shrink-0 text-white/40" />
                   hello@jusrental.com
                 </a>
               </li>
               <li>
                 <span className="flex items-start gap-2 text-sm text-white/50">
-                  <Clock className="w-4 h-4 mt-0.5 shrink-0 text-white/40" />
+                  <LuClock className="w-4 h-4 mt-0.5 shrink-0 text-white/40" />
                   Mon - Sat, 9AM - 7PM
                 </span>
               </li>

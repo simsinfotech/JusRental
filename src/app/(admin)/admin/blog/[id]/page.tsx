@@ -2,7 +2,7 @@
 
 import { useEffect, useState, use } from 'react';
 import { useRouter } from 'next/navigation';
-import { FileText, Save, AlertCircle, ArrowLeft, CheckCircle } from 'lucide-react';
+import { LuFileText, LuSave, LuCircleAlert, LuArrowLeft, LuCircleCheck } from 'react-icons/lu';
 import { createSupabaseBrowser } from '@/lib/supabase-browser';
 
 const CATEGORIES = ['Renting Tips', 'Market Trends', 'Neighbourhood Guides', 'Legal', 'NRI Corner'];
@@ -97,9 +97,9 @@ export default function AdminEditBlogPage({ params }: { params: Promise<{ id: st
     <div>
       <div className="flex items-center gap-3 mb-8">
         <button onClick={() => router.back()} className="p-2 rounded-lg hover:bg-surface-light cursor-pointer">
-          <ArrowLeft className="w-5 h-5" />
+          <LuArrowLeft className="w-5 h-5" />
         </button>
-        <FileText className="w-6 h-6 text-red-600" />
+        <LuFileText className="w-6 h-6 text-red-600" />
         <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">Edit Post</h1>
       </div>
 
@@ -107,7 +107,7 @@ export default function AdminEditBlogPage({ params }: { params: Promise<{ id: st
         <div className={`mb-4 flex items-center gap-2 p-3 rounded-xl text-sm ${
           message.type === 'error' ? 'bg-red-500/10 text-red-600' : 'bg-green-500/10 text-green-600'
         }`}>
-          {message.type === 'error' ? <AlertCircle className="w-4 h-4" /> : <CheckCircle className="w-4 h-4" />}
+          {message.type === 'error' ? <LuCircleAlert className="w-4 h-4" /> : <LuCircleCheck className="w-4 h-4" />}
           {message.text}
         </div>
       )}
@@ -192,7 +192,7 @@ export default function AdminEditBlogPage({ params }: { params: Promise<{ id: st
         <div className="flex justify-end">
           <button type="submit" disabled={loading}
             className="flex items-center gap-2 px-8 py-2.5 rounded-xl bg-gradient-to-r from-red-500 to-orange-500 text-white font-semibold cursor-pointer disabled:opacity-50">
-            <Save className="w-4 h-4" />
+            <LuSave className="w-4 h-4" />
             {loading ? 'Saving...' : 'Save Changes'}
           </button>
         </div>

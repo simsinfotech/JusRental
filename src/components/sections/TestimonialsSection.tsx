@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { motion } from 'motion/react';
-import { Star } from 'lucide-react';
+import { LuStar } from 'react-icons/lu';
 import { fadeInUp, staggerContainer } from '@/lib/animations';
 import { useAnimateInView } from '@/hooks/useAnimateInView';
 import type { Testimonial } from '@/types';
@@ -46,7 +46,7 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
                 {/* Stars */}
                 <div className="flex gap-0.5 mb-4">
                   {Array.from({ length: 5 }).map((_, i) => (
-                    <Star
+                    <LuStar
                       key={i}
                       className={`w-4 h-4 ${
                         i < testimonial.rating

@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
-import { SlidersHorizontal, ArrowUpDown } from 'lucide-react';
+import { LuSlidersHorizontal, LuArrowUpDown } from 'react-icons/lu';
 import { PropertyCard } from '@/components/properties/PropertyCard';
 import { PropertyFilters } from '@/components/properties/PropertyFilters';
 import { Pagination } from '@/components/ui/Pagination';
@@ -83,7 +83,7 @@ export function PropertiesContent({
               onClick={() => setMobileFiltersOpen(true)}
               className="lg:hidden flex items-center gap-2 px-4 py-2 rounded-lg border border-glass-border text-sm cursor-pointer"
             >
-              <SlidersHorizontal className="w-4 h-4" />
+              <LuSlidersHorizontal className="w-4 h-4" />
               Filters
             </button>
             {properties.length > 0 && (
@@ -94,7 +94,7 @@ export function PropertiesContent({
           </div>
 
           <div className="flex items-center gap-2 ml-auto">
-            <ArrowUpDown className="w-4 h-4 text-[var(--muted)]" />
+            <LuArrowUpDown className="w-4 h-4 text-[var(--muted)]" />
             <select
               value={sort}
               onChange={(e) => updateParams('sort', e.target.value)}
@@ -143,7 +143,7 @@ export function PropertiesContent({
             ) : (
               <div className="text-center py-20">
                 <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-surface-light flex items-center justify-center">
-                  <SlidersHorizontal className="w-8 h-8 text-[var(--muted)]" />
+                  <LuSlidersHorizontal className="w-8 h-8 text-[var(--muted)]" />
                 </div>
                 <h3 className="text-xl font-semibold font-[family-name:var(--font-heading)] mb-2">
                   No properties found

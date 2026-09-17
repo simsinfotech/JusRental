@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'motion/react';
-import { Clock, Tag, ArrowRight } from 'lucide-react';
+import { LuClock, LuTag, LuArrowRight } from 'react-icons/lu';
 import { fadeInUp, staggerContainer } from '@/lib/animations';
 import { useAnimateInView } from '@/hooks/useAnimateInView';
 import { GlassCard } from '@/components/ui/GlassCard';
@@ -65,7 +65,7 @@ export function BlogContent({ posts, categories }: BlogContentProps) {
                     />
                     <div className="absolute top-3 left-3">
                       <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-[#006194]/90 text-white">
-                        <Tag className="w-3 h-3" />
+                        <LuTag className="w-3 h-3" />
                         {post.category}
                       </span>
                     </div>
@@ -80,13 +80,13 @@ export function BlogContent({ posts, categories }: BlogContentProps) {
                     <div className="flex items-center justify-between text-xs text-[var(--muted)]">
                       <div className="flex items-center gap-3">
                         <span className="flex items-center gap-1">
-                          <Clock className="w-3 h-3" />
+                          <LuClock className="w-3 h-3" />
                           {post.readTime} min read
                         </span>
                         <span>{post.publishedDate}</span>
                       </div>
                       <span className="text-[#006194] font-medium flex items-center gap-1 group-hover:underline">
-                        Read <ArrowRight className="w-3 h-3" />
+                        Read <LuArrowRight className="w-3 h-3" />
                       </span>
                     </div>
                   </div>

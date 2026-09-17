@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Home, Plus, CheckCircle, XCircle, Trash2, Eye } from 'lucide-react';
+import { LuHouse, LuPlus, LuCircleCheck, LuCircleX, LuTrash2, LuEye } from 'react-icons/lu';
 import { DataTable } from '@/components/admin/DataTable';
 import { StatusBadge } from '@/components/admin/StatusBadge';
 import { createSupabaseBrowser } from '@/lib/supabase-browser';
@@ -90,7 +90,7 @@ export default function AdminPropertiesPage() {
       sortable: true,
       render: (item: PropertyRow) => (
         <span className="flex items-center gap-1 text-[var(--muted)]">
-          <Eye className="w-3 h-3" />
+          <LuEye className="w-3 h-3" />
           {item.views_count || 0}
         </span>
       ),
@@ -118,7 +118,7 @@ export default function AdminPropertiesPage() {
             }`}
             title={item.verified ? 'Unverify' : 'Verify'}
           >
-            <CheckCircle className="w-4 h-4" />
+            <LuCircleCheck className="w-4 h-4" />
           </button>
           <button
             onClick={(e) => {
@@ -128,14 +128,14 @@ export default function AdminPropertiesPage() {
             className="p-1.5 rounded-lg text-[var(--muted)] hover:bg-surface-light transition-colors cursor-pointer"
             title={item.status === 'active' ? 'Deactivate' : 'Activate'}
           >
-            <XCircle className="w-4 h-4" />
+            <LuCircleX className="w-4 h-4" />
           </button>
           <button
             onClick={(e) => { e.stopPropagation(); handleDelete(item.id); }}
             className="p-1.5 rounded-lg text-red-500 hover:bg-red-500/10 transition-colors cursor-pointer"
             title="Delete"
           >
-            <Trash2 className="w-4 h-4" />
+            <LuTrash2 className="w-4 h-4" />
           </button>
         </div>
       ),
@@ -154,7 +154,7 @@ export default function AdminPropertiesPage() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center gap-3">
-          <Home className="w-6 h-6 text-red-600" />
+          <LuHouse className="w-6 h-6 text-red-600" />
           <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">Properties</h1>
           <span className="text-sm text-[var(--muted)]">({properties.length})</span>
         </div>
@@ -162,7 +162,7 @@ export default function AdminPropertiesPage() {
           href="/admin/properties/new"
           className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-red-500 to-orange-500 text-white font-medium text-sm"
         >
-          <Plus className="w-4 h-4" />
+          <LuPlus className="w-4 h-4" />
           Add Property
         </Link>
       </div>

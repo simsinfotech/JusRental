@@ -2,7 +2,7 @@
 
 import { useState, useActionState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { Calendar, Phone, Mail, User, Clock, MessageSquare, CheckCircle2 } from 'lucide-react';
+import { LuCalendar, LuPhone, LuMail, LuUser, LuClock, LuMessageSquare, LuCircleCheckBig } from 'react-icons/lu';
 import { PageHero } from '@/components/layout/PageHero';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { WHATSAPP_NUMBER } from '@/lib/constants';
@@ -57,7 +57,7 @@ function BookVisitContent() {
           {submitted ? (
             <GlassCard hover={false} className="text-center py-12">
               <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-green-500/10 flex items-center justify-center">
-                <CheckCircle2 className="w-8 h-8 text-green-500" />
+                <LuCircleCheckBig className="w-8 h-8 text-green-500" />
               </div>
               <h2 className="text-2xl font-bold font-[family-name:var(--font-heading)] mb-2">
                 Request Sent!
@@ -88,7 +88,7 @@ function BookVisitContent() {
                 <div>
                   <label className="text-sm font-medium mb-1.5 block">Full Name *</label>
                   <div className="relative">
-                    <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--muted)]" />
+                    <LuUser className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--muted)]" />
                     <input
                       type="text"
                       name="name"
@@ -102,7 +102,7 @@ function BookVisitContent() {
                 <div>
                   <label className="text-sm font-medium mb-1.5 block">Phone Number *</label>
                   <div className="relative">
-                    <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--muted)]" />
+                    <LuPhone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--muted)]" />
                     <input
                       type="tel"
                       name="phone"
@@ -116,7 +116,7 @@ function BookVisitContent() {
                 <div>
                   <label className="text-sm font-medium mb-1.5 block">Email</label>
                   <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--muted)]" />
+                    <LuMail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--muted)]" />
                     <input
                       type="email"
                       name="email"
@@ -130,7 +130,7 @@ function BookVisitContent() {
                   <div>
                     <label className="text-sm font-medium mb-1.5 block">Preferred Date *</label>
                     <div className="relative">
-                      <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--muted)]" />
+                      <LuCalendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--muted)]" />
                       <input
                         type="date"
                         name="preferredDate"
@@ -142,7 +142,7 @@ function BookVisitContent() {
                   <div>
                     <label className="text-sm font-medium mb-1.5 block">Preferred Time *</label>
                     <div className="relative">
-                      <Clock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--muted)]" />
+                      <LuClock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--muted)]" />
                       <select
                         name="preferredTime"
                         required
@@ -161,7 +161,7 @@ function BookVisitContent() {
                 <div>
                   <label className="text-sm font-medium mb-1.5 block">Message</label>
                   <div className="relative">
-                    <MessageSquare className="absolute left-3 top-3 w-4 h-4 text-[var(--muted)]" />
+                    <LuMessageSquare className="absolute left-3 top-3 w-4 h-4 text-[var(--muted)]" />
                     <textarea
                       name="message"
                       defaultValue={propertyTitle ? `I'd like to visit: ${propertyTitle}` : ''}

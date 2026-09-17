@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ChevronRight } from 'lucide-react';
+import { LuChevronRight } from 'react-icons/lu';
 
 interface BreadcrumbItem {
   label: string;
@@ -21,7 +21,7 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
       </Link>
       {items.map((item, i) => (
         <span key={i} className="flex items-center gap-1.5">
-          <ChevronRight className="w-3.5 h-3.5 text-white/40" />
+          <LuChevronRight className="w-3.5 h-3.5 text-white/40" />
           {item.href ? (
             <Link
               href={item.href}

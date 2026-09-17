@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Sparkles, SlidersHorizontal, IndianRupee, CheckCircle2, Loader2 } from 'lucide-react';
+import { LuSparkles, LuSlidersHorizontal, LuIndianRupee, LuCircleCheckBig, LuLoaderCircle } from 'react-icons/lu';
 import { fadeInUp, staggerContainer } from '@/lib/animations';
 import { useAnimateInView } from '@/hooks/useAnimateInView';
 
@@ -57,7 +57,7 @@ export function AIMatchingSection() {
             {/* Left — Preferences */}
             <motion.div variants={fadeInUp} className="space-y-6">
               <div className="flex items-center gap-2 mb-2">
-                <SlidersHorizontal className="w-5 h-5 text-[#006194]" />
+                <LuSlidersHorizontal className="w-5 h-5 text-[#006194]" />
                 <h3 className="text-lg font-semibold font-[family-name:var(--font-heading)] text-[#131b2e]">
                   Your Preferences
                 </h3>
@@ -86,7 +86,7 @@ export function AIMatchingSection() {
               {/* Budget selector */}
               <div>
                 <label className="text-sm text-[#3f4850] mb-2 block font-medium">
-                  <IndianRupee className="w-3.5 h-3.5 inline" /> Monthly Budget
+                  <LuIndianRupee className="w-3.5 h-3.5 inline" /> Monthly Budget
                 </label>
                 <div className="flex flex-wrap gap-2">
                   {budgetOptions.map((opt) => (
@@ -132,17 +132,17 @@ export function AIMatchingSection() {
               >
                 {matchState === 'loading' ? (
                   <>
-                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <LuLoaderCircle className="w-4 h-4 animate-spin" />
                     Matching...
                   </>
                 ) : matchState === 'found' ? (
                   <>
-                    <CheckCircle2 className="w-4 h-4" />
+                    <LuCircleCheckBig className="w-4 h-4" />
                     Match Found!
                   </>
                 ) : (
                   <>
-                    <Sparkles className="w-4 h-4" />
+                    <LuSparkles className="w-4 h-4" />
                     Find Matches Now
                   </>
                 )}
@@ -153,7 +153,7 @@ export function AIMatchingSection() {
             <motion.div variants={fadeInUp}>
               <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6 h-full flex flex-col">
                 <div className="flex items-center gap-2 mb-6">
-                  <Sparkles className="w-5 h-5 text-purple-600" />
+                  <LuSparkles className="w-5 h-5 text-purple-600" />
                   <h3 className="text-lg font-semibold font-[family-name:var(--font-heading)] text-[#131b2e]">
                     AI Top Recommendation
                   </h3>
@@ -237,7 +237,7 @@ export function AIMatchingSection() {
                     >
                       <div>
                         <div className="w-20 h-20 mx-auto rounded-full bg-purple-50 flex items-center justify-center mb-4">
-                          <Sparkles className="w-8 h-8 text-purple-400" />
+                          <LuSparkles className="w-8 h-8 text-purple-400" />
                         </div>
                         <p className="text-[#3f4850] text-sm max-w-xs mx-auto">
                           Set your preferences and click &ldquo;Find Matches Now&rdquo; to see AI-curated results

@@ -2,7 +2,7 @@
 
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
-import { Sun, Moon } from 'lucide-react';
+import { LuSun, LuMoon } from 'react-icons/lu';
 import { motion } from 'motion/react';
 
 export function ThemeToggle() {
@@ -23,9 +23,9 @@ export function ThemeToggle() {
       aria-label="Toggle theme"
     >
       {theme === 'dark' ? (
-        <Sun className="w-4 h-4 text-[#006194]" />
+        <LuSun className="w-4 h-4 text-[#006194]" />
       ) : (
-        <Moon className="w-4 h-4 text-[#006194]" />
+        <LuMoon className="w-4 h-4 text-[#006194]" />
       )}
     </motion.button>
   );

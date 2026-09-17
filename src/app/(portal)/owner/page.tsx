@@ -1,5 +1,5 @@
 import { createSupabaseServer } from '@/lib/supabase-ssr';
-import { LayoutDashboard, Home, Eye, Calendar } from 'lucide-react';
+import { LuLayoutDashboard, LuHouse, LuEye, LuCalendar } from 'react-icons/lu';
 import { GlassCard } from '@/components/ui/GlassCard';
 
 export default async function OwnerDashboard() {
@@ -26,15 +26,15 @@ export default async function OwnerDashboard() {
   const totalViews = properties?.reduce((sum, p) => sum + (p.views_count || 0), 0) || 0;
 
   const stats = [
-    { label: 'My Properties', value: propertiesCount || 0, icon: Home, color: 'text-[#006194] bg-[#006194]/10' },
-    { label: 'Total Views', value: totalViews, icon: Eye, color: 'text-[#006194] bg-[#006194]/10' },
-    { label: 'Visit Requests', value: visitsCount || 0, icon: Calendar, color: 'text-green-600 bg-green-500/10' },
+    { label: 'My Properties', value: propertiesCount || 0, icon: LuHouse, color: 'text-[#006194] bg-[#006194]/10' },
+    { label: 'Total Views', value: totalViews, icon: LuEye, color: 'text-[#006194] bg-[#006194]/10' },
+    { label: 'Visit Requests', value: visitsCount || 0, icon: LuCalendar, color: 'text-green-600 bg-green-500/10' },
   ];
 
   return (
     <div>
       <div className="flex items-center gap-3 mb-8">
-        <LayoutDashboard className="w-6 h-6 text-[#006194]" />
+        <LuLayoutDashboard className="w-6 h-6 text-[#006194]" />
         <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">Dashboard</h1>
       </div>
 
@@ -63,7 +63,7 @@ export default async function OwnerDashboard() {
             href="/owner/properties/new"
             className="flex items-center gap-3 p-4 rounded-xl border border-glass-border hover:bg-surface-light transition-all"
           >
-            <Home className="w-5 h-5 text-[#006194]" />
+            <LuHouse className="w-5 h-5 text-[#006194]" />
             <div>
               <p className="font-medium">Add New Property</p>
               <p className="text-sm text-[var(--muted)]">List a new property for rent</p>
@@ -73,7 +73,7 @@ export default async function OwnerDashboard() {
             href="/owner/visits"
             className="flex items-center gap-3 p-4 rounded-xl border border-glass-border hover:bg-surface-light transition-all"
           >
-            <Calendar className="w-5 h-5 text-green-600" />
+            <LuCalendar className="w-5 h-5 text-green-600" />
             <div>
               <p className="font-medium">View Visit Requests</p>
               <p className="text-sm text-[var(--muted)]">Manage pending visits</p>

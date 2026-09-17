@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { User, Save, AlertCircle, CheckCircle, Lock } from 'lucide-react';
+import { LuUser, LuSave, LuCircleAlert, LuCircleCheck, LuLock } from 'react-icons/lu';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { createSupabaseBrowser } from '@/lib/supabase-browser';
 
@@ -124,7 +124,7 @@ export default function OwnerProfilePage() {
   return (
     <div>
       <div className="flex items-center gap-3 mb-8">
-        <User className="w-6 h-6 text-[#006194]" />
+        <LuUser className="w-6 h-6 text-[#006194]" />
         <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">My Profile</h1>
       </div>
 
@@ -139,7 +139,7 @@ export default function OwnerProfilePage() {
             <div className={`mb-4 flex items-center gap-2 p-3 rounded-xl text-sm ${
               message.type === 'error' ? 'bg-red-500/10 text-red-600' : 'bg-green-500/10 text-green-600'
             }`}>
-              {message.type === 'error' ? <AlertCircle className="w-4 h-4 shrink-0" /> : <CheckCircle className="w-4 h-4 shrink-0" />}
+              {message.type === 'error' ? <LuCircleAlert className="w-4 h-4 shrink-0" /> : <LuCircleCheck className="w-4 h-4 shrink-0" />}
               {message.text}
             </div>
           )}
@@ -196,7 +196,7 @@ export default function OwnerProfilePage() {
                 disabled={loading}
                 className="flex items-center gap-2 px-8 py-2.5 rounded-xl bg-[#006194] text-white font-semibold cursor-pointer disabled:opacity-50"
               >
-                <Save className="w-4 h-4" />
+                <LuSave className="w-4 h-4" />
                 {loading ? 'Saving...' : 'Save Profile'}
               </button>
             </div>
@@ -208,7 +208,7 @@ export default function OwnerProfilePage() {
       <form onSubmit={handlePasswordChange}>
         <GlassCard hover={false}>
           <h2 className="text-lg font-semibold font-[family-name:var(--font-heading)] mb-4 flex items-center gap-2">
-            <Lock className="w-5 h-5" />
+            <LuLock className="w-5 h-5" />
             Change Password
           </h2>
 
@@ -216,7 +216,7 @@ export default function OwnerProfilePage() {
             <div className={`mb-4 flex items-center gap-2 p-3 rounded-xl text-sm ${
               passwordMsg.type === 'error' ? 'bg-red-500/10 text-red-600' : 'bg-green-500/10 text-green-600'
             }`}>
-              {passwordMsg.type === 'error' ? <AlertCircle className="w-4 h-4 shrink-0" /> : <CheckCircle className="w-4 h-4 shrink-0" />}
+              {passwordMsg.type === 'error' ? <LuCircleAlert className="w-4 h-4 shrink-0" /> : <LuCircleCheck className="w-4 h-4 shrink-0" />}
               {passwordMsg.text}
             </div>
           )}
@@ -253,7 +253,7 @@ export default function OwnerProfilePage() {
                 disabled={changingPassword}
                 className="flex items-center gap-2 px-8 py-2.5 rounded-xl bg-surface-light border border-glass-border font-semibold cursor-pointer disabled:opacity-50 hover:bg-surface transition-all"
               >
-                <Lock className="w-4 h-4" />
+                <LuLock className="w-4 h-4" />
                 {changingPassword ? 'Changing...' : 'Change Password'}
               </button>
             </div>

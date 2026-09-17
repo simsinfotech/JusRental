@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { FileText, Save, AlertCircle, ArrowLeft } from 'lucide-react';
+import { LuFileText, LuSave, LuCircleAlert, LuArrowLeft } from 'react-icons/lu';
 import { createSupabaseBrowser } from '@/lib/supabase-browser';
 
 const CATEGORIES = ['Renting Tips', 'Market Trends', 'Neighbourhood Guides', 'Legal', 'NRI Corner'];
@@ -63,15 +63,15 @@ export default function AdminNewBlogPage() {
     <div>
       <div className="flex items-center gap-3 mb-8">
         <button onClick={() => router.back()} className="p-2 rounded-lg hover:bg-surface-light cursor-pointer">
-          <ArrowLeft className="w-5 h-5" />
+          <LuArrowLeft className="w-5 h-5" />
         </button>
-        <FileText className="w-6 h-6 text-red-600" />
+        <LuFileText className="w-6 h-6 text-red-600" />
         <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">New Blog Post</h1>
       </div>
 
       {error && (
         <div className="mb-4 flex items-center gap-2 p-3 rounded-xl bg-red-500/10 text-red-600 text-sm">
-          <AlertCircle className="w-4 h-4 shrink-0" />
+          <LuCircleAlert className="w-4 h-4 shrink-0" />
           {error}
         </div>
       )}
@@ -154,7 +154,7 @@ export default function AdminNewBlogPage() {
         <div className="flex justify-end">
           <button type="submit" disabled={loading}
             className="flex items-center gap-2 px-8 py-2.5 rounded-xl bg-gradient-to-r from-red-500 to-orange-500 text-white font-semibold cursor-pointer disabled:opacity-50">
-            <Save className="w-4 h-4" />
+            <LuSave className="w-4 h-4" />
             {loading ? 'Publishing...' : 'Publish Post'}
           </button>
         </div>

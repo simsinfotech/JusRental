@@ -3,18 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'motion/react';
-import {
-  Search,
-  ShieldCheck,
-  Headphones,
-  BadgePercent,
-  Lock,
-  Home,
-  MapPin,
-  Building2,
-  IndianRupee,
-  ChevronDown,
-} from 'lucide-react';
+import { LuSearch, LuShieldCheck, LuHeadphones, LuBadgePercent, LuLock, LuHouse, LuMapPin, LuBuilding2, LuIndianRupee, LuChevronDown } from 'react-icons/lu';
 import { fadeInUp, staggerContainer } from '@/lib/animations';
 import { useAnimateInView } from '@/hooks/useAnimateInView';
 import { AnimatedCounter } from '@/components/ui/AnimatedCounter';
@@ -51,10 +40,10 @@ const budgetOptions = [
 ];
 
 const trustBadges = [
-  { icon: ShieldCheck, label: 'Verified Homes', description: 'Every listing checked' },
-  { icon: Headphones, label: '24/7 Support', description: 'Always here to help' },
-  { icon: BadgePercent, label: 'Zero Brokerage', description: 'No hidden fees' },
-  { icon: Lock, label: 'Secure Payments', description: 'Safe transactions' },
+  { icon: LuShieldCheck, label: 'Verified Homes', description: 'Every listing checked' },
+  { icon: LuHeadphones, label: '24/7 Support', description: 'Always here to help' },
+  { icon: LuBadgePercent, label: 'Zero Brokerage', description: 'No hidden fees' },
+  { icon: LuLock, label: 'Secure Payments', description: 'Safe transactions' },
 ];
 
 const stats = [
@@ -158,7 +147,7 @@ export function HeroSection() {
                     City
                   </label>
                   <div className="relative">
-                    <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                    <LuMapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                     <select
                       className={selectClasses}
                       defaultValue="Bangalore"
@@ -169,7 +158,7 @@ export function HeroSection() {
                       <option disabled>Mumbai (Coming Soon)</option>
                       <option disabled>Delhi (Coming Soon)</option>
                     </select>
-                    <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                    <LuChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
                   </div>
                 </div>
 
@@ -179,7 +168,7 @@ export function HeroSection() {
                     Property Type
                   </label>
                   <div className="relative">
-                    <Home className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                    <LuHouse className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                     <select
                       value={selectedType}
                       onChange={(e) => setSelectedType(e.target.value)}
@@ -190,7 +179,7 @@ export function HeroSection() {
                         <option key={t} value={t}>{t}</option>
                       ))}
                     </select>
-                    <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                    <LuChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
                   </div>
                 </div>
 
@@ -200,7 +189,7 @@ export function HeroSection() {
                     Area
                   </label>
                   <div className="relative">
-                    <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                    <LuMapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                     <select
                       value={selectedLocation}
                       onChange={(e) => setSelectedLocation(e.target.value)}
@@ -211,7 +200,7 @@ export function HeroSection() {
                         <option key={loc} value={loc}>{loc}</option>
                       ))}
                     </select>
-                    <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                    <LuChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
                   </div>
                 </div>
 
@@ -221,7 +210,7 @@ export function HeroSection() {
                     BHK Type
                   </label>
                   <div className="relative">
-                    <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                    <LuBuilding2 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                     <select
                       value={selectedBhk}
                       onChange={(e) => setSelectedBhk(e.target.value)}
@@ -232,7 +221,7 @@ export function HeroSection() {
                         <option key={b} value={b}>{b}</option>
                       ))}
                     </select>
-                    <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                    <LuChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
                   </div>
                 </div>
 
@@ -242,7 +231,7 @@ export function HeroSection() {
                     Budget
                   </label>
                   <div className="relative">
-                    <IndianRupee className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                    <LuIndianRupee className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                     <select
                       value={selectedBudget}
                       onChange={(e) => setSelectedBudget(e.target.value)}
@@ -253,7 +242,7 @@ export function HeroSection() {
                         <option key={b} value={b}>{b}</option>
                       ))}
                     </select>
-                    <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                    <LuChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
                   </div>
                 </div>
               </div>
@@ -264,7 +253,7 @@ export function HeroSection() {
                   onClick={handleSearch}
                   className="w-full sm:w-auto flex-1 sm:flex-none px-8 py-3 rounded-xl bg-[#006194] hover:bg-[#005080] text-white font-semibold flex items-center justify-center gap-2 shadow-lg shadow-[#006194]/25 transition-all duration-300 hover:-translate-y-0.5 cursor-pointer"
                 >
-                  <Search className="w-4 h-4" />
+                  <LuSearch className="w-4 h-4" />
                   Search Homes
                 </button>
                 <span className="text-sm text-white/50 hidden sm:inline">

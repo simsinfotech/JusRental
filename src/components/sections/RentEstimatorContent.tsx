@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'motion/react';
-import { IndianRupee, MapPin, Home } from 'lucide-react';
+import { LuIndianRupee, LuMapPin, LuHouse } from 'react-icons/lu';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 
@@ -23,7 +23,7 @@ export function RentEstimatorContent({ rentData, rentAreas, bhkOptions }: RentEs
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <GlassCard gradient hover={false} className="p-8">
           <div className="flex items-center gap-2 mb-6">
-            <IndianRupee className="w-6 h-6 text-[#006194]" />
+            <LuIndianRupee className="w-6 h-6 text-[#006194]" />
             <h2 className="text-xl font-semibold font-[family-name:var(--font-heading)]">
               Estimate Monthly Rent
             </h2>
@@ -32,7 +32,7 @@ export function RentEstimatorContent({ rentData, rentAreas, bhkOptions }: RentEs
           {/* BHK Selection */}
           <div className="mb-6">
             <label className="text-sm text-[var(--muted)] mb-3 block flex items-center gap-1.5">
-              <Home className="w-4 h-4" />
+              <LuHouse className="w-4 h-4" />
               Property Type
             </label>
             <div className="flex flex-wrap gap-2">
@@ -55,7 +55,7 @@ export function RentEstimatorContent({ rentData, rentAreas, bhkOptions }: RentEs
           {/* Area Selection */}
           <div className="mb-8">
             <label className="text-sm text-[var(--muted)] mb-3 block flex items-center gap-1.5">
-              <MapPin className="w-4 h-4" />
+              <LuMapPin className="w-4 h-4" />
               Location
             </label>
             <div className="flex flex-wrap gap-2">

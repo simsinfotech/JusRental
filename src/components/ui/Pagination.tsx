@@ -1,6 +1,6 @@
 'use client';
 
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { LuChevronLeft, LuChevronRight } from 'react-icons/lu';
 import { cn } from '@/lib/utils';
 
 interface PaginationProps {
@@ -28,7 +28,7 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
         disabled={currentPage === 1}
         className="p-2 rounded-lg border border-glass-border hover:bg-surface-light disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer"
       >
-        <ChevronLeft className="w-4 h-4" />
+        <LuChevronLeft className="w-4 h-4" />
       </button>
 
       {pages.map((page, i) =>
@@ -55,7 +55,7 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
         disabled={currentPage === totalPages}
         className="p-2 rounded-lg border border-glass-border hover:bg-surface-light disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer"
       >
-        <ChevronRight className="w-4 h-4" />
+        <LuChevronRight className="w-4 h-4" />
       </button>
     </div>
   );

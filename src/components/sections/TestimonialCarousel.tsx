@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Autoplay, Pagination } from 'swiper/modules';
-import { Star, Quote } from 'lucide-react';
+import { LuStar, LuQuote } from 'react-icons/lu';
 import { GlassCard } from '@/components/ui/GlassCard';
 import type { Testimonial } from '@/types';
 
@@ -42,13 +42,13 @@ export default function TestimonialCarousel({ testimonials }: TestimonialCarouse
       {testimonials.map((t) => (
         <SwiperSlide key={t.id} className="py-4">
           <GlassCard className="h-full">
-            <Quote className="w-8 h-8 text-[#006194]/30 mb-4" />
+            <LuQuote className="w-8 h-8 text-[#006194]/30 mb-4" />
             <p className="text-[var(--foreground)] leading-relaxed mb-6">
               &ldquo;{t.content}&rdquo;
             </p>
             <div className="flex items-center gap-1 mb-4">
               {Array.from({ length: t.rating }).map((_, i) => (
-                <Star key={i} className="w-4 h-4 fill-[#006194] text-[#006194]" />
+                <LuStar key={i} className="w-4 h-4 fill-[#006194] text-[#006194]" />
               ))}
             </div>
             <div className="flex items-center gap-3">

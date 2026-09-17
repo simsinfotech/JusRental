@@ -4,17 +4,15 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
-import {
-  LayoutDashboard, Home, Calendar, FileText, User, LogOut, Menu, X, ChevronRight,
-} from 'lucide-react';
+import { LuLayoutDashboard, LuHouse, LuCalendar, LuFileText, LuUser, LuLogOut, LuMenu, LuX, LuChevronRight } from 'react-icons/lu';
 import { createSupabaseBrowser } from '@/lib/supabase-browser';
 
 const sidebarLinks = [
-  { href: '/owner', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/owner/properties', label: 'My Properties', icon: Home },
-  { href: '/owner/visits', label: 'Visit Requests', icon: Calendar },
-  { href: '/owner/agreement', label: 'Agreements', icon: FileText },
-  { href: '/owner/profile', label: 'Profile', icon: User },
+  { href: '/owner', label: 'Dashboard', icon: LuLayoutDashboard },
+  { href: '/owner/properties', label: 'My Properties', icon: LuHouse },
+  { href: '/owner/visits', label: 'Visit Requests', icon: LuCalendar },
+  { href: '/owner/agreement', label: 'Agreements', icon: LuFileText },
+  { href: '/owner/profile', label: 'Profile', icon: LuUser },
 ];
 
 export default function OwnerLayout({ children }: { children: React.ReactNode }) {
@@ -44,7 +42,7 @@ export default function OwnerLayout({ children }: { children: React.ReactNode })
       {/* Mobile header */}
       <div className="lg:hidden flex items-center justify-between p-4 border-b border-glass-border">
         <button onClick={() => setSidebarOpen(true)} className="p-2 rounded-lg hover:bg-surface-light cursor-pointer">
-          <Menu className="w-5 h-5" />
+          <LuMenu className="w-5 h-5" />
         </button>
         <Link href="/" className="flex items-center gap-2">
           <Image src="/images/monogram.png" alt="JusRental" width={28} height={28} />
@@ -69,7 +67,7 @@ export default function OwnerLayout({ children }: { children: React.ReactNode })
               <span className="font-semibold font-[family-name:var(--font-heading)]">Owner Portal</span>
             </Link>
             <button onClick={() => setSidebarOpen(false)} className="lg:hidden p-1 rounded-lg hover:bg-surface-light cursor-pointer">
-              <X className="w-4 h-4" />
+              <LuX className="w-4 h-4" />
             </button>
           </div>
 
@@ -89,7 +87,7 @@ export default function OwnerLayout({ children }: { children: React.ReactNode })
                 >
                   <link.icon className="w-4 h-4" />
                   {link.label}
-                  {isActive && <ChevronRight className="w-3 h-3 ml-auto" />}
+                  {isActive && <LuChevronRight className="w-3 h-3 ml-auto" />}
                 </Link>
               );
             })}
@@ -109,7 +107,7 @@ export default function OwnerLayout({ children }: { children: React.ReactNode })
               onClick={handleLogout}
               className="w-full flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-red-500 hover:bg-red-500/10 transition-all cursor-pointer"
             >
-              <LogOut className="w-4 h-4" />
+              <LuLogOut className="w-4 h-4" />
               Sign Out
             </button>
           </div>

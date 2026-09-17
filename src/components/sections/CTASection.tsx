@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { ExternalLink, Building2, TrendingUp, Users, Globe, CheckCircle2 } from 'lucide-react';
+import { LuExternalLink, LuBuilding2, LuTrendingUp, LuUsers, LuGlobe, LuCircleCheckBig } from 'react-icons/lu';
 import { fadeInUp, staggerContainer } from '@/lib/animations';
 import { useAnimateInView } from '@/hooks/useAnimateInView';
 
@@ -43,7 +43,7 @@ export function CTASection() {
                 variants={fadeInUp}
                 className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 text-white/90 text-sm font-medium mb-4"
               >
-                <Globe className="w-3.5 h-3.5" />
+                <LuGlobe className="w-3.5 h-3.5" />
                 Our Network
               </motion.span>
 
@@ -66,7 +66,7 @@ export function CTASection() {
               <motion.div variants={fadeInUp} className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-8">
                 {features.map((text) => (
                   <div key={text} className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-white/90 shrink-0" />
+                    <LuCircleCheckBig className="w-4 h-4 text-white/90 shrink-0" />
                     <span className="text-sm text-white/90">{text}</span>
                   </div>
                 ))}
@@ -79,7 +79,7 @@ export function CTASection() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-white text-[#006194] font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5"
                 >
-                  <ExternalLink className="w-4 h-4" />
+                  <LuExternalLink className="w-4 h-4" />
                   Visit EstateHive.in
                 </a>
               </motion.div>
@@ -105,14 +105,14 @@ export function CTASection() {
                 <div className="grid grid-cols-2 gap-4 mb-6">
                   <div className="text-center">
                     <div className="flex items-center justify-center gap-1 text-white/80 mb-1">
-                      <Building2 className="w-4 h-4" />
+                      <LuBuilding2 className="w-4 h-4" />
                     </div>
                     <p className="text-2xl font-bold text-white">10K+</p>
                     <p className="text-xs text-white/60">Listings</p>
                   </div>
                   <div className="text-center">
                     <div className="flex items-center justify-center gap-1 text-white/80 mb-1">
-                      <Users className="w-4 h-4" />
+                      <LuUsers className="w-4 h-4" />
                     </div>
                     <p className="text-2xl font-bold text-white">500+</p>
                     <p className="text-xs text-white/60">Agents</p>

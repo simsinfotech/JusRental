@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import { Upload, X, ImageIcon } from 'lucide-react';
+import { LuUpload, LuX, LuImage } from 'react-icons/lu';
 import Image from 'next/image';
 import { createSupabaseBrowser } from '@/lib/supabase-browser';
 
@@ -100,7 +100,7 @@ export function ImageUpload({
           }}
           disabled={uploading || images.length >= maxFiles}
         />
-        <Upload className="w-8 h-8 text-[var(--muted)] mb-2" />
+        <LuUpload className="w-8 h-8 text-[var(--muted)] mb-2" />
         <p className="text-sm font-medium text-[var(--muted)]">
           {uploading ? 'Uploading...' : 'Drop images here or click to browse'}
         </p>
@@ -126,7 +126,7 @@ export function ImageUpload({
                 onClick={() => handleRemove(i)}
                 className="absolute top-1.5 right-1.5 p-1 rounded-lg bg-black/60 text-white opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
               >
-                <X className="w-3.5 h-3.5" />
+                <LuX className="w-3.5 h-3.5" />
               </button>
               {i === 0 && (
                 <span className="absolute bottom-1.5 left-1.5 px-2 py-0.5 rounded-md bg-black/60 text-white text-xs">

@@ -1,5 +1,5 @@
 import { createSupabaseServer } from '@/lib/supabase-ssr';
-import { Calendar, Clock, Phone, Mail, User, MessageSquare } from 'lucide-react';
+import { LuCalendar, LuClock, LuPhone, LuMail, LuUser, LuMessageSquare } from 'react-icons/lu';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { Badge } from '@/components/ui/Badge';
 
@@ -35,7 +35,7 @@ export default async function OwnerVisitsPage() {
   return (
     <div>
       <div className="flex items-center gap-3 mb-8">
-        <Calendar className="w-6 h-6 text-[#006194]" />
+        <LuCalendar className="w-6 h-6 text-[#006194]" />
         <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">Visit Requests</h1>
       </div>
 
@@ -55,22 +55,22 @@ export default async function OwnerVisitsPage() {
 
               <div className="grid sm:grid-cols-2 gap-3 text-sm">
                 <div className="flex items-center gap-2 text-[var(--muted)]">
-                  <User className="w-3.5 h-3.5" />
+                  <LuUser className="w-3.5 h-3.5" />
                   {visit.name}
                 </div>
                 <div className="flex items-center gap-2 text-[var(--muted)]">
-                  <Phone className="w-3.5 h-3.5" />
+                  <LuPhone className="w-3.5 h-3.5" />
                   {visit.phone}
                 </div>
                 {visit.email && (
                   <div className="flex items-center gap-2 text-[var(--muted)]">
-                    <Mail className="w-3.5 h-3.5" />
+                    <LuMail className="w-3.5 h-3.5" />
                     {visit.email}
                   </div>
                 )}
                 {visit.preferred_date && (
                   <div className="flex items-center gap-2 text-[var(--muted)]">
-                    <Calendar className="w-3.5 h-3.5" />
+                    <LuCalendar className="w-3.5 h-3.5" />
                     {visit.preferred_date}
                     {visit.preferred_time && ` at ${visit.preferred_time}`}
                   </div>
@@ -80,14 +80,14 @@ export default async function OwnerVisitsPage() {
               {visit.message && (
                 <div className="mt-3 pt-3 border-t border-glass-border">
                   <div className="flex items-start gap-2 text-sm text-[var(--muted)]">
-                    <MessageSquare className="w-3.5 h-3.5 mt-0.5 shrink-0" />
+                    <LuMessageSquare className="w-3.5 h-3.5 mt-0.5 shrink-0" />
                     {visit.message}
                   </div>
                 </div>
               )}
 
               <div className="mt-3 pt-3 border-t border-glass-border text-xs text-[var(--muted)]">
-                <Clock className="w-3 h-3 inline mr-1" />
+                <LuClock className="w-3 h-3 inline mr-1" />
                 {new Date(visit.created_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
               </div>
             </GlassCard>
@@ -95,7 +95,7 @@ export default async function OwnerVisitsPage() {
         </div>
       ) : (
         <GlassCard hover={false} className="text-center py-12">
-          <Calendar className="w-12 h-12 mx-auto text-[var(--muted)] mb-4" />
+          <LuCalendar className="w-12 h-12 mx-auto text-[var(--muted)] mb-4" />
           <h3 className="text-lg font-semibold mb-2">No visit requests yet</h3>
           <p className="text-[var(--muted)]">Visit requests for your properties will appear here.</p>
         </GlassCard>

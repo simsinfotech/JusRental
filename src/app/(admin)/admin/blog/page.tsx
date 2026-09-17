@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { FileText, Plus, Edit2, Trash2, Eye, EyeOff } from 'lucide-react';
+import { LuFileText, LuPlus, LuSquarePen, LuTrash2, LuEye, LuEyeOff } from 'react-icons/lu';
 import { StatusBadge } from '@/components/admin/StatusBadge';
 import { createSupabaseBrowser } from '@/lib/supabase-browser';
 
@@ -63,7 +63,7 @@ export default function AdminBlogPage() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center gap-3">
-          <FileText className="w-6 h-6 text-red-600" />
+          <LuFileText className="w-6 h-6 text-red-600" />
           <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">Blog Posts</h1>
           <span className="text-sm text-[var(--muted)]">({posts.length})</span>
         </div>
@@ -71,7 +71,7 @@ export default function AdminBlogPage() {
           href="/admin/blog/new"
           className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-red-500 to-orange-500 text-white font-medium text-sm"
         >
-          <Plus className="w-4 h-4" />
+          <LuPlus className="w-4 h-4" />
           New Post
         </Link>
       </div>
@@ -102,21 +102,21 @@ export default function AdminBlogPage() {
                 onClick={() => togglePublish(post.id, post.status || 'published')}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium hover:bg-surface-light transition-all cursor-pointer text-[var(--muted)]"
               >
-                {post.status === 'draft' ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
+                {post.status === 'draft' ? <LuEye className="w-3.5 h-3.5" /> : <LuEyeOff className="w-3.5 h-3.5" />}
                 {post.status === 'draft' ? 'Publish' : 'Unpublish'}
               </button>
               <button
                 onClick={() => router.push(`/admin/blog/${post.id}`)}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium hover:bg-surface-light transition-all cursor-pointer text-[var(--muted)]"
               >
-                <Edit2 className="w-3.5 h-3.5" />
+                <LuSquarePen className="w-3.5 h-3.5" />
                 Edit
               </button>
               <button
                 onClick={() => handleDelete(post.id)}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium hover:bg-red-500/10 transition-all cursor-pointer text-red-500"
               >
-                <Trash2 className="w-3.5 h-3.5" />
+                <LuTrash2 className="w-3.5 h-3.5" />
                 Delete
               </button>
             </div>
@@ -125,7 +125,7 @@ export default function AdminBlogPage() {
 
         {posts.length === 0 && (
           <div className="glass-card p-8 text-center">
-            <FileText className="w-12 h-12 mx-auto text-[var(--muted)] mb-3" />
+            <LuFileText className="w-12 h-12 mx-auto text-[var(--muted)] mb-3" />
             <p className="text-[var(--muted)]">No blog posts yet</p>
           </div>
         )}

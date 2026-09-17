@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'motion/react';
-import { MapPin, ArrowRight, Flame, TrendingUp } from 'lucide-react';
+import { LuMapPin, LuArrowRight, LuFlame, LuTrendingUp } from 'react-icons/lu';
 import { fadeInUp, staggerContainer } from '@/lib/animations';
 import { useAnimateInView } from '@/hooks/useAnimateInView';
 import type { Area } from '@/types';
@@ -62,9 +62,9 @@ export function AreaExplorer({ areas }: AreaExplorerProps) {
                     <div className="absolute top-2 right-2 z-10">
                       <span className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full bg-amber-500 text-white text-[10px] font-semibold uppercase tracking-wide">
                         {index % 2 === 0 ? (
-                          <><Flame className="w-2.5 h-2.5" /> Hotspot</>
+                          <><LuFlame className="w-2.5 h-2.5" /> Hotspot</>
                         ) : (
-                          <><TrendingUp className="w-2.5 h-2.5" /> Popular</>
+                          <><LuTrendingUp className="w-2.5 h-2.5" /> Popular</>
                         )}
                       </span>
                     </div>
@@ -77,7 +77,7 @@ export function AreaExplorer({ areas }: AreaExplorerProps) {
                     {area.name}
                   </h3>
                   <p className="text-xs text-[#3f4850] flex items-center gap-1 mb-0.5">
-                    <MapPin className="w-3 h-3" />
+                    <LuMapPin className="w-3 h-3" />
                     {area.properties} properties
                   </p>
                   <p className="text-xs text-[#707881]">{area.priceRange}</p>

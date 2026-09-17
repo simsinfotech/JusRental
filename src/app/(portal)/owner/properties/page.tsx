@@ -1,6 +1,6 @@
 import { createSupabaseServer } from '@/lib/supabase-ssr';
 import Link from 'next/link';
-import { Home, Plus, Eye, MapPin } from 'lucide-react';
+import { LuHouse, LuPlus, LuEye, LuMapPin } from 'react-icons/lu';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { Badge } from '@/components/ui/Badge';
 
@@ -20,14 +20,14 @@ export default async function OwnerPropertiesPage() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center gap-3">
-          <Home className="w-6 h-6 text-[#006194]" />
+          <LuHouse className="w-6 h-6 text-[#006194]" />
           <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">My Properties</h1>
         </div>
         <Link
           href="/owner/properties/new"
           className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#006194] text-white font-medium text-sm shadow-lg shadow-[#006194]/25 hover:shadow-[#006194]/40 transition-all"
         >
-          <Plus className="w-4 h-4" />
+          <LuPlus className="w-4 h-4" />
           Add Property
         </Link>
       </div>
@@ -40,7 +40,7 @@ export default async function OwnerPropertiesPage() {
                 <div>
                   <h3 className="font-semibold font-[family-name:var(--font-heading)]">{p.title}</h3>
                   <p className="text-sm text-[var(--muted)] flex items-center gap-1 mt-1">
-                    <MapPin className="w-3 h-3" />
+                    <LuMapPin className="w-3 h-3" />
                     {p.location}
                   </p>
                 </div>
@@ -62,7 +62,7 @@ export default async function OwnerPropertiesPage() {
 
               <div className="flex items-center justify-between pt-3 border-t border-glass-border">
                 <span className="flex items-center gap-1 text-sm text-[var(--muted)]">
-                  <Eye className="w-3.5 h-3.5" />
+                  <LuEye className="w-3.5 h-3.5" />
                   {p.views_count || 0} views
                 </span>
                 <Link
@@ -77,14 +77,14 @@ export default async function OwnerPropertiesPage() {
         </div>
       ) : (
         <GlassCard hover={false} className="text-center py-12">
-          <Home className="w-12 h-12 mx-auto text-[var(--muted)] mb-4" />
+          <LuHouse className="w-12 h-12 mx-auto text-[var(--muted)] mb-4" />
           <h3 className="text-lg font-semibold mb-2">No properties yet</h3>
           <p className="text-[var(--muted)] mb-4">Add your first property to start getting tenants.</p>
           <Link
             href="/owner/properties/new"
             className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#006194] text-white font-medium"
           >
-            <Plus className="w-4 h-4" />
+            <LuPlus className="w-4 h-4" />
             Add Property
           </Link>
         </GlassCard>

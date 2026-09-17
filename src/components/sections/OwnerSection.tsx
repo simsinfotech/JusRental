@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'motion/react';
-import { TrendingUp, CheckCircle2, Users, Shield, IndianRupee, Home } from 'lucide-react';
+import { LuTrendingUp, LuCircleCheckBig, LuUsers, LuShield, LuIndianRupee, LuHouse } from 'react-icons/lu';
 import { fadeInUp, staggerContainer, slideInLeft, slideInRight } from '@/lib/animations';
 import { useAnimateInView } from '@/hooks/useAnimateInView';
 
@@ -42,7 +42,7 @@ export function OwnerSection() {
           {/* Left — Owner Proposition */}
           <motion.div variants={slideInLeft} className="space-y-6">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-[#006194] text-sm font-medium">
-              <Home className="w-3.5 h-3.5" />
+              <LuHouse className="w-3.5 h-3.5" />
               For Property Owners
             </span>
 
@@ -58,7 +58,7 @@ export function OwnerSection() {
             <div className="space-y-3">
               {benefits.map((text) => (
                 <div key={text} className="flex items-center gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-[#006194] shrink-0" />
+                  <LuCircleCheckBig className="w-5 h-5 text-[#006194] shrink-0" />
                   <span className="text-white/80">{text}</span>
                 </div>
               ))}
@@ -68,7 +68,7 @@ export function OwnerSection() {
               href="/list-property"
               className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-white text-[#0F172A] font-semibold hover:bg-slate-100 transition-all duration-300 hover:-translate-y-0.5"
             >
-              <Home className="w-4 h-4" />
+              <LuHouse className="w-4 h-4" />
               List Your Property Free
             </Link>
           </motion.div>
@@ -77,7 +77,7 @@ export function OwnerSection() {
           <motion.div variants={slideInRight}>
             <div className="bg-white rounded-2xl p-6 md:p-8 shadow-xl">
               <div className="flex items-center gap-2 mb-6">
-                <IndianRupee className="w-5 h-5 text-[#006194]" />
+                <LuIndianRupee className="w-5 h-5 text-[#006194]" />
                 <h3 className="text-lg font-semibold font-[family-name:var(--font-heading)] text-[#131b2e]">
                   Rental Estimator
                 </h3>
@@ -143,7 +143,7 @@ export function OwnerSection() {
                 href="/list-property"
                 className="w-full py-3 rounded-xl bg-[#006194] hover:bg-[#005080] text-white font-semibold flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer"
               >
-                <TrendingUp className="w-4 h-4" />
+                <LuTrendingUp className="w-4 h-4" />
                 List With This Estimate
               </Link>
             </div>

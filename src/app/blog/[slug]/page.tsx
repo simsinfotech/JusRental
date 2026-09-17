@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowLeft, Clock, Tag, User, Calendar } from 'lucide-react';
+import { LuArrowLeft, LuClock, LuTag, LuUser, LuCalendar } from 'react-icons/lu';
 import { fetchBlogPostBySlug, fetchBlogPosts } from '@/lib/dal';
 import { Breadcrumb } from '@/components/ui/Breadcrumb';
 import { GlassCard } from '@/components/ui/GlassCard';
@@ -55,7 +55,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             href="/blog"
             className="inline-flex items-center gap-1.5 text-sm text-white/60 hover:text-white mt-4 transition-colors"
           >
-            <ArrowLeft className="w-4 h-4" />
+            <LuArrowLeft className="w-4 h-4" />
             Back to Blog
           </Link>
         </div>
@@ -79,19 +79,19 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           {/* Meta */}
           <div className="flex flex-wrap items-center gap-4 mb-6">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-medium bg-[#006194]/10 text-[#006194] border border-[#006194]/20">
-              <Tag className="w-3.5 h-3.5" />
+              <LuTag className="w-3.5 h-3.5" />
               {post.category}
             </span>
             <span className="flex items-center gap-1.5 text-sm text-[var(--muted)]">
-              <Clock className="w-3.5 h-3.5" />
+              <LuClock className="w-3.5 h-3.5" />
               {post.readTime} min read
             </span>
             <span className="flex items-center gap-1.5 text-sm text-[var(--muted)]">
-              <Calendar className="w-3.5 h-3.5" />
+              <LuCalendar className="w-3.5 h-3.5" />
               {post.publishedDate}
             </span>
             <span className="flex items-center gap-1.5 text-sm text-[var(--muted)]">
-              <User className="w-3.5 h-3.5" />
+              <LuUser className="w-3.5 h-3.5" />
               {post.author}
             </span>
           </div>

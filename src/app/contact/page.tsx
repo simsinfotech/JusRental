@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useActionState, useEffect } from 'react';
-import { Phone, Mail, MapPin, Clock, User, MessageSquare, CheckCircle2, Send } from 'lucide-react';
+import { LuPhone, LuMail, LuMapPin, LuClock, LuUser, LuMessageSquare, LuCircleCheckBig, LuSend } from 'react-icons/lu';
 import { PageHero } from '@/components/layout/PageHero';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { WHATSAPP_NUMBER, WHATSAPP_URL } from '@/lib/constants';
@@ -9,25 +9,25 @@ import { submitContactForm, type ContactFormState } from '@/lib/actions/contact'
 
 const contactInfo = [
   {
-    icon: Phone,
+    icon: LuPhone,
     title: 'Phone / WhatsApp',
     detail: '+91 90363 17765',
     href: WHATSAPP_URL,
   },
   {
-    icon: Mail,
+    icon: LuMail,
     title: 'Email',
     detail: 'hello@jusrental.com',
     href: 'mailto:hello@jusrental.com',
   },
   {
-    icon: MapPin,
+    icon: LuMapPin,
     title: 'Address',
     detail: 'Bengaluru 560077, Karnataka, India',
     href: undefined,
   },
   {
-    icon: Clock,
+    icon: LuClock,
     title: 'Working Hours',
     detail: 'Mon - Sat: 9:00 AM - 7:00 PM',
     href: undefined,
@@ -79,7 +79,7 @@ export default function ContactPage() {
               {submitted ? (
                 <GlassCard hover={false} className="text-center py-12">
                   <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-green-500/10 flex items-center justify-center">
-                    <CheckCircle2 className="w-8 h-8 text-green-500" />
+                    <LuCircleCheckBig className="w-8 h-8 text-green-500" />
                   </div>
                   <h2 className="text-2xl font-bold font-[family-name:var(--font-heading)] mb-2">
                     Message Sent!
@@ -109,7 +109,7 @@ export default function ContactPage() {
                       <div>
                         <label className="text-sm font-medium mb-1.5 block">Full Name *</label>
                         <div className="relative">
-                          <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--muted)]" />
+                          <LuUser className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--muted)]" />
                           <input
                             type="text"
                             name="name"
@@ -122,7 +122,7 @@ export default function ContactPage() {
                       <div>
                         <label className="text-sm font-medium mb-1.5 block">Phone *</label>
                         <div className="relative">
-                          <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--muted)]" />
+                          <LuPhone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--muted)]" />
                           <input
                             type="tel"
                             name="phone"
@@ -137,7 +137,7 @@ export default function ContactPage() {
                     <div>
                       <label className="text-sm font-medium mb-1.5 block">Email</label>
                       <div className="relative">
-                        <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--muted)]" />
+                        <LuMail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--muted)]" />
                         <input
                           type="email"
                           name="email"
@@ -161,7 +161,7 @@ export default function ContactPage() {
                     <div>
                       <label className="text-sm font-medium mb-1.5 block">Message *</label>
                       <div className="relative">
-                        <MessageSquare className="absolute left-3 top-3 w-4 h-4 text-[var(--muted)]" />
+                        <LuMessageSquare className="absolute left-3 top-3 w-4 h-4 text-[var(--muted)]" />
                         <textarea
                           name="message"
                           required
@@ -177,7 +177,7 @@ export default function ContactPage() {
                       disabled={isPending}
                       className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-[#006194] text-white font-semibold shadow-lg shadow-[#006194]/25 hover:shadow-[#006194]/40 transition-all duration-300 hover:-translate-y-0.5 cursor-pointer disabled:opacity-50"
                     >
-                      <Send className="w-4 h-4" />
+                      <LuSend className="w-4 h-4" />
                       {isPending ? 'Sending...' : 'Send Message'}
                     </button>
                   </form>

@@ -1,5 +1,5 @@
 import { createSupabaseServer } from '@/lib/supabase-ssr';
-import { LayoutDashboard, Home, Users, Eye, Calendar, FileText, TrendingUp } from 'lucide-react';
+import { LuLayoutDashboard, LuHouse, LuUsers, LuEye, LuCalendar, LuFileText, LuTrendingUp } from 'react-icons/lu';
 import { AdminCard } from '@/components/admin/AdminCard';
 import { AdminDashboardCharts } from '@/components/admin/AdminDashboardCharts';
 
@@ -32,13 +32,13 @@ export default async function AdminDashboardPage() {
   const totalViews = properties?.reduce((sum, p) => sum + (p.views_count || 0), 0) || 0;
 
   const stats = [
-    { label: 'Total Properties', value: propertiesCount || 0, icon: Home, color: 'text-[#006194] bg-[#006194]/10' },
-    { label: 'Active Listings', value: activeCount || 0, icon: TrendingUp, color: 'text-green-600 bg-green-500/10' },
-    { label: 'Total Views', value: totalViews, icon: Eye, color: 'text-[#006194] bg-[#006194]/10' },
-    { label: 'Contact Leads', value: contactsCount || 0, icon: Users, color: 'text-purple-600 bg-purple-500/10' },
-    { label: 'Visit Requests', value: visitsCount || 0, icon: Calendar, color: 'text-orange-600 bg-orange-500/10' },
-    { label: 'Listing Requests', value: listingReqCount || 0, icon: Home, color: 'text-pink-600 bg-pink-500/10' },
-    { label: 'Blog Posts', value: blogCount || 0, icon: FileText, color: 'text-indigo-600 bg-indigo-500/10' },
+    { label: 'Total Properties', value: propertiesCount || 0, icon: LuHouse, color: 'text-[#006194] bg-[#006194]/10' },
+    { label: 'Active Listings', value: activeCount || 0, icon: LuTrendingUp, color: 'text-green-600 bg-green-500/10' },
+    { label: 'Total Views', value: totalViews, icon: LuEye, color: 'text-[#006194] bg-[#006194]/10' },
+    { label: 'Contact Leads', value: contactsCount || 0, icon: LuUsers, color: 'text-purple-600 bg-purple-500/10' },
+    { label: 'Visit Requests', value: visitsCount || 0, icon: LuCalendar, color: 'text-orange-600 bg-orange-500/10' },
+    { label: 'Listing Requests', value: listingReqCount || 0, icon: LuHouse, color: 'text-pink-600 bg-pink-500/10' },
+    { label: 'Blog Posts', value: blogCount || 0, icon: LuFileText, color: 'text-indigo-600 bg-indigo-500/10' },
   ];
 
   // Build chart data: leads per day (last 30 days)
@@ -70,7 +70,7 @@ export default async function AdminDashboardPage() {
   return (
     <div>
       <div className="flex items-center gap-3 mb-8">
-        <LayoutDashboard className="w-6 h-6 text-red-600" />
+        <LuLayoutDashboard className="w-6 h-6 text-red-600" />
         <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">Admin Dashboard</h1>
       </div>
 

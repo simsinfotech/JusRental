@@ -2,7 +2,7 @@
 
 import { useEffect, useState, use } from 'react';
 import { useRouter } from 'next/navigation';
-import { Home, AlertCircle, Save } from 'lucide-react';
+import { LuHouse, LuCircleAlert, LuSave } from 'react-icons/lu';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { createSupabaseBrowser } from '@/lib/supabase-browser';
 
@@ -100,13 +100,13 @@ export default function EditPropertyPage({ params }: { params: Promise<{ id: str
   return (
     <div>
       <div className="flex items-center gap-3 mb-8">
-        <Home className="w-6 h-6 text-[#006194]" />
+        <LuHouse className="w-6 h-6 text-[#006194]" />
         <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">Edit Property</h1>
       </div>
 
       {error && (
         <div className="mb-4 flex items-center gap-2 p-3 rounded-xl bg-red-500/10 text-red-600 text-sm">
-          <AlertCircle className="w-4 h-4 shrink-0" />
+          <LuCircleAlert className="w-4 h-4 shrink-0" />
           {error}
         </div>
       )}
@@ -205,7 +205,7 @@ export default function EditPropertyPage({ params }: { params: Promise<{ id: str
             <div className="flex justify-end">
               <button type="submit" disabled={loading}
                 className="flex items-center gap-2 px-8 py-2.5 rounded-xl bg-[#006194] text-white font-semibold cursor-pointer disabled:opacity-50">
-                <Save className="w-4 h-4" />
+                <LuSave className="w-4 h-4" />
                 {loading ? 'Saving...' : 'Save Changes'}
               </button>
             </div>

@@ -1,10 +1,7 @@
 'use client';
 
 import { motion } from 'motion/react';
-import {
-  Users, FileText, IndianRupee, Wrench, Calculator, Video,
-  ArrowRight, Globe, Phone,
-} from 'lucide-react';
+import { LuUsers, LuFileText, LuIndianRupee, LuWrench, LuCalculator, LuVideo, LuArrowRight, LuGlobe, LuPhone } from 'react-icons/lu';
 import { fadeInUp, staggerContainer } from '@/lib/animations';
 import { useAnimateInView } from '@/hooks/useAnimateInView';
 import { GlassCard } from '@/components/ui/GlassCard';
@@ -13,7 +10,7 @@ import { WHATSAPP_URL } from '@/lib/constants';
 import type { NRIService } from '@/types';
 
 const iconMap: Record<string, React.ElementType> = {
-  Users, FileText, IndianRupee, Wrench, Calculator, Video,
+  LuUsers, LuFileText, LuIndianRupee, LuWrench, LuCalculator, LuVideo,
 };
 
 const howItWorks = [
@@ -51,7 +48,7 @@ export function NRIServicesContent({ services }: NRIServicesContentProps) {
             className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
           >
             {services.map((service) => {
-              const Icon = iconMap[service.icon] || Globe;
+              const Icon = iconMap[service.icon] || LuGlobe;
               return (
                 <motion.div key={service.title} variants={fadeInUp}>
                   <GlassCard className="h-full" whileHover={{ y: -4 }}>
@@ -105,7 +102,7 @@ export function NRIServicesContent({ services }: NRIServicesContentProps) {
       <section className="py-12 md:py-16">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <GlassCard gradient hover={false} className="py-12">
-            <Globe className="w-12 h-12 mx-auto text-[#006194] mb-4" />
+            <LuGlobe className="w-12 h-12 mx-auto text-[#006194] mb-4" />
             <h2 className="text-2xl md:text-3xl font-bold font-[family-name:var(--font-heading)] mb-3">
               Ready to Get Started?
             </h2>
@@ -119,7 +116,7 @@ export function NRIServicesContent({ services }: NRIServicesContentProps) {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-[#006194] text-white font-semibold shadow-lg shadow-[#006194]/25 hover:shadow-[#006194]/40 transition-all duration-300 hover:-translate-y-0.5"
               >
-                <Phone className="w-4 h-4" />
+                <LuPhone className="w-4 h-4" />
                 Contact Us on WhatsApp
               </a>
             </div>

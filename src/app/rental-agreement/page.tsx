@@ -1,9 +1,7 @@
 'use client';
 
 import { motion } from 'motion/react';
-import {
-  FileText, ShieldCheck, AlertCircle, CheckCircle2, ArrowRight, Phone,
-} from 'lucide-react';
+import { LuFileText, LuShieldCheck, LuCircleAlert, LuCircleCheckBig, LuArrowRight, LuPhone } from 'react-icons/lu';
 import { fadeInUp, staggerContainer } from '@/lib/animations';
 import { useAnimateInView } from '@/hooks/useAnimateInView';
 import { PageHero } from '@/components/layout/PageHero';
@@ -74,7 +72,7 @@ export default function RentalAgreementPage() {
               <div className="space-y-3">
                 {mustInclude.map((item, i) => (
                   <div key={i} className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0 mt-0.5" />
+                    <LuCircleCheckBig className="w-5 h-5 text-green-500 shrink-0 mt-0.5" />
                     <span className="text-[var(--muted)]">{item}</span>
                   </div>
                 ))}
@@ -82,7 +80,7 @@ export default function RentalAgreementPage() {
             </div>
             <GlassCard gradient hover={false} className="p-8">
               <div className="flex items-center gap-3 mb-4">
-                <AlertCircle className="w-6 h-6 text-[#006194]" />
+                <LuCircleAlert className="w-6 h-6 text-[#006194]" />
                 <h3 className="text-lg font-semibold font-[family-name:var(--font-heading)]">
                   Important Note
                 </h3>
@@ -165,9 +163,9 @@ export default function RentalAgreementPage() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-[#006194] text-white font-semibold shadow-lg shadow-[#006194]/25 hover:shadow-[#006194]/40 transition-all duration-300 hover:-translate-y-0.5"
           >
-            <FileText className="w-4 h-4" />
+            <LuFileText className="w-4 h-4" />
             Get Agreement Assistance
-            <ArrowRight className="w-4 h-4" />
+            <LuArrowRight className="w-4 h-4" />
           </a>
         </div>
       </section>

@@ -1,64 +1,55 @@
 'use client';
 
 import { motion } from 'motion/react';
-import {
-  BadgeIndianRupee,
-  ShieldCheck,
-  Sparkles,
-  UserCheck,
-  CreditCard,
-  MessageCircle,
-  Globe,
-  BookOpen,
-} from 'lucide-react';
+import { LuBadgeIndianRupee, LuShieldCheck, LuSparkles, LuUserCheck, LuCreditCard, LuMessageCircle, LuGlobe, LuBookOpen } from 'react-icons/lu';
 import { fadeInUp, staggerContainer } from '@/lib/animations';
 import { useAnimateInView } from '@/hooks/useAnimateInView';
 
 const features = [
   {
-    icon: BadgeIndianRupee,
+    icon: LuBadgeIndianRupee,
     title: 'Zero Brokerage',
     description: 'No hidden fees or commissions. What you see is what you pay.',
     color: 'bg-blue-50 text-[#006194]',
   },
   {
-    icon: ShieldCheck,
+    icon: LuShieldCheck,
     title: 'Verified Listings',
     description: 'Every property is physically verified by our team before listing.',
     color: 'bg-emerald-50 text-emerald-600',
   },
   {
-    icon: Sparkles,
+    icon: LuSparkles,
     title: 'AI Property Matching',
     description: 'Our AI analyzes your preferences to find the perfect home match.',
     color: 'bg-purple-50 text-purple-600',
   },
   {
-    icon: UserCheck,
+    icon: LuUserCheck,
     title: 'Tenant KYC',
     description: 'Background-verified tenants for owner peace of mind.',
     color: 'bg-amber-50 text-amber-600',
   },
   {
-    icon: CreditCard,
+    icon: LuCreditCard,
     title: 'Online Token Payment',
     description: 'Secure online payments with instant confirmation receipts.',
     color: 'bg-sky-50 text-sky-600',
   },
   {
-    icon: MessageCircle,
+    icon: LuMessageCircle,
     title: 'WhatsApp Notifications',
     description: 'Real-time updates on viewings, bookings, and payments via WhatsApp.',
     color: 'bg-green-50 text-green-600',
   },
   {
-    icon: Globe,
+    icon: LuGlobe,
     title: 'NRI Services',
     description: 'End-to-end property management for overseas property owners.',
     color: 'bg-indigo-50 text-indigo-600',
   },
   {
-    icon: BookOpen,
+    icon: LuBookOpen,
     title: 'Blog & Community',
     description: 'Expert area guides, rental tips, and tenant resources.',
     color: 'bg-rose-50 text-rose-600',

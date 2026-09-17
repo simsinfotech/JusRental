@@ -1,5 +1,5 @@
 import { createSupabaseServer } from '@/lib/supabase-ssr';
-import { FileText, Download, Clock, CheckCircle } from 'lucide-react';
+import { LuFileText, LuDownload, LuClock, LuCircleCheck } from 'react-icons/lu';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { Badge } from '@/components/ui/Badge';
 
@@ -19,7 +19,7 @@ export default async function OwnerAgreementPage() {
   return (
     <div>
       <div className="flex items-center gap-3 mb-8">
-        <FileText className="w-6 h-6 text-[#006194]" />
+        <LuFileText className="w-6 h-6 text-[#006194]" />
         <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">Rental Agreements</h1>
       </div>
 
@@ -40,7 +40,7 @@ export default async function OwnerAgreementPage() {
               <div className="mt-4 pt-4 border-t border-glass-border">
                 <div className="flex items-center gap-6 text-sm text-[var(--muted)]">
                   <div className="flex items-center gap-1.5">
-                    <Clock className="w-3.5 h-3.5" />
+                    <LuClock className="w-3.5 h-3.5" />
                     <span>Agreement not yet generated</span>
                   </div>
                 </div>
@@ -54,7 +54,7 @@ export default async function OwnerAgreementPage() {
         </div>
       ) : (
         <GlassCard hover={false} className="text-center py-12">
-          <FileText className="w-12 h-12 mx-auto text-[var(--muted)] mb-4" />
+          <LuFileText className="w-12 h-12 mx-auto text-[var(--muted)] mb-4" />
           <h3 className="text-lg font-semibold mb-2">No agreements yet</h3>
           <p className="text-[var(--muted)]">
             Rental agreements will appear here once you have listed properties and confirmed tenants.
@@ -68,9 +68,9 @@ export default async function OwnerAgreementPage() {
         </h3>
         <div className="space-y-3">
           {[
-            { icon: CheckCircle, text: 'Tenant confirms interest and completes verification' },
-            { icon: FileText, text: 'Digital rental agreement is generated with all terms' },
-            { icon: Download, text: 'Both parties sign digitally — download anytime' },
+            { icon: LuCircleCheck, text: 'Tenant confirms interest and completes verification' },
+            { icon: LuFileText, text: 'Digital rental agreement is generated with all terms' },
+            { icon: LuDownload, text: 'Both parties sign digitally — download anytime' },
           ].map((step, i) => (
             <div key={i} className="flex items-start gap-3 text-sm text-[var(--muted)]">
               <step.icon className="w-4 h-4 mt-0.5 text-[#006194] shrink-0" />

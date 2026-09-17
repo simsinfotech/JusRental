@@ -3,25 +3,19 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import {
-  MapPin, Calendar, Home, Compass, Users, ChevronRight, Share2, Heart,
-  Wifi, Dumbbell, Car, Zap, Waves, Shield, Droplets, AirVent, ArrowUpDown,
-  School, Hospital, Train, ShoppingBag, TreePine, UtensilsCrossed, MessageCircle,
-  ShieldCheck, Camera, ExternalLink, Phone, CheckCircle2, Sparkles, Maximize2,
-  Building2, Clock,
-} from 'lucide-react';
+import { LuMapPin, LuCalendar, LuHouse, LuCompass, LuUsers, LuChevronRight, LuShare2, LuHeart, LuWifi, LuDumbbell, LuCar, LuZap, LuWaves, LuShield, LuDroplets, LuAirVent, LuArrowUpDown, LuSchool, LuHospital, LuTrainFront, LuShoppingBag, LuTreePine, LuUtensilsCrossed, LuMessageCircle, LuShieldCheck, LuCamera, LuExternalLink, LuPhone, LuCircleCheckBig, LuSparkles, LuMaximize2, LuBuilding2, LuClock } from 'react-icons/lu';
 import { getPropertyWhatsAppURL, WHATSAPP_NUMBER } from '@/lib/constants';
 import { PropertyCard } from '@/components/properties/PropertyCard';
 import type { Property } from '@/types';
 
 const amenityIcons: Record<string, React.ElementType> = {
-  WiFi: Wifi, Gym: Dumbbell, Parking: Car, 'Power Backup': Zap,
-  Pool: Waves, Security: Shield, 'Water Purifier': Droplets, AC: AirVent, Lift: ArrowUpDown,
+  WiFi: LuWifi, Gym: LuDumbbell, Parking: LuCar, 'Power Backup': LuZap,
+  Pool: LuWaves, Security: LuShield, 'Water Purifier': LuDroplets, AC: LuAirVent, Lift: LuArrowUpDown,
 };
 
 const nearbyIcons: Record<string, React.ElementType> = {
-  school: School, hospital: Hospital, metro: Train, mall: ShoppingBag,
-  park: TreePine, restaurant: UtensilsCrossed,
+  school: LuSchool, hospital: LuHospital, metro: LuTrainFront, mall: LuShoppingBag,
+  park: LuTreePine, restaurant: LuUtensilsCrossed,
 };
 
 interface PropertyDetailProps {
@@ -60,13 +54,13 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-4">
           <nav className="flex items-center gap-1.5 text-sm text-[#3f4850] flex-wrap">
             <Link href="/" className="hover:text-[#006194] transition-colors">Home</Link>
-            <ChevronRight className="w-3.5 h-3.5 text-[#707881]" />
+            <LuChevronRight className="w-3.5 h-3.5 text-[#707881]" />
             <Link href="/properties" className="hover:text-[#006194] transition-colors">Properties</Link>
-            <ChevronRight className="w-3.5 h-3.5 text-[#707881]" />
+            <LuChevronRight className="w-3.5 h-3.5 text-[#707881]" />
             <span className="text-[#3f4850]">Bangalore</span>
-            <ChevronRight className="w-3.5 h-3.5 text-[#707881]" />
+            <LuChevronRight className="w-3.5 h-3.5 text-[#707881]" />
             <span className="text-[#3f4850]">{property.area}</span>
-            <ChevronRight className="w-3.5 h-3.5 text-[#707881]" />
+            <LuChevronRight className="w-3.5 h-3.5 text-[#707881]" />
             <span className="text-[#131b2e] font-semibold truncate max-w-xs">{property.title}</span>
           </nav>
           <div className="flex items-center gap-2">
@@ -74,7 +68,7 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white hover:bg-slate-50 text-[#3f4850] text-sm font-medium shadow-sm transition-all cursor-pointer"
               type="button"
             >
-              <Share2 className="w-4 h-4" />
+              <LuShare2 className="w-4 h-4" />
               Share
             </button>
             <button
@@ -82,7 +76,7 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
               className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white hover:bg-slate-50 text-sm font-medium shadow-sm transition-all cursor-pointer ${isSaved ? 'text-red-500' : 'text-[#131b2e]'}`}
               type="button"
             >
-              <Heart className={`w-4 h-4 ${isSaved ? 'fill-red-500 text-red-500' : ''}`} />
+              <LuHeart className={`w-4 h-4 ${isSaved ? 'fill-red-500 text-red-500' : ''}`} />
               {isSaved ? 'Saved' : 'Save'}
             </button>
             {similar.length > 0 && (
@@ -90,7 +84,7 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
                 href="#similar-properties-section"
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#cce5ff] text-[#004b73] text-sm font-medium hover:bg-[#93ccff] transition-colors"
               >
-                <Sparkles className="w-4 h-4" />
+                <LuSparkles className="w-4 h-4" />
                 Similar Homes
               </a>
             )}
@@ -104,7 +98,7 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
             <div className="flex items-center flex-wrap gap-2 mb-1">
               {property.verified && (
                 <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#DCFCE7] text-[#16A34A] text-[11px] font-bold uppercase tracking-wider">
-                  <ShieldCheck className="w-3.5 h-3.5" />
+                  <LuShieldCheck className="w-3.5 h-3.5" />
                   Verified by JusRental
                 </span>
               )}
@@ -125,7 +119,7 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
             </h1>
             {/* Location */}
             <div className="flex items-center gap-1.5 text-[#3f4850] text-sm">
-              <MapPin className="w-4 h-4 text-[#006194]" />
+              <LuMapPin className="w-4 h-4 text-[#006194]" />
               <span>{property.location}</span>
             </div>
           </div>
@@ -158,7 +152,7 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
               <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/70 via-transparent to-transparent pointer-events-none" />
               {property.verified && (
                 <div className="absolute top-3 left-3 flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#16A34A] text-white text-[11px] font-bold uppercase tracking-wider shadow-md">
-                  <ShieldCheck className="w-3.5 h-3.5" />
+                  <LuShieldCheck className="w-3.5 h-3.5" />
                   Verified
                 </div>
               )}
@@ -189,7 +183,7 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
               className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white text-[#131b2e] text-sm font-medium hover:bg-slate-50 transition-all shadow-lg cursor-pointer"
               type="button"
             >
-              <Camera className="w-4 h-4" />
+              <LuCamera className="w-4 h-4" />
               View all {property.images.length} Photos
             </button>
           </div>
@@ -208,12 +202,12 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
                 )}
               </h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                <SpecCard icon={<Building2 className="w-5 h-5" />} label="Configuration" value={`${property.bhk} BHK ${property.type}`} />
-                <SpecCard icon={<Maximize2 className="w-5 h-5" />} label="Super Built-up" value={`${property.sqft} sq.ft`} />
-                <SpecCard icon={<Compass className="w-5 h-5" />} label="Facing" value={`${property.facing} Facing`} />
-                <SpecCard icon={<ArrowUpDown className="w-5 h-5" />} label="Floor Level" value={`Floor ${property.floor}`} />
-                <SpecCard icon={<Users className="w-5 h-5" />} label="Tenant Preference" value={property.sharingType} sub="Corporate Leases OK" />
-                <SpecCard icon={<Calendar className="w-5 h-5" />} label="Listed Date" value={property.postedDate} sub={property.available ? 'Immediate Handover' : undefined} subColor="text-[#16A34A]" />
+                <SpecCard icon={<LuBuilding2 className="w-5 h-5" />} label="Configuration" value={`${property.bhk} BHK ${property.type}`} />
+                <SpecCard icon={<LuMaximize2 className="w-5 h-5" />} label="Super Built-up" value={`${property.sqft} sq.ft`} />
+                <SpecCard icon={<LuCompass className="w-5 h-5" />} label="Facing" value={`${property.facing} Facing`} />
+                <SpecCard icon={<LuArrowUpDown className="w-5 h-5" />} label="Floor Level" value={`Floor ${property.floor}`} />
+                <SpecCard icon={<LuUsers className="w-5 h-5" />} label="Tenant Preference" value={property.sharingType} sub="Corporate Leases OK" />
+                <SpecCard icon={<LuCalendar className="w-5 h-5" />} label="Listed Date" value={property.postedDate} sub={property.available ? 'Immediate Handover' : undefined} subColor="text-[#16A34A]" />
               </div>
             </section>
 
@@ -256,7 +250,7 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
                   return (
                     <div key={amenity} className="flex items-center gap-3 p-3 rounded-xl bg-[#F8FAFC]">
                       <div className="w-9 h-9 rounded-lg bg-[#cce5ff] flex items-center justify-center text-[#006194] shrink-0">
-                        {Icon ? <Icon className="w-5 h-5" /> : <Home className="w-5 h-5" />}
+                        {Icon ? <Icon className="w-5 h-5" /> : <LuHouse className="w-5 h-5" />}
                       </div>
                       <span className="text-sm font-semibold text-[#131b2e]">{amenity}</span>
                     </div>
@@ -280,14 +274,14 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
                     className="inline-flex items-center gap-1 text-[#006194] text-sm font-medium hover:underline"
                   >
                     Open in Maps
-                    <ExternalLink className="w-3.5 h-3.5" />
+                    <LuExternalLink className="w-3.5 h-3.5" />
                   </a>
                 </div>
 
                 {/* Nearby Landmarks */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
                   {property.nearbyPlaces.map((place) => {
-                    const Icon = nearbyIcons[place.type] || MapPin;
+                    const Icon = nearbyIcons[place.type] || LuMapPin;
                     return (
                       <div key={place.name} className="p-2.5 rounded-lg bg-[#F8FAFC] flex items-center justify-between">
                         <div className="flex items-center gap-2">
@@ -306,7 +300,7 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
             <section className="bg-gradient-to-br from-white via-white to-[#DCFCE7]/40 rounded-2xl p-5 md:p-6 shadow-sm">
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-2xl bg-[#DCFCE7] flex items-center justify-center text-[#16A34A] shrink-0">
-                  <ShieldCheck className="w-7 h-7" />
+                  <LuShieldCheck className="w-7 h-7" />
                 </div>
                 <div className="flex flex-col gap-2">
                   <div>
@@ -339,7 +333,7 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
                     className="text-[#006194] text-sm font-medium hover:underline inline-flex items-center gap-0.5"
                   >
                     View All
-                    <ChevronRight className="w-4 h-4" />
+                    <LuChevronRight className="w-4 h-4" />
                   </Link>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -359,7 +353,7 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
                 {/* Savings Ribbon */}
                 <div className="bg-[#DCFCE7] text-[#16A34A] px-3.5 py-1.5 rounded-xl text-[11px] font-bold flex items-center justify-between mb-4">
                   <span className="flex items-center gap-1.5">
-                    <CheckCircle2 className="w-4 h-4" />
+                    <LuCircleCheckBig className="w-4 h-4" />
                     You save ₹{property.price.toLocaleString()} Brokerage
                   </span>
                   <span className="uppercase tracking-wider">Zero Broker</span>
@@ -396,7 +390,7 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
 
                 {/* Token Refund Note */}
                 <div className="flex items-start gap-2 p-2.5 rounded-lg bg-[#f2f3ff] text-[#3f4850] text-sm mb-4">
-                  <ShieldCheck className="w-4 h-4 text-[#006194] shrink-0 mt-0.5" />
+                  <LuShieldCheck className="w-4 h-4 text-[#006194] shrink-0 mt-0.5" />
                   <span>100% money-back token refund if this apartment is not precisely as pictured when you visit.</span>
                 </div>
 
@@ -464,12 +458,12 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
                     </>
                   ) : visitState === 'done' ? (
                     <>
-                      <CheckCircle2 className="w-5 h-5" />
+                      <LuCircleCheckBig className="w-5 h-5" />
                       Visit Requested!
                     </>
                   ) : (
                     <>
-                      <Calendar className="w-5 h-5" />
+                      <LuCalendar className="w-5 h-5" />
                       Schedule a Free Physical Visit
                     </>
                   )}
@@ -482,7 +476,7 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
                   rel="noopener noreferrer"
                   className="w-full py-2.5 px-4 rounded-xl bg-[#DCFCE7] text-[#16A34A] font-semibold flex items-center justify-center gap-2 hover:bg-[#bbf7d0] transition-colors"
                 >
-                  <MessageCircle className="w-5 h-5" />
+                  <LuMessageCircle className="w-5 h-5" />
                   Chat with Property Concierge
                 </a>
 
@@ -490,7 +484,7 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
                 {visitState === 'done' && (
                   <div className="mt-3 p-3 rounded-xl bg-[#DCFCE7] text-[#16A34A] text-sm">
                     <div className="flex items-center gap-1.5 font-bold">
-                      <CheckCircle2 className="w-4 h-4" />
+                      <LuCircleCheckBig className="w-4 h-4" />
                       Visit request scheduled!
                     </div>
                     <p className="text-[#3f4850] mt-1 text-xs">
@@ -512,7 +506,7 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
                   <span className="text-[11px] text-[#3f4850] uppercase font-semibold">Assigned Concierge</span>
                   <span className="text-sm font-semibold text-[#131b2e] truncate">JusRental Team</span>
                   <span className="text-xs text-[#16A34A] flex items-center gap-1">
-                    <ShieldCheck className="w-3 h-3" />
+                    <LuShieldCheck className="w-3 h-3" />
                     Verified Partner
                   </span>
                 </div>
@@ -520,14 +514,14 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
                   href={`tel:+${WHATSAPP_NUMBER}`}
                   className="w-10 h-10 rounded-xl bg-[#F1F5F9] hover:bg-slate-200 flex items-center justify-center text-[#006194] transition-colors"
                 >
-                  <Phone className="w-5 h-5" />
+                  <LuPhone className="w-5 h-5" />
                 </a>
               </div>
 
               {/* Safety Capsule */}
               <div className="p-3 rounded-xl bg-[#f2f3ff] flex items-center justify-between text-[#3f4850] text-sm">
                 <div className="flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-[#006194]" />
+                  <LuShieldCheck className="w-4 h-4 text-[#006194]" />
                   <span>100% Verified Ownership Papers</span>
                 </div>
                 <Link href="/contact" className="text-[11px] text-[#006194] font-bold hover:underline">
@@ -568,7 +562,7 @@ function SpecCard({ icon, label, value, sub, subColor }: {
 function GuaranteeItem({ text }: { text: string }) {
   return (
     <div className="flex items-center gap-2 text-sm text-[#131b2e]">
-      <CheckCircle2 className="w-4 h-4 text-[#16A34A] shrink-0" />
+      <LuCircleCheckBig className="w-4 h-4 text-[#16A34A] shrink-0" />
       <span>{text}</span>
     </div>
   );

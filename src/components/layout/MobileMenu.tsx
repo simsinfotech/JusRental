@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from 'motion/react';
 import Link from 'next/link';
-import { X, User, LogIn } from 'lucide-react';
+import { LuX, LuUser, LuLogIn } from 'react-icons/lu';
 import { NAV_LINKS, WHATSAPP_URL } from '@/lib/constants';
 import { Button } from '@/components/ui/Button';
 
@@ -38,7 +38,7 @@ export function MobileMenu({ isOpen, onClose, isLoggedIn }: MobileMenuProps) {
               className="self-end p-2 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors cursor-pointer"
               aria-label="Close menu"
             >
-              <X className="w-5 h-5" />
+              <LuX className="w-5 h-5" />
             </button>
             <nav className="mt-8 flex flex-col gap-2">
               {NAV_LINKS.map((link) => (
@@ -59,7 +59,7 @@ export function MobileMenu({ isOpen, onClose, isLoggedIn }: MobileMenuProps) {
                     onClick={onClose}
                     className="flex items-center gap-3 px-4 py-3 rounded-xl text-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors text-[#006194]"
                   >
-                    <User className="w-5 h-5" />
+                    <LuUser className="w-5 h-5" />
                     My Portal
                   </Link>
                 ) : (
@@ -68,7 +68,7 @@ export function MobileMenu({ isOpen, onClose, isLoggedIn }: MobileMenuProps) {
                     onClick={onClose}
                     className="flex items-center gap-3 px-4 py-3 rounded-xl text-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
                   >
-                    <LogIn className="w-5 h-5" />
+                    <LuLogIn className="w-5 h-5" />
                     Login
                   </Link>
                 )}

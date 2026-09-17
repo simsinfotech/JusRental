@@ -4,19 +4,16 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
-import {
-  LayoutDashboard, Home, Users, FileText, Search, Settings,
-  LogOut, Menu, X, ChevronRight, Shield,
-} from 'lucide-react';
+import { LuLayoutDashboard, LuHouse, LuUsers, LuFileText, LuSearch, LuSettings, LuLogOut, LuMenu, LuX, LuChevronRight, LuShield } from 'react-icons/lu';
 import { createSupabaseBrowser } from '@/lib/supabase-browser';
 
 const sidebarLinks = [
-  { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/admin/properties', label: 'Properties', icon: Home },
-  { href: '/admin/leads', label: 'Leads', icon: Users },
-  { href: '/admin/blog', label: 'Blog', icon: FileText },
-  { href: '/admin/seo', label: 'SEO', icon: Search },
-  { href: '/admin/settings', label: 'Settings', icon: Settings },
+  { href: '/admin', label: 'Dashboard', icon: LuLayoutDashboard },
+  { href: '/admin/properties', label: 'Properties', icon: LuHouse },
+  { href: '/admin/leads', label: 'Leads', icon: LuUsers },
+  { href: '/admin/blog', label: 'Blog', icon: LuFileText },
+  { href: '/admin/seo', label: 'SEO', icon: LuSearch },
+  { href: '/admin/settings', label: 'Settings', icon: LuSettings },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -46,10 +43,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {/* Mobile header */}
       <div className="lg:hidden flex items-center justify-between p-4 border-b border-glass-border">
         <button onClick={() => setSidebarOpen(true)} className="p-2 rounded-lg hover:bg-surface-light cursor-pointer">
-          <Menu className="w-5 h-5" />
+          <LuMenu className="w-5 h-5" />
         </button>
         <Link href="/admin" className="flex items-center gap-2">
-          <Shield className="w-5 h-5 text-red-500" />
+          <LuShield className="w-5 h-5 text-red-500" />
           <span className="font-semibold font-[family-name:var(--font-heading)]">Admin Panel</span>
         </Link>
         <div className="w-9" />
@@ -72,7 +69,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               </div>
             </Link>
             <button onClick={() => setSidebarOpen(false)} className="lg:hidden p-1 rounded-lg hover:bg-surface-light cursor-pointer">
-              <X className="w-4 h-4" />
+              <LuX className="w-4 h-4" />
             </button>
           </div>
 
@@ -92,7 +89,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 >
                   <link.icon className="w-4 h-4" />
                   {link.label}
-                  {isActive && <ChevronRight className="w-3 h-3 ml-auto" />}
+                  {isActive && <LuChevronRight className="w-3 h-3 ml-auto" />}
                 </Link>
               );
             })}
@@ -112,7 +109,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               onClick={handleLogout}
               className="w-full flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-red-500 hover:bg-red-500/10 transition-all cursor-pointer"
             >
-              <LogOut className="w-4 h-4" />
+              <LuLogOut className="w-4 h-4" />
               Sign Out
             </button>
           </div>

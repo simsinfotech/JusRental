@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Users, Phone, Mail, MessageSquare, Calendar, Download, User } from 'lucide-react';
+import { LuUsers, LuPhone, LuMail, LuMessageSquare, LuCalendar, LuDownload, LuUser } from 'react-icons/lu';
 import { StatusBadge } from '@/components/admin/StatusBadge';
 import { createSupabaseBrowser } from '@/lib/supabase-browser';
 
@@ -77,14 +77,14 @@ export default function AdminLeadsPage() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center gap-3">
-          <Users className="w-6 h-6 text-red-600" />
+          <LuUsers className="w-6 h-6 text-red-600" />
           <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">Leads</h1>
         </div>
         <button
           onClick={exportCSV}
           className="flex items-center gap-2 px-4 py-2 rounded-xl border border-glass-border text-sm font-medium hover:bg-surface-light transition-all cursor-pointer"
         >
-          <Download className="w-4 h-4" />
+          <LuDownload className="w-4 h-4" />
           Export CSV
         </button>
       </div>
@@ -114,7 +114,7 @@ export default function AdminLeadsPage() {
               <div className="flex items-start justify-between mb-3">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-[#006194]/10 flex items-center justify-center">
-                    <User className="w-5 h-5 text-[#006194]" />
+                    <LuUser className="w-5 h-5 text-[#006194]" />
                   </div>
                   <div>
                     <p className="font-semibold">{lead.name as string}</p>
@@ -131,25 +131,25 @@ export default function AdminLeadsPage() {
               <div className="grid sm:grid-cols-2 gap-2 text-sm mb-3">
                 {lead.phone ? (
                   <div className="flex items-center gap-2 text-[var(--muted)]">
-                    <Phone className="w-3.5 h-3.5" />
+                    <LuPhone className="w-3.5 h-3.5" />
                     <a href={`tel:${lead.phone}`} className="hover:text-[#006194]">{String(lead.phone)}</a>
                   </div>
                 ) : null}
                 {lead.email ? (
                   <div className="flex items-center gap-2 text-[var(--muted)]">
-                    <Mail className="w-3.5 h-3.5" />
+                    <LuMail className="w-3.5 h-3.5" />
                     <a href={`mailto:${lead.email}`} className="hover:text-[#006194]">{String(lead.email)}</a>
                   </div>
                 ) : null}
                 {lead.preferred_date ? (
                   <div className="flex items-center gap-2 text-[var(--muted)]">
-                    <Calendar className="w-3.5 h-3.5" />
+                    <LuCalendar className="w-3.5 h-3.5" />
                     {String(lead.preferred_date)}{lead.preferred_time ? ` at ${String(lead.preferred_time)}` : ''}
                   </div>
                 ) : null}
                 {lead.subject ? (
                   <div className="flex items-center gap-2 text-[var(--muted)]">
-                    <MessageSquare className="w-3.5 h-3.5" />
+                    <LuMessageSquare className="w-3.5 h-3.5" />
                     {String(lead.subject)}
                   </div>
                 ) : null}
@@ -189,7 +189,7 @@ export default function AdminLeadsPage() {
           ))
         ) : (
           <div className="glass-card p-8 text-center">
-            <Users className="w-12 h-12 mx-auto text-[var(--muted)] mb-3" />
+            <LuUsers className="w-12 h-12 mx-auto text-[var(--muted)] mb-3" />
             <p className="text-[var(--muted)]">No {tab} yet</p>
           </div>
         )}

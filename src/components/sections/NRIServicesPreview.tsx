@@ -2,22 +2,15 @@
 
 import Link from 'next/link';
 import { motion } from 'motion/react';
-import {
-  ArrowRight,
-  Users,
-  FileText,
-  IndianRupee,
-  Wrench,
-  Globe,
-} from 'lucide-react';
+import { LuArrowRight, LuUsers, LuFileText, LuIndianRupee, LuWrench, LuGlobe } from 'react-icons/lu';
 import { fadeInUp, staggerContainer } from '@/lib/animations';
 import { useAnimateInView } from '@/hooks/useAnimateInView';
 
 const highlights = [
-  { icon: Users, title: 'Tenant Discovery', desc: 'Verified tenants from our 5,000+ pool', color: 'bg-blue-50 text-[#006194]' },
-  { icon: FileText, title: 'Legal Support', desc: 'Rental agreements & registration', color: 'bg-emerald-50 text-emerald-600' },
-  { icon: IndianRupee, title: 'Rent Collection', desc: 'Automated monthly transfers', color: 'bg-amber-50 text-amber-600' },
-  { icon: Wrench, title: 'Maintenance', desc: 'Property upkeep & inspections', color: 'bg-purple-50 text-purple-600' },
+  { icon: LuUsers, title: 'Tenant Discovery', desc: 'Verified tenants from our 5,000+ pool', color: 'bg-blue-50 text-[#006194]' },
+  { icon: LuFileText, title: 'Legal Support', desc: 'Rental agreements & registration', color: 'bg-emerald-50 text-emerald-600' },
+  { icon: LuIndianRupee, title: 'Rent Collection', desc: 'Automated monthly transfers', color: 'bg-amber-50 text-amber-600' },
+  { icon: LuWrench, title: 'Maintenance', desc: 'Property upkeep & inspections', color: 'bg-purple-50 text-purple-600' },
 ];
 
 export function NRIServicesPreview() {
@@ -29,7 +22,7 @@ export function NRIServicesPreview() {
         {/* Section Header */}
         <div className="text-center mb-12">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#006194]/10 text-[#006194] text-sm font-medium mb-4">
-            <Globe className="w-3.5 h-3.5" />
+            <LuGlobe className="w-3.5 h-3.5" />
             NRI Property Management
           </span>
           <h2 className="text-3xl md:text-4xl font-bold font-[family-name:var(--font-heading)] text-[#131b2e] mb-4">
@@ -68,9 +61,9 @@ export function NRIServicesPreview() {
             href="/nri-services"
             className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-[#006194] hover:bg-[#005080] text-white font-semibold shadow-lg shadow-[#006194]/20 transition-all duration-300 hover:-translate-y-0.5"
           >
-            <Globe className="w-4 h-4" />
+            <LuGlobe className="w-4 h-4" />
             Explore NRI Services
-            <ArrowRight className="w-4 h-4" />
+            <LuArrowRight className="w-4 h-4" />
           </Link>
         </div>
       </div>

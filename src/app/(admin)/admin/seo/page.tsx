@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Search, Save, AlertCircle, CheckCircle, Globe, FileText, Code } from 'lucide-react';
+import { LuSearch, LuSave, LuCircleAlert, LuCircleCheck, LuGlobe, LuFileText, LuCode } from 'react-icons/lu';
 import { createSupabaseBrowser } from '@/lib/supabase-browser';
 
 interface SeoSettings {
@@ -105,7 +105,7 @@ export default function AdminSEOPage() {
   return (
     <div>
       <div className="flex items-center gap-3 mb-8">
-        <Search className="w-6 h-6 text-red-600" />
+        <LuSearch className="w-6 h-6 text-red-600" />
         <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">SEO Management</h1>
       </div>
 
@@ -113,7 +113,7 @@ export default function AdminSEOPage() {
         <div className={`mb-4 flex items-center gap-2 p-3 rounded-xl text-sm ${
           message.type === 'error' ? 'bg-red-500/10 text-red-600' : 'bg-green-500/10 text-green-600'
         }`}>
-          {message.type === 'error' ? <AlertCircle className="w-4 h-4" /> : <CheckCircle className="w-4 h-4" />}
+          {message.type === 'error' ? <LuCircleAlert className="w-4 h-4" /> : <LuCircleCheck className="w-4 h-4" />}
           {message.text}
         </div>
       )}
@@ -144,7 +144,7 @@ export default function AdminSEOPage() {
               <div className={`w-5 h-5 rounded-full flex items-center justify-center ${
                 score.check ? 'bg-green-500/10 text-green-600' : 'bg-red-500/10 text-red-600'
               }`}>
-                {score.check ? <CheckCircle className="w-3 h-3" /> : <AlertCircle className="w-3 h-3" />}
+                {score.check ? <LuCircleCheck className="w-3 h-3" /> : <LuCircleAlert className="w-3 h-3" />}
               </div>
               <span className="font-medium">{score.label}</span>
               <span className="text-[var(--muted)] ml-auto">{score.detail}</span>
@@ -157,7 +157,7 @@ export default function AdminSEOPage() {
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="glass-card p-6 space-y-4">
           <div className="flex items-center gap-2 mb-2">
-            <Globe className="w-5 h-5 text-[#006194]" />
+            <LuGlobe className="w-5 h-5 text-[#006194]" />
             <h2 className="text-lg font-semibold">Default Meta Tags</h2>
           </div>
 
@@ -190,7 +190,7 @@ export default function AdminSEOPage() {
 
         <div className="glass-card p-6 space-y-4">
           <div className="flex items-center gap-2 mb-2">
-            <Code className="w-5 h-5 text-[#006194]" />
+            <LuCode className="w-5 h-5 text-[#006194]" />
             <h2 className="text-lg font-semibold">Tracking & Verification</h2>
           </div>
 
@@ -214,7 +214,7 @@ export default function AdminSEOPage() {
         <div className="flex justify-end">
           <button type="submit" disabled={loading}
             className="flex items-center gap-2 px-8 py-2.5 rounded-xl bg-gradient-to-r from-red-500 to-orange-500 text-white font-semibold cursor-pointer disabled:opacity-50">
-            <Save className="w-4 h-4" />
+            <LuSave className="w-4 h-4" />
             {loading ? 'Saving...' : 'Save SEO Settings'}
           </button>
         </div>

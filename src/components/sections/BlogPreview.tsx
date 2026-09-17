@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'motion/react';
-import { ArrowRight, Clock, Tag } from 'lucide-react';
+import { LuArrowRight, LuClock, LuTag } from 'react-icons/lu';
 import { fadeInUp, staggerContainer } from '@/lib/animations';
 import { useAnimateInView } from '@/hooks/useAnimateInView';
 import type { BlogPost } from '@/types';
@@ -36,7 +36,7 @@ export function BlogPreview({ posts }: BlogPreviewProps) {
             className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-[#006194] font-medium border border-[#006194]/20 hover:bg-[#006194]/5 transition-all text-sm"
           >
             View All Articles
-            <ArrowRight className="w-4 h-4" />
+            <LuArrowRight className="w-4 h-4" />
           </Link>
         </div>
 
@@ -61,7 +61,7 @@ export function BlogPreview({ posts }: BlogPreviewProps) {
                     />
                     <div className="absolute top-3 left-3">
                       <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-[#006194] text-white">
-                        <Tag className="w-3 h-3" />
+                        <LuTag className="w-3 h-3" />
                         {post.category}
                       </span>
                     </div>
@@ -75,7 +75,7 @@ export function BlogPreview({ posts }: BlogPreviewProps) {
                     </p>
                     <div className="flex items-center gap-3 text-xs text-[#707881]">
                       <span className="flex items-center gap-1">
-                        <Clock className="w-3 h-3" />
+                        <LuClock className="w-3 h-3" />
                         {post.readTime} min read
                       </span>
                       <span>{post.publishedDate}</span>
@@ -94,7 +94,7 @@ export function BlogPreview({ posts }: BlogPreviewProps) {
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-[#006194] font-medium border border-[#006194]/20 hover:bg-[#006194]/5 transition-all text-sm"
           >
             View All Articles
-            <ArrowRight className="w-4 h-4" />
+            <LuArrowRight className="w-4 h-4" />
           </Link>
         </div>
       </div>

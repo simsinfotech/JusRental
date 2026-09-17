@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Settings, Save, AlertCircle, CheckCircle, Globe, MessageCircle, Share2 } from 'lucide-react';
+import { LuSettings, LuSave, LuCircleAlert, LuCircleCheck, LuGlobe, LuMessageCircle, LuShare2 } from 'react-icons/lu';
 import { createSupabaseBrowser } from '@/lib/supabase-browser';
 
 interface GeneralSettings {
@@ -98,7 +98,7 @@ export default function AdminSettingsPage() {
   return (
     <div>
       <div className="flex items-center gap-3 mb-8">
-        <Settings className="w-6 h-6 text-red-600" />
+        <LuSettings className="w-6 h-6 text-red-600" />
         <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">Site Settings</h1>
       </div>
 
@@ -106,7 +106,7 @@ export default function AdminSettingsPage() {
         <div className={`mb-4 flex items-center gap-2 p-3 rounded-xl text-sm ${
           message.type === 'error' ? 'bg-red-500/10 text-red-600' : 'bg-green-500/10 text-green-600'
         }`}>
-          {message.type === 'error' ? <AlertCircle className="w-4 h-4" /> : <CheckCircle className="w-4 h-4" />}
+          {message.type === 'error' ? <LuCircleAlert className="w-4 h-4" /> : <LuCircleCheck className="w-4 h-4" />}
           {message.text}
         </div>
       )}
@@ -115,7 +115,7 @@ export default function AdminSettingsPage() {
         {/* General Settings */}
         <div className="glass-card p-6 space-y-4">
           <div className="flex items-center gap-2 mb-2">
-            <Globe className="w-5 h-5 text-[#006194]" />
+            <LuGlobe className="w-5 h-5 text-[#006194]" />
             <h2 className="text-lg font-semibold">General</h2>
           </div>
 
@@ -136,7 +136,7 @@ export default function AdminSettingsPage() {
 
           <div>
             <label className="text-sm font-medium mb-1.5 block flex items-center gap-2">
-              <MessageCircle className="w-4 h-4 text-green-600" />
+              <LuMessageCircle className="w-4 h-4 text-green-600" />
               WhatsApp Number
             </label>
             <input type="text" value={general.whatsappNumber}
@@ -150,7 +150,7 @@ export default function AdminSettingsPage() {
         {/* Social Links */}
         <div className="glass-card p-6 space-y-4">
           <div className="flex items-center gap-2 mb-2">
-            <Share2 className="w-5 h-5 text-[#006194]" />
+            <LuShare2 className="w-5 h-5 text-[#006194]" />
             <h2 className="text-lg font-semibold">Social Media</h2>
           </div>
 
@@ -189,7 +189,7 @@ export default function AdminSettingsPage() {
         <div className="flex justify-end">
           <button type="submit" disabled={loading}
             className="flex items-center gap-2 px-8 py-2.5 rounded-xl bg-gradient-to-r from-red-500 to-orange-500 text-white font-semibold cursor-pointer disabled:opacity-50">
-            <Save className="w-4 h-4" />
+            <LuSave className="w-4 h-4" />
             {loading ? 'Saving...' : 'Save Settings'}
           </button>
         </div>

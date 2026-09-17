@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { CreditCard } from 'lucide-react';
+import { LuCreditCard } from 'react-icons/lu';
 
 interface PaymentButtonProps {
   amount: number; // in paise (59900 = ₹599)
@@ -112,7 +112,7 @@ export function PaymentButton({
       disabled={loading}
       className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#006194] text-white font-semibold shadow-lg shadow-[#006194]/25 hover:shadow-[#006194]/40 transition-all cursor-pointer disabled:opacity-50"
     >
-      <CreditCard className="w-4 h-4" />
+      <LuCreditCard className="w-4 h-4" />
       {loading ? 'Processing...' : label}
     </button>
   );

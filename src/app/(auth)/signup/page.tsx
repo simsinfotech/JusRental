@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Mail, Lock, User, Phone, UserPlus, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { LuMail, LuLock, LuUser, LuPhone, LuUserPlus, LuCircleAlert, LuCircleCheckBig } from 'react-icons/lu';
 import { createSupabaseBrowser } from '@/lib/supabase-browser';
 
 export default function SignUpPage() {
@@ -57,7 +57,7 @@ export default function SignUpPage() {
     return (
       <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 shadow-2xl text-center">
         <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-green-500/10 flex items-center justify-center">
-          <CheckCircle2 className="w-8 h-8 text-green-400" />
+          <LuCircleCheckBig className="w-8 h-8 text-green-400" />
         </div>
         <h2 className="text-2xl font-bold text-white mb-2">Check Your Email</h2>
         <p className="text-white/60 mb-6">
@@ -88,7 +88,7 @@ export default function SignUpPage() {
 
       {error && (
         <div className="mb-4 flex items-center gap-2 p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
-          <AlertCircle className="w-4 h-4 shrink-0" />
+          <LuCircleAlert className="w-4 h-4 shrink-0" />
           {error}
         </div>
       )}
@@ -97,7 +97,7 @@ export default function SignUpPage() {
         <div>
           <label className="text-sm font-medium text-white/80 mb-1.5 block">Full Name *</label>
           <div className="relative">
-            <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
+            <LuUser className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
             <input
               type="text"
               required
@@ -112,7 +112,7 @@ export default function SignUpPage() {
         <div>
           <label className="text-sm font-medium text-white/80 mb-1.5 block">Email *</label>
           <div className="relative">
-            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
+            <LuMail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
             <input
               type="email"
               required
@@ -127,7 +127,7 @@ export default function SignUpPage() {
         <div>
           <label className="text-sm font-medium text-white/80 mb-1.5 block">Phone *</label>
           <div className="relative">
-            <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
+            <LuPhone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
             <input
               type="tel"
               required
@@ -142,7 +142,7 @@ export default function SignUpPage() {
         <div>
           <label className="text-sm font-medium text-white/80 mb-1.5 block">Password *</label>
           <div className="relative">
-            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
+            <LuLock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
             <input
               type="password"
               required
@@ -160,7 +160,7 @@ export default function SignUpPage() {
           disabled={loading}
           className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-[#006194] text-white font-semibold shadow-lg shadow-[#006194]/25 hover:shadow-[#006194]/40 transition-all duration-300 hover:-translate-y-0.5 cursor-pointer disabled:opacity-50"
         >
-          <UserPlus className="w-4 h-4" />
+          <LuUserPlus className="w-4 h-4" />
           {loading ? 'Creating account...' : 'Create Account'}
         </button>
       </form>

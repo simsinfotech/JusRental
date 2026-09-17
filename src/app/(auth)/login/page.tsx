@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Mail, Lock, LogIn, AlertCircle } from 'lucide-react';
+import { LuMail, LuLock, LuLogIn, LuCircleAlert } from 'react-icons/lu';
 import { createSupabaseBrowser } from '@/lib/supabase-browser';
 import { Suspense } from 'react';
 
@@ -50,7 +50,7 @@ function LoginForm() {
 
       {error && (
         <div className="mb-4 flex items-center gap-2 p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
-          <AlertCircle className="w-4 h-4 shrink-0" />
+          <LuCircleAlert className="w-4 h-4 shrink-0" />
           {error}
         </div>
       )}
@@ -59,7 +59,7 @@ function LoginForm() {
         <div>
           <label className="text-sm font-medium text-white/80 mb-1.5 block">Email</label>
           <div className="relative">
-            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
+            <LuMail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
             <input
               type="email"
               required
@@ -74,7 +74,7 @@ function LoginForm() {
         <div>
           <label className="text-sm font-medium text-white/80 mb-1.5 block">Password</label>
           <div className="relative">
-            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
+            <LuLock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
             <input
               type="password"
               required
@@ -91,7 +91,7 @@ function LoginForm() {
           disabled={loading}
           className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-[#006194] text-white font-semibold shadow-lg shadow-[#006194]/25 hover:shadow-[#006194]/40 transition-all duration-300 hover:-translate-y-0.5 cursor-pointer disabled:opacity-50"
         >
-          <LogIn className="w-4 h-4" />
+          <LuLogIn className="w-4 h-4" />
           {loading ? 'Signing in...' : 'Sign In'}
         </button>
       </form>

@@ -3,7 +3,7 @@
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { motion } from 'motion/react';
-import { MapPin, ArrowRight, Camera, ShieldCheck } from 'lucide-react';
+import { LuMapPin, LuArrowRight, LuCamera, LuShieldCheck } from 'react-icons/lu';
 import { fadeInUp, staggerContainer } from '@/lib/animations';
 import { useAnimateInView } from '@/hooks/useAnimateInView';
 import { ImageGallery } from '@/components/ui/ImageGallery';
@@ -60,7 +60,7 @@ export function PropertyShowcase({ properties }: PropertyShowcaseProps) {
                       {property.verified && (
                         <div className="absolute top-3 left-3 z-10">
                           <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#16A34A] text-white text-xs font-medium">
-                            <ShieldCheck className="w-3 h-3" />
+                            <LuShieldCheck className="w-3 h-3" />
                             Verified
                           </span>
                         </div>
@@ -76,7 +76,7 @@ export function PropertyShowcase({ properties }: PropertyShowcaseProps) {
                       {/* Photo Count */}
                       <div className="absolute bottom-3 right-3 z-10">
                         <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-black/50 backdrop-blur-sm text-white text-xs">
-                          <Camera className="w-3 h-3" />
+                          <LuCamera className="w-3 h-3" />
                           {property.images.length}
                         </span>
                       </div>
@@ -104,7 +104,7 @@ export function PropertyShowcase({ properties }: PropertyShowcaseProps) {
 
                       {/* Location */}
                       <div className="flex items-center gap-1.5 text-sm text-[#3f4850] mb-3">
-                        <MapPin className="w-3.5 h-3.5 flex-shrink-0 text-[#707881]" />
+                        <LuMapPin className="w-3.5 h-3.5 flex-shrink-0 text-[#707881]" />
                         <span className="line-clamp-1">{property.location}</span>
                       </div>
 
@@ -128,7 +128,7 @@ export function PropertyShowcase({ properties }: PropertyShowcaseProps) {
                         </div>
                         <span className="inline-flex items-center gap-1 px-4 py-2 rounded-lg bg-[#006194] text-white text-sm font-medium group-hover:bg-[#005080] transition-colors">
                           View Details
-                          <ArrowRight className="w-3.5 h-3.5" />
+                          <LuArrowRight className="w-3.5 h-3.5" />
                         </span>
                       </div>
                     </div>
@@ -145,7 +145,7 @@ export function PropertyShowcase({ properties }: PropertyShowcaseProps) {
             className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-[#006194] hover:bg-[#005080] text-white font-semibold shadow-lg shadow-[#006194]/20 transition-all duration-300 hover:-translate-y-0.5"
           >
             View All Properties
-            <ArrowRight className="w-4 h-4" />
+            <LuArrowRight className="w-4 h-4" />
           </Link>
         </div>
       </div>

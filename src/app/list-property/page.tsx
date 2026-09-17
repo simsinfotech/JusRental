@@ -2,10 +2,7 @@
 
 import { useState, useActionState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import {
-  Home, Users, Shield, TrendingUp, CheckCircle2, ArrowRight,
-  MessageCircle, Zap, Crown,
-} from 'lucide-react';
+import { LuHouse, LuUsers, LuShield, LuTrendingUp, LuCircleCheckBig, LuArrowRight, LuMessageCircle, LuZap, LuCrown } from 'react-icons/lu';
 import { fadeInUp, staggerContainer } from '@/lib/animations';
 import { useAnimateInView } from '@/hooks/useAnimateInView';
 import { PageHero } from '@/components/layout/PageHero';
@@ -15,19 +12,19 @@ import { WHATSAPP_NUMBER, WHATSAPP_URL } from '@/lib/constants';
 import { submitListProperty, type ListPropertyFormState } from '@/lib/actions/list-property';
 
 const benefits = [
-  { icon: Users, title: '5,000+ Verified Tenants', desc: 'Access our large pool of pre-screened, KYC-verified tenants.' },
-  { icon: Shield, title: 'Tenant Background Check', desc: 'We verify employment, ID, and previous rental history.' },
-  { icon: TrendingUp, title: 'Market-Rate Pricing', desc: 'Our rent estimator ensures you get the best market rate.' },
-  { icon: MessageCircle, title: 'WhatsApp Alerts', desc: 'Get instant notifications when tenants view or enquire about your property.' },
-  { icon: CheckCircle2, title: 'Agreement Support', desc: 'Complete rental agreement drafting and registration assistance.' },
-  { icon: Zap, title: 'Fast Closure', desc: 'Average time to find a tenant: just 7 days.' },
+  { icon: LuUsers, title: '5,000+ Verified Tenants', desc: 'Access our large pool of pre-screened, KYC-verified tenants.' },
+  { icon: LuShield, title: 'Tenant Background Check', desc: 'We verify employment, ID, and previous rental history.' },
+  { icon: LuTrendingUp, title: 'Market-Rate Pricing', desc: 'Our rent estimator ensures you get the best market rate.' },
+  { icon: LuMessageCircle, title: 'WhatsApp Alerts', desc: 'Get instant notifications when tenants view or enquire about your property.' },
+  { icon: LuCircleCheckBig, title: 'Agreement Support', desc: 'Complete rental agreement drafting and registration assistance.' },
+  { icon: LuZap, title: 'Fast Closure', desc: 'Average time to find a tenant: just 7 days.' },
 ];
 
 const plans = [
   {
     name: 'Free Listing',
     price: 'Free',
-    icon: Home,
+    icon: LuHouse,
     features: [
       'Basic property listing',
       'Listed on our platform',
@@ -41,7 +38,7 @@ const plans = [
   {
     name: 'Verified Listing',
     price: '₹599',
-    icon: Crown,
+    icon: LuCrown,
     features: [
       'Professional photo shoot',
       'Verified badge on listing',
@@ -173,7 +170,7 @@ export default function ListPropertyPage() {
                   <ul className="space-y-2.5 mb-6">
                     {plan.features.map((f) => (
                       <li key={f} className="flex items-start gap-2 text-sm">
-                        <CheckCircle2 className={`w-4 h-4 shrink-0 mt-0.5 ${plan.highlighted ? 'text-[#006194]' : 'text-green-500'}`} />
+                        <LuCircleCheckBig className={`w-4 h-4 shrink-0 mt-0.5 ${plan.highlighted ? 'text-[#006194]' : 'text-green-500'}`} />
                         <span className="text-[var(--muted)]">{f}</span>
                       </li>
                     ))}
@@ -190,7 +187,7 @@ export default function ListPropertyPage() {
                     }`}
                   >
                     {plan.cta}
-                    <ArrowRight className="w-4 h-4" />
+                    <LuArrowRight className="w-4 h-4" />
                   </a>
                 </GlassCard>
               </motion.div>
@@ -211,7 +208,7 @@ export default function ListPropertyPage() {
           {submitted ? (
             <GlassCard hover={false} className="text-center py-12">
               <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-green-500/10 flex items-center justify-center">
-                <CheckCircle2 className="w-8 h-8 text-green-500" />
+                <LuCircleCheckBig className="w-8 h-8 text-green-500" />
               </div>
               <h2 className="text-2xl font-bold font-[family-name:var(--font-heading)] mb-2">
                 Request Submitted!
