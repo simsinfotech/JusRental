@@ -1,10 +1,11 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { LuSlidersHorizontal, LuArrowUpDown } from 'react-icons/lu';
 import { PropertyCard } from '@/components/properties/PropertyCard';
 import { PropertyFilters } from '@/components/properties/PropertyFilters';
+import { LeadPopup } from '@/components/properties/LeadPopup';
 import { Pagination } from '@/components/ui/Pagination';
 import type { Property } from '@/types';
 
@@ -43,6 +44,13 @@ export function PropertiesContent({
 }: PropertiesContentProps) {
   const router = useRouter();
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [showLeadPopup, setShowLeadPopup] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem('jusrental_lead_captured')) return;
+    const timer = setTimeout(() => setShowLeadPopup(true), 3000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const filters = initialFilters;
   const sort = initialSort;
@@ -162,6 +170,11 @@ export function PropertiesContent({
           </div>
         </div>
       </div>
+
+      <LeadPopup
+        isOpen={showLeadPopup}
+        onClose={() => setShowLeadPopup(false)}
+      />
     </section>
   );
 }
