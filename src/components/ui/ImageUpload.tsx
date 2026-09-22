@@ -3,6 +3,7 @@
 import { useState, useCallback, useRef } from 'react';
 import { LuUpload, LuX, LuLoader, LuCircleAlert, LuMoveLeft, LuMoveRight, LuStar } from 'react-icons/lu';
 import Image from 'next/image';
+import { createSupabaseBrowser } from '@/lib/supabase-browser';
 
 interface ImageUploadProps {
   images: string[];
@@ -40,40 +41,86 @@ export function ImageUpload({
         .slice(0, remaining);
 
       if (toUpload.length === 0) {
-        setErrorMessage('Please select valid image files (JPG, PNG, WebP, etc.).');
+        setErrorMessage('Please select valid image files (JPG, PNG, WebP, HEIC).');
         return;
       }
 
       setUploading(true);
-      setUploadProgressText(`Uploading ${toUpload.length} image${toUpload.length > 1 ? 's' : ''}...`);
+      setUploadProgressText(`Preparing ${toUpload.length} image${toUpload.length > 1 ? 's' : ''}...`);
+
+      const supabase = createSupabaseBrowser();
+      const newUrls: string[] = [];
+      const errorList: string[] = [];
 
       try {
-        const formData = new FormData();
-        toUpload.forEach((file) => formData.append('files', file));
-        formData.append('bucket', bucket);
-        formData.append('folder', folder);
-
-        const res = await fetch('/api/upload', {
+        // Step 1: Request signed upload authorizations
+        const signRes = await fetch('/api/upload/sign', {
           method: 'POST',
-          body: formData,
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            files: toUpload.map((f) => ({ name: f.name, type: f.type, size: f.size })),
+            bucket,
+            folder,
+          }),
         });
 
-        const data = await res.json();
+        let signData: {
+          signedUrls?: Array<{
+            originalName: string;
+            path: string;
+            token: string;
+            signedUrl: string;
+            publicUrl: string;
+          }>;
+          errors?: string[];
+          error?: string;
+        } = {};
 
-        if (!res.ok) {
-          throw new Error(data.error || 'Failed to upload images.');
+        try {
+          signData = await signRes.json();
+        } catch {
+          throw new Error('Server returned an invalid response. Please try again.');
         }
 
-        if (data.urls && data.urls.length > 0) {
-          onChange([...images, ...data.urls]);
-          if (data.errors && data.errors.length > 0) {
-            setErrorMessage(`Some files could not be uploaded: ${data.errors.join(', ')}`);
+        if (!signRes.ok || !signData.signedUrls) {
+          throw new Error(signData.error || 'Failed to authorize image upload.');
+        }
+
+        // Step 2: Upload each file directly to Supabase Storage using signed tokens
+        const signedList = signData.signedUrls;
+        for (let i = 0; i < toUpload.length; i++) {
+          const file = toUpload[i];
+          const signInfo = signedList.find((s) => s.originalName === file.name) || signedList[i];
+
+          if (!signInfo) continue;
+
+          setUploadProgressText(`Uploading ${i + 1} of ${toUpload.length}...`);
+
+          const { error: uploadError } = await supabase.storage
+            .from(bucket)
+            .uploadToSignedUrl(signInfo.path, signInfo.token, file, {
+              contentType: file.type || 'image/jpeg',
+            });
+
+          if (uploadError) {
+            console.error('Direct signed upload error:', uploadError);
+            errorList.push(`Failed to upload ${file.name}: ${uploadError.message}`);
+          } else {
+            newUrls.push(signInfo.publicUrl);
           }
-        } else if (data.errors && data.errors.length > 0) {
-          setErrorMessage(data.errors.join(', '));
+        }
+
+        if (newUrls.length > 0) {
+          onChange([...images, ...newUrls]);
+        }
+
+        if (errorList.length > 0) {
+          setErrorMessage(errorList.join('; '));
+        } else if (signData.errors && signData.errors.length > 0) {
+          setErrorMessage(signData.errors.join('; '));
         }
       } catch (err: unknown) {
-        console.error('Upload error:', err);
+        console.error('Upload handler error:', err);
         const msg = err instanceof Error ? err.message : 'Error uploading images. Please try again.';
         setErrorMessage(msg);
       } finally {
@@ -170,7 +217,7 @@ export function ImageUpload({
             <p className="text-sm font-semibold text-[#006194]">
               {uploadProgressText || 'Uploading images...'}
             </p>
-            <p className="text-xs text-[var(--muted)] mt-1">Please wait while files are processed</p>
+            <p className="text-xs text-[var(--muted)] mt-1">Direct upload in progress</p>
           </div>
         ) : (
           <div className="flex flex-col items-center text-center">
