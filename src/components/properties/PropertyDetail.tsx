@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { LuMapPin, LuCalendar, LuHouse, LuCompass, LuUsers, LuChevronRight, LuShare2, LuHeart, LuWifi, LuDumbbell, LuCar, LuZap, LuWaves, LuShield, LuDroplets, LuAirVent, LuArrowUpDown, LuSchool, LuHospital, LuTrainFront, LuShoppingBag, LuTreePine, LuUtensilsCrossed, LuMessageCircle, LuShieldCheck, LuCamera, LuExternalLink, LuPhone, LuCircleCheckBig, LuSparkles, LuMaximize2, LuBuilding2, LuClock } from 'react-icons/lu';
+import { LuMapPin, LuCalendar, LuHouse, LuCompass, LuUsers, LuChevronRight, LuShare2, LuHeart, LuWifi, LuDumbbell, LuCar, LuZap, LuWaves, LuShield, LuDroplets, LuAirVent, LuArrowUpDown, LuSchool, LuHospital, LuTrainFront, LuShoppingBag, LuTreePine, LuUtensilsCrossed, LuMessageCircle, LuShieldCheck, LuCamera, LuExternalLink, LuPhone, LuCircleCheckBig, LuSparkles, LuMaximize2, LuBuilding2, LuX, LuChevronLeft } from 'react-icons/lu';
 import { getPropertyWhatsAppURL, WHATSAPP_NUMBER } from '@/lib/constants';
 import { PropertyCard } from '@/components/properties/PropertyCard';
 import type { Property } from '@/types';
@@ -25,11 +25,38 @@ interface PropertyDetailProps {
 
 export function PropertyDetail({ property, similar }: PropertyDetailProps) {
   const whatsappUrl = getPropertyWhatsAppURL(property.title, property.location, property.price);
-  const bookVisitUrl = `/book-visit?propertyId=${property.id}&title=${encodeURIComponent(property.title)}`;
   const [isSaved, setIsSaved] = useState(false);
   const [selectedDate, setSelectedDate] = useState('Today');
   const [selectedSlot, setSelectedSlot] = useState('2 PM - 5 PM');
   const [visitState, setVisitState] = useState<'idle' | 'loading' | 'done'>('idle');
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+
+  const images = property.images && property.images.length > 0 ? property.images : ['/images/scene-1.png'];
+
+  const openLightbox = (index: number) => {
+    setLightboxIndex(index);
+    setLightboxOpen(true);
+  };
+
+  const nextLightbox = useCallback(() => {
+    setLightboxIndex((prev) => (prev < images.length - 1 ? prev + 1 : 0));
+  }, [images.length]);
+
+  const prevLightbox = useCallback(() => {
+    setLightboxIndex((prev) => (prev > 0 ? prev - 1 : images.length - 1));
+  }, [images.length]);
+
+  useEffect(() => {
+    if (!lightboxOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setLightboxOpen(false);
+      if (e.key === 'ArrowRight') nextLightbox();
+      if (e.key === 'ArrowLeft') prevLightbox();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [lightboxOpen, nextLightbox, prevLightbox]);
 
   useEffect(() => {
     fetch('/api/properties/view', {
@@ -137,12 +164,17 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
 
         {/* ─── Image Gallery Grid ─── */}
         <div className="relative w-full rounded-2xl overflow-hidden shadow-md bg-white mb-7">
-          <div className={`grid grid-cols-1 ${property.images.length > 1 ? 'md:grid-cols-4' : ''} gap-2 p-2 bg-[#F8FAFC]`}
-            style={{ height: property.images.length > 1 ? '460px' : '400px' }}>
+          <div
+            className={`grid grid-cols-1 ${images.length > 1 ? 'md:grid-cols-4' : ''} gap-2 p-2 bg-[#F8FAFC]`}
+            style={{ height: images.length > 1 ? '460px' : '400px' }}
+          >
             {/* Main Large Photo */}
-            <div className={`relative ${property.images.length > 1 ? 'md:col-span-2' : 'col-span-full'} h-full rounded-xl overflow-hidden group cursor-pointer`}>
+            <div
+              onClick={() => openLightbox(0)}
+              className={`relative ${images.length > 1 ? 'md:col-span-2' : 'col-span-full'} h-full rounded-xl overflow-hidden group cursor-pointer`}
+            >
               <Image
-                src={property.images[0]}
+                src={images[0]}
                 alt={property.title}
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -159,10 +191,14 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
             </div>
 
             {/* Supporting Gallery Photos (2x2) */}
-            {property.images.length > 1 && (
+            {images.length > 1 && (
               <div className="hidden md:grid md:col-span-2 grid-cols-2 gap-2 h-full">
-                {property.images.slice(1, 5).map((img, i) => (
-                  <div key={i} className="relative rounded-xl overflow-hidden group cursor-pointer h-full">
+                {images.slice(1, 5).map((img, i) => (
+                  <div
+                    key={i}
+                    onClick={() => openLightbox(i + 1)}
+                    className="relative rounded-xl overflow-hidden group cursor-pointer h-full"
+                  >
                     <Image
                       src={img}
                       alt={`${property.title} - ${i + 2}`}
@@ -171,6 +207,11 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
                       sizes="(max-width: 768px) 50vw, 25vw"
                     />
                     <div className="absolute inset-0 bg-[#0F172A]/20 group-hover:bg-transparent transition-colors" />
+                    {i === 3 && images.length > 5 && (
+                      <div className="absolute inset-0 bg-black/60 flex items-center justify-center text-white font-bold text-lg">
+                        +{images.length - 5} More
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
@@ -180,11 +221,12 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
           {/* Gallery floating buttons */}
           <div className="absolute bottom-4 right-4 flex items-center gap-2 z-10">
             <button
+              onClick={() => openLightbox(0)}
               className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white text-[#131b2e] text-sm font-medium hover:bg-slate-50 transition-all shadow-lg cursor-pointer"
               type="button"
             >
               <LuCamera className="w-4 h-4" />
-              View all {property.images.length} Photos
+              View all {images.length} Photos
             </button>
           </div>
         </div>
@@ -532,6 +574,101 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
           </div>
         </div>
       </div>
+
+      {/* ─── Fullscreen Photo Lightbox Modal ─── */}
+      {lightboxOpen && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex flex-col justify-between p-4 md:p-6"
+        >
+          {/* Top Bar */}
+          <div className="flex items-center justify-between text-white z-10">
+            <div>
+              <p className="text-sm md:text-base font-semibold truncate max-w-md">{property.title}</p>
+              <p className="text-xs text-slate-400">
+                Photo {lightboxIndex + 1} of {images.length}
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => setLightboxOpen(false)}
+              className="p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
+              aria-label="Close photo viewer"
+            >
+              <LuX className="w-6 h-6" />
+            </button>
+          </div>
+
+          {/* Center Image Display */}
+          <div className="relative flex-1 flex items-center justify-center my-4 overflow-hidden">
+            <div className="relative w-full h-full max-w-5xl max-h-[75vh]">
+              <Image
+                src={images[lightboxIndex]}
+                alt={`${property.title} photo ${lightboxIndex + 1}`}
+                fill
+                className="object-contain"
+                sizes="100vw"
+                priority
+              />
+            </div>
+
+            {/* Prev/Next buttons */}
+            {images.length > 1 && (
+              <>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    prevLightbox();
+                  }}
+                  className="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all cursor-pointer backdrop-blur-sm"
+                  aria-label="Previous photo"
+                >
+                  <LuChevronLeft className="w-6 h-6" />
+                </button>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    nextLightbox();
+                  }}
+                  className="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all cursor-pointer backdrop-blur-sm"
+                  aria-label="Next photo"
+                >
+                  <LuChevronRight className="w-6 h-6" />
+                </button>
+              </>
+            )}
+          </div>
+
+          {/* Bottom Thumbnail Strip */}
+          {images.length > 1 && (
+            <div className="flex items-center justify-center gap-2 overflow-x-auto py-2 px-4 max-w-4xl mx-auto scrollbar-thin">
+              {images.map((img, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => setLightboxIndex(i)}
+                  className={`relative w-16 h-12 md:w-20 md:h-14 rounded-lg overflow-hidden shrink-0 transition-all cursor-pointer ${
+                    i === lightboxIndex
+                      ? 'ring-2 ring-[#006194] opacity-100 scale-105'
+                      : 'opacity-50 hover:opacity-80'
+                  }`}
+                >
+                  <Image
+                    src={img}
+                    alt={`Thumbnail ${i + 1}`}
+                    fill
+                    className="object-cover"
+                    sizes="80px"
+                  />
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

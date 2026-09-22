@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { LuHouse, LuMapPin, LuIndianRupee, LuImagePlus, LuCircleAlert, LuCircleCheckBig, LuEye } from 'react-icons/lu';
 import { GlassCard } from '@/components/ui/GlassCard';
+import { ImageUpload } from '@/components/ui/ImageUpload';
 import { createSupabaseBrowser } from '@/lib/supabase-browser';
 
 const PROPERTY_TYPES = ['Apartment', 'Villa', 'Independent House'];
@@ -17,7 +18,7 @@ export default function AddPropertyPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [step, setStep] = useState(1);
-  const [images, setImages] = useState<File[]>([]);
+  const [images, setImages] = useState<string[]>([]);
 
   const [form, setForm] = useState({
     title: '',
@@ -45,11 +46,6 @@ export default function AddPropertyPage() {
     }));
   };
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = Array.from(e.target.files || []);
-    setImages((prev) => [...prev, ...files].slice(0, 5));
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
@@ -65,27 +61,7 @@ export default function AddPropertyPage() {
         return;
       }
 
-      // Upload images to Supabase Storage
-      const imageUrls: string[] = [];
-      for (const file of images) {
-        const ext = file.name.split('.').pop();
-        const fileName = `${user.id}/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
-        const { error: uploadError } = await supabase.storage
-          .from('property-images')
-          .upload(fileName, file);
-
-        if (!uploadError) {
-          const { data: { publicUrl } } = supabase.storage
-            .from('property-images')
-            .getPublicUrl(fileName);
-          imageUrls.push(publicUrl);
-        }
-      }
-
-      // If no images uploaded, use a default
-      if (imageUrls.length === 0) {
-        imageUrls.push('/images/scene-1.png');
-      }
+      const imageUrls = images.length > 0 ? images : ['/images/scene-1.png'];
 
       // Generate slug
       const slug = form.title
@@ -381,45 +357,14 @@ export default function AddPropertyPage() {
           <GlassCard hover={false}>
             <h2 className="text-lg font-semibold mb-6">Property Images</h2>
             <div className="space-y-4">
-              <div className="border-2 border-dashed border-glass-border rounded-2xl p-8 text-center">
-                <LuImagePlus className="w-12 h-12 mx-auto text-[var(--muted)] mb-4" />
-                <p className="text-sm text-[var(--muted)] mb-2">Drag & drop images or click to browse</p>
-                <p className="text-xs text-[var(--muted)] mb-4">Max 5 images, JPEG/PNG</p>
-                <label className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-surface-light text-sm font-medium cursor-pointer hover:bg-surface-lighter transition-all">
-                  <LuImagePlus className="w-4 h-4" />
-                  Choose Files
-                  <input
-                    type="file"
-                    accept="image/*"
-                    multiple
-                    onChange={handleImageChange}
-                    className="hidden"
-                  />
-                </label>
-              </div>
+              <ImageUpload
+                images={images}
+                onChange={setImages}
+                folder="owner"
+                maxFiles={10}
+              />
 
-              {images.length > 0 && (
-                <div className="flex flex-wrap gap-2">
-                  {images.map((img, i) => (
-                    <div key={i} className="relative w-20 h-20 rounded-lg overflow-hidden border border-glass-border">
-                      <img
-                        src={URL.createObjectURL(img)}
-                        alt={`Preview ${i + 1}`}
-                        className="w-full h-full object-cover"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setImages((prev) => prev.filter((_, idx) => idx !== i))}
-                        className="absolute top-0.5 right-0.5 w-5 h-5 rounded-full bg-red-500 text-white text-xs flex items-center justify-center cursor-pointer"
-                      >
-                        x
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              <div className="flex justify-between">
+              <div className="flex justify-between pt-4">
                 <button
                   type="button"
                   onClick={() => setStep(2)}
@@ -517,13 +462,14 @@ export default function AddPropertyPage() {
             )}
 
             <div className="mb-6">
-              <span className="text-xs text-[var(--muted)] block mb-2">Images</span>
+              <span className="text-xs text-[var(--muted)] block mb-2">Images ({images.length})</span>
               {images.length > 0 ? (
                 <div className="flex flex-wrap gap-2">
-                  {images.map((img, i) => (
-                    <div key={i} className="w-20 h-20 rounded-lg overflow-hidden border border-glass-border">
+                  {images.map((imgUrl, i) => (
+                    <div key={i} className="relative w-20 h-20 rounded-lg overflow-hidden border border-glass-border">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
-                        src={URL.createObjectURL(img)}
+                        src={imgUrl}
                         alt={`Preview ${i + 1}`}
                         className="w-full h-full object-cover"
                       />

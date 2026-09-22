@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { LuMapPin, LuHeart, LuShieldCheck, LuArrowRight, LuCamera } from 'react-icons/lu';
+import { LuMapPin, LuHeart, LuShieldCheck } from 'react-icons/lu';
 import { ImageGallery } from '@/components/ui/ImageGallery';
 import type { Property } from '@/types';
 
