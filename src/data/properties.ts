@@ -26,6 +26,8 @@ export const PROPERTIES: Property[] = [
     ],
     sharingType: 'Family',
     postedDate: '2026-09-10',
+    verificationFee: 599,
+    concierge: 'JusRental Team',
   },
   {
     id: '2',
@@ -52,6 +54,8 @@ export const PROPERTIES: Property[] = [
     ],
     sharingType: 'Any',
     postedDate: '2026-09-08',
+    verificationFee: 599,
+    concierge: 'JusRental Team',
   },
   {
     id: '3',
@@ -78,6 +82,8 @@ export const PROPERTIES: Property[] = [
     ],
     sharingType: 'Family',
     postedDate: '2026-09-12',
+    verificationFee: 599,
+    concierge: 'JusRental Team',
   },
   {
     id: '4',
@@ -104,6 +110,8 @@ export const PROPERTIES: Property[] = [
     ],
     sharingType: 'Any',
     postedDate: '2026-09-05',
+    verificationFee: 599,
+    concierge: 'JusRental Team',
   },
   {
     id: '5',
@@ -130,6 +138,8 @@ export const PROPERTIES: Property[] = [
     ],
     sharingType: 'Family',
     postedDate: '2026-09-11',
+    verificationFee: 599,
+    concierge: 'JusRental Team',
   },
   {
     id: '6',
@@ -156,6 +166,8 @@ export const PROPERTIES: Property[] = [
     ],
     sharingType: 'Any',
     postedDate: '2026-09-09',
+    verificationFee: 599,
+    concierge: 'JusRental Team',
   },
   {
     id: '7',
@@ -182,6 +194,8 @@ export const PROPERTIES: Property[] = [
     ],
     sharingType: 'Bachelor',
     postedDate: '2026-09-07',
+    verificationFee: 599,
+    concierge: 'JusRental Team',
   },
   {
     id: '8',
@@ -208,6 +222,8 @@ export const PROPERTIES: Property[] = [
     ],
     sharingType: 'Family',
     postedDate: '2026-09-13',
+    verificationFee: 599,
+    concierge: 'JusRental Team',
   },
   {
     id: '9',
@@ -234,6 +250,8 @@ export const PROPERTIES: Property[] = [
     ],
     sharingType: 'Family',
     postedDate: '2026-09-06',
+    verificationFee: 599,
+    concierge: 'JusRental Team',
   },
   {
     id: '10',
@@ -260,6 +278,8 @@ export const PROPERTIES: Property[] = [
     ],
     sharingType: 'Any',
     postedDate: '2026-09-14',
+    verificationFee: 599,
+    concierge: 'JusRental Team',
   },
   {
     id: '11',
@@ -286,6 +306,8 @@ export const PROPERTIES: Property[] = [
     ],
     sharingType: 'Family',
     postedDate: '2026-09-04',
+    verificationFee: 599,
+    concierge: 'JusRental Team',
   },
   {
     id: '12',
@@ -312,6 +334,8 @@ export const PROPERTIES: Property[] = [
     ],
     sharingType: 'Any',
     postedDate: '2026-09-03',
+    verificationFee: 599,
+    concierge: 'JusRental Team',
   },
   {
     id: '13',
@@ -338,6 +362,8 @@ export const PROPERTIES: Property[] = [
     ],
     sharingType: 'Family',
     postedDate: '2026-09-02',
+    verificationFee: 599,
+    concierge: 'JusRental Team',
   },
   {
     id: '14',
@@ -364,6 +390,8 @@ export const PROPERTIES: Property[] = [
     ],
     sharingType: 'Bachelor',
     postedDate: '2026-09-01',
+    verificationFee: 599,
+    concierge: 'JusRental Team',
   },
   {
     id: '15',
@@ -390,6 +418,8 @@ export const PROPERTIES: Property[] = [
     ],
     sharingType: 'Family',
     postedDate: '2026-08-28',
+    verificationFee: 599,
+    concierge: 'JusRental Team',
   },
   {
     id: '16',
@@ -416,6 +446,8 @@ export const PROPERTIES: Property[] = [
     ],
     sharingType: 'Family',
     postedDate: '2026-09-15',
+    verificationFee: 599,
+    concierge: 'JusRental Team',
   },
   {
     id: '17',
@@ -442,6 +474,8 @@ export const PROPERTIES: Property[] = [
     ],
     sharingType: 'Any',
     postedDate: '2026-09-10',
+    verificationFee: 599,
+    concierge: 'JusRental Team',
   },
   {
     id: '18',
@@ -468,6 +502,8 @@ export const PROPERTIES: Property[] = [
     ],
     sharingType: 'Bachelor',
     postedDate: '2026-09-08',
+    verificationFee: 599,
+    concierge: 'JusRental Team',
   },
   {
     id: '19',
@@ -494,6 +530,8 @@ export const PROPERTIES: Property[] = [
     ],
     sharingType: 'Family',
     postedDate: '2026-09-14',
+    verificationFee: 599,
+    concierge: 'JusRental Team',
   },
   {
     id: '20',
@@ -520,6 +558,8 @@ export const PROPERTIES: Property[] = [
     ],
     sharingType: 'Any',
     postedDate: '2026-09-12',
+    verificationFee: 599,
+    concierge: 'JusRental Team',
   },
 ];
 

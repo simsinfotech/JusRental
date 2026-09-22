@@ -28,6 +28,8 @@ export interface DbProperty {
   slug?: string;
   views_count?: number;
   status?: string;
+  verification_fee?: number;
+  concierge_name?: string;
   created_at?: string;
   updated_at?: string;
 }
@@ -125,6 +127,8 @@ export function mapDbProperty(row: DbProperty): Property {
     })),
     sharingType: row.sharing_type as Property['sharingType'],
     postedDate: row.posted_date,
+    verificationFee: row.verification_fee ?? 599,
+    concierge: row.concierge_name ?? 'JusRental Team',
   };
 }
 

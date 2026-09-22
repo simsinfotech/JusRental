@@ -19,6 +19,8 @@ export interface Property {
   nearbyPlaces: NearbyPlace[];
   sharingType: 'Family' | 'Bachelor' | 'Any';
   postedDate: string;
+  verificationFee: number;
+  concierge: string;
 }
 
 export interface NearbyPlace {

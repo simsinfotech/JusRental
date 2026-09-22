@@ -426,7 +426,7 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
                   </div>
                   <div className="flex items-center justify-between pt-1 border-t border-slate-100">
                     <span className="text-[#3f4850]">JusRental Verification Fee</span>
-                    <span className="font-bold text-[#0369A1]">₹599 only</span>
+                    <span className="font-bold text-[#0369A1]">₹{(property.verificationFee ?? 599).toLocaleString()} only</span>
                   </div>
                 </div>
 
@@ -546,7 +546,7 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
                 </div>
                 <div className="flex flex-col flex-1 min-w-0">
                   <span className="text-[11px] text-[#3f4850] uppercase font-semibold">Assigned Concierge</span>
-                  <span className="text-sm font-semibold text-[#131b2e] truncate">JusRental Team</span>
+                  <span className="text-sm font-semibold text-[#131b2e] truncate">{property.concierge ?? 'JusRental Team'}</span>
                   <span className="text-xs text-[#16A34A] flex items-center gap-1">
                     <LuShieldCheck className="w-3 h-3" />
                     Verified Partner
