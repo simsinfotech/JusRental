@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'All fields are required' }, { status: 400 });
   }
 
-  const webhookUrl = process.env.NEXT_PUBLIC_GOOGLE_SHEET_WEBHOOK;
+  const webhookUrl = process.env.GOOGLE_SHEET_WEBHOOK || process.env.NEXT_PUBLIC_GOOGLE_SHEET_WEBHOOK;
   if (!webhookUrl) {
     return NextResponse.json({ error: 'Webhook not configured' }, { status: 500 });
   }
