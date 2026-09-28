@@ -29,6 +29,8 @@ export default function OwnerEditBlogPage({ params }: { params: Promise<{ id: st
 
   useEffect(() => {
     const load = async () => {
+      // Read uses public SELECT policy (published posts are readable)
+      // For drafts, fall back to API if needed
       const supabase = createSupabaseBrowser();
       const { data } = await supabase
         .from('js_blog_posts')
@@ -60,10 +62,11 @@ export default function OwnerEditBlogPage({ params }: { params: Promise<{ id: st
     setMessage(null);
     setLoading(true);
 
-    const supabase = createSupabaseBrowser();
-    const { error } = await supabase
-      .from('js_blog_posts')
-      .update({
+    const res = await fetch('/api/blog', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        id,
         title: form.title,
         slug: form.slug,
         excerpt: form.excerpt,
@@ -74,11 +77,13 @@ export default function OwnerEditBlogPage({ params }: { params: Promise<{ id: st
         cover_image: form.coverImage,
         read_time: parseInt(form.readTime) || 5,
         published: form.status === 'published',
-      })
-      .eq('id', id);
+      }),
+    });
 
-    if (error) {
-      setMessage({ type: 'error', text: error.message });
+    const data = await res.json();
+
+    if (!res.ok) {
+      setMessage({ type: 'error', text: data.error || 'Failed to update post' });
     } else {
       setMessage({ type: 'success', text: 'Post updated.' });
     }

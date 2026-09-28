@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { LuFileText, LuSave, LuCircleAlert, LuArrowLeft } from 'react-icons/lu';
-import { createSupabaseBrowser } from '@/lib/supabase-browser';
 
 const CATEGORIES = ['Rental Tips', 'Area Guides', 'Legal Advice', 'Moving Guide', 'Owner Tips'];
 
@@ -29,28 +28,26 @@ export default function AdminNewBlogPage() {
     setError('');
     setLoading(true);
 
-    const slug = form.title
-      .toLowerCase()
-      .replace(/[^a-z0-9\s-]/g, '')
-      .replace(/\s+/g, '-');
-
-    const supabase = createSupabaseBrowser();
-    const { error: insertError } = await supabase.from('js_blog_posts').insert({
-      title: form.title,
-      slug,
-      excerpt: form.excerpt,
-      content: form.content,
-      author: form.author,
-      category: form.category,
-      tags: form.tags.split(',').map((t) => t.trim()).filter(Boolean),
-      cover_image: form.coverImage || '/images/scene-1.png',
-      read_time: parseInt(form.readTime) || 5,
-      published_date: new Date().toISOString().slice(0, 10),
-      published: form.status === 'published',
+    const res = await fetch('/api/blog', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        title: form.title,
+        excerpt: form.excerpt,
+        content: form.content,
+        author: form.author,
+        category: form.category,
+        tags: form.tags.split(',').map((t) => t.trim()).filter(Boolean),
+        cover_image: form.coverImage || '/images/scene-1.png',
+        read_time: parseInt(form.readTime) || 5,
+        published: form.status === 'published',
+      }),
     });
 
-    if (insertError) {
-      setError(insertError.message);
+    const data = await res.json();
+
+    if (!res.ok) {
+      setError(data.error || 'Failed to create post');
       setLoading(false);
       return;
     }

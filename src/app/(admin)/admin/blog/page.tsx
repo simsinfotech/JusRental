@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { LuFileText, LuPlus, LuSquarePen, LuTrash2, LuEye, LuEyeOff } from 'react-icons/lu';
 import { StatusBadge } from '@/components/admin/StatusBadge';
-import { createSupabaseBrowser } from '@/lib/supabase-browser';
 
 interface BlogRow {
   id: string;
@@ -24,28 +23,30 @@ export default function AdminBlogPage() {
   const [loading, setLoading] = useState(true);
 
   const loadPosts = async () => {
-    const supabase = createSupabaseBrowser();
-    const { data } = await supabase
-      .from('js_blog_posts')
-      .select('id, title, slug, category, author, published_date, read_time, published')
-      .order('published_date', { ascending: false });
-
-    setPosts((data as BlogRow[]) || []);
+    const res = await fetch('/api/blog');
+    const data = await res.json();
+    setPosts(Array.isArray(data) ? data : []);
     setLoading(false);
   };
 
   useEffect(() => { loadPosts(); }, []);
 
   const togglePublish = async (id: string, currentlyPublished: boolean) => {
-    const supabase = createSupabaseBrowser();
-    await supabase.from('js_blog_posts').update({ published: !currentlyPublished }).eq('id', id);
+    await fetch('/api/blog', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id, published: !currentlyPublished }),
+    });
     loadPosts();
   };
 
   const handleDelete = async (id: string) => {
     if (!confirm('Delete this blog post?')) return;
-    const supabase = createSupabaseBrowser();
-    await supabase.from('js_blog_posts').delete().eq('id', id);
+    await fetch('/api/blog', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id }),
+    });
     loadPosts();
   };
 

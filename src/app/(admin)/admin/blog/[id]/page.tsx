@@ -4,6 +4,7 @@ import { useEffect, useState, use } from 'react';
 import { useRouter } from 'next/navigation';
 import { LuFileText, LuSave, LuCircleAlert, LuArrowLeft, LuCircleCheck } from 'react-icons/lu';
 import { createSupabaseBrowser } from '@/lib/supabase-browser';
+// Note: read uses browser client (public SELECT policy), writes use /api/blog (service role)
 
 const CATEGORIES = ['Rental Tips', 'Area Guides', 'Legal Advice', 'Moving Guide', 'Owner Tips'];
 
@@ -60,10 +61,11 @@ export default function AdminEditBlogPage({ params }: { params: Promise<{ id: st
     setMessage(null);
     setLoading(true);
 
-    const supabase = createSupabaseBrowser();
-    const { error } = await supabase
-      .from('js_blog_posts')
-      .update({
+    const res = await fetch('/api/blog', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        id,
         title: form.title,
         slug: form.slug,
         excerpt: form.excerpt,
@@ -74,11 +76,13 @@ export default function AdminEditBlogPage({ params }: { params: Promise<{ id: st
         cover_image: form.coverImage,
         read_time: parseInt(form.readTime) || 5,
         published: form.status === 'published',
-      })
-      .eq('id', id);
+      }),
+    });
 
-    if (error) {
-      setMessage({ type: 'error', text: error.message });
+    const data = await res.json();
+
+    if (!res.ok) {
+      setMessage({ type: 'error', text: data.error || 'Failed to update post' });
     } else {
       setMessage({ type: 'success', text: 'Post updated.' });
     }
