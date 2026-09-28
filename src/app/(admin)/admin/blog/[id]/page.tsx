@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { LuFileText, LuSave, LuCircleAlert, LuArrowLeft, LuCircleCheck } from 'react-icons/lu';
 import { createSupabaseBrowser } from '@/lib/supabase-browser';
 
-const CATEGORIES = ['Renting Tips', 'Market Trends', 'Neighbourhood Guides', 'Legal', 'NRI Corner'];
+const CATEGORIES = ['Rental Tips', 'Area Guides', 'Legal Advice', 'Moving Guide', 'Owner Tips'];
 
 export default function AdminEditBlogPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
@@ -20,7 +20,7 @@ export default function AdminEditBlogPage({ params }: { params: Promise<{ id: st
     excerpt: '',
     content: '',
     author: '',
-    category: 'Renting Tips',
+    category: 'Rental Tips',
     tags: '',
     coverImage: '',
     readTime: '5',
@@ -47,7 +47,7 @@ export default function AdminEditBlogPage({ params }: { params: Promise<{ id: st
           tags: (data.tags || []).join(', '),
           coverImage: data.cover_image || '',
           readTime: (data.read_time || 5).toString(),
-          status: data.status || 'published',
+          status: data.published !== false ? 'published' : 'draft',
         });
       }
       setFetching(false);
@@ -73,7 +73,7 @@ export default function AdminEditBlogPage({ params }: { params: Promise<{ id: st
         tags: form.tags.split(',').map((t) => t.trim()).filter(Boolean),
         cover_image: form.coverImage,
         read_time: parseInt(form.readTime) || 5,
-        status: form.status,
+        published: form.status === 'published',
       })
       .eq('id', id);
 

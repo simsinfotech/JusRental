@@ -15,8 +15,7 @@ interface BlogRow {
   author: string;
   published_date: string;
   read_time: number;
-  status?: string;
-  [key: string]: unknown;
+  published: boolean;
 }
 
 export default function AdminBlogPage() {
@@ -28,7 +27,7 @@ export default function AdminBlogPage() {
     const supabase = createSupabaseBrowser();
     const { data } = await supabase
       .from('js_blog_posts')
-      .select('id, title, slug, category, author, published_date, read_time, status')
+      .select('id, title, slug, category, author, published_date, read_time, published')
       .order('published_date', { ascending: false });
 
     setPosts((data as BlogRow[]) || []);
@@ -37,10 +36,9 @@ export default function AdminBlogPage() {
 
   useEffect(() => { loadPosts(); }, []);
 
-  const togglePublish = async (id: string, currentStatus: string) => {
+  const togglePublish = async (id: string, currentlyPublished: boolean) => {
     const supabase = createSupabaseBrowser();
-    const newStatus = currentStatus === 'published' ? 'draft' : 'published';
-    await supabase.from('js_blog_posts').update({ status: newStatus }).eq('id', id);
+    await supabase.from('js_blog_posts').update({ published: !currentlyPublished }).eq('id', id);
     loadPosts();
   };
 
@@ -93,17 +91,17 @@ export default function AdminBlogPage() {
                 </div>
               </div>
               <div className="flex items-center gap-2 ml-4">
-                <StatusBadge status={post.status || 'published'} />
+                <StatusBadge status={post.published ? 'published' : 'draft'} />
               </div>
             </div>
 
             <div className="flex items-center gap-1 mt-3 pt-3 border-t border-glass-border">
               <button
-                onClick={() => togglePublish(post.id, post.status || 'published')}
+                onClick={() => togglePublish(post.id, post.published)}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium hover:bg-surface-light transition-all cursor-pointer text-[var(--muted)]"
               >
-                {post.status === 'draft' ? <LuEye className="w-3.5 h-3.5" /> : <LuEyeOff className="w-3.5 h-3.5" />}
-                {post.status === 'draft' ? 'Publish' : 'Unpublish'}
+                {!post.published ? <LuEye className="w-3.5 h-3.5" /> : <LuEyeOff className="w-3.5 h-3.5" />}
+                {!post.published ? 'Publish' : 'Unpublish'}
               </button>
               <button
                 onClick={() => router.push(`/admin/blog/${post.id}`)}

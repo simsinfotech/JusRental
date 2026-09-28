@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { LuFileText, LuSave, LuCircleAlert, LuArrowLeft } from 'react-icons/lu';
 import { createSupabaseBrowser } from '@/lib/supabase-browser';
 
-const CATEGORIES = ['Renting Tips', 'Market Trends', 'Neighbourhood Guides', 'Legal', 'NRI Corner'];
+const CATEGORIES = ['Rental Tips', 'Area Guides', 'Legal Advice', 'Moving Guide', 'Owner Tips'];
 
 export default function AdminNewBlogPage() {
   const router = useRouter();
@@ -17,7 +17,7 @@ export default function AdminNewBlogPage() {
     excerpt: '',
     content: '',
     author: 'JusRental Team',
-    category: 'Renting Tips',
+    category: 'Rental Tips',
     tags: '',
     coverImage: '',
     readTime: '5',
@@ -46,7 +46,7 @@ export default function AdminNewBlogPage() {
       cover_image: form.coverImage || '/images/scene-1.png',
       read_time: parseInt(form.readTime) || 5,
       published_date: new Date().toISOString().slice(0, 10),
-      status: form.status,
+      published: form.status === 'published',
     });
 
     if (insertError) {
