@@ -112,7 +112,10 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
           preferredTime: selectedSlot,
         }),
       });
-      if (!res.ok) throw new Error('Failed to submit');
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        throw new Error(body.error || `Request failed (${res.status})`);
+      }
 
       // 2. Insert into Supabase for admin/owner visibility (non-blocking)
       const supabase = createSupabaseBrowser();
@@ -131,9 +134,9 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
 
       setVisitFormOpen(false);
       setVisitState('done');
-    } catch {
+    } catch (err) {
       setVisitFormState('error');
-      setVisitFormError('Something went wrong. Please try again.');
+      setVisitFormError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
     }
   };
 

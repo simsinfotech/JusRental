@@ -27,18 +27,31 @@ export async function POST(request: NextRequest) {
       redirect: 'manual',
     });
 
-    if (res.status === 302) {
+    // Handle 302 redirect (expected from Google Apps Script)
+    if (res.status >= 300 && res.status < 400) {
       const redirectUrl = res.headers.get('location');
       if (redirectUrl) {
-        const followRes = await fetch(redirectUrl);
+        const followRes = await fetch(redirectUrl, { method: 'GET' });
         const text = await followRes.text();
         return NextResponse.json({ result: 'success', response: text });
       }
+      return NextResponse.json({ result: 'success', response: 'redirect-no-location' });
+    }
+
+    // Non-redirect response
+    if (!res.ok) {
+      const text = await res.text();
+      console.error('Google Sheets webhook error:', res.status, text);
+      return NextResponse.json({ error: `Webhook returned ${res.status}` }, { status: 502 });
     }
 
     const text = await res.text();
     return NextResponse.json({ result: 'success', response: text });
-  } catch {
-    return NextResponse.json({ error: 'Failed to submit to Google Sheets' }, { status: 502 });
+  } catch (err) {
+    console.error('Leads capture error:', err);
+    return NextResponse.json(
+      { error: err instanceof Error ? err.message : 'Failed to submit to Google Sheets' },
+      { status: 502 },
+    );
   }
 }
