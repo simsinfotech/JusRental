@@ -636,89 +636,178 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
             className="absolute inset-0 bg-black/60 backdrop-blur-sm"
             onClick={() => setVisitFormOpen(false)}
           />
-          {/* Modal */}
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md relative z-10">
-            <button
-              onClick={() => setVisitFormOpen(false)}
-              className="absolute top-4 right-4 p-1.5 rounded-lg hover:bg-black/5 transition-colors cursor-pointer"
-              aria-label="Close"
-              type="button"
-            >
-              <LuX className="w-5 h-5 text-[#3f4850]" />
-            </button>
-
-            <div className="p-6 sm:p-8">
-              <div className="mb-5">
-                <h3 className="text-xl font-bold font-[family-name:var(--font-heading)] text-[#131b2e] mb-1">
-                  Schedule Your Free Visit
-                </h3>
-                <p className="text-sm text-[#3f4850]">
-                  Share your details and we&apos;ll confirm your visit to <span className="font-semibold text-[#131b2e]">{property.title}</span>.
-                </p>
-                <div className="mt-2 flex items-center gap-3 text-xs text-[#3f4850]">
-                  <span className="px-2 py-1 rounded-lg bg-[#F1F5F9] font-medium">{selectedDate}</span>
-                  <span className="px-2 py-1 rounded-lg bg-[#F1F5F9] font-medium">{selectedSlot}</span>
+          {/* Modal — split layout */}
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-[880px] relative z-10 grid grid-cols-1 md:grid-cols-2 overflow-hidden">
+            {/* ── Left: Property Image & Details ── */}
+            <div className="relative hidden md:flex flex-col justify-end min-h-[480px]">
+              <Image
+                src={images[0]}
+                alt={property.title}
+                fill
+                className="object-cover"
+                sizes="440px"
+              />
+              {/* Gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/90 via-[#0F172A]/40 to-transparent" />
+              {/* Content over image */}
+              <div className="relative z-10 p-6 flex flex-col gap-3">
+                {property.verified && (
+                  <span className="self-start inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#16A34A] text-white text-[11px] font-bold uppercase tracking-wider">
+                    <LuShieldCheck className="w-3.5 h-3.5" />
+                    Verified
+                  </span>
+                )}
+                <h4 className="text-xl font-bold font-[family-name:var(--font-heading)] text-white leading-tight">
+                  {property.title}
+                </h4>
+                <div className="flex items-center gap-1.5 text-white/80 text-sm">
+                  <LuMapPin className="w-3.5 h-3.5" />
+                  <span>{property.location}</span>
+                </div>
+                <div className="flex items-center gap-4 mt-1">
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-2xl font-extrabold text-white font-[family-name:var(--font-heading)]">
+                      ₹{property.price.toLocaleString()}
+                    </span>
+                    <span className="text-white/60 text-sm">/ month</span>
+                  </div>
+                </div>
+                <div className="flex flex-wrap items-center gap-2 mt-1">
+                  <span className="px-2.5 py-1 rounded-lg bg-white/15 backdrop-blur-sm text-white text-xs font-medium">
+                    {property.bhk} BHK {property.type}
+                  </span>
+                  <span className="px-2.5 py-1 rounded-lg bg-white/15 backdrop-blur-sm text-white text-xs font-medium">
+                    {property.sqft} sq.ft
+                  </span>
+                  <span className="px-2.5 py-1 rounded-lg bg-white/15 backdrop-blur-sm text-white text-xs font-medium">
+                    {property.furnished}
+                  </span>
+                </div>
+                <div className="flex items-center gap-2 mt-2 pt-3 border-t border-white/15">
+                  <LuCircleCheckBig className="w-4 h-4 text-[#4ADE80]" />
+                  <span className="text-white/90 text-sm font-medium">Zero Brokerage &mdash; Save ₹{property.price.toLocaleString()}</span>
                 </div>
               </div>
+            </div>
 
-              {visitFormState === 'error' && (
-                <div className="mb-4 p-3 rounded-xl bg-red-50 text-red-600 text-sm">
-                  {visitFormError}
-                </div>
-              )}
+            {/* ── Right: Lead Form ── */}
+            <div className="relative flex flex-col">
+              <button
+                onClick={() => setVisitFormOpen(false)}
+                className="absolute top-4 right-4 p-1.5 rounded-lg hover:bg-black/5 transition-colors cursor-pointer z-10"
+                aria-label="Close"
+                type="button"
+              >
+                <LuX className="w-5 h-5 text-[#3f4850]" />
+              </button>
 
-              <form onSubmit={handleVisitFormSubmit} className="space-y-4">
-                <div>
-                  <label className="text-sm font-medium text-[#131b2e] mb-1.5 block">Name *</label>
-                  <div className="relative">
-                    <LuUsers className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#707881]" />
-                    <input
-                      type="text"
-                      name="name"
-                      required
-                      placeholder="Your name"
-                      className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 bg-[#F8FAFC] focus:outline-none focus:ring-2 focus:ring-[#006194]/20 focus:border-[#006194]/50 transition-all text-[#131b2e]"
-                    />
+              <div className="p-6 sm:p-8 flex flex-col justify-center h-full">
+                {/* Mobile-only property pill */}
+                <div className="md:hidden mb-4 flex items-center gap-3 p-3 rounded-xl bg-[#F8FAFC]">
+                  <div className="relative w-14 h-14 rounded-lg overflow-hidden shrink-0">
+                    <Image src={images[0]} alt={property.title} fill className="object-cover" sizes="56px" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-sm font-semibold text-[#131b2e] truncate">{property.title}</p>
+                    <p className="text-xs text-[#3f4850]">₹{property.price.toLocaleString()}/mo</p>
                   </div>
                 </div>
 
-                <div>
-                  <label className="text-sm font-medium text-[#131b2e] mb-1.5 block">Phone *</label>
-                  <div className="relative">
-                    <LuPhone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#707881]" />
-                    <input
-                      type="tel"
-                      name="phone"
-                      required
-                      placeholder="+91 XXXXX XXXXX"
-                      className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 bg-[#F8FAFC] focus:outline-none focus:ring-2 focus:ring-[#006194]/20 focus:border-[#006194]/50 transition-all text-[#131b2e]"
-                    />
+                <div className="mb-5">
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#cce5ff] text-[#004b73] text-[11px] font-bold mb-3">
+                    <LuCalendar className="w-3 h-3" />
+                    FREE VISIT
+                  </div>
+                  <h3 className="text-xl font-bold font-[family-name:var(--font-heading)] text-[#131b2e] mb-1">
+                    Schedule Your Visit
+                  </h3>
+                  <p className="text-sm text-[#3f4850]">
+                    Fill in your details and we&apos;ll confirm your appointment.
+                  </p>
+                  <div className="mt-3 flex items-center gap-2 text-xs text-[#3f4850]">
+                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#F1F5F9] font-semibold">
+                      <LuCalendar className="w-3 h-3 text-[#006194]" />
+                      {selectedDate}
+                    </span>
+                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#F1F5F9] font-semibold">
+                      <LuCompass className="w-3 h-3 text-[#006194]" />
+                      {selectedSlot}
+                    </span>
                   </div>
                 </div>
 
-                <div>
-                  <label className="text-sm font-medium text-[#131b2e] mb-1.5 block">Email *</label>
-                  <div className="relative">
-                    <LuMessageCircle className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#707881]" />
-                    <input
-                      type="email"
-                      name="email"
-                      required
-                      placeholder="your@email.com"
-                      className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 bg-[#F8FAFC] focus:outline-none focus:ring-2 focus:ring-[#006194]/20 focus:border-[#006194]/50 transition-all text-[#131b2e]"
-                    />
+                {visitFormState === 'error' && (
+                  <div className="mb-4 p-3 rounded-xl bg-red-50 text-red-600 text-sm">
+                    {visitFormError}
                   </div>
-                </div>
+                )}
 
-                <button
-                  type="submit"
-                  disabled={visitFormState === 'submitting'}
-                  className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-gradient-to-r from-[#006194] to-[#0369A1] text-white font-semibold shadow-lg shadow-[#006194]/25 hover:shadow-[#006194]/40 transition-all duration-300 hover:-translate-y-0.5 cursor-pointer disabled:opacity-50"
-                >
-                  <LuCalendar className="w-4 h-4" />
-                  {visitFormState === 'submitting' ? 'Submitting...' : 'Confirm Visit Request'}
-                </button>
-              </form>
+                <form onSubmit={handleVisitFormSubmit} className="space-y-3.5">
+                  <div>
+                    <label className="text-sm font-medium text-[#131b2e] mb-1.5 block">Name *</label>
+                    <div className="relative">
+                      <LuUsers className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#707881]" />
+                      <input
+                        type="text"
+                        name="name"
+                        required
+                        placeholder="Your full name"
+                        className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 bg-[#F8FAFC] focus:outline-none focus:ring-2 focus:ring-[#006194]/20 focus:border-[#006194]/50 transition-all text-[#131b2e] placeholder:text-slate-400"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="text-sm font-medium text-[#131b2e] mb-1.5 block">Phone *</label>
+                    <div className="relative">
+                      <LuPhone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#707881]" />
+                      <input
+                        type="tel"
+                        name="phone"
+                        required
+                        placeholder="+91 XXXXX XXXXX"
+                        className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 bg-[#F8FAFC] focus:outline-none focus:ring-2 focus:ring-[#006194]/20 focus:border-[#006194]/50 transition-all text-[#131b2e] placeholder:text-slate-400"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="text-sm font-medium text-[#131b2e] mb-1.5 block">Email *</label>
+                    <div className="relative">
+                      <LuMessageCircle className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#707881]" />
+                      <input
+                        type="email"
+                        name="email"
+                        required
+                        placeholder="your@email.com"
+                        className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 bg-[#F8FAFC] focus:outline-none focus:ring-2 focus:ring-[#006194]/20 focus:border-[#006194]/50 transition-all text-[#131b2e] placeholder:text-slate-400"
+                      />
+                    </div>
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={visitFormState === 'submitting'}
+                    className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-gradient-to-r from-[#006194] to-[#0369A1] text-white font-semibold shadow-lg shadow-[#006194]/25 hover:shadow-[#006194]/40 transition-all duration-300 hover:-translate-y-0.5 cursor-pointer disabled:opacity-50"
+                  >
+                    {visitFormState === 'submitting' ? (
+                      <>
+                        <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        Confirming...
+                      </>
+                    ) : (
+                      <>
+                        <LuCalendar className="w-4 h-4" />
+                        Confirm Visit Request
+                      </>
+                    )}
+                  </button>
+                </form>
+
+                <p className="mt-4 text-center text-[11px] text-[#707881]">
+                  Our concierge will call within 15 min to confirm access.
+                </p>
+              </div>
             </div>
           </div>
         </div>
