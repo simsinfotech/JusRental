@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
-  const { name, phone, email } = await request.json();
+  const { name, phone, email, propertyTitle, preferredDate, preferredTime } = await request.json();
 
   if (!name || !phone || !email) {
     return NextResponse.json({ error: 'All fields are required' }, { status: 400 });
@@ -13,10 +13,15 @@ export async function POST(request: NextRequest) {
   }
 
   try {
+    const payload: Record<string, string> = { name, phone, email };
+    if (propertyTitle) payload.propertyTitle = propertyTitle;
+    if (preferredDate) payload.preferredDate = preferredDate;
+    if (preferredTime) payload.preferredTime = preferredTime;
+
     const res = await fetch(webhookUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, phone, email }),
+      body: JSON.stringify(payload),
       redirect: 'follow',
     });
 

@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { LuMapPin, LuCalendar, LuHouse, LuCompass, LuUsers, LuChevronRight, LuShare2, LuHeart, LuWifi, LuDumbbell, LuCar, LuZap, LuWaves, LuShield, LuDroplets, LuAirVent, LuArrowUpDown, LuSchool, LuHospital, LuTrainFront, LuShoppingBag, LuTreePine, LuUtensilsCrossed, LuMessageCircle, LuShieldCheck, LuCamera, LuExternalLink, LuPhone, LuCircleCheckBig, LuSparkles, LuMaximize2, LuBuilding2, LuX, LuChevronLeft } from 'react-icons/lu';
 import { getPropertyWhatsAppURL, WHATSAPP_NUMBER } from '@/lib/constants';
 import { PropertyCard } from '@/components/properties/PropertyCard';
+import { createSupabaseBrowser } from '@/lib/supabase-browser';
 import type { Property } from '@/types';
 
 const amenityIcons: Record<string, React.ElementType> = {
@@ -31,6 +32,9 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
   const [visitState, setVisitState] = useState<'idle' | 'loading' | 'done'>('idle');
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [visitFormOpen, setVisitFormOpen] = useState(false);
+  const [visitFormState, setVisitFormState] = useState<'idle' | 'submitting' | 'error'>('idle');
+  const [visitFormError, setVisitFormError] = useState('');
 
   const images = property.images && property.images.length > 0 ? property.images : ['/images/scene-1.png'];
 
@@ -67,8 +71,57 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
   }, [property.id]);
 
   const handleScheduleVisit = () => {
-    setVisitState('loading');
-    setTimeout(() => setVisitState('done'), 800);
+    if (visitState === 'done') return;
+    setVisitFormOpen(true);
+    setVisitFormState('idle');
+    setVisitFormError('');
+  };
+
+  const handleVisitFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setVisitFormState('submitting');
+    setVisitFormError('');
+
+    const formData = new FormData(e.currentTarget);
+    const name = formData.get('name') as string;
+    const phone = formData.get('phone') as string;
+    const email = formData.get('email') as string;
+
+    try {
+      // 1. Send to Google Sheets via API
+      const res = await fetch('/api/leads/capture', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          phone,
+          email,
+          propertyTitle: property.title,
+          preferredDate: selectedDate,
+          preferredTime: selectedSlot,
+        }),
+      });
+      if (!res.ok) throw new Error('Failed to submit');
+
+      // 2. Insert into Supabase for admin/owner visibility
+      const supabase = createSupabaseBrowser();
+      await supabase.from('js_book_visit_requests').insert({
+        name,
+        phone,
+        email,
+        preferred_date: selectedDate,
+        preferred_time: selectedSlot,
+        message: '',
+        property_id: property.id,
+        status: 'pending',
+      });
+
+      setVisitFormOpen(false);
+      setVisitState('done');
+    } catch {
+      setVisitFormState('error');
+      setVisitFormError('Something went wrong. Please try again.');
+    }
   };
 
   const dateOptions = ['Today', 'Tomorrow', 'Weekend'];
@@ -574,6 +627,102 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
           </div>
         </div>
       </div>
+
+      {/* ─── Visit Lead Capture Modal ─── */}
+      {visitFormOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          {/* Backdrop */}
+          <div
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            onClick={() => setVisitFormOpen(false)}
+          />
+          {/* Modal */}
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md relative z-10">
+            <button
+              onClick={() => setVisitFormOpen(false)}
+              className="absolute top-4 right-4 p-1.5 rounded-lg hover:bg-black/5 transition-colors cursor-pointer"
+              aria-label="Close"
+              type="button"
+            >
+              <LuX className="w-5 h-5 text-[#3f4850]" />
+            </button>
+
+            <div className="p-6 sm:p-8">
+              <div className="mb-5">
+                <h3 className="text-xl font-bold font-[family-name:var(--font-heading)] text-[#131b2e] mb-1">
+                  Schedule Your Free Visit
+                </h3>
+                <p className="text-sm text-[#3f4850]">
+                  Share your details and we&apos;ll confirm your visit to <span className="font-semibold text-[#131b2e]">{property.title}</span>.
+                </p>
+                <div className="mt-2 flex items-center gap-3 text-xs text-[#3f4850]">
+                  <span className="px-2 py-1 rounded-lg bg-[#F1F5F9] font-medium">{selectedDate}</span>
+                  <span className="px-2 py-1 rounded-lg bg-[#F1F5F9] font-medium">{selectedSlot}</span>
+                </div>
+              </div>
+
+              {visitFormState === 'error' && (
+                <div className="mb-4 p-3 rounded-xl bg-red-50 text-red-600 text-sm">
+                  {visitFormError}
+                </div>
+              )}
+
+              <form onSubmit={handleVisitFormSubmit} className="space-y-4">
+                <div>
+                  <label className="text-sm font-medium text-[#131b2e] mb-1.5 block">Name *</label>
+                  <div className="relative">
+                    <LuUsers className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#707881]" />
+                    <input
+                      type="text"
+                      name="name"
+                      required
+                      placeholder="Your name"
+                      className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 bg-[#F8FAFC] focus:outline-none focus:ring-2 focus:ring-[#006194]/20 focus:border-[#006194]/50 transition-all text-[#131b2e]"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="text-sm font-medium text-[#131b2e] mb-1.5 block">Phone *</label>
+                  <div className="relative">
+                    <LuPhone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#707881]" />
+                    <input
+                      type="tel"
+                      name="phone"
+                      required
+                      placeholder="+91 XXXXX XXXXX"
+                      className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 bg-[#F8FAFC] focus:outline-none focus:ring-2 focus:ring-[#006194]/20 focus:border-[#006194]/50 transition-all text-[#131b2e]"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="text-sm font-medium text-[#131b2e] mb-1.5 block">Email *</label>
+                  <div className="relative">
+                    <LuMessageCircle className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#707881]" />
+                    <input
+                      type="email"
+                      name="email"
+                      required
+                      placeholder="your@email.com"
+                      className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 bg-[#F8FAFC] focus:outline-none focus:ring-2 focus:ring-[#006194]/20 focus:border-[#006194]/50 transition-all text-[#131b2e]"
+                    />
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={visitFormState === 'submitting'}
+                  className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-gradient-to-r from-[#006194] to-[#0369A1] text-white font-semibold shadow-lg shadow-[#006194]/25 hover:shadow-[#006194]/40 transition-all duration-300 hover:-translate-y-0.5 cursor-pointer disabled:opacity-50"
+                >
+                  <LuCalendar className="w-4 h-4" />
+                  {visitFormState === 'submitting' ? 'Submitting...' : 'Confirm Visit Request'}
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* ─── Fullscreen Photo Lightbox Modal ─── */}
       {lightboxOpen && (
