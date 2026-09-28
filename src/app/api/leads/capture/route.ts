@@ -18,14 +18,24 @@ export async function POST(request: NextRequest) {
     if (preferredDate) payload.preferredDate = preferredDate;
     if (preferredTime) payload.preferredTime = preferredTime;
 
+    // Google Apps Script returns a 302 redirect whose destination only accepts GET.
+    // Use redirect:'manual' to capture the 302 and follow it with a GET request.
     const res = await fetch(webhookUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
-      redirect: 'follow',
+      redirect: 'manual',
     });
 
-    // Google Apps Script redirects; read the final response
+    if (res.status === 302) {
+      const redirectUrl = res.headers.get('location');
+      if (redirectUrl) {
+        const followRes = await fetch(redirectUrl);
+        const text = await followRes.text();
+        return NextResponse.json({ result: 'success', response: text });
+      }
+    }
+
     const text = await res.text();
     return NextResponse.json({ result: 'success', response: text });
   } catch {
