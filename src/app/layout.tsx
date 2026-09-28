@@ -23,6 +23,9 @@ export const metadata: Metadata = {
   description:
     'Discover 1200+ verified rental properties across 25+ Bangalore neighborhoods. Zero brokerage. Move in hassle-free.',
   keywords: ['Bangalore rentals', 'no brokerage', 'rental homes', 'PG', 'flats for rent'],
+  verification: {
+    google: 'qP7irCiAqorZ0gTyToUeMxgXwpwsFvfblFjyF7zT9fs',
+  },
   icons: {
     icon: '/images/monogram.png',
     apple: '/images/monogram.png',
