@@ -87,6 +87,17 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
     const phone = formData.get('phone') as string;
     const email = formData.get('email') as string;
 
+    // Resolve label ("Today" / "Tomorrow" / "Weekend") to YYYY-MM-DD for DB
+    const resolveDate = (label: string) => {
+      const d = new Date();
+      if (label === 'Tomorrow') d.setDate(d.getDate() + 1);
+      else if (label === 'Weekend') {
+        const day = d.getDay();
+        d.setDate(d.getDate() + (day === 0 ? 0 : day === 6 ? 0 : 6 - day));
+      }
+      return d.toISOString().split('T')[0];
+    };
+
     try {
       // 1. Send to Google Sheets via API
       const res = await fetch('/api/leads/capture', {
@@ -103,17 +114,19 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
       });
       if (!res.ok) throw new Error('Failed to submit');
 
-      // 2. Insert into Supabase for admin/owner visibility
+      // 2. Insert into Supabase for admin/owner visibility (non-blocking)
       const supabase = createSupabaseBrowser();
-      await supabase.from('js_book_visit_requests').insert({
+      supabase.from('js_book_visit_requests').insert({
         name,
         phone,
         email,
-        preferred_date: selectedDate,
+        preferred_date: resolveDate(selectedDate),
         preferred_time: selectedSlot,
         message: '',
         property_id: property.id,
         status: 'pending',
+      }).then(({ error }) => {
+        if (error) console.error('Supabase visit insert error:', error);
       });
 
       setVisitFormOpen(false);
