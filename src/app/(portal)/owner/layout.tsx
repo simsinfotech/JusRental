@@ -4,13 +4,14 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { LuLayoutDashboard, LuHouse, LuCalendar, LuFileText, LuUser, LuLogOut, LuMenu, LuX, LuChevronRight } from 'react-icons/lu';
+import { LuLayoutDashboard, LuHouse, LuCalendar, LuFileText, LuUser, LuLogOut, LuMenu, LuX, LuChevronRight, LuPenLine } from 'react-icons/lu';
 import { createSupabaseBrowser } from '@/lib/supabase-browser';
 
 const sidebarLinks = [
   { href: '/owner', label: 'Dashboard', icon: LuLayoutDashboard },
   { href: '/owner/properties', label: 'My Properties', icon: LuHouse },
   { href: '/owner/visits', label: 'Visit Requests', icon: LuCalendar },
+  { href: '/owner/blog', label: 'Blog', icon: LuPenLine },
   { href: '/owner/agreement', label: 'Agreements', icon: LuFileText },
   { href: '/owner/profile', label: 'Profile', icon: LuUser },
 ];
