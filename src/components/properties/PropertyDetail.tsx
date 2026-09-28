@@ -107,6 +107,7 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
           name,
           phone,
           email,
+          source: 'Visit Request',
           propertyTitle: property.title,
           preferredDate: selectedDate,
           preferredTime: selectedSlot,

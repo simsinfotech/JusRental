@@ -23,6 +23,7 @@ export function LeadPopup({ isOpen, onClose }: LeadPopupProps) {
       name: formData.get('name') as string,
       phone: formData.get('phone') as string,
       email: formData.get('email') as string,
+      source: 'Lead Popup',
     };
 
     try {
