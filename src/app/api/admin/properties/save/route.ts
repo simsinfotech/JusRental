@@ -59,7 +59,7 @@ export async function POST(request: NextRequest) {
       images: Array.isArray(images) && images.length > 0 ? images : ['/images/scene-1.png'],
       available: available ?? true,
       verified: verified ?? false,
-      status: status || 'active',
+      status: status || 'inactive',
       updated_at: new Date().toISOString(),
     };
 

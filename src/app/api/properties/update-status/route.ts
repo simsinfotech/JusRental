@@ -20,7 +20,7 @@ export async function PATCH(req: NextRequest) {
   // Use admin client to bypass RLS
   const { error } = await supabaseAdmin
     .from('js_properties')
-    .update({ status })
+    .update({ status, updated_at: new Date().toISOString() })
     .eq('id', id);
 
   if (error) {

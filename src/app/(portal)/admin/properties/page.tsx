@@ -3,7 +3,7 @@
 import { useEffect, useState, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { LuHouse, LuPlus, LuEye, LuMapPin, LuTrash2, LuShieldCheck, LuCircleCheck, LuCircleX, LuSearch, LuChevronLeft, LuChevronRight } from 'react-icons/lu';
+import { LuHouse, LuPlus, LuEye, LuMapPin, LuTrash2, LuShieldCheck, LuCircleCheck, LuCircleX, LuSearch, LuChevronLeft, LuChevronRight, LuClock } from 'react-icons/lu';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { Badge } from '@/components/ui/Badge';
 import { createSupabaseBrowser } from '@/lib/supabase-browser';
@@ -21,6 +21,7 @@ interface PropertyRow {
   status: string;
   verified: boolean;
   views_count: number;
+  updated_at: string | null;
 }
 
 export default function OwnerPropertiesPage() {
@@ -37,10 +38,10 @@ export default function OwnerPropertiesPage() {
 
     const { data } = await supabase
       .from('js_properties')
-      .select('id, title, location, area, price, bhk, sqft, status, verified, views_count')
+      .select('id, title, location, area, price, bhk, sqft, status, verified, views_count, updated_at')
       .order('created_at', { ascending: false });
 
-    setProperties(((data as PropertyRow[]) || []).map((p) => ({ ...p, status: p.status || 'active' })));
+    setProperties(((data as PropertyRow[]) || []).map((p) => ({ ...p, status: p.status || 'inactive' })));
     setLoading(false);
   };
 
@@ -160,10 +161,18 @@ export default function OwnerPropertiesPage() {
                 </div>
 
                 <div className="flex items-center justify-between pt-3 border-t border-glass-border">
-                  <span className="flex items-center gap-1 text-sm text-[var(--muted)]">
-                    <LuEye className="w-3.5 h-3.5" />
-                    {p.views_count || 0} views
-                  </span>
+                  <div className="flex flex-col gap-1">
+                    <span className="flex items-center gap-1 text-sm text-[var(--muted)]">
+                      <LuEye className="w-3.5 h-3.5" />
+                      {p.views_count || 0} views
+                    </span>
+                    {p.updated_at && (
+                      <span className="flex items-center gap-1 text-xs text-[var(--muted)]">
+                        <LuClock className="w-3 h-3" />
+                        Updated {new Date(p.updated_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}, {new Date(p.updated_at).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })}
+                      </span>
+                    )}
+                  </div>
                   <div className="flex items-center gap-2">
                     {p.status === 'pending' ? (
                       <button
