@@ -95,18 +95,14 @@ export default function EditPropertyPage({ params }: { params: Promise<{ id: str
       }),
     });
 
-    const result = await res.json();
-
     if (!res.ok) {
+      const result = await res.json();
       setError(result.error || 'Failed to save property');
       setLoading(false);
       return;
     }
 
-    // Use the returned property data directly (saved via admin client)
-    if (result.property) {
-      setUpdatedAt(result.property.updated_at || new Date().toISOString());
-    }
+    setUpdatedAt(new Date().toISOString());
     setSaved(true);
     setLoading(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -122,12 +118,27 @@ export default function EditPropertyPage({ params }: { params: Promise<{ id: str
 
   return (
     <div>
-      <div className="flex items-center gap-3 mb-8">
-        <button onClick={() => router.back()} className="p-2 rounded-lg hover:bg-surface-light cursor-pointer">
-          <LuArrowLeft className="w-5 h-5" />
-        </button>
-        <LuHouse className="w-6 h-6 text-[#006194]" />
-        <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">Edit Property</h1>
+      <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center gap-3">
+          <button onClick={() => router.back()} className="p-2 rounded-lg hover:bg-surface-light cursor-pointer">
+            <LuArrowLeft className="w-5 h-5" />
+          </button>
+          <LuHouse className="w-6 h-6 text-[#006194]" />
+          <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">Edit Property</h1>
+        </div>
+        <div className="flex items-center gap-3">
+          {updatedAt && (
+            <span className="flex items-center gap-1.5 text-xs text-[var(--muted)] bg-surface-light px-3 py-1.5 rounded-lg">
+              <LuClock className="w-3.5 h-3.5" />
+              Last modified: {new Date(updatedAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}, {new Date(updatedAt).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+            </span>
+          )}
+          <Link href={`/properties/${id}`} target="_blank"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#006194]/10 text-[#006194] hover:bg-[#006194]/20 transition-colors text-xs font-medium">
+            <LuEye className="w-3.5 h-3.5" />
+            View Property
+          </Link>
+        </div>
       </div>
 
       {error && (
@@ -138,22 +149,9 @@ export default function EditPropertyPage({ params }: { params: Promise<{ id: str
       )}
 
       {saved && (
-        <div className="mb-4 flex items-center justify-between p-3 rounded-xl bg-green-500/10 text-green-600 text-sm">
-          <div className="flex items-center gap-2">
-            <LuCircleCheck className="w-4 h-4 shrink-0" />
-            Property saved successfully.
-            {updatedAt && (
-              <span className="flex items-center gap-1 text-xs text-green-600/70">
-                <LuClock className="w-3 h-3" />
-                {new Date(updatedAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}, {new Date(updatedAt).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })}
-              </span>
-            )}
-          </div>
-          <Link href={`/properties/${id}`} target="_blank"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-green-600 text-white hover:bg-green-700 transition-colors text-xs font-semibold">
-            <LuEye className="w-3.5 h-3.5" />
-            View Property
-          </Link>
+        <div className="mb-4 flex items-center gap-2 p-3 rounded-xl bg-green-500/10 text-green-600 text-sm">
+          <LuCircleCheck className="w-4 h-4 shrink-0" />
+          Property saved successfully.
         </div>
       )}
 
