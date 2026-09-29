@@ -95,14 +95,18 @@ export default function EditPropertyPage({ params }: { params: Promise<{ id: str
       }),
     });
 
+    const result = await res.json();
+
     if (!res.ok) {
-      const data = await res.json();
-      setError(data.error || 'Failed to save property');
+      setError(result.error || 'Failed to save property');
       setLoading(false);
       return;
     }
 
-    await loadProperty();
+    // Use the returned property data directly (saved via admin client)
+    if (result.property) {
+      setUpdatedAt(result.property.updated_at || new Date().toISOString());
+    }
     setSaved(true);
     setLoading(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
