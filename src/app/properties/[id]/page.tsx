@@ -15,12 +15,16 @@ export async function generateMetadata({ params }: PropertyPageProps): Promise<M
     return { title: 'Property Not Found — JusRental' };
   }
 
+  const title = property.seoTitle || `${property.title} — ₹${property.price.toLocaleString()}/month | JusRental`;
+  const description = property.seoDescription || property.description.slice(0, 160);
+
   return {
-    title: `${property.title} — ₹${property.price.toLocaleString()}/month | JusRental`,
-    description: property.description.slice(0, 160),
+    title,
+    description,
+    keywords: property.seoKeywords || undefined,
     openGraph: {
-      title: `${property.title} — ₹${property.price.toLocaleString()}/month`,
-      description: property.description.slice(0, 160),
+      title: property.seoTitle || `${property.title} — ₹${property.price.toLocaleString()}/month`,
+      description,
       images: property.images[0] ? [property.images[0]] : [],
     },
   };

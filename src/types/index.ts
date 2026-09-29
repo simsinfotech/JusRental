@@ -21,6 +21,9 @@ export interface Property {
   postedDate: string;
   verificationFee: number;
   concierge: string;
+  seoTitle?: string;
+  seoDescription?: string;
+  seoKeywords?: string;
 }
 
 export interface NearbyPlace {

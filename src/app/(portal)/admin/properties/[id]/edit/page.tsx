@@ -2,7 +2,7 @@
 
 import { useEffect, useState, use } from 'react';
 import { useRouter } from 'next/navigation';
-import { LuHouse, LuCircleAlert, LuSave, LuShieldCheck, LuArrowLeft } from 'react-icons/lu';
+import { LuHouse, LuCircleAlert, LuSave, LuShieldCheck, LuArrowLeft, LuChevronDown, LuChevronUp, LuSearch } from 'react-icons/lu';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { ImageUpload } from '@/components/ui/ImageUpload';
 import { createSupabaseBrowser } from '@/lib/supabase-browser';
@@ -20,11 +20,13 @@ export default function EditPropertyPage({ params }: { params: Promise<{ id: str
   const [error, setError] = useState('');
   const [status, setStatus] = useState('');
   const [images, setImages] = useState<string[]>([]);
+  const [seoOpen, setSeoOpen] = useState(false);
   const [form, setForm] = useState({
     title: '', location: '', area: '', price: '', bhk: '', sqft: '',
     type: 'Apartment', furnished: 'Semi-Furnished', description: '',
     deposit: '', floor: '', facing: 'East', sharingType: 'Family',
     amenities: [] as string[], available: true,
+    seoTitle: '', seoDescription: '', seoKeywords: '',
   });
 
   useEffect(() => {
@@ -49,6 +51,8 @@ export default function EditPropertyPage({ params }: { params: Promise<{ id: str
           deposit: data.deposit.toString(), floor: data.floor, facing: data.facing,
           sharingType: data.sharing_type, amenities: data.amenities || [],
           available: data.available,
+          seoTitle: data.seo_title || '', seoDescription: data.seo_description || '',
+          seoKeywords: data.seo_keywords || '',
         });
       }
       setFetching(false);
@@ -82,6 +86,8 @@ export default function EditPropertyPage({ params }: { params: Promise<{ id: str
         sharing_type: form.sharingType, amenities: form.amenities,
         available: form.available, status,
         images: images.length > 0 ? images : ['/images/scene-1.png'],
+        seo_title: form.seoTitle, seo_description: form.seoDescription,
+        seo_keywords: form.seoKeywords,
       }),
     });
 
@@ -216,6 +222,65 @@ export default function EditPropertyPage({ params }: { params: Promise<{ id: str
                 <span className="text-sm font-medium">Available for rent</span>
               </label>
             </div>
+            {/* SEO Settings */}
+            <div className="border border-glass-border rounded-xl overflow-hidden">
+              <button type="button" onClick={() => setSeoOpen(!seoOpen)}
+                className="w-full flex items-center justify-between px-4 py-3 bg-surface-light hover:bg-surface-light/80 transition-colors cursor-pointer">
+                <div className="flex items-center gap-2">
+                  <LuSearch className="w-4 h-4 text-[#006194]" />
+                  <span className="text-sm font-semibold">SEO Settings</span>
+                  {(form.seoTitle || form.seoDescription || form.seoKeywords) && (
+                    <span className="text-xs px-2 py-0.5 rounded-full bg-green-500/10 text-green-600">Configured</span>
+                  )}
+                </div>
+                {seoOpen ? <LuChevronUp className="w-4 h-4" /> : <LuChevronDown className="w-4 h-4" />}
+              </button>
+              {seoOpen && (
+                <div className="p-4 space-y-4 border-t border-glass-border">
+                  <div>
+                    <label className="text-sm font-medium mb-1.5 block">
+                      SEO Title <span className="text-[var(--muted)]">({form.seoTitle.length}/60)</span>
+                    </label>
+                    <input type="text" value={form.seoTitle}
+                      onChange={(e) => setForm({ ...form, seoTitle: e.target.value })}
+                      placeholder={form.title || 'Custom search engine title'}
+                      className="w-full px-4 py-2.5 rounded-xl border border-glass-border bg-surface-light" />
+                    <p className="text-xs text-[var(--muted)] mt-1">Leave blank to auto-generate from property title</p>
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium mb-1.5 block">
+                      SEO Description <span className="text-[var(--muted)]">({form.seoDescription.length}/160)</span>
+                    </label>
+                    <textarea value={form.seoDescription}
+                      onChange={(e) => setForm({ ...form, seoDescription: e.target.value })}
+                      placeholder={form.description?.slice(0, 160) || 'Custom search engine description'}
+                      rows={3}
+                      className="w-full px-4 py-2.5 rounded-xl border border-glass-border bg-surface-light resize-none" />
+                    <p className="text-xs text-[var(--muted)] mt-1">Leave blank to auto-generate from property description</p>
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium mb-1.5 block">SEO Keywords</label>
+                    <input type="text" value={form.seoKeywords}
+                      onChange={(e) => setForm({ ...form, seoKeywords: e.target.value })}
+                      placeholder="e.g. 2bhk, whitefield, furnished apartment"
+                      className="w-full px-4 py-2.5 rounded-xl border border-glass-border bg-surface-light" />
+                    <p className="text-xs text-[var(--muted)] mt-1">Comma-separated keywords for search engines</p>
+                  </div>
+                  {/* Google Preview */}
+                  <div className="p-4 rounded-xl bg-surface-light">
+                    <p className="text-xs text-[var(--muted)] mb-2">Google Preview</p>
+                    <p className="text-[#1a0dab] text-base font-medium truncate">
+                      {form.seoTitle || (form.title ? `${form.title} | JusRental` : 'Page Title')}
+                    </p>
+                    <p className="text-green-700 text-xs">https://jusrental.com/properties/{id}</p>
+                    <p className="text-sm text-[var(--muted)] line-clamp-2 mt-0.5">
+                      {form.seoDescription || form.description?.slice(0, 160) || 'Property description...'}
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+
             <div className="flex justify-end">
               <button type="submit" disabled={loading}
                 className="flex items-center gap-2 px-8 py-2.5 rounded-xl bg-[#006194] text-white font-semibold cursor-pointer disabled:opacity-50">

@@ -28,6 +28,9 @@ export async function POST(request: NextRequest) {
       owner_phone,
       verification_fee,
       concierge_name,
+      seo_title,
+      seo_description,
+      seo_keywords,
     } = body;
 
     if (!id) {
@@ -74,6 +77,16 @@ export async function POST(request: NextRequest) {
 
     if (concierge_name !== undefined && concierge_name !== null) {
       updatePayload.concierge_name = concierge_name;
+    }
+
+    if (seo_title !== undefined) {
+      updatePayload.seo_title = seo_title;
+    }
+    if (seo_description !== undefined) {
+      updatePayload.seo_description = seo_description;
+    }
+    if (seo_keywords !== undefined) {
+      updatePayload.seo_keywords = seo_keywords;
     }
 
     const { data, error } = await supabaseAdmin

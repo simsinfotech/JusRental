@@ -30,6 +30,9 @@ export interface DbProperty {
   status?: string;
   verification_fee?: number;
   concierge_name?: string;
+  seo_title?: string;
+  seo_description?: string;
+  seo_keywords?: string;
   created_at?: string;
   updated_at?: string;
 }
@@ -129,6 +132,9 @@ export function mapDbProperty(row: DbProperty): Property {
     postedDate: row.posted_date,
     verificationFee: row.verification_fee ?? 599,
     concierge: row.concierge_name ?? 'JusRental Team',
+    seoTitle: row.seo_title ?? '',
+    seoDescription: row.seo_description ?? '',
+    seoKeywords: row.seo_keywords ?? '',
   };
 }
 
