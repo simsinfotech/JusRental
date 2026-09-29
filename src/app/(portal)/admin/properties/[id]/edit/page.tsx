@@ -37,7 +37,6 @@ export default function EditPropertyPage({ params }: { params: Promise<{ id: str
         .from('js_properties')
         .select('*')
         .eq('id', id)
-        .eq('owner_id', user.id)
         .single();
 
       if (data) {
@@ -71,22 +70,24 @@ export default function EditPropertyPage({ params }: { params: Promise<{ id: str
     setError('');
     setLoading(true);
 
-    const supabase = createSupabaseBrowser();
-    const { error: updateError } = await supabase
-      .from('js_properties')
-      .update({
+    const res = await fetch('/api/admin/properties/save', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        id,
         title: form.title, location: form.location, area: form.area,
-        price: parseInt(form.price), bhk: parseInt(form.bhk), sqft: parseInt(form.sqft),
+        price: form.price, bhk: form.bhk, sqft: form.sqft,
         type: form.type, furnished: form.furnished, description: form.description,
-        deposit: parseInt(form.deposit), floor: form.floor, facing: form.facing,
+        deposit: form.deposit, floor: form.floor, facing: form.facing,
         sharing_type: form.sharingType, amenities: form.amenities,
-        available: form.available,
+        available: form.available, status,
         images: images.length > 0 ? images : ['/images/scene-1.png'],
-      })
-      .eq('id', id);
+      }),
+    });
 
-    if (updateError) {
-      setError(updateError.message);
+    if (!res.ok) {
+      const data = await res.json();
+      setError(data.error || 'Failed to save property');
       setLoading(false);
       return;
     }
