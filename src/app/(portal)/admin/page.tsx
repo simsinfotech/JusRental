@@ -9,25 +9,21 @@ export default async function OwnerDashboard() {
 
   if (!user) return null;
 
-  // Fetch stats
+  // Fetch stats — all properties
   const [{ count: propertiesCount }, { count: visitsCount }] = await Promise.all([
-    supabase.from('js_properties').select('*', { count: 'exact', head: true }).eq('owner_id', user.id),
-    supabase.from('js_book_visit_requests').select('*', { count: 'exact', head: true }).in(
-      'property_id',
-      (await supabase.from('js_properties').select('id').eq('owner_id', user.id)).data?.map(p => p.id) || []
-    ),
+    supabase.from('js_properties').select('*', { count: 'exact', head: true }),
+    supabase.from('js_book_visit_requests').select('*', { count: 'exact', head: true }),
   ]);
 
   // Fetch total views
   const { data: properties } = await supabase
     .from('js_properties')
-    .select('views_count')
-    .eq('owner_id', user.id);
+    .select('views_count');
 
   const totalViews = properties?.reduce((sum, p) => sum + (p.views_count || 0), 0) || 0;
 
   const stats = [
-    { label: 'My Properties', value: propertiesCount || 0, icon: LuHouse, color: 'text-[#006194] bg-[#006194]/10', href: '/admin/properties' },
+    { label: 'All Properties', value: propertiesCount || 0, icon: LuHouse, color: 'text-[#006194] bg-[#006194]/10', href: '/admin/properties' },
     { label: 'Total Views', value: totalViews, icon: LuEye, color: 'text-[#006194] bg-[#006194]/10', href: '/admin/properties' },
     { label: 'Visit Requests', value: visitsCount || 0, icon: LuCalendar, color: 'text-green-600 bg-green-500/10', href: '/admin/visits' },
   ];

@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { LuHouse, LuPlus, LuEye, LuMapPin, LuTrash2, LuShieldCheck } from 'react-icons/lu';
+import { LuHouse, LuPlus, LuEye, LuMapPin, LuTrash2, LuShieldCheck, LuCircleCheck, LuCircleX } from 'react-icons/lu';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { Badge } from '@/components/ui/Badge';
 import { createSupabaseBrowser } from '@/lib/supabase-browser';
@@ -34,24 +34,23 @@ export default function OwnerPropertiesPage() {
     const { data } = await supabase
       .from('js_properties')
       .select('id, title, location, area, price, bhk, sqft, status, verified, views_count')
-      .eq('owner_id', user.id)
       .order('created_at', { ascending: false });
 
-    setProperties((data as PropertyRow[]) || []);
+    setProperties(((data as PropertyRow[]) || []).map((p) => ({ ...p, status: p.status || 'active' })));
     setLoading(false);
   };
 
   useEffect(() => { loadProperties(); }, []);
 
-  const handleApprove = async (id: string) => {
+  const handleStatusChange = async (id: string, status: string) => {
     const res = await fetch('/api/properties/update-status', {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id, status: 'active' }),
+      body: JSON.stringify({ id, status }),
     });
     if (!res.ok) {
       const data = await res.json();
-      alert(data.error || 'Failed to approve property');
+      alert(data.error || 'Failed to update status');
       return;
     }
     loadProperties();
@@ -85,7 +84,8 @@ export default function OwnerPropertiesPage() {
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center gap-3">
           <LuHouse className="w-6 h-6 text-[#006194]" />
-          <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">My Properties</h1>
+          <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">All Properties</h1>
+          <span className="text-sm text-[var(--muted)]">({properties.length})</span>
         </div>
         <Link
           href="/admin/properties/new"
@@ -111,7 +111,7 @@ export default function OwnerPropertiesPage() {
                 <div className="flex gap-2">
                   {p.verified && <Badge variant="success">Verified</Badge>}
                   <Badge variant={p.status === 'active' ? 'info' : p.status === 'pending' ? 'warning' : 'default'}>
-                    {p.status === 'pending' ? 'Pending Approval' : p.status || 'active'}
+                    {p.status === 'pending' ? 'Pending Approval' : p.status}
                   </Badge>
                 </div>
               </div>
@@ -129,19 +129,35 @@ export default function OwnerPropertiesPage() {
                   <LuEye className="w-3.5 h-3.5" />
                   {p.views_count || 0} views
                 </span>
-                <div className="flex items-center gap-3">
-                  {(!p.status || p.status === 'pending') && (
+                <div className="flex items-center gap-2">
+                  {p.status === 'pending' ? (
                     <button
-                      onClick={() => handleApprove(p.id)}
+                      onClick={() => handleStatusChange(p.id, 'active')}
                       className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-green-600 text-white hover:bg-green-700 transition-colors cursor-pointer text-xs font-semibold shadow-sm"
                     >
-                      <LuShieldCheck className="w-4 h-4" />
+                      <LuShieldCheck className="w-3.5 h-3.5" />
                       Approve
+                    </button>
+                  ) : p.status === 'active' ? (
+                    <button
+                      onClick={() => handleStatusChange(p.id, 'inactive')}
+                      className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-yellow-500/10 text-yellow-600 hover:bg-yellow-500/20 transition-colors cursor-pointer text-xs font-medium"
+                    >
+                      <LuCircleX className="w-3.5 h-3.5" />
+                      Deactivate
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => handleStatusChange(p.id, 'active')}
+                      className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-green-500/10 text-green-600 hover:bg-green-500/20 transition-colors cursor-pointer text-xs font-medium"
+                    >
+                      <LuCircleCheck className="w-3.5 h-3.5" />
+                      Activate
                     </button>
                   )}
                   <button
                     onClick={() => handleDelete(p.id)}
-                    className="flex items-center gap-1 text-sm text-red-500 hover:text-red-600 font-medium cursor-pointer"
+                    className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-red-500/10 text-red-500 hover:bg-red-500/20 transition-colors cursor-pointer text-xs font-medium"
                   >
                     <LuTrash2 className="w-3.5 h-3.5" />
                     Delete
