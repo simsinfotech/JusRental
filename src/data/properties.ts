@@ -1160,5 +1160,5 @@ export function getSimilarProperties(property: Property, limit = 3): Property[] 
   ).slice(0, limit);
 }
 
-export const ALL_AREAS = [...new Set(PROPERTIES.map((p) => p.area))].sort();
-export const ALL_TYPES = [...new Set(PROPERTIES.map((p) => p.type))].sort();
+export const ALL_AREAS = ['Devanahalli', 'Hebbal', 'Hennur', 'Horamavu', 'Jakkur', 'Thanisandra', 'Yelahanka'];
+export const ALL_TYPES = ['Apartment', 'Independent House', 'Villa'];
