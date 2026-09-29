@@ -3,7 +3,7 @@
 import { useEffect, useState, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { LuHouse, LuPlus, LuEye, LuMapPin, LuTrash2, LuShieldCheck, LuCircleCheck, LuCircleX, LuSearch, LuChevronLeft, LuChevronRight, LuClock } from 'react-icons/lu';
+import { LuHouse, LuPlus, LuEye, LuMapPin, LuTrash2, LuShieldCheck, LuCircleCheck, LuCircleX, LuSearch, LuChevronLeft, LuChevronRight, LuClock, LuPenLine, LuFileText } from 'react-icons/lu';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { Badge } from '@/components/ui/Badge';
 import { createSupabaseBrowser } from '@/lib/supabase-browser';
@@ -21,7 +21,18 @@ interface PropertyRow {
   status: string;
   verified: boolean;
   views_count: number;
+  created_at: string | null;
   updated_at: string | null;
+}
+
+type Tab = 'updated' | 'not_updated';
+
+function isUpdated(p: PropertyRow): boolean {
+  if (!p.updated_at || !p.created_at) return false;
+  // Consider "updated" if updated_at is more than 60 seconds after created_at
+  const created = new Date(p.created_at).getTime();
+  const updated = new Date(p.updated_at).getTime();
+  return (updated - created) > 60000;
 }
 
 export default function OwnerPropertiesPage() {
@@ -30,6 +41,7 @@ export default function OwnerPropertiesPage() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
+  const [tab, setTab] = useState<Tab>('not_updated');
 
   const loadProperties = async () => {
     const supabase = createSupabaseBrowser();
@@ -38,7 +50,7 @@ export default function OwnerPropertiesPage() {
 
     const { data } = await supabase
       .from('js_properties')
-      .select('id, title, location, area, price, bhk, sqft, status, verified, views_count, updated_at')
+      .select('id, title, location, area, price, bhk, sqft, status, verified, views_count, created_at, updated_at')
       .order('created_at', { ascending: false });
 
     setProperties(((data as PropertyRow[]) || []).map((p) => ({ ...p, status: p.status || 'inactive' })));
@@ -47,20 +59,26 @@ export default function OwnerPropertiesPage() {
 
   useEffect(() => { loadProperties(); }, []);
 
-  // Filter by search
+  // Filter by search then by tab
   const filtered = useMemo(() => {
-    if (!search.trim()) return properties;
-    const q = search.toLowerCase();
-    return properties.filter(
-      (p) =>
-        p.title.toLowerCase().includes(q) ||
-        p.location.toLowerCase().includes(q) ||
-        p.area.toLowerCase().includes(q)
-    );
-  }, [properties, search]);
+    let list = properties;
+    if (search.trim()) {
+      const q = search.toLowerCase();
+      list = list.filter(
+        (p) =>
+          p.title.toLowerCase().includes(q) ||
+          p.location.toLowerCase().includes(q) ||
+          p.area.toLowerCase().includes(q)
+      );
+    }
+    return list.filter((p) => (tab === 'updated' ? isUpdated(p) : !isUpdated(p)));
+  }, [properties, search, tab]);
 
-  // Reset to page 1 when search changes
-  useEffect(() => { setPage(1); }, [search]);
+  const updatedCount = useMemo(() => properties.filter(isUpdated).length, [properties]);
+  const notUpdatedCount = useMemo(() => properties.filter((p) => !isUpdated(p)).length, [properties]);
+
+  // Reset to page 1 when search or tab changes
+  useEffect(() => { setPage(1); }, [search, tab]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const paginated = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
@@ -108,7 +126,7 @@ export default function OwnerPropertiesPage() {
         <div className="flex items-center gap-3">
           <LuHouse className="w-6 h-6 text-[#006194]" />
           <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">All Properties</h1>
-          <span className="text-sm text-[var(--muted)]">({filtered.length})</span>
+          <span className="text-sm text-[var(--muted)]">({properties.length})</span>
         </div>
         <Link
           href="/admin/properties/new"
@@ -117,6 +135,42 @@ export default function OwnerPropertiesPage() {
           <LuPlus className="w-4 h-4" />
           Add Property
         </Link>
+      </div>
+
+      {/* Tabs */}
+      <div className="flex gap-1 mb-4 p-1 bg-surface-light rounded-xl w-fit">
+        <button
+          onClick={() => setTab('not_updated')}
+          className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all cursor-pointer ${
+            tab === 'not_updated'
+              ? 'bg-white dark:bg-surface text-[#006194] shadow-sm'
+              : 'text-[var(--muted)] hover:text-[var(--foreground)]'
+          }`}
+        >
+          <LuFileText className="w-4 h-4" />
+          Not Updated
+          <span className={`text-xs px-1.5 py-0.5 rounded-full ${
+            tab === 'not_updated' ? 'bg-[#006194]/10 text-[#006194]' : 'bg-surface-light text-[var(--muted)]'
+          }`}>
+            {notUpdatedCount}
+          </span>
+        </button>
+        <button
+          onClick={() => setTab('updated')}
+          className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all cursor-pointer ${
+            tab === 'updated'
+              ? 'bg-white dark:bg-surface text-[#006194] shadow-sm'
+              : 'text-[var(--muted)] hover:text-[var(--foreground)]'
+          }`}
+        >
+          <LuPenLine className="w-4 h-4" />
+          Updated
+          <span className={`text-xs px-1.5 py-0.5 rounded-full ${
+            tab === 'updated' ? 'bg-green-500/10 text-green-600' : 'bg-surface-light text-[var(--muted)]'
+          }`}>
+            {updatedCount}
+          </span>
+        </button>
       </div>
 
       {/* Search bar */}
@@ -166,10 +220,16 @@ export default function OwnerPropertiesPage() {
                       <LuEye className="w-3.5 h-3.5" />
                       {p.views_count || 0} views
                     </span>
-                    {p.updated_at && (
-                      <span className="flex items-center gap-1 text-xs text-[var(--muted)]">
+                    {p.updated_at && isUpdated(p) && (
+                      <span className="flex items-center gap-1 text-xs text-green-600">
                         <LuClock className="w-3 h-3" />
                         Updated {new Date(p.updated_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}, {new Date(p.updated_at).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })}
+                      </span>
+                    )}
+                    {!isUpdated(p) && (
+                      <span className="flex items-center gap-1 text-xs text-yellow-600">
+                        <LuClock className="w-3 h-3" />
+                        Not yet updated
                       </span>
                     )}
                   </div>
@@ -283,18 +343,17 @@ export default function OwnerPropertiesPage() {
               <h3 className="text-lg font-semibold mb-2">No results found</h3>
               <p className="text-[var(--muted)] mb-4">Try a different search term.</p>
             </>
+          ) : tab === 'updated' ? (
+            <>
+              <LuPenLine className="w-12 h-12 mx-auto text-[var(--muted)] mb-4" />
+              <h3 className="text-lg font-semibold mb-2">No updated properties</h3>
+              <p className="text-[var(--muted)] mb-4">Properties will appear here once they have been edited and saved.</p>
+            </>
           ) : (
             <>
               <LuHouse className="w-12 h-12 mx-auto text-[var(--muted)] mb-4" />
-              <h3 className="text-lg font-semibold mb-2">No properties yet</h3>
-              <p className="text-[var(--muted)] mb-4">Add your first property to start getting tenants.</p>
-              <Link
-                href="/admin/properties/new"
-                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#006194] text-white font-medium"
-              >
-                <LuPlus className="w-4 h-4" />
-                Add Property
-              </Link>
+              <h3 className="text-lg font-semibold mb-2">All properties have been updated</h3>
+              <p className="text-[var(--muted)] mb-4">Great work! All properties have been reviewed and saved.</p>
             </>
           )}
         </GlassCard>
