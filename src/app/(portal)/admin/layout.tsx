@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { LuLayoutDashboard, LuHouse, LuCalendar, LuFileText, LuUser, LuLogOut, LuMenu, LuX, LuChevronRight, LuPenLine } from 'react-icons/lu';
+import { LuLayoutDashboard, LuHouse, LuCalendar, LuFileText, LuUser, LuLogOut, LuMenu, LuX, LuChevronRight, LuPenLine, LuSearch } from 'react-icons/lu';
 import { createSupabaseBrowser } from '@/lib/supabase-browser';
 
 const sidebarLinks = [
@@ -13,6 +13,7 @@ const sidebarLinks = [
   { href: '/admin/visits', label: 'Visit Requests', icon: LuCalendar },
   { href: '/admin/blog', label: 'Blog', icon: LuPenLine },
   { href: '/admin/agreement', label: 'Agreements', icon: LuFileText },
+  { href: '/admin/seo', label: 'SEO', icon: LuSearch },
   { href: '/admin/profile', label: 'Profile', icon: LuUser },
 ];
 
