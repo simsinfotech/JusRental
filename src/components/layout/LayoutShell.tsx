@@ -3,6 +3,7 @@
 import { usePathname } from 'next/navigation';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
+import { LocationPrompt } from '@/components/location/LocationPrompt';
 
 export function LayoutShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -13,6 +14,7 @@ export function LayoutShell({ children }: { children: React.ReactNode }) {
       {!isPortal && <Navbar />}
       <main>{children}</main>
       {!isPortal && <Footer />}
+      <LocationPrompt />
     </>
   );
 }
