@@ -2,7 +2,7 @@
 
 import { useEffect, useState, use } from 'react';
 import { useRouter } from 'next/navigation';
-import { LuHouse, LuCircleAlert, LuSave, LuShieldCheck } from 'react-icons/lu';
+import { LuHouse, LuCircleAlert, LuSave, LuShieldCheck, LuArrowLeft } from 'react-icons/lu';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { ImageUpload } from '@/components/ui/ImageUpload';
 import { createSupabaseBrowser } from '@/lib/supabase-browser';
@@ -107,6 +107,9 @@ export default function EditPropertyPage({ params }: { params: Promise<{ id: str
   return (
     <div>
       <div className="flex items-center gap-3 mb-8">
+        <button onClick={() => router.back()} className="p-2 rounded-lg hover:bg-surface-light cursor-pointer">
+          <LuArrowLeft className="w-5 h-5" />
+        </button>
         <LuHouse className="w-6 h-6 text-[#006194]" />
         <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">Edit Property</h1>
       </div>
