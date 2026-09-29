@@ -52,7 +52,7 @@ export default function OwnerNewBlogPage() {
       return;
     }
 
-    router.push('/owner/blog');
+    router.push('/admin/blog');
     router.refresh();
   };
 

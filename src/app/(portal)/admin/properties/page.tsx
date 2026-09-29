@@ -88,7 +88,7 @@ export default function OwnerPropertiesPage() {
           <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">My Properties</h1>
         </div>
         <Link
-          href="/owner/properties/new"
+          href="/admin/properties/new"
           className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#006194] text-white font-medium text-sm shadow-lg shadow-[#006194]/25 hover:shadow-[#006194]/40 transition-all"
         >
           <LuPlus className="w-4 h-4" />
@@ -147,7 +147,7 @@ export default function OwnerPropertiesPage() {
                     Delete
                   </button>
                   <Link
-                    href={`/owner/properties/${p.id}/edit`}
+                    href={`/admin/properties/${p.id}/edit`}
                     className="text-sm text-[#006194] font-medium hover:underline"
                   >
                     Edit
@@ -163,7 +163,7 @@ export default function OwnerPropertiesPage() {
           <h3 className="text-lg font-semibold mb-2">No properties yet</h3>
           <p className="text-[var(--muted)] mb-4">Add your first property to start getting tenants.</p>
           <Link
-            href="/owner/properties/new"
+            href="/admin/properties/new"
             className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#006194] text-white font-medium"
           >
             <LuPlus className="w-4 h-4" />

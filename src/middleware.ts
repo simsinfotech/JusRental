@@ -32,15 +32,7 @@ export async function middleware(request: NextRequest) {
 
   const pathname = request.nextUrl.pathname;
 
-  // Protect /owner/* routes
-  if (pathname.startsWith('/owner') && !user) {
-    const url = request.nextUrl.clone();
-    url.pathname = '/login';
-    url.searchParams.set('redirect', pathname);
-    return NextResponse.redirect(url);
-  }
-
-  // Protect /admin/* routes
+  // Protect /admin/* routes (owner portal)
   if (pathname.startsWith('/admin') && !user) {
     const url = request.nextUrl.clone();
     url.pathname = '/login';
@@ -48,8 +40,16 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  // Check admin role for /admin/* routes
-  if (pathname.startsWith('/admin') && user) {
+  // Protect /superadmin/* routes
+  if (pathname.startsWith('/superadmin') && !user) {
+    const url = request.nextUrl.clone();
+    url.pathname = '/login';
+    url.searchParams.set('redirect', pathname);
+    return NextResponse.redirect(url);
+  }
+
+  // Check admin role for /superadmin/* routes
+  if (pathname.startsWith('/superadmin') && user) {
     const { data: profile } = await supabase
       .from('js_user_profiles')
       .select('role')
@@ -58,14 +58,14 @@ export async function middleware(request: NextRequest) {
 
     if (!profile || profile.role !== 'admin') {
       const url = request.nextUrl.clone();
-      url.pathname = '/owner';
+      url.pathname = '/admin';
       return NextResponse.redirect(url);
     }
   }
 
   // Redirect logged-in users away from auth pages
   if ((pathname === '/login' || pathname === '/signup') && user) {
-    const redirect = request.nextUrl.searchParams.get('redirect') || '/owner';
+    const redirect = request.nextUrl.searchParams.get('redirect') || '/admin';
     const url = request.nextUrl.clone();
     url.pathname = redirect;
     url.searchParams.delete('redirect');
@@ -77,8 +77,8 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/owner/:path*',
     '/admin/:path*',
+    '/superadmin/:path*',
     '/login',
     '/signup',
   ],

@@ -7,7 +7,7 @@ import { LocationPrompt } from '@/components/location/LocationPrompt';
 
 export function LayoutShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const isPortal = pathname.startsWith('/admin') || pathname.startsWith('/owner');
+  const isPortal = pathname.startsWith('/admin') || pathname.startsWith('/superadmin');
 
   return (
     <>

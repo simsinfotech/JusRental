@@ -4,19 +4,19 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { LuLayoutDashboard, LuHouse, LuUsers, LuFileText, LuSearch, LuSettings, LuLogOut, LuMenu, LuX, LuChevronRight, LuShield } from 'react-icons/lu';
+import { LuLayoutDashboard, LuHouse, LuCalendar, LuFileText, LuUser, LuLogOut, LuMenu, LuX, LuChevronRight, LuPenLine } from 'react-icons/lu';
 import { createSupabaseBrowser } from '@/lib/supabase-browser';
 
 const sidebarLinks = [
   { href: '/admin', label: 'Dashboard', icon: LuLayoutDashboard },
-  { href: '/admin/properties', label: 'Properties', icon: LuHouse },
-  { href: '/admin/leads', label: 'Leads', icon: LuUsers },
-  { href: '/admin/blog', label: 'Blog', icon: LuFileText },
-  { href: '/admin/seo', label: 'SEO', icon: LuSearch },
-  { href: '/admin/settings', label: 'Settings', icon: LuSettings },
+  { href: '/admin/properties', label: 'My Properties', icon: LuHouse },
+  { href: '/admin/visits', label: 'Visit Requests', icon: LuCalendar },
+  { href: '/admin/blog', label: 'Blog', icon: LuPenLine },
+  { href: '/admin/agreement', label: 'Agreements', icon: LuFileText },
+  { href: '/admin/profile', label: 'Profile', icon: LuUser },
 ];
 
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
+export default function OwnerLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -45,28 +45,27 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <button onClick={() => setSidebarOpen(true)} className="p-2 rounded-lg hover:bg-surface-light cursor-pointer">
           <LuMenu className="w-5 h-5" />
         </button>
-        <Link href="/admin" className="flex items-center gap-2">
-          <LuShield className="w-5 h-5 text-red-500" />
-          <span className="font-semibold font-[family-name:var(--font-heading)]">Admin Panel</span>
+        <Link href="/" className="flex items-center gap-2">
+          <Image src="/images/monogram.png" alt="JusRental" width={28} height={28} />
+          <span className="font-semibold font-[family-name:var(--font-heading)]">Owner Portal</span>
         </Link>
         <div className="w-9" />
       </div>
 
       <div className="flex">
+        {/* Sidebar overlay (mobile) */}
         {sidebarOpen && (
           <div className="fixed inset-0 bg-black/50 z-40 lg:hidden" onClick={() => setSidebarOpen(false)} />
         )}
 
+        {/* Sidebar */}
         <aside className={`fixed lg:sticky top-0 left-0 z-50 lg:z-0 h-screen w-64 bg-surface border-r border-glass-border flex flex-col transition-transform duration-300 lg:translate-x-0 ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         }`}>
           <div className="p-4 flex items-center justify-between border-b border-glass-border">
-            <Link href="/admin" className="flex items-center gap-2">
+            <Link href="/" className="flex items-center gap-2">
               <Image src="/images/monogram.png" alt="JusRental" width={32} height={32} />
-              <div>
-                <span className="font-semibold font-[family-name:var(--font-heading)] text-sm">JusRental</span>
-                <span className="ml-1 px-1.5 py-0.5 rounded text-[10px] font-bold bg-red-500/10 text-red-500">ADMIN</span>
-              </div>
+              <span className="font-semibold font-[family-name:var(--font-heading)]">Owner Portal</span>
             </Link>
             <button onClick={() => setSidebarOpen(false)} className="lg:hidden p-1 rounded-lg hover:bg-surface-light cursor-pointer">
               <LuX className="w-4 h-4" />
@@ -83,7 +82,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                   onClick={() => setSidebarOpen(false)}
                   className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
                     isActive
-                      ? 'bg-gradient-to-r from-red-500/10 to-orange-500/10 text-red-600 border border-red-500/20'
+                      ? 'bg-[#006194]/10 text-[#006194] border border-[#006194]/20'
                       : 'text-[var(--muted)] hover:bg-surface-light hover:text-[var(--foreground)]'
                   }`}
                 >
@@ -97,12 +96,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
           <div className="p-4 border-t border-glass-border">
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-r from-red-500 to-orange-500 flex items-center justify-center text-white text-sm font-bold">
-                {userName?.charAt(0)?.toUpperCase() || 'A'}
+              <div className="w-8 h-8 rounded-full bg-[#006194] flex items-center justify-center text-white text-sm font-bold">
+                {userName?.charAt(0)?.toUpperCase() || 'U'}
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium truncate">{userName || 'Admin'}</p>
-                <p className="text-xs text-[var(--muted)]">Administrator</p>
+                <p className="text-sm font-medium truncate">{userName || 'User'}</p>
+                <p className="text-xs text-[var(--muted)]">Owner</p>
               </div>
             </div>
             <button
@@ -115,7 +114,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </div>
         </aside>
 
-        <main className="flex-1 min-h-screen">
+        {/* Main content */}
+        <main className="flex-1 min-h-screen lg:min-h-[calc(100vh-0px)]">
           <div className="p-4 md:p-6 lg:p-8">
             {children}
           </div>

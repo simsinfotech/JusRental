@@ -55,7 +55,7 @@ export function MobileMenu({ isOpen, onClose, isLoggedIn }: MobileMenuProps) {
               <div className="mt-2 pt-2 border-t border-glass-border">
                 {isLoggedIn ? (
                   <Link
-                    href="/owner"
+                    href="/admin"
                     onClick={onClose}
                     className="flex items-center gap-3 px-4 py-3 rounded-xl text-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors text-[#006194]"
                   >

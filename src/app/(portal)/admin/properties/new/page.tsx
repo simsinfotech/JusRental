@@ -101,7 +101,7 @@ export default function AddPropertyPage() {
         return;
       }
 
-      router.push('/owner/properties');
+      router.push('/admin/properties');
       router.refresh();
     } catch {
       setError('Something went wrong. Please try again.');

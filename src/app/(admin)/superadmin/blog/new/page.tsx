@@ -52,7 +52,7 @@ export default function AdminNewBlogPage() {
       return;
     }
 
-    router.push('/admin/blog');
+    router.push('/superadmin/blog');
     router.refresh();
   };
 

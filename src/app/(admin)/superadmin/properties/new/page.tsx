@@ -64,7 +64,7 @@ export default function AdminAddPropertyPage() {
       return;
     }
 
-    router.push('/admin/properties');
+    router.push('/superadmin/properties');
     router.refresh();
   };
 

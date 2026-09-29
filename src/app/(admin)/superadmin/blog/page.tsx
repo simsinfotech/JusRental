@@ -3,7 +3,8 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { LuPenLine, LuPlus, LuSquarePen, LuTrash2, LuEye, LuEyeOff } from 'react-icons/lu';
+import { LuFileText, LuPlus, LuSquarePen, LuTrash2, LuEye, LuEyeOff } from 'react-icons/lu';
+import { StatusBadge } from '@/components/admin/StatusBadge';
 
 interface BlogRow {
   id: string;
@@ -16,7 +17,7 @@ interface BlogRow {
   published: boolean;
 }
 
-export default function OwnerBlogPage() {
+export default function AdminBlogPage() {
   const router = useRouter();
   const [posts, setPosts] = useState<BlogRow[]>([]);
   const [loading, setLoading] = useState(true);
@@ -61,13 +62,13 @@ export default function OwnerBlogPage() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center gap-3">
-          <LuPenLine className="w-6 h-6 text-[#006194]" />
+          <LuFileText className="w-6 h-6 text-red-600" />
           <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">Blog Posts</h1>
           <span className="text-sm text-[var(--muted)]">({posts.length})</span>
         </div>
         <Link
-          href="/owner/blog/new"
-          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#006194] text-white font-medium text-sm"
+          href="/superadmin/blog/new"
+          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-red-500 to-orange-500 text-white font-medium text-sm"
         >
           <LuPlus className="w-4 h-4" />
           New Post
@@ -80,7 +81,7 @@ export default function OwnerBlogPage() {
             <div className="flex items-start justify-between">
               <div className="flex-1 min-w-0">
                 <h3 className="font-semibold truncate">{post.title}</h3>
-                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1 text-sm text-[var(--muted)]">
+                <div className="flex items-center gap-3 mt-1 text-sm text-[var(--muted)]">
                   <span>{post.category}</span>
                   <span>·</span>
                   <span>{post.author}</span>
@@ -91,13 +92,7 @@ export default function OwnerBlogPage() {
                 </div>
               </div>
               <div className="flex items-center gap-2 ml-4">
-                <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border capitalize ${
-                  post.published
-                    ? 'bg-green-500/10 text-green-600 border-green-500/20'
-                    : 'bg-gray-500/10 text-gray-500 border-gray-500/20'
-                }`}>
-                  {post.published ? 'published' : 'draft'}
-                </span>
+                <StatusBadge status={post.published ? 'published' : 'draft'} />
               </div>
             </div>
 
@@ -110,7 +105,7 @@ export default function OwnerBlogPage() {
                 {!post.published ? 'Publish' : 'Unpublish'}
               </button>
               <button
-                onClick={() => router.push(`/owner/blog/${post.id}`)}
+                onClick={() => router.push(`/superadmin/blog/${post.id}`)}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium hover:bg-surface-light transition-all cursor-pointer text-[var(--muted)]"
               >
                 <LuSquarePen className="w-3.5 h-3.5" />
@@ -129,7 +124,7 @@ export default function OwnerBlogPage() {
 
         {posts.length === 0 && (
           <div className="glass-card p-8 text-center">
-            <LuPenLine className="w-12 h-12 mx-auto text-[var(--muted)] mb-3" />
+            <LuFileText className="w-12 h-12 mx-auto text-[var(--muted)] mb-3" />
             <p className="text-[var(--muted)]">No blog posts yet</p>
           </div>
         )}

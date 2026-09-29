@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/admin/', '/owner/', '/login', '/signup'],
+        disallow: ['/admin/', '/superadmin/', '/login', '/signup'],
       },
     ],
     sitemap: 'https://jusrental.com/sitemap.xml',

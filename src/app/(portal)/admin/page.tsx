@@ -27,9 +27,9 @@ export default async function OwnerDashboard() {
   const totalViews = properties?.reduce((sum, p) => sum + (p.views_count || 0), 0) || 0;
 
   const stats = [
-    { label: 'My Properties', value: propertiesCount || 0, icon: LuHouse, color: 'text-[#006194] bg-[#006194]/10', href: '/owner/properties' },
-    { label: 'Total Views', value: totalViews, icon: LuEye, color: 'text-[#006194] bg-[#006194]/10', href: '/owner/properties' },
-    { label: 'Visit Requests', value: visitsCount || 0, icon: LuCalendar, color: 'text-green-600 bg-green-500/10', href: '/owner/visits' },
+    { label: 'My Properties', value: propertiesCount || 0, icon: LuHouse, color: 'text-[#006194] bg-[#006194]/10', href: '/admin/properties' },
+    { label: 'Total Views', value: totalViews, icon: LuEye, color: 'text-[#006194] bg-[#006194]/10', href: '/admin/properties' },
+    { label: 'Visit Requests', value: visitsCount || 0, icon: LuCalendar, color: 'text-green-600 bg-green-500/10', href: '/admin/visits' },
   ];
 
   return (
@@ -63,7 +63,7 @@ export default async function OwnerDashboard() {
         </h2>
         <div className="grid sm:grid-cols-2 gap-3">
           <a
-            href="/owner/properties/new"
+            href="/admin/properties/new"
             className="flex items-center gap-3 p-4 rounded-xl border border-glass-border hover:bg-surface-light transition-all"
           >
             <LuHouse className="w-5 h-5 text-[#006194]" />
@@ -73,7 +73,7 @@ export default async function OwnerDashboard() {
             </div>
           </a>
           <a
-            href="/owner/visits"
+            href="/admin/visits"
             className="flex items-center gap-3 p-4 rounded-xl border border-glass-border hover:bg-surface-light transition-all"
           >
             <LuCalendar className="w-5 h-5 text-green-600" />

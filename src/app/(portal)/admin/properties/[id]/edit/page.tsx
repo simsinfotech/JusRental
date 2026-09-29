@@ -91,7 +91,7 @@ export default function EditPropertyPage({ params }: { params: Promise<{ id: str
       return;
     }
 
-    router.push('/owner/properties');
+    router.push('/admin/properties');
     router.refresh();
   };
 

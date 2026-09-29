@@ -155,7 +155,7 @@ export function Navbar() {
                 {/* User Avatar/Login */}
                 {isLoggedIn ? (
                   <Link
-                    href="/owner"
+                    href="/admin"
                     className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${
                       showSolidBg
                         ? 'bg-[#006194]/10 text-[#006194] hover:bg-[#006194]/20'

@@ -184,7 +184,7 @@ export default function AdminPropertiesPage() {
           <span className="text-sm text-[var(--muted)]">({properties.length})</span>
         </div>
         <Link
-          href="/admin/properties/new"
+          href="/superadmin/properties/new"
           className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-red-500 to-orange-500 text-white font-medium text-sm"
         >
           <LuPlus className="w-4 h-4" />
@@ -196,7 +196,7 @@ export default function AdminPropertiesPage() {
         data={properties}
         columns={columns}
         searchKeys={['title', 'location', 'area']}
-        onRowClick={(item) => router.push(`/admin/properties/${item.id}`)}
+        onRowClick={(item) => router.push(`/superadmin/properties/${item.id}`)}
       />
     </div>
   );
