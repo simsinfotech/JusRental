@@ -207,6 +207,14 @@ export default function OwnerPropertiesPage() {
                       Delete
                     </button>
                     <Link
+                      href={`/properties/${p.id}`}
+                      target="_blank"
+                      className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-[#006194]/10 text-[#006194] hover:bg-[#006194]/20 transition-colors text-xs font-medium"
+                    >
+                      <LuEye className="w-3.5 h-3.5" />
+                      View
+                    </Link>
+                    <Link
                       href={`/admin/properties/${p.id}/edit`}
                       className="text-sm text-[#006194] font-medium hover:underline"
                     >

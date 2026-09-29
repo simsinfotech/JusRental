@@ -2,7 +2,8 @@
 
 import { useEffect, useState, use } from 'react';
 import { useRouter } from 'next/navigation';
-import { LuHouse, LuCircleAlert, LuSave, LuShieldCheck, LuArrowLeft, LuChevronDown, LuChevronUp, LuSearch } from 'react-icons/lu';
+import Link from 'next/link';
+import { LuHouse, LuCircleAlert, LuSave, LuShieldCheck, LuArrowLeft, LuChevronDown, LuChevronUp, LuSearch, LuCircleCheck, LuEye, LuClock } from 'react-icons/lu';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { ImageUpload } from '@/components/ui/ImageUpload';
 import { createSupabaseBrowser } from '@/lib/supabase-browser';
@@ -18,7 +19,9 @@ export default function EditPropertyPage({ params }: { params: Promise<{ id: str
   const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(true);
   const [error, setError] = useState('');
+  const [saved, setSaved] = useState(false);
   const [status, setStatus] = useState('');
+  const [updatedAt, setUpdatedAt] = useState<string | null>(null);
   const [images, setImages] = useState<string[]>([]);
   const [seoOpen, setSeoOpen] = useState(false);
   const [form, setForm] = useState({
@@ -29,36 +32,36 @@ export default function EditPropertyPage({ params }: { params: Promise<{ id: str
     seoTitle: '', seoDescription: '', seoKeywords: '',
   });
 
-  useEffect(() => {
-    const loadProperty = async () => {
-      const supabase = createSupabaseBrowser();
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return;
+  const loadProperty = async () => {
+    const supabase = createSupabaseBrowser();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return;
 
-      const { data } = await supabase
-        .from('js_properties')
-        .select('*')
-        .eq('id', id)
-        .single();
+    const { data } = await supabase
+      .from('js_properties')
+      .select('*')
+      .eq('id', id)
+      .single();
 
-      if (data) {
-        setStatus(data.status || 'pending');
-        setImages(data.images || []);
-        setForm({
-          title: data.title, location: data.location, area: data.area,
-          price: data.price.toString(), bhk: data.bhk.toString(), sqft: data.sqft.toString(),
-          type: data.type, furnished: data.furnished, description: data.description,
-          deposit: data.deposit.toString(), floor: data.floor, facing: data.facing,
-          sharingType: data.sharing_type, amenities: data.amenities || [],
-          available: data.available,
-          seoTitle: data.seo_title || '', seoDescription: data.seo_description || '',
-          seoKeywords: data.seo_keywords || '',
-        });
-      }
-      setFetching(false);
-    };
-    loadProperty();
-  }, [id]);
+    if (data) {
+      setStatus(data.status || 'pending');
+      setImages(data.images || []);
+      setUpdatedAt(data.updated_at || null);
+      setForm({
+        title: data.title, location: data.location, area: data.area,
+        price: data.price.toString(), bhk: data.bhk.toString(), sqft: data.sqft.toString(),
+        type: data.type, furnished: data.furnished, description: data.description,
+        deposit: data.deposit.toString(), floor: data.floor, facing: data.facing,
+        sharingType: data.sharing_type, amenities: data.amenities || [],
+        available: data.available,
+        seoTitle: data.seo_title || '', seoDescription: data.seo_description || '',
+        seoKeywords: data.seo_keywords || '',
+      });
+    }
+    setFetching(false);
+  };
+
+  useEffect(() => { loadProperty(); }, [id]);
 
   const toggleAmenity = (amenity: string) => {
     setForm((prev) => ({
@@ -72,6 +75,7 @@ export default function EditPropertyPage({ params }: { params: Promise<{ id: str
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    setSaved(false);
     setLoading(true);
 
     const res = await fetch('/api/admin/properties/save', {
@@ -98,8 +102,10 @@ export default function EditPropertyPage({ params }: { params: Promise<{ id: str
       return;
     }
 
-    router.push('/admin/properties');
-    router.refresh();
+    await loadProperty();
+    setSaved(true);
+    setLoading(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   if (fetching) {
@@ -124,6 +130,26 @@ export default function EditPropertyPage({ params }: { params: Promise<{ id: str
         <div className="mb-4 flex items-center gap-2 p-3 rounded-xl bg-red-500/10 text-red-600 text-sm">
           <LuCircleAlert className="w-4 h-4 shrink-0" />
           {error}
+        </div>
+      )}
+
+      {saved && (
+        <div className="mb-4 flex items-center justify-between p-3 rounded-xl bg-green-500/10 text-green-600 text-sm">
+          <div className="flex items-center gap-2">
+            <LuCircleCheck className="w-4 h-4 shrink-0" />
+            Property saved successfully.
+            {updatedAt && (
+              <span className="flex items-center gap-1 text-xs text-green-600/70">
+                <LuClock className="w-3 h-3" />
+                {new Date(updatedAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}, {new Date(updatedAt).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })}
+              </span>
+            )}
+          </div>
+          <Link href={`/properties/${id}`} target="_blank"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-green-600 text-white hover:bg-green-700 transition-colors text-xs font-semibold">
+            <LuEye className="w-3.5 h-3.5" />
+            View Property
+          </Link>
         </div>
       )}
 
