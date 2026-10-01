@@ -42,7 +42,7 @@ export async function submitBookVisit(
     return { success: false, error: 'Something went wrong. Please try again.' };
   }
 
-  sendToGoogleSheets({
+  await sendToGoogleSheets({
     source: 'Book Visit',
     name,
     phone,

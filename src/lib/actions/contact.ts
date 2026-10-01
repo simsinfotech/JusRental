@@ -38,7 +38,7 @@ export async function submitContactForm(
     return { success: false, error: 'Something went wrong. Please try again.' };
   }
 
-  sendToGoogleSheets({
+  await sendToGoogleSheets({
     source: 'Contact Form',
     name,
     phone,

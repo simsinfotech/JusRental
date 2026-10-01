@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
   if (preferredTime) payload.preferredTime = preferredTime;
 
   // Send to Google Sheets
-  sendToGoogleSheets(payload);
+  await sendToGoogleSheets(payload);
 
   // Also persist to Supabase so leads appear in the admin panel
   const details = [

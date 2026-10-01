@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
   if (userAgent) payload.userAgent = userAgent;
   if (denied) payload.denied = 'true';
 
-  sendToGoogleSheets(payload);
+  await sendToGoogleSheets(payload);
 
   // Insert into Supabase
   try {
