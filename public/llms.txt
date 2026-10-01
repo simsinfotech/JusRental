@@ -2,31 +2,53 @@
 
 ## About
 JusRental is a zero-brokerage rental property platform focused on North Bangalore.
-We connect property owners directly with verified tenants.
+We connect property owners directly with verified tenants. Every listing is personally
+verified by our team with accurate photos, genuine pricing, and real-time availability.
 
 ## Website Structure
 - / — Homepage with property showcase, area explorer, testimonials
-- /properties — Browse verified rental properties with filters
-- /properties/[id] — Individual property detail page
-- /list-property — Property owners can list their rental property
-- /rent-estimator — Estimate rental rates by area and BHK
+- /properties — Browse verified rental properties with filters (area, budget, BHK, type, furnished)
+- /properties/[id] — Individual property detail page with photos, amenities, pricing, and nearby places
+- /properties/hennur — Rental homes in Hennur with area guide, rent ranges, FAQs
+- /properties/hebbal — Rental homes in Hebbal with area guide, rent ranges, FAQs
+- /properties/yelahanka — Rental homes in Yelahanka with area guide, rent ranges, FAQs
+- /properties/thanisandra — Rental homes in Thanisandra with area guide, rent ranges, FAQs
+- /properties/devanahalli — Rental homes in Devanahalli with area guide, rent ranges, FAQs
+- /properties/horamavu — Rental homes in Horamavu with area guide, rent ranges, FAQs
+- /properties/jakkur — Rental homes in Jakkur with area guide, rent ranges, FAQs
+- /list-property — Property owners can list their rental property for free
+- /rent-estimator — Estimate rental rates by area and BHK configuration
 - /blog — Rental tips, market trends, neighbourhood guides
 - /blog/[slug] — Individual blog post
-- /contact — Contact form and WhatsApp
+- /contact — Contact form and WhatsApp support
 - /book-visit — Schedule a property visit
-- /nri-services — Services for Non-Resident Indians
-- /rental-agreement — Rental agreement information
+- /nri-services — Property management services for Non-Resident Indians
+- /rental-agreement — Rental agreement information and templates
 
 ## Key Features
-- 100% verified property listings
-- Zero brokerage for tenants
-- WhatsApp-first communication
-- NRI-friendly services
+- 100% verified property listings — every property is personally inspected
+- Zero brokerage for tenants — no hidden charges
+- WhatsApp-first communication — quick responses and easy scheduling
+- NRI-friendly property management — tenant discovery, rent collection, maintenance
 - Real-time availability updates
+- AI-powered SEO optimization for property listings
+- Area-specific guides with rent ranges, connectivity info, and FAQs
 
 ## Coverage Areas
-North Bangalore: Hennur, Hebbal, Yelahanka, Thanisandra, Devanahalli, Horamavu
+North Bangalore: Hennur, Hebbal, Yelahanka, Thanisandra, Devanahalli, Horamavu, Jakkur
+
+## Property Types
+- Apartments (1 BHK, 2 BHK, 3 BHK, 4+ BHK)
+- Villas
+- Independent Houses
+- Furnished, Semi-Furnished, and Unfurnished options
+
+## Typical Rent Ranges (North Bangalore)
+- 1 BHK: ₹7,000 – ₹22,000/month
+- 2 BHK: ₹12,000 – ₹40,000/month
+- 3 BHK: ₹18,000 – ₹70,000/month
 
 ## Contact
 WhatsApp: +91 90363 17765
-Website: https://jusrental.com
+Website: https://www.jusrental.com
+Facebook: https://www.facebook.com/profile.php?id=61594353013446

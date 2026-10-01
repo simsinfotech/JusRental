@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/admin/', '/superadmin/', '/login', '/signup'],
       },
     ],
-    sitemap: 'https://jusrental.com/sitemap.xml',
+    sitemap: 'https://www.jusrental.com/sitemap.xml',
   };
 }

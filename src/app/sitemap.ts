@@ -1,8 +1,9 @@
 import { MetadataRoute } from 'next';
 import { createSupabaseServer } from '@/lib/supabase-ssr';
+import { getAllAreaSlugs } from '@/lib/area-content';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://jusrental.com';
+  const baseUrl = 'https://www.jusrental.com';
   const supabase = await createSupabaseServer();
 
   // Static pages
@@ -14,6 +15,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
     priority: path === '' ? 1 : 0.8,
+  }));
+
+  // Area pages
+  const areaPages = getAllAreaSlugs().map((slug) => ({
+    url: `${baseUrl}/properties/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
   }));
 
   // Dynamic property pages
@@ -41,5 +50,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  return [...staticPages, ...propertyPages, ...blogPages];
+  return [...staticPages, ...areaPages, ...propertyPages, ...blogPages];
 }

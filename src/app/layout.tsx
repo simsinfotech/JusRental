@@ -22,6 +22,25 @@ export const metadata: Metadata = {
   description:
     'Discover 1200+ verified rental properties across 25+ Bangalore neighborhoods. Zero brokerage. Move in hassle-free.',
   keywords: ['Bangalore rentals', 'no brokerage', 'rental homes', 'PG', 'flats for rent'],
+  metadataBase: new URL('https://www.jusrental.com'),
+  openGraph: {
+    type: 'website',
+    siteName: 'JusRental',
+    title: 'JusRental — Find Your Perfect Rental Home in Bangalore',
+    description: 'Discover 1200+ verified rental properties across 25+ Bangalore neighborhoods. Zero brokerage. Move in hassle-free.',
+    url: 'https://www.jusrental.com',
+    images: [{ url: '/images/hero-bg.webp', width: 1200, height: 630, alt: 'JusRental — Rental Homes in Bangalore' }],
+    locale: 'en_IN',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'JusRental — Find Your Perfect Rental Home in Bangalore',
+    description: 'Discover 1200+ verified rental properties across 25+ Bangalore neighborhoods. Zero brokerage.',
+    images: ['/images/hero-bg.webp'],
+  },
+  other: {
+    'fb:page': 'https://www.facebook.com/profile.php?id=61594353013446',
+  },
   verification: {
     google: 'qP7irCiAqorZ0gTyToUeMxgXwpwsFvfblFjyF7zT9fs',
   },
@@ -78,6 +97,42 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         />
       </head>
       <body className="min-h-screen bg-[var(--background)] text-[var(--foreground)]" suppressHydrationWarning>
+        {/* Organization + WebSite structured data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify([
+              {
+                '@context': 'https://schema.org',
+                '@type': 'Organization',
+                name: 'JusRental',
+                url: 'https://www.jusrental.com',
+                logo: 'https://www.jusrental.com/images/monogram.png',
+                sameAs: [
+                  'https://www.facebook.com/profile.php?id=61594353013446',
+                ],
+                contactPoint: {
+                  '@type': 'ContactPoint',
+                  telephone: '+91-90363-17765',
+                  contactType: 'customer service',
+                  areaServed: 'IN',
+                  availableLanguage: ['English', 'Hindi', 'Kannada'],
+                },
+              },
+              {
+                '@context': 'https://schema.org',
+                '@type': 'WebSite',
+                name: 'JusRental',
+                url: 'https://www.jusrental.com',
+                potentialAction: {
+                  '@type': 'SearchAction',
+                  target: 'https://www.jusrental.com/properties?q={search_term_string}',
+                  'query-input': 'required name=search_term_string',
+                },
+              },
+            ]),
+          }}
+        />
         <noscript>
           <iframe
             src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
