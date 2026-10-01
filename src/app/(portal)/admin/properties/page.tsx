@@ -23,6 +23,7 @@ interface PropertyRow {
   views_count: number;
   created_at: string | null;
   updated_at: string | null;
+  images?: string[];
 }
 
 type Tab = 'updated' | 'not_updated';
@@ -50,7 +51,7 @@ export default function OwnerPropertiesPage() {
 
     const { data } = await supabase
       .from('js_properties')
-      .select('id, title, location, area, price, bhk, sqft, status, verified, views_count, created_at, updated_at')
+      .select('id, title, location, area, price, bhk, sqft, status, verified, views_count, created_at, updated_at, images')
       .order('created_at', { ascending: false });
 
     setProperties(((data as PropertyRow[]) || []).map((p) => ({ ...p, status: p.status || 'inactive' })));
@@ -188,102 +189,123 @@ export default function OwnerPropertiesPage() {
       {paginated.length > 0 ? (
         <>
           <div className="grid md:grid-cols-2 gap-4">
-            {paginated.map((p) => (
-              <GlassCard key={p.id} hover={false}>
-                <div className="flex items-start justify-between mb-3">
-                  <div>
-                    <h3 className="font-semibold font-[family-name:var(--font-heading)]">{p.title}</h3>
-                    <p className="text-sm text-[var(--muted)] flex items-center gap-1 mt-1">
-                      <LuMapPin className="w-3 h-3" />
-                      {p.location}
-                    </p>
-                  </div>
-                  <div className="flex gap-2">
-                    {p.verified && <Badge variant="success">Verified</Badge>}
-                    <Badge variant={p.status === 'active' ? 'info' : p.status === 'pending' ? 'warning' : 'default'}>
-                      {p.status === 'pending' ? 'Pending Approval' : p.status}
-                    </Badge>
-                  </div>
-                </div>
+            {paginated.map((p) => {
+              const coverImage = (p.images && p.images.length > 0) ? p.images[0] : '/images/scene-1.png';
+              return (
+                <div
+                  key={p.id}
+                  className="group relative rounded-2xl overflow-hidden border border-glass-border shadow-md transition-all hover:shadow-xl flex flex-col justify-between min-h-[220px]"
+                >
+                  {/* Property Image as Background */}
+                  <div
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                    style={{ backgroundImage: `url('${coverImage}')` }}
+                  />
 
-                <div className="flex items-center gap-4 text-sm text-[var(--muted)] mb-4">
-                  <span>{p.bhk} BHK</span>
-                  <span>|</span>
-                  <span>{p.sqft} sqft</span>
-                  <span>|</span>
-                  <span>₹{p.price.toLocaleString()}/mo</span>
-                </div>
+                  {/* Gradient Overlay for Readable Text */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/75 to-slate-950/50 backdrop-blur-[1px]" />
 
-                <div className="flex items-center justify-between pt-3 border-t border-glass-border">
-                  <div className="flex flex-col gap-1">
-                    <span className="flex items-center gap-1 text-sm text-[var(--muted)]">
-                      <LuEye className="w-3.5 h-3.5" />
-                      {p.views_count || 0} views
-                    </span>
-                    {p.updated_at && isUpdated(p) && (
-                      <span className="flex items-center gap-1 text-xs text-green-600">
-                        <LuClock className="w-3 h-3" />
-                        Updated {new Date(p.updated_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}, {new Date(p.updated_at).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })}
-                      </span>
-                    )}
-                    {!isUpdated(p) && (
-                      <span className="flex items-center gap-1 text-xs text-yellow-600">
-                        <LuClock className="w-3 h-3" />
-                        Not yet updated
-                      </span>
-                    )}
+                  {/* Card Content Header */}
+                  <div className="relative z-10 p-5 flex items-start justify-between">
+                    <div>
+                      <h3 className="font-bold text-base md:text-lg text-white font-[family-name:var(--font-heading)] drop-shadow-md">
+                        {p.title}
+                      </h3>
+                      <p className="text-sm text-slate-300 flex items-center gap-1 mt-1 drop-shadow">
+                        <LuMapPin className="w-3.5 h-3.5 text-slate-300" />
+                        {p.location}
+                      </p>
+                    </div>
+                    <div className="flex gap-2">
+                      {p.verified && <Badge variant="success">Verified</Badge>}
+                      <Badge variant={p.status === 'active' ? 'info' : p.status === 'pending' ? 'warning' : 'default'}>
+                        {p.status === 'pending' ? 'Pending Approval' : p.status}
+                      </Badge>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    {p.status === 'pending' ? (
+
+                  {/* Specs row */}
+                  <div className="relative z-10 px-5 text-sm text-slate-200 font-medium flex items-center gap-3 drop-shadow my-2">
+                    <span>{p.bhk} BHK</span>
+                    <span className="text-slate-400">|</span>
+                    <span>{p.sqft} sqft</span>
+                    <span className="text-slate-400">|</span>
+                    <span className="text-amber-300 font-semibold">₹{p.price.toLocaleString()}/mo</span>
+                  </div>
+
+                  {/* Footer Action Row */}
+                  <div className="relative z-10 p-4 pt-3 flex flex-wrap items-center justify-between border-t border-white/10 bg-slate-950/30 backdrop-blur-md gap-2">
+                    <div className="flex flex-col gap-1">
+                      <span className="flex items-center gap-1 text-xs text-slate-300">
+                        <LuEye className="w-3.5 h-3.5 text-slate-400" />
+                        {p.views_count || 0} views
+                      </span>
+                      {p.updated_at && isUpdated(p) && (
+                        <span className="flex items-center gap-1 text-[11px] text-emerald-400 font-medium">
+                          <LuClock className="w-3 h-3" />
+                          Updated {new Date(p.updated_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
+                        </span>
+                      )}
+                      {!isUpdated(p) && (
+                        <span className="flex items-center gap-1 text-[11px] text-amber-400 font-medium">
+                          <LuClock className="w-3 h-3" />
+                          Not yet updated
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="flex items-center gap-2 flex-wrap">
+                      {p.status === 'pending' ? (
+                        <button
+                          onClick={() => handleStatusChange(p.id, 'active')}
+                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white transition-colors cursor-pointer text-xs font-semibold shadow-sm"
+                        >
+                          <LuShieldCheck className="w-3.5 h-3.5" />
+                          Approve
+                        </button>
+                      ) : p.status === 'active' ? (
+                        <button
+                          onClick={() => handleStatusChange(p.id, 'inactive')}
+                          className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/30 hover:bg-amber-500/30 transition-colors cursor-pointer text-xs font-medium backdrop-blur-sm"
+                        >
+                          <LuCircleX className="w-3.5 h-3.5" />
+                          Deactivate
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => handleStatusChange(p.id, 'active')}
+                          className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-500/30 transition-colors cursor-pointer text-xs font-medium backdrop-blur-sm"
+                        >
+                          <LuCircleCheck className="w-3.5 h-3.5" />
+                          Activate
+                        </button>
+                      )}
                       <button
-                        onClick={() => handleStatusChange(p.id, 'active')}
-                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-green-600 text-white hover:bg-green-700 transition-colors cursor-pointer text-xs font-semibold shadow-sm"
+                        onClick={() => handleDelete(p.id)}
+                        className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-rose-500/20 text-rose-300 border border-rose-500/30 hover:bg-rose-500/30 transition-colors cursor-pointer text-xs font-medium backdrop-blur-sm"
                       >
-                        <LuShieldCheck className="w-3.5 h-3.5" />
-                        Approve
+                        <LuTrash2 className="w-3.5 h-3.5" />
+                        Delete
                       </button>
-                    ) : p.status === 'active' ? (
-                      <button
-                        onClick={() => handleStatusChange(p.id, 'inactive')}
-                        className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-yellow-500/10 text-yellow-600 hover:bg-yellow-500/20 transition-colors cursor-pointer text-xs font-medium"
+                      <Link
+                        href={`/properties/${p.id}`}
+                        target="_blank"
+                        className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-white/15 text-white border border-white/20 hover:bg-white/25 transition-colors text-xs font-medium backdrop-blur-sm"
                       >
-                        <LuCircleX className="w-3.5 h-3.5" />
-                        Deactivate
-                      </button>
-                    ) : (
-                      <button
-                        onClick={() => handleStatusChange(p.id, 'active')}
-                        className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-green-500/10 text-green-600 hover:bg-green-500/20 transition-colors cursor-pointer text-xs font-medium"
+                        <LuEye className="w-3.5 h-3.5" />
+                        View
+                      </Link>
+                      <Link
+                        href={`/admin/properties/${p.id}/edit`}
+                        className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#006194] hover:bg-[#005080] text-white transition-colors text-xs font-semibold shadow-sm"
                       >
-                        <LuCircleCheck className="w-3.5 h-3.5" />
-                        Activate
-                      </button>
-                    )}
-                    <button
-                      onClick={() => handleDelete(p.id)}
-                      className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-red-500/10 text-red-500 hover:bg-red-500/20 transition-colors cursor-pointer text-xs font-medium"
-                    >
-                      <LuTrash2 className="w-3.5 h-3.5" />
-                      Delete
-                    </button>
-                    <Link
-                      href={`/properties/${p.id}`}
-                      target="_blank"
-                      className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-[#006194]/10 text-[#006194] hover:bg-[#006194]/20 transition-colors text-xs font-medium"
-                    >
-                      <LuEye className="w-3.5 h-3.5" />
-                      View
-                    </Link>
-                    <Link
-                      href={`/admin/properties/${p.id}/edit`}
-                      className="text-sm text-[#006194] font-medium hover:underline"
-                    >
-                      Edit
-                    </Link>
+                        Edit
+                      </Link>
+                    </div>
                   </div>
                 </div>
-              </GlassCard>
-            ))}
+              );
+            })}
           </div>
 
           {/* Pagination */}
