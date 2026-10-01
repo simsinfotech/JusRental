@@ -93,7 +93,7 @@ export function HeroSection() {
   return (
     <>
       {/* ─── HERO ─── */}
-      <section className="relative min-h-screen overflow-hidden bg-[#0F172A]">
+      <section className="relative min-h-screen overflow-hidden bg-[#0F172A] w-full">
         {/* Background image */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -108,12 +108,12 @@ export function HeroSection() {
           <div className="absolute inset-0 bg-gradient-to-b from-[#0F172A]/60 via-[#0F172A]/40 to-[#0F172A]/80" />
         </div>
 
-        {/* Atmospheric blur elements */}
-        <div className="absolute top-20 left-1/4 w-96 h-96 bg-[#006194]/20 rounded-full blur-[128px] pointer-events-none" />
-        <div className="absolute bottom-20 right-1/4 w-80 h-80 bg-[#006194]/15 rounded-full blur-[100px] pointer-events-none" />
+        {/* Atmospheric blur elements — clipped inside section overflow-hidden */}
+        <div className="absolute top-20 left-1/4 w-48 h-48 sm:w-96 sm:h-96 bg-[#006194]/20 rounded-full blur-[80px] sm:blur-[128px] pointer-events-none" />
+        <div className="absolute bottom-20 right-1/4 w-40 h-40 sm:w-80 sm:h-80 bg-[#006194]/15 rounded-full blur-[60px] sm:blur-[100px] pointer-events-none" />
 
         {/* Content */}
-        <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8 pt-28 sm:pt-36 pb-12 sm:pb-16">
+        <div className="relative z-10 flex flex-col items-center justify-center min-h-screen w-full px-4 sm:px-6 lg:px-8 pt-28 sm:pt-36 pb-12 sm:pb-16 box-border">
           <motion.div
             variants={staggerContainer}
             initial="hidden"
@@ -146,10 +146,10 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="w-full max-w-4xl mx-auto"
+            className="w-full max-w-4xl mx-auto min-w-0"
           >
-            <form onSubmit={handleSearch} className="rounded-2xl bg-white/10 backdrop-blur-xl border border-white/15 p-4 sm:p-5 md:p-6 shadow-2xl shadow-black/20">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5 sm:gap-3">
+            <form onSubmit={handleSearch} className="rounded-2xl bg-white/10 backdrop-blur-xl border border-white/15 p-3 sm:p-5 md:p-6 shadow-2xl shadow-black/20 w-full">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-2 sm:gap-2.5 md:gap-3">
                 {/* City */}
                 <div>
                   <label className="text-[11px] sm:text-xs font-semibold text-white/70 uppercase tracking-wider mb-1 block">
@@ -257,7 +257,7 @@ export function HeroSection() {
               </div>
 
               {/* Search Action Strip */}
-              <div className="mt-3 sm:mt-4 flex flex-col sm:flex-row items-center gap-2.5 sm:gap-3">
+              <div className="mt-3 sm:mt-4 flex flex-col items-stretch gap-2 sm:flex-row sm:items-center sm:gap-3">
                 <div className="relative flex-1 w-full">
                   <LuSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                   <input
