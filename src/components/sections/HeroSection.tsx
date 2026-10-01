@@ -113,17 +113,17 @@ export function HeroSection() {
         <div className="absolute bottom-20 right-1/4 w-80 h-80 bg-[#006194]/15 rounded-full blur-[100px] pointer-events-none" />
 
         {/* Content */}
-        <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8 pt-24 pb-16">
+        <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8 pt-28 sm:pt-36 pb-12 sm:pb-16">
           <motion.div
             variants={staggerContainer}
             initial="hidden"
             animate="visible"
-            className="text-center max-w-4xl mx-auto mb-10"
+            className="text-center max-w-4xl mx-auto mb-6 sm:mb-10"
           >
             {/* Main Headline */}
             <motion.h1
               variants={fadeInUp}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold font-[family-name:var(--font-heading)] leading-[1.08] text-white mb-6"
+              className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold font-[family-name:var(--font-heading)] leading-[1.15] sm:leading-[1.08] text-white mb-3 sm:mb-6 tracking-tight"
             >
               Homes That Feel{' '}
               <span className="bg-gradient-to-r text-white">
@@ -134,7 +134,7 @@ export function HeroSection() {
             {/* Subtitle */}
             <motion.p
               variants={fadeInUp}
-              className="text-lg md:text-xl text-white/70 leading-relaxed max-w-2xl mx-auto"
+              className="text-xs sm:text-base md:text-xl text-white/80 leading-relaxed max-w-2xl mx-auto px-2"
             >
               Discover verified rental homes in Bangalore. AI-matched to your needs,
               zero brokerage, and hassle-free move-in across 25+ neighborhoods.
@@ -148,11 +148,11 @@ export function HeroSection() {
             transition={{ duration: 0.7, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
             className="w-full max-w-4xl mx-auto"
           >
-            <form onSubmit={handleSearch} className="rounded-2xl bg-white/10 backdrop-blur-xl border border-white/15 p-5 md:p-6 shadow-2xl shadow-black/20">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+            <form onSubmit={handleSearch} className="rounded-2xl bg-white/10 backdrop-blur-xl border border-white/15 p-4 sm:p-5 md:p-6 shadow-2xl shadow-black/20">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5 sm:gap-3">
                 {/* City */}
                 <div>
-                  <label className="text-xs font-medium text-white/60 uppercase tracking-wider mb-1.5 block">
+                  <label className="text-[11px] sm:text-xs font-semibold text-white/70 uppercase tracking-wider mb-1 block">
                     City
                   </label>
                   <div className="relative">
@@ -173,7 +173,7 @@ export function HeroSection() {
 
                 {/* Property Type */}
                 <div>
-                  <label className="text-xs font-medium text-white/60 uppercase tracking-wider mb-1.5 block">
+                  <label className="text-[11px] sm:text-xs font-semibold text-white/70 uppercase tracking-wider mb-1 block">
                     Property Type
                   </label>
                   <div className="relative">
@@ -194,7 +194,7 @@ export function HeroSection() {
 
                 {/* Area */}
                 <div>
-                  <label className="text-xs font-medium text-white/60 uppercase tracking-wider mb-1.5 block">
+                  <label className="text-[11px] sm:text-xs font-semibold text-white/70 uppercase tracking-wider mb-1 block">
                     Area
                   </label>
                   <div className="relative">
@@ -215,7 +215,7 @@ export function HeroSection() {
 
                 {/* BHK */}
                 <div>
-                  <label className="text-xs font-medium text-white/60 uppercase tracking-wider mb-1.5 block">
+                  <label className="text-[11px] sm:text-xs font-semibold text-white/70 uppercase tracking-wider mb-1 block">
                     BHK Type
                   </label>
                   <div className="relative">
@@ -236,7 +236,7 @@ export function HeroSection() {
 
                 {/* Budget */}
                 <div>
-                  <label className="text-xs font-medium text-white/60 uppercase tracking-wider mb-1.5 block">
+                  <label className="text-[11px] sm:text-xs font-semibold text-white/70 uppercase tracking-wider mb-1 block">
                     Budget
                   </label>
                   <div className="relative">
@@ -257,26 +257,26 @@ export function HeroSection() {
               </div>
 
               {/* Search Action Strip */}
-              <div className="mt-4 flex flex-col sm:flex-row items-center gap-3">
+              <div className="mt-3 sm:mt-4 flex flex-col sm:flex-row items-center gap-2.5 sm:gap-3">
                 <div className="relative flex-1 w-full">
                   <LuSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                   <input
                     type="text"
                     value={searchKeyword}
                     onChange={(e) => setSearchKeyword(e.target.value)}
-                    placeholder="Search by keywords, project name, or society..."
-                    className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white/90 border border-slate-200 text-[#131b2e] text-sm focus:outline-none focus:border-[#006194] focus:ring-2 focus:ring-[#006194]/20 transition-all placeholder:text-slate-400"
+                    placeholder="Search area, project, or society..."
+                    className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white/95 border border-slate-200 text-[#131b2e] text-xs sm:text-sm focus:outline-none focus:border-[#006194] focus:ring-2 focus:ring-[#006194]/20 transition-all placeholder:text-slate-400"
                   />
                 </div>
                 <button
                   type="submit"
-                  className="w-full sm:w-auto px-8 py-2.5 rounded-xl bg-[#006194] hover:bg-[#005080] text-white font-semibold flex items-center justify-center gap-2 shadow-lg shadow-[#006194]/25 transition-all duration-300 hover:-translate-y-0.5 cursor-pointer shrink-0"
+                  className="w-full sm:w-auto px-6 sm:px-8 py-3 rounded-xl bg-[#006194] hover:bg-[#005080] active:scale-[0.99] text-white font-semibold text-sm sm:text-base flex items-center justify-center gap-2 shadow-lg shadow-[#006194]/30 transition-all cursor-pointer shrink-0"
                 >
                   <LuSearch className="w-4 h-4" />
                   Search Homes
                 </button>
-                <span className="text-sm text-white/50 hidden lg:inline shrink-0">
-                  or browse <Link href="/properties" className="text-[#006194] hover:underline font-medium text-white/80">all properties</Link>
+                <span className="text-xs sm:text-sm text-white/60 hidden lg:inline shrink-0">
+                  or browse <Link href="/properties" className="text-white hover:underline font-semibold">all properties</Link>
                 </span>
               </div>
             </form>
@@ -287,17 +287,17 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.7 }}
-            className="mt-10 w-full max-w-4xl mx-auto"
+            className="mt-8 sm:mt-10 w-full max-w-4xl mx-auto"
           >
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4 md:gap-6">
               {trustBadges.map((badge) => (
-                <div key={badge.label} className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
-                    <badge.icon className="w-5 h-5 text-[#006194]" />
+                <div key={badge.label} className="flex items-center gap-2.5 p-2 rounded-xl bg-white/5 sm:bg-transparent border border-white/10 sm:border-0">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
+                    <badge.icon className="w-4 h-4 sm:w-5 sm:h-5 text-[#006194]" />
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-white">{badge.label}</p>
-                    <p className="text-xs text-white/50">{badge.description}</p>
+                    <p className="text-xs sm:text-sm font-semibold text-white">{badge.label}</p>
+                    <p className="text-[10px] sm:text-xs text-white/60">{badge.description}</p>
                   </div>
                 </div>
               ))}
