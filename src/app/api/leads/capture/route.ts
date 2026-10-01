@@ -3,7 +3,7 @@ import { supabaseAdmin } from '@/lib/supabase-server';
 import { sendToGoogleSheets } from '@/lib/google-sheets';
 
 export async function POST(request: NextRequest) {
-  const { name, phone, email, propertyTitle, preferredDate, preferredTime, source } = await request.json();
+  const { name, phone, email, propertyTitle, location, area, preferredDate, preferredTime, source } = await request.json();
 
   if (!name || !phone || !email) {
     return NextResponse.json({ error: 'All fields are required' }, { status: 400 });
@@ -13,6 +13,8 @@ export async function POST(request: NextRequest) {
   const payload: Record<string, string> = { name, phone, email };
   if (source) payload.source = source;
   if (propertyTitle) payload.propertyTitle = propertyTitle;
+  if (location) payload.location = location;
+  if (area) payload.area = area;
   if (preferredDate) payload.preferredDate = preferredDate;
   if (preferredTime) payload.preferredTime = preferredTime;
 
@@ -22,6 +24,8 @@ export async function POST(request: NextRequest) {
   // Also persist to Supabase so leads appear in the admin panel
   const details = [
     propertyTitle && `Property: ${propertyTitle}`,
+    location && `Location: ${location}`,
+    area && `Area: ${area}`,
     preferredDate && `Date: ${preferredDate}`,
     preferredTime && `Time: ${preferredTime}`,
   ].filter(Boolean).join(', ');
