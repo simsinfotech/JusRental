@@ -39,6 +39,14 @@ const initialState: ContactFormState = { success: false };
 export default function ContactPage() {
   const [state, formAction, isPending] = useActionState(submitContactForm, initialState);
   const [submitted, setSubmitted] = useState(false);
+  const [userLocation, setUserLocation] = useState({ city: '', area: '' });
+
+  useEffect(() => {
+    setUserLocation({
+      city: localStorage.getItem('jusrental_user_city') || '',
+      area: localStorage.getItem('jusrental_user_area') || '',
+    });
+  }, []);
 
   useEffect(() => {
     if (state.success) {
@@ -105,6 +113,8 @@ export default function ContactPage() {
                     </div>
                   )}
                   <form id="contact-form" action={formAction} className="space-y-5">
+                    <input type="hidden" name="userCity" value={userLocation.city} />
+                    <input type="hidden" name="userArea" value={userLocation.area} />
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div>
                         <label className="text-sm font-medium mb-1.5 block">Full Name *</label>

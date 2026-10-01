@@ -62,6 +62,14 @@ export default function ListPropertyPage() {
 
   const [state, formAction, isPending] = useActionState(submitListProperty, initialState);
   const [submitted, setSubmitted] = useState(false);
+  const [userLocation, setUserLocation] = useState({ city: '', area: '' });
+
+  useEffect(() => {
+    setUserLocation({
+      city: localStorage.getItem('jusrental_user_city') || '',
+      area: localStorage.getItem('jusrental_user_area') || '',
+    });
+  }, []);
 
   useEffect(() => {
     if (state.success) {
@@ -232,6 +240,8 @@ export default function ListPropertyPage() {
               )}
               <form id="list-property-form" action={formAction} className="space-y-4">
                 <input type="hidden" name="plan" value="free" />
+                <input type="hidden" name="userCity" value={userLocation.city} />
+                <input type="hidden" name="userArea" value={userLocation.area} />
                 <div>
                   <label className="text-sm font-medium mb-1.5 block">Your Name *</label>
                   <input

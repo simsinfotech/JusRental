@@ -17,6 +17,8 @@ export async function submitContactForm(
   const phone = formData.get('phone') as string;
   const subject = formData.get('subject') as string;
   const message = formData.get('message') as string;
+  const userCity = (formData.get('userCity') as string) || '';
+  const userArea = (formData.get('userArea') as string) || '';
 
   if (!name || !phone || !subject || !message) {
     return { success: false, error: 'Please fill in all required fields.' };
@@ -45,6 +47,8 @@ export async function submitContactForm(
     email: email || '',
     subject,
     message,
+    userCity,
+    userArea,
   });
 
   return { success: true };

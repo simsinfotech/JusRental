@@ -18,6 +18,8 @@ export async function submitListProperty(
   const bhk = formData.get('bhk') as string;
   const area = formData.get('area') as string;
   const plan = formData.get('plan') as string;
+  const userCity = (formData.get('userCity') as string) || '';
+  const userArea = (formData.get('userArea') as string) || '';
 
   if (!name || !phone) {
     return { success: false, error: 'Please fill in all required fields.' };
@@ -48,6 +50,8 @@ export async function submitListProperty(
     bhk: bhk || '',
     area: area || '',
     plan: plan || 'free',
+    userCity,
+    userArea,
   });
 
   return { success: true };

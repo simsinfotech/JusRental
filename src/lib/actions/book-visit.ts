@@ -19,6 +19,8 @@ export async function submitBookVisit(
   const preferredTime = formData.get('preferredTime') as string;
   const message = formData.get('message') as string;
   const propertyId = formData.get('propertyId') as string;
+  const userCity = (formData.get('userCity') as string) || '';
+  const userArea = (formData.get('userArea') as string) || '';
 
   if (!name || !phone) {
     return { success: false, error: 'Please fill in all required fields.' };
@@ -50,6 +52,8 @@ export async function submitBookVisit(
     preferredDate: preferredDate || '',
     preferredTime: preferredTime || '',
     message: message || '',
+    userCity,
+    userArea,
   });
 
   return { success: true };

@@ -24,6 +24,8 @@ export function LeadPopup({ isOpen, onClose }: LeadPopupProps) {
       phone: formData.get('phone') as string,
       email: formData.get('email') as string,
       source: 'Lead Popup',
+      userCity: localStorage.getItem('jusrental_user_city') || '',
+      userArea: localStorage.getItem('jusrental_user_area') || '',
     };
 
     try {

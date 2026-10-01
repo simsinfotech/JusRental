@@ -99,6 +99,8 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
     };
 
     const resolvedDate = resolveDate(selectedDate);
+    const userCity = localStorage.getItem('jusrental_user_city') || '';
+    const userArea = localStorage.getItem('jusrental_user_area') || '';
 
     try {
       // 1. Send to Google Sheets via API
@@ -111,10 +113,12 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
           email,
           source: 'Visit Request',
           propertyTitle: property.title,
-          location: property.location,
-          area: property.area,
+          propertyLocation: property.location,
+          propertyArea: property.area,
           preferredDate: `${resolvedDate} (${selectedDate})`,
           preferredTime: selectedSlot,
+          userCity,
+          userArea,
         }),
       });
       if (!res.ok) {

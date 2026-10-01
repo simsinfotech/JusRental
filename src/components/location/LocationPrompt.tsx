@@ -43,6 +43,12 @@ export function LocationPrompt() {
           // Reverse geocode failed — send coordinates without city/area
         }
 
+        // Store in localStorage so forms can include user location
+        if (city || area) {
+          localStorage.setItem('jusrental_user_city', city);
+          localStorage.setItem('jusrental_user_area', area);
+        }
+
         sendLocation({ latitude, longitude, city, area, userAgent: navigator.userAgent });
       },
       () => {
