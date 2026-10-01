@@ -6,17 +6,20 @@ const STORAGE_KEY = 'jusrental_location_captured';
 
 export function LocationPrompt() {
   useEffect(() => {
-    if (localStorage.getItem(STORAGE_KEY)) return;
+    const alreadyCaptured = localStorage.getItem(STORAGE_KEY);
+    const hasCityStored = localStorage.getItem('jusrental_user_city');
+
+    // Skip only if we already captured AND city is stored
+    if (alreadyCaptured && hasCityStored) return;
 
     if (!navigator.geolocation) {
       localStorage.setItem(STORAGE_KEY, 'true');
-      sendLocation({ denied: true, userAgent: navigator.userAgent });
+      if (!alreadyCaptured) sendLocation({ denied: true, userAgent: navigator.userAgent });
       return;
     }
 
     navigator.geolocation.getCurrentPosition(
       async (position) => {
-        localStorage.setItem(STORAGE_KEY, 'true');
         const { latitude, longitude } = position.coords;
 
         let city = '';
@@ -43,18 +46,22 @@ export function LocationPrompt() {
           // Reverse geocode failed — send coordinates without city/area
         }
 
-        // Store in localStorage so forms can include user location
-        if (city || area) {
-          localStorage.setItem('jusrental_user_city', city);
-          localStorage.setItem('jusrental_user_area', area);
-        }
+        // Always store city/area so forms can include user location
+        localStorage.setItem('jusrental_user_city', city);
+        localStorage.setItem('jusrental_user_area', area);
 
-        sendLocation({ latitude, longitude, city, area, userAgent: navigator.userAgent });
+        // Only send to API on first capture to avoid duplicates
+        if (!alreadyCaptured) {
+          localStorage.setItem(STORAGE_KEY, 'true');
+          sendLocation({ latitude, longitude, city, area, userAgent: navigator.userAgent });
+        }
       },
       () => {
         // User denied or error
-        localStorage.setItem(STORAGE_KEY, 'true');
-        sendLocation({ denied: true, userAgent: navigator.userAgent });
+        if (!alreadyCaptured) {
+          localStorage.setItem(STORAGE_KEY, 'true');
+          sendLocation({ denied: true, userAgent: navigator.userAgent });
+        }
       },
     );
   }, []);
