@@ -58,23 +58,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <head>
-        {/* Preload LCP hero image — biggest single LCP win */}
-        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-        <link
-          rel="preload"
-          href="/images/hero-bg.webp"
-          as="image"
-          type="image/webp"
-          // @ts-expect-error fetchpriority is valid HTML but not in React types yet
-          fetchpriority="high"
-        />
         {/* DNS prefetch for Supabase API */}
         <link rel="dns-prefetch" href="https://zuiacgsbkdgdpoxtgkuz.supabase.co" />
         <link rel="preconnect" href="https://zuiacgsbkdgdpoxtgkuz.supabase.co" />
-        {/* Google Tag Manager */}
+        {/* Google Tag Manager — deferred to reduce main thread work */}
         <Script
           id="gtm-script"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -86,11 +76,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         {/* Google Analytics 4 (gtag.js) */}
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
         <Script
           id="ga4-config"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_ID}');`,
           }}

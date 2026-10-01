@@ -1,7 +1,5 @@
 import dynamic from 'next/dynamic';
 import { HeroSection } from '@/components/sections/HeroSection';
-import { KeyFeaturesSection } from '@/components/sections/KeyFeaturesSection';
-import { PropertyShowcase } from '@/components/sections/PropertyShowcase';
 import {
   fetchFeaturedProperties,
   fetchAreas,
@@ -10,6 +8,12 @@ import {
 } from '@/lib/dal';
 
 // Lazy-load below-the-fold sections — not needed for initial paint
+const KeyFeaturesSection = dynamic(() =>
+  import('@/components/sections/KeyFeaturesSection').then((m) => m.KeyFeaturesSection)
+);
+const PropertyShowcase = dynamic(() =>
+  import('@/components/sections/PropertyShowcase').then((m) => m.PropertyShowcase)
+);
 const AreaExplorer = dynamic(() =>
   import('@/components/sections/AreaExplorer').then((m) => m.AreaExplorer)
 );
