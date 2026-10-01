@@ -3,7 +3,7 @@
 import { useEffect, useState, use } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { LuHouse, LuCircleAlert, LuSave, LuShieldCheck, LuArrowLeft, LuChevronDown, LuChevronUp, LuSearch, LuCircleCheck, LuEye, LuClock } from 'react-icons/lu';
+import { LuHouse, LuCircleAlert, LuSave, LuShieldCheck, LuArrowLeft, LuChevronDown, LuChevronUp, LuSearch, LuCircleCheck, LuEye, LuClock, LuSparkles } from 'react-icons/lu';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { ImageUpload } from '@/components/ui/ImageUpload';
 import { createSupabaseBrowser } from '@/lib/supabase-browser';
@@ -24,6 +24,7 @@ export default function EditPropertyPage({ params }: { params: Promise<{ id: str
   const [updatedAt, setUpdatedAt] = useState<string | null>(null);
   const [images, setImages] = useState<string[]>([]);
   const [seoOpen, setSeoOpen] = useState(false);
+  const [aiLoading, setAiLoading] = useState(false);
   const [form, setForm] = useState({
     title: '', location: '', area: '', price: '', bhk: '', sqft: '',
     type: 'Apartment', furnished: 'Semi-Furnished', description: '',
@@ -70,6 +71,42 @@ export default function EditPropertyPage({ params }: { params: Promise<{ id: str
         ? prev.amenities.filter((a) => a !== amenity)
         : [...prev.amenities, amenity],
     }));
+  };
+
+  const handleAiSuggest = async () => {
+    setAiLoading(true);
+    try {
+      const res = await fetch('/api/admin/seo-suggest', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: form.title,
+          location: form.location,
+          area: form.area,
+          bhk: form.bhk,
+          type: form.type,
+          furnished: form.furnished,
+          price: form.price,
+          description: form.description,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        alert(data.error || 'Failed to generate SEO suggestions');
+        return;
+      }
+      setForm((prev) => ({
+        ...prev,
+        seoTitle: data.seoTitle,
+        seoDescription: data.seoDescription,
+        seoKeywords: data.seoKeywords,
+      }));
+      setSeoOpen(true);
+    } catch {
+      alert('Failed to generate SEO suggestions. Please try again.');
+    } finally {
+      setAiLoading(false);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -252,19 +289,46 @@ export default function EditPropertyPage({ params }: { params: Promise<{ id: str
             </div>
             {/* SEO Settings */}
             <div className="border border-glass-border rounded-xl overflow-hidden">
-              <button type="button" onClick={() => setSeoOpen(!seoOpen)}
-                className="w-full flex items-center justify-between px-4 py-3 bg-surface-light hover:bg-surface-light/80 transition-colors cursor-pointer">
+              <div onClick={() => setSeoOpen(!seoOpen)}
+                className="w-full flex items-center justify-between px-4 py-3 bg-surface-light hover:bg-surface-light/80 transition-colors cursor-pointer select-none">
                 <div className="flex items-center gap-2">
                   <LuSearch className="w-4 h-4 text-[#006194]" />
                   <span className="text-sm font-semibold">SEO Settings</span>
                   {(form.seoTitle || form.seoDescription || form.seoKeywords) && (
-                    <span className="text-xs px-2 py-0.5 rounded-full bg-green-500/10 text-green-600">Configured</span>
+                    <span className="text-xs px-2 py-0.5 rounded-full bg-green-500/10 text-green-600 font-medium">Configured</span>
                   )}
                 </div>
-                {seoOpen ? <LuChevronUp className="w-4 h-4" /> : <LuChevronDown className="w-4 h-4" />}
-              </button>
+                <div className="flex items-center gap-2">
+                  <button type="button" disabled={aiLoading}
+                    onClick={(e) => { e.stopPropagation(); handleAiSuggest(); }}
+                    className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[#006194] text-white text-xs font-medium hover:bg-[#005080] transition-colors disabled:opacity-50 cursor-pointer">
+                    <LuSparkles className="w-3.5 h-3.5 text-amber-300" />
+                    {aiLoading ? 'Suggesting...' : 'AI Auto Suggest'}
+                  </button>
+                  {seoOpen ? <LuChevronUp className="w-4 h-4" /> : <LuChevronDown className="w-4 h-4" />}
+                </div>
+              </div>
               {seoOpen && (
                 <div className="p-4 space-y-4 border-t border-glass-border">
+                  {/* AI SEO Banner */}
+                  <div className="flex items-center justify-between p-3.5 rounded-xl bg-blue-50/50 border border-blue-100 dark:bg-blue-950/20 dark:border-blue-900/30">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 rounded-lg bg-[#006194]/10 text-[#006194]">
+                        <LuSparkles className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <p className="text-xs font-semibold text-foreground">SEO AI Auto Suggest</p>
+                        <p className="text-[11px] text-[var(--muted)]">Generate optimized title, meta description & keywords instantly</p>
+                      </div>
+                    </div>
+                    <button type="button" disabled={aiLoading}
+                      onClick={handleAiSuggest}
+                      className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#006194] text-white text-xs font-medium hover:bg-[#005080] transition-colors disabled:opacity-50 cursor-pointer shadow-sm">
+                      <LuSparkles className="w-3.5 h-3.5 text-amber-300" />
+                      {aiLoading ? 'Generating...' : 'Generate with AI'}
+                    </button>
+                  </div>
+
                   <div>
                     <label className="text-sm font-medium mb-1.5 block">
                       SEO Title <span className="text-[var(--muted)]">({form.seoTitle.length}/60)</span>
