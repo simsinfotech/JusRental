@@ -40,7 +40,6 @@ const plans = [
     price: '₹599',
     icon: LuCrown,
     features: [
-      'Professional photo shoot',
       'Verified badge on listing',
       'Priority placement in search',
       'Tenant KYC & background check',
