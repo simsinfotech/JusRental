@@ -1,6 +1,7 @@
 'use server';
 
 import { supabaseAdmin } from '@/lib/supabase-server';
+import { sendToGoogleSheets } from '@/lib/google-sheets';
 
 export interface ListPropertyFormState {
   success: boolean;
@@ -38,6 +39,16 @@ export async function submitListProperty(
     console.error('Error submitting listing request:', error);
     return { success: false, error: 'Something went wrong. Please try again.' };
   }
+
+  sendToGoogleSheets({
+    source: 'List Property',
+    name,
+    phone,
+    propertyType: propertyType || '',
+    bhk: bhk || '',
+    area: area || '',
+    plan: plan || 'free',
+  });
 
   return { success: true };
 }

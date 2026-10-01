@@ -1,6 +1,7 @@
 'use server';
 
 import { supabaseAdmin } from '@/lib/supabase-server';
+import { sendToGoogleSheets } from '@/lib/google-sheets';
 
 export interface ContactFormState {
   success: boolean;
@@ -36,6 +37,15 @@ export async function submitContactForm(
     console.error('Error submitting contact form:', error);
     return { success: false, error: 'Something went wrong. Please try again.' };
   }
+
+  sendToGoogleSheets({
+    source: 'Contact Form',
+    name,
+    phone,
+    email: email || '',
+    subject,
+    message,
+  });
 
   return { success: true };
 }

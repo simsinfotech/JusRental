@@ -1,6 +1,7 @@
 'use server';
 
 import { supabaseAdmin } from '@/lib/supabase-server';
+import { sendToGoogleSheets } from '@/lib/google-sheets';
 
 export interface BookVisitFormState {
   success: boolean;
@@ -40,6 +41,16 @@ export async function submitBookVisit(
     console.error('Error submitting book visit:', error);
     return { success: false, error: 'Something went wrong. Please try again.' };
   }
+
+  sendToGoogleSheets({
+    source: 'Book Visit',
+    name,
+    phone,
+    email: email || '',
+    preferredDate: preferredDate || '',
+    preferredTime: preferredTime || '',
+    message: message || '',
+  });
 
   return { success: true };
 }
