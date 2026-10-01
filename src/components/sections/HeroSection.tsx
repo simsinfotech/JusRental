@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'motion/react';
 import { LuSearch, LuShieldCheck, LuHeadphones, LuBadgePercent, LuLock, LuHouse, LuMapPin, LuBuilding2, LuIndianRupee, LuChevronDown } from 'react-icons/lu';
 import { fadeInUp, staggerContainer } from '@/lib/animations';
@@ -95,10 +96,14 @@ export function HeroSection() {
       <section className="relative min-h-screen overflow-hidden bg-[#0F172A]">
         {/* Background image */}
         <div className="absolute inset-0 z-0">
-          <img
-            src="/images/hero-bg.png"
+          <Image
+            src="/images/hero-bg.webp"
             alt="Luxury living room with sunset city view"
-            className="absolute inset-0 w-full h-full object-cover opacity-40"
+            fill
+            priority
+            sizes="100vw"
+            quality={85}
+            className="object-cover opacity-40"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0F172A]/60 via-[#0F172A]/40 to-[#0F172A]/80" />
         </div>
