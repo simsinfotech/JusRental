@@ -1,0 +1,204 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import { LuUsers, LuPhone, LuMail, LuMessageSquare, LuCalendar, LuDownload, LuUser } from 'react-icons/lu';
+import { StatusBadge } from '@/components/admin/StatusBadge';
+
+type Tab = 'contacts' | 'visits' | 'listings';
+type LeadRow = Record<string, unknown>;
+
+const CONTACT_STATUS_FLOW = ['new', 'read', 'responded', 'closed'];
+const VISIT_STATUS_FLOW = ['pending', 'confirmed', 'completed', 'cancelled'];
+const LISTING_STATUS_FLOW = ['pending', 'contacted', 'listed', 'rejected'];
+
+export default function AdminLeadsPage() {
+  const [tab, setTab] = useState<Tab>('contacts');
+  const [contacts, setContacts] = useState<LeadRow[]>([]);
+  const [visits, setVisits] = useState<LeadRow[]>([]);
+  const [listings, setListings] = useState<LeadRow[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const loadData = async () => {
+    const res = await fetch('/api/admin/leads');
+    const data = await res.json();
+    setContacts(data.contacts || []);
+    setVisits(data.visits || []);
+    setListings(data.listings || []);
+    setLoading(false);
+  };
+
+  useEffect(() => { loadData(); }, []);
+
+  const updateStatus = async (table: string, id: string, status: string) => {
+    await fetch('/api/admin/leads', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ table, id, status }),
+    });
+    loadData();
+  };
+
+  const exportCSV = () => {
+    const data = tab === 'contacts' ? contacts : tab === 'visits' ? visits : listings;
+    if (data.length === 0) return;
+
+    const keys = Object.keys(data[0]);
+    const csv = [
+      keys.join(','),
+      ...data.map((row) => keys.map((k) => `"${String(row[k] ?? '').replace(/"/g, '""')}"`).join(',')),
+    ].join('\n');
+
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${tab}-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const tabs = [
+    { key: 'contacts' as Tab, label: 'Contact Submissions', count: contacts.length },
+    { key: 'visits' as Tab, label: 'Visit Requests', count: visits.length },
+    { key: 'listings' as Tab, label: 'Listing Requests', count: listings.length },
+  ];
+
+  const currentData = tab === 'contacts' ? contacts : tab === 'visits' ? visits : listings;
+  const statusFlow = tab === 'contacts' ? CONTACT_STATUS_FLOW : tab === 'visits' ? VISIT_STATUS_FLOW : LISTING_STATUS_FLOW;
+  const tableName = tab === 'contacts'
+    ? 'js_contact_submissions'
+    : tab === 'visits'
+    ? 'js_book_visit_requests'
+    : 'js_property_listing_requests';
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-20">
+        <div className="text-[var(--muted)]">Loading leads...</div>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center gap-3">
+          <LuUsers className="w-6 h-6 text-[#006194]" />
+          <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">Leads</h1>
+        </div>
+        <button
+          onClick={exportCSV}
+          className="flex items-center gap-2 px-4 py-2 rounded-xl border border-glass-border text-sm font-medium hover:bg-surface-light transition-all cursor-pointer"
+        >
+          <LuDownload className="w-4 h-4" />
+          Export CSV
+        </button>
+      </div>
+
+      {/* Tabs */}
+      <div className="flex gap-1 mb-6 bg-surface-light rounded-xl p-1">
+        {tabs.map((t) => (
+          <button
+            key={t.key}
+            onClick={() => setTab(t.key)}
+            className={`flex-1 px-4 py-2 rounded-lg text-sm font-medium transition-all cursor-pointer ${
+              tab === t.key
+                ? 'bg-[var(--background)] shadow-sm'
+                : 'text-[var(--muted)] hover:text-[var(--foreground)]'
+            }`}
+          >
+            {t.label} ({t.count})
+          </button>
+        ))}
+      </div>
+
+      {/* Lead cards */}
+      <div className="space-y-3">
+        {currentData.length > 0 ? (
+          currentData.map((lead) => (
+            <div key={lead.id as string} className="glass-card p-4">
+              <div className="flex items-start justify-between mb-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-[#006194]/10 flex items-center justify-center">
+                    <LuUser className="w-5 h-5 text-[#006194]" />
+                  </div>
+                  <div>
+                    <p className="font-semibold">{lead.name as string}</p>
+                    <p className="text-xs text-[var(--muted)]">
+                      {new Date(lead.created_at as string).toLocaleDateString('en-IN', {
+                        day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit',
+                      })}
+                    </p>
+                  </div>
+                </div>
+                <StatusBadge status={(lead.status as string) || 'new'} />
+              </div>
+
+              <div className="grid sm:grid-cols-2 gap-2 text-sm mb-3">
+                {lead.phone ? (
+                  <div className="flex items-center gap-2 text-[var(--muted)]">
+                    <LuPhone className="w-3.5 h-3.5" />
+                    <a href={`tel:${lead.phone}`} className="hover:text-[#006194]">{String(lead.phone)}</a>
+                  </div>
+                ) : null}
+                {lead.email ? (
+                  <div className="flex items-center gap-2 text-[var(--muted)]">
+                    <LuMail className="w-3.5 h-3.5" />
+                    <a href={`mailto:${lead.email}`} className="hover:text-[#006194]">{String(lead.email)}</a>
+                  </div>
+                ) : null}
+                {lead.preferred_date ? (
+                  <div className="flex items-center gap-2 text-[var(--muted)]">
+                    <LuCalendar className="w-3.5 h-3.5" />
+                    {String(lead.preferred_date)}{lead.preferred_time ? ` at ${String(lead.preferred_time)}` : ''}
+                  </div>
+                ) : null}
+                {lead.subject ? (
+                  <div className="flex items-center gap-2 text-[var(--muted)]">
+                    <LuMessageSquare className="w-3.5 h-3.5" />
+                    {String(lead.subject)}
+                  </div>
+                ) : null}
+                {lead.property_type ? (
+                  <div className="flex items-center gap-2 text-[var(--muted)]">
+                    <LuMessageSquare className="w-3.5 h-3.5" />
+                    {String(lead.property_type)}{lead.bhk ? ` - ${String(lead.bhk)} BHK` : ''}{lead.area ? ` in ${String(lead.area)}` : ''}
+                  </div>
+                ) : null}
+              </div>
+
+              {lead.message ? (
+                <p className="text-sm text-[var(--muted)] bg-surface-light rounded-lg p-3 mb-3">
+                  {String(lead.message)}
+                </p>
+              ) : null}
+
+              {/* Status flow buttons */}
+              <div className="flex items-center gap-2 pt-2 border-t border-glass-border">
+                <span className="text-xs text-[var(--muted)] mr-2">Update:</span>
+                {statusFlow.map((s) => (
+                  <button
+                    key={s}
+                    onClick={() => updateStatus(tableName, lead.id as string, s)}
+                    className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-all cursor-pointer capitalize ${
+                      lead.status === s
+                        ? 'bg-[#006194] text-white'
+                        : 'bg-surface-light text-[var(--muted)] hover:text-[var(--foreground)]'
+                    }`}
+                  >
+                    {s}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ))
+        ) : (
+          <div className="glass-card p-8 text-center">
+            <LuUsers className="w-12 h-12 mx-auto text-[var(--muted)] mb-3" />
+            <p className="text-[var(--muted)]">No {tab} yet</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
