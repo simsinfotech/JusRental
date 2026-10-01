@@ -1,13 +1,7 @@
+import dynamic from 'next/dynamic';
 import { HeroSection } from '@/components/sections/HeroSection';
 import { KeyFeaturesSection } from '@/components/sections/KeyFeaturesSection';
 import { PropertyShowcase } from '@/components/sections/PropertyShowcase';
-import { AreaExplorer } from '@/components/sections/AreaExplorer';
-import { AIMatchingSection } from '@/components/sections/AIMatchingSection';
-import { OwnerSection } from '@/components/sections/OwnerSection';
-import { NRIServicesPreview } from '@/components/sections/NRIServicesPreview';
-import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
-import { BlogPreview } from '@/components/sections/BlogPreview';
-import { CTASection } from '@/components/sections/CTASection';
 import {
   fetchFeaturedProperties,
   fetchAreas,
@@ -15,7 +9,31 @@ import {
   fetchBlogPosts,
 } from '@/lib/dal';
 
-export const dynamic = 'force-dynamic';
+// Lazy-load below-the-fold sections — not needed for initial paint
+const AreaExplorer = dynamic(() =>
+  import('@/components/sections/AreaExplorer').then((m) => m.AreaExplorer)
+);
+const AIMatchingSection = dynamic(() =>
+  import('@/components/sections/AIMatchingSection').then((m) => m.AIMatchingSection)
+);
+const OwnerSection = dynamic(() =>
+  import('@/components/sections/OwnerSection').then((m) => m.OwnerSection)
+);
+const NRIServicesPreview = dynamic(() =>
+  import('@/components/sections/NRIServicesPreview').then((m) => m.NRIServicesPreview)
+);
+const TestimonialsSection = dynamic(() =>
+  import('@/components/sections/TestimonialsSection').then((m) => m.TestimonialsSection)
+);
+const BlogPreview = dynamic(() =>
+  import('@/components/sections/BlogPreview').then((m) => m.BlogPreview)
+);
+const CTASection = dynamic(() =>
+  import('@/components/sections/CTASection').then((m) => m.CTASection)
+);
+
+// ISR: regenerate page at most once every 60 seconds
+export const revalidate = 60;
 
 export default async function Home() {
   const [properties, areas, testimonials, blogPosts] = await Promise.all([

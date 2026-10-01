@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
-import { Plus_Jakarta_Sans, Inter } from 'next/font/google';
+import { Plus_Jakarta_Sans } from 'next/font/google';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
 import { SmoothScrollProvider } from '@/components/providers/SmoothScrollProvider';
 import { LayoutShell } from '@/components/layout/LayoutShell';
@@ -9,14 +9,10 @@ import './globals.css';
 const GTM_ID = 'GTM-P844FG8T';
 const GA_ID = 'G-GBHPMM96ZC';
 
+// Single font — Plus Jakarta Sans covers all weights we need.
+// Removing Inter saves ~80KB of font download.
 const plusJakarta = Plus_Jakarta_Sans({
   variable: '--font-plus-jakarta',
-  subsets: ['latin'],
-  display: 'swap',
-});
-
-const inter = Inter({
-  variable: '--font-inter',
   subsets: ['latin'],
   display: 'swap',
 });
@@ -39,10 +35,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${plusJakarta.variable} ${inter.variable} antialiased`}
+      className={`${plusJakarta.variable} antialiased`}
       suppressHydrationWarning
     >
       <head>
+        {/* Preload LCP hero image — biggest single LCP win */}
+        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+        <link
+          rel="preload"
+          href="/images/hero-bg.webp"
+          as="image"
+          type="image/webp"
+          // @ts-expect-error fetchpriority is valid HTML but not in React types yet
+          fetchpriority="high"
+        />
+        {/* DNS prefetch for Supabase API */}
+        <link rel="dns-prefetch" href="https://zuiacgsbkdgdpoxtgkuz.supabase.co" />
+        <link rel="preconnect" href="https://zuiacgsbkdgdpoxtgkuz.supabase.co" />
         {/* Google Tag Manager */}
         <Script
           id="gtm-script"
