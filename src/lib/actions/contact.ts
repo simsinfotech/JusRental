@@ -47,8 +47,8 @@ export async function submitContactForm(
     email: email || '',
     subject,
     message,
-    userCity,
-    userArea,
+    city: userCity,
+    area: userArea,
   });
 
   return { success: true };

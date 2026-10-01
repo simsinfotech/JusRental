@@ -48,10 +48,10 @@ export async function submitListProperty(
     phone,
     propertyType: propertyType || '',
     bhk: bhk || '',
-    area: area || '',
+    propertyArea: area || '',
     plan: plan || 'free',
-    userCity,
-    userArea,
+    city: userCity,
+    area: userArea,
   });
 
   return { success: true };

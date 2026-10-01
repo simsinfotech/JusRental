@@ -17,13 +17,15 @@ export async function POST(request: NextRequest) {
   // Build payload for Google Sheets
   const payload: Record<string, string> = { name, phone, email };
   if (source) payload.source = source;
-  if (propertyTitle) payload.propertyTitle = propertyTitle;
-  if (propertyLocation) payload.propertyLocation = propertyLocation;
-  if (propertyArea) payload.propertyArea = propertyArea;
+  if (propertyTitle) {
+    // Combine property title with location for the Property column
+    const parts = [propertyTitle, propertyLocation, propertyArea].filter(Boolean);
+    payload.propertyTitle = parts.join(' - ');
+  }
   if (preferredDate) payload.preferredDate = preferredDate;
   if (preferredTime) payload.preferredTime = preferredTime;
-  if (userCity) payload.userCity = userCity;
-  if (userArea) payload.userArea = userArea;
+  if (userCity) payload.city = userCity;
+  if (userArea) payload.area = userArea;
 
   // Send to Google Sheets
   await sendToGoogleSheets(payload);

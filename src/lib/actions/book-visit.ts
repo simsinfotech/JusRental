@@ -52,8 +52,8 @@ export async function submitBookVisit(
     preferredDate: preferredDate || '',
     preferredTime: preferredTime || '',
     message: message || '',
-    userCity,
-    userArea,
+    city: userCity,
+    area: userArea,
   });
 
   return { success: true };
