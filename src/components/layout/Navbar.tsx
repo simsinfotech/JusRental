@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, useScroll, useMotionValueEvent } from 'motion/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { LuMenu, LuUser, LuMapPin, LuSearch, LuHouse, LuChevronDown } from 'react-icons/lu';
 import { NAV_LINKS } from '@/lib/constants';
 import { MobileMenu } from './MobileMenu';
@@ -17,6 +17,7 @@ export function Navbar() {
   const [cityOpen, setCityOpen] = useState(false);
   const { scrollY } = useScroll();
   const pathname = usePathname();
+  const router = useRouter();
   const isHome = pathname === '/';
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
@@ -128,8 +129,10 @@ export function Navbar() {
 
             {/* Actions */}
             <div className="flex items-center gap-2">
-              {/* Search placeholder */}
-              <button className={`hidden lg:inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm border transition-colors cursor-pointer ${
+              {/* Search button */}
+              <button
+                onClick={() => router.push('/properties')}
+                className={`hidden lg:inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm border transition-colors cursor-pointer ${
                 showSolidBg
                   ? 'border-slate-200 text-[#707881] hover:bg-slate-50'
                   : 'border-white/15 text-white/60 hover:bg-white/10'

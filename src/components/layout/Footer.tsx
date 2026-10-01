@@ -26,10 +26,10 @@ const footerLinks = {
     { label: 'NRI Services', href: '/nri-services' },
   ],
   legal: [
-    { label: 'Privacy Policy', href: '#' },
-    { label: 'Terms of Service', href: '#' },
-    { label: 'Refund Policy', href: '#' },
-    { label: 'Zero Brokerage Policy', href: '#' },
+    { label: 'Privacy Policy', href: '/privacy-policy' },
+    { label: 'Terms of Service', href: '/terms-of-service' },
+    { label: 'Refund Policy', href: '/refund-policy' },
+    { label: 'Zero Brokerage Policy', href: '/zero-brokerage-policy' },
   ],
 };
 
@@ -168,13 +168,13 @@ export function Footer() {
           </p>
           <div className="flex flex-wrap gap-4 md:gap-6">
             {footerLinks.legal.map((link) => (
-              <a
+              <Link
                 key={link.label}
                 href={link.href}
                 className="text-xs text-white/40 hover:text-white/70 transition-colors"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </div>
         </div>

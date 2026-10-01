@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
 import { LuSparkles, LuSlidersHorizontal, LuIndianRupee, LuCircleCheckBig, LuLoaderCircle } from 'react-icons/lu';
 import { fadeInUp, staggerContainer } from '@/lib/animations';
@@ -10,7 +11,16 @@ const bhkOptions = ['1 BHK', '2 BHK', '3 BHK', '4+ BHK'];
 const budgetOptions = ['₹25K - ₹35K', '₹35K - ₹45K', '₹45K - ₹55K', '₹55K - ₹75K', '₹75K+'];
 const amenityOptions = ['WiFi', 'Gym', 'Parking', 'Pool', 'Furnished', 'Pet Friendly'];
 
+const budgetToParams: Record<string, { min: string; max: string }> = {
+  '₹25K - ₹35K': { min: '25000', max: '35000' },
+  '₹35K - ₹45K': { min: '35000', max: '45000' },
+  '₹45K - ₹55K': { min: '45000', max: '55000' },
+  '₹55K - ₹75K': { min: '55000', max: '75000' },
+  '₹75K+': { min: '75000', max: '' },
+};
+
 export function AIMatchingSection() {
+  const router = useRouter();
   const { ref, controls } = useAnimateInView(0.1);
   const [selectedBHK, setSelectedBHK] = useState('2 BHK');
   const [selectedBudget, setSelectedBudget] = useState('₹35K - ₹45K');
@@ -28,9 +38,14 @@ export function AIMatchingSection() {
   const handleFindMatches = () => {
     setMatchState('loading');
     setTimeout(() => {
-      setMatchState('found');
-      setTimeout(() => setMatchState('idle'), 5000);
-    }, 2000);
+      const params = new URLSearchParams();
+      if (selectedBHK) params.set('bhk', selectedBHK.replace(' BHK', '').replace('+', ''));
+      if (selectedBudget && budgetToParams[selectedBudget]) {
+        params.set('budgetMin', budgetToParams[selectedBudget].min);
+        if (budgetToParams[selectedBudget].max) params.set('budgetMax', budgetToParams[selectedBudget].max);
+      }
+      router.push(`/properties${params.toString() ? `?${params.toString()}` : ''}`);
+    }, 1500);
   };
 
   return (
