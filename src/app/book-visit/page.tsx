@@ -7,6 +7,7 @@ import { PageHero } from '@/components/layout/PageHero';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { WHATSAPP_NUMBER } from '@/lib/constants';
 import { submitBookVisit, type BookVisitFormState } from '@/lib/actions/book-visit';
+import { getUserLocation } from '@/lib/user-location';
 
 const initialState: BookVisitFormState = { success: false };
 
@@ -20,10 +21,7 @@ function BookVisitContent() {
   const [userLocation, setUserLocation] = useState({ city: '', area: '' });
 
   useEffect(() => {
-    setUserLocation({
-      city: localStorage.getItem('jusrental_user_city') || '',
-      area: localStorage.getItem('jusrental_user_area') || '',
-    });
+    getUserLocation().then(setUserLocation);
   }, []);
 
   useEffect(() => {

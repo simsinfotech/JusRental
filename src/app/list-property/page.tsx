@@ -10,6 +10,7 @@ import { GlassCard } from '@/components/ui/GlassCard';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { WHATSAPP_NUMBER, WHATSAPP_URL } from '@/lib/constants';
 import { submitListProperty, type ListPropertyFormState } from '@/lib/actions/list-property';
+import { getUserLocation } from '@/lib/user-location';
 
 const benefits = [
   { icon: LuUsers, title: '5,000+ Verified Tenants', desc: 'Access our large pool of pre-screened, KYC-verified tenants.' },
@@ -65,10 +66,7 @@ export default function ListPropertyPage() {
   const [userLocation, setUserLocation] = useState({ city: '', area: '' });
 
   useEffect(() => {
-    setUserLocation({
-      city: localStorage.getItem('jusrental_user_city') || '',
-      area: localStorage.getItem('jusrental_user_area') || '',
-    });
+    getUserLocation().then(setUserLocation);
   }, []);
 
   useEffect(() => {

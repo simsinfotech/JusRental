@@ -6,6 +6,7 @@ import { PageHero } from '@/components/layout/PageHero';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { WHATSAPP_NUMBER, WHATSAPP_URL } from '@/lib/constants';
 import { submitContactForm, type ContactFormState } from '@/lib/actions/contact';
+import { getUserLocation } from '@/lib/user-location';
 
 const contactInfo = [
   {
@@ -42,10 +43,7 @@ export default function ContactPage() {
   const [userLocation, setUserLocation] = useState({ city: '', area: '' });
 
   useEffect(() => {
-    setUserLocation({
-      city: localStorage.getItem('jusrental_user_city') || '',
-      area: localStorage.getItem('jusrental_user_area') || '',
-    });
+    getUserLocation().then(setUserLocation);
   }, []);
 
   useEffect(() => {
