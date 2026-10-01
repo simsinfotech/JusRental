@@ -7,7 +7,7 @@ import { WHATSAPP_URL } from '@/lib/constants';
 
 const footerLinks = {
   company: [
-    { label: 'About Us', href: '/contact' },
+    { label: 'About Us', href: '/about' },
     { label: 'Blog', href: '/blog' },
     { label: 'Contact', href: '/contact' },
     { label: 'Rental Agreement', href: '/rental-agreement' },

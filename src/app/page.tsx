@@ -47,8 +47,42 @@ export default async function Home() {
     fetchBlogPosts(),
   ]);
 
+  // Compute aggregate rating from testimonials
+  const ratingCount = testimonials.length;
+  const ratingSum = testimonials.reduce((sum, t) => sum + t.rating, 0);
+  const ratingValue = ratingCount > 0 ? (ratingSum / ratingCount).toFixed(1) : '5.0';
+
+  const reviewJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: 'JusRental',
+    url: 'https://www.jusrental.com',
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue,
+      reviewCount: ratingCount,
+      bestRating: '5',
+      worstRating: '1',
+    },
+    review: testimonials.slice(0, 5).map((t) => ({
+      '@type': 'Review',
+      author: { '@type': 'Person', name: t.name },
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: t.rating,
+        bestRating: '5',
+        worstRating: '1',
+      },
+      reviewBody: t.content,
+    })),
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(reviewJsonLd) }}
+      />
       <HeroSection />
       <KeyFeaturesSection />
       <PropertyShowcase properties={properties} />

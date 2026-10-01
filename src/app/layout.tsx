@@ -94,10 +94,42 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             __html: JSON.stringify([
               {
                 '@context': 'https://schema.org',
-                '@type': 'Organization',
+                '@type': ['Organization', 'LocalBusiness'],
                 name: 'JusRental',
                 url: 'https://www.jusrental.com',
                 logo: 'https://www.jusrental.com/images/monogram.png',
+                description: 'AI-matched, verified rental homes in Bangalore. Zero tenant brokerage, closing handled for you.',
+                foundingDate: '2024',
+                founder: {
+                  '@type': 'Person',
+                  name: 'Shamique',
+                  jobTitle: 'Founder & CEO',
+                },
+                address: {
+                  '@type': 'PostalAddress',
+                  addressLocality: 'Bengaluru',
+                  postalCode: '560077',
+                  addressRegion: 'Karnataka',
+                  addressCountry: 'IN',
+                },
+                geo: {
+                  '@type': 'GeoCoordinates',
+                  latitude: '13.0827',
+                  longitude: '77.5877',
+                },
+                telephone: '+91-90363-17765',
+                email: 'hello@jusrental.com',
+                priceRange: '₹8,000 - ₹1,50,000/month',
+                openingHoursSpecification: {
+                  '@type': 'OpeningHoursSpecification',
+                  dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+                  opens: '09:00',
+                  closes: '19:00',
+                },
+                areaServed: {
+                  '@type': 'City',
+                  name: 'Bengaluru',
+                },
                 sameAs: [
                   'https://www.facebook.com/profile.php?id=61594353013446',
                 ],

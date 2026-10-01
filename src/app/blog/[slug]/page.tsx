@@ -7,6 +7,7 @@ import { fetchBlogPostBySlug, fetchBlogPosts } from '@/lib/dal';
 import { Breadcrumb } from '@/components/ui/Breadcrumb';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { BlogPostContent } from '@/components/sections/BlogPostContent';
+import { getAuthor } from '@/lib/authors';
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
@@ -44,8 +45,54 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     .filter((p) => p.slug !== post.slug && p.category === post.category)
     .slice(0, 2);
 
+  const author = getAuthor(post.author);
+
+  const jsonLd = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: post.title,
+      description: post.excerpt,
+      image: post.coverImage || undefined,
+      datePublished: post.publishedDate,
+      dateModified: post.publishedDate,
+      author: {
+        '@type': 'Person',
+        name: author.name,
+        jobTitle: author.role,
+        url: 'https://www.jusrental.com/about',
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'JusRental',
+        logo: {
+          '@type': 'ImageObject',
+          url: 'https://www.jusrental.com/images/monogram.png',
+        },
+      },
+      mainEntityOfPage: {
+        '@type': 'WebPage',
+        '@id': `https://www.jusrental.com/blog/${slug}`,
+      },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.jusrental.com' },
+        { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://www.jusrental.com/blog' },
+        { '@type': 'ListItem', position: 3, name: post.title, item: `https://www.jusrental.com/blog/${slug}` },
+      ],
+    },
+  ];
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       {/* Hero */}
       <section className="relative bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#0f172a] pt-28 pb-8 md:pt-32 md:pb-10">
         <div className="absolute top-0 right-0 w-96 h-96 bg-[#006194]/10 rounded-full blur-[120px] pointer-events-none" />
@@ -105,8 +152,30 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           {/* Content */}
           <BlogPostContent content={post.content} />
 
-          {/* Tags */}
+          {/* Author Bio */}
           <div className="mt-10 pt-6 border-t border-glass-border">
+            <div className="flex items-start gap-4">
+              <div className="w-14 h-14 rounded-full bg-[#006194] flex items-center justify-center shrink-0">
+                <span className="text-lg font-bold text-white">{author.name.charAt(0)}</span>
+              </div>
+              <div>
+                <p className="font-semibold font-[family-name:var(--font-heading)]">
+                  Written by {author.name}
+                </p>
+                <p className="text-sm text-[#006194] font-medium mb-1">{author.role}</p>
+                <p className="text-sm text-[var(--muted)] leading-relaxed">{author.bio}</p>
+                <Link
+                  href="/about"
+                  className="inline-block mt-2 text-sm text-[#006194] hover:underline"
+                >
+                  Learn more about our team
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* Tags */}
+          <div className="mt-8 pt-6 border-t border-glass-border">
             <div className="flex flex-wrap gap-2">
               {post.tags.map((tag) => (
                 <span

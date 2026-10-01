@@ -10,8 +10,21 @@ export default async function BlogPage() {
     fetchBlogCategories(),
   ]);
 
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.jusrental.com' },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://www.jusrental.com/blog' },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <PageHero
         title="Blog & Guides"
         subtitle="Expert rental tips, area guides, and legal advice for tenants and property owners in Bangalore."

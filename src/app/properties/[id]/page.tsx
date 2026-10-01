@@ -62,21 +62,32 @@ export default async function PropertyDetailPage({ params }: PropertyPageProps) 
   if (areaContent) {
     const properties = await fetchProperties({ area: areaContent.name });
 
-    const faqJsonLd = {
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      mainEntity: areaContent.faqs.map((faq) => ({
-        '@type': 'Question',
-        name: faq.q,
-        acceptedAnswer: { '@type': 'Answer', text: faq.a },
-      })),
-    };
+    const areaJsonLd = [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: areaContent.faqs.map((faq) => ({
+          '@type': 'Question',
+          name: faq.q,
+          acceptedAnswer: { '@type': 'Answer', text: faq.a },
+        })),
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.jusrental.com' },
+          { '@type': 'ListItem', position: 2, name: 'Properties', item: 'https://www.jusrental.com/properties' },
+          { '@type': 'ListItem', position: 3, name: areaContent.name, item: `https://www.jusrental.com/properties/${areaContent.slug}` },
+        ],
+      },
+    ];
 
     return (
       <>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(areaJsonLd) }}
         />
         <AreaPage area={areaContent} properties={properties} />
       </>
@@ -92,32 +103,43 @@ export default async function PropertyDetailPage({ params }: PropertyPageProps) 
 
   const similar = await fetchSimilarProperties(property);
 
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'RealEstateListing',
-    name: property.title,
-    description: property.seoDescription || property.description.slice(0, 300),
-    url: `https://www.jusrental.com/properties/${id}`,
-    image: property.images[0] || undefined,
-    offers: {
-      '@type': 'Offer',
-      price: property.price,
-      priceCurrency: 'INR',
-      availability: property.available ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+  const jsonLd = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'RealEstateListing',
+      name: property.title,
+      description: property.seoDescription || property.description.slice(0, 300),
+      url: `https://www.jusrental.com/properties/${id}`,
+      image: property.images[0] || undefined,
+      offers: {
+        '@type': 'Offer',
+        price: property.price,
+        priceCurrency: 'INR',
+        availability: property.available ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+      },
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: property.area,
+        addressRegion: 'Karnataka',
+        addressCountry: 'IN',
+      },
+      numberOfRooms: property.bhk,
+      floorSize: {
+        '@type': 'QuantitativeValue',
+        value: property.sqft,
+        unitCode: 'FTK',
+      },
     },
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: property.area,
-      addressRegion: 'Karnataka',
-      addressCountry: 'IN',
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.jusrental.com' },
+        { '@type': 'ListItem', position: 2, name: 'Properties', item: 'https://www.jusrental.com/properties' },
+        { '@type': 'ListItem', position: 3, name: property.title, item: `https://www.jusrental.com/properties/${id}` },
+      ],
     },
-    numberOfRooms: property.bhk,
-    floorSize: {
-      '@type': 'QuantitativeValue',
-      value: property.sqft,
-      unitCode: 'FTK',
-    },
-  };
+  ];
 
   return (
     <>
