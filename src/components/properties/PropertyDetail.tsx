@@ -98,6 +98,8 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
       return d.toISOString().split('T')[0];
     };
 
+    const resolvedDate = resolveDate(selectedDate);
+
     try {
       // 1. Send to Google Sheets via API
       const res = await fetch('/api/leads/capture', {
@@ -108,8 +110,8 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
           phone,
           email,
           source: 'Visit Request',
-          propertyTitle: property.title,
-          preferredDate: selectedDate,
+          propertyTitle: `${property.title} - ${property.location}`,
+          preferredDate: `${resolvedDate} (${selectedDate})`,
           preferredTime: selectedSlot,
         }),
       });
@@ -124,7 +126,7 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
         name,
         phone,
         email,
-        preferred_date: resolveDate(selectedDate),
+        preferred_date: resolvedDate,
         preferred_time: selectedSlot,
         message: '',
         property_id: property.id,
