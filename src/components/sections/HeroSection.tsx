@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { motion } from 'motion/react';
 import { LuSearch, LuShieldCheck, LuHeadphones, LuBadgePercent, LuLock, LuHouse, LuMapPin, LuBuilding2, LuIndianRupee, LuChevronDown } from 'react-icons/lu';
 import { fadeInUp, staggerContainer } from '@/lib/animations';
@@ -64,14 +65,17 @@ const budgetToParams: Record<string, { min: string; max: string }> = {
 
 export function HeroSection() {
   const router = useRouter();
+  const [searchKeyword, setSearchKeyword] = useState('');
   const [selectedLocation, setSelectedLocation] = useState('');
   const [selectedBhk, setSelectedBhk] = useState('');
   const [selectedBudget, setSelectedBudget] = useState('');
   const [selectedType, setSelectedType] = useState('');
   const { ref: statsRef, controls: statsControls } = useAnimateInView(0.2);
 
-  const handleSearch = () => {
+  const handleSearch = (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
     const params = new URLSearchParams();
+    if (searchKeyword.trim()) params.set('q', searchKeyword.trim());
     if (selectedType) params.set('type', selectedType);
     if (selectedLocation) params.set('area', selectedLocation);
     if (selectedBhk) params.set('bhk', selectedBhk.replace(' BHK', '').replace('+', ''));
@@ -139,7 +143,7 @@ export function HeroSection() {
             transition={{ duration: 0.7, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
             className="w-full max-w-4xl mx-auto"
           >
-            <div className="rounded-2xl bg-white/10 backdrop-blur-xl border border-white/15 p-5 md:p-6 shadow-2xl shadow-black/20">
+            <form onSubmit={handleSearch} className="rounded-2xl bg-white/10 backdrop-blur-xl border border-white/15 p-5 md:p-6 shadow-2xl shadow-black/20">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
                 {/* City */}
                 <div>
@@ -249,18 +253,28 @@ export function HeroSection() {
 
               {/* Search Action Strip */}
               <div className="mt-4 flex flex-col sm:flex-row items-center gap-3">
+                <div className="relative flex-1 w-full">
+                  <LuSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                  <input
+                    type="text"
+                    value={searchKeyword}
+                    onChange={(e) => setSearchKeyword(e.target.value)}
+                    placeholder="Search by keywords, project name, or society..."
+                    className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white/90 border border-slate-200 text-[#131b2e] text-sm focus:outline-none focus:border-[#006194] focus:ring-2 focus:ring-[#006194]/20 transition-all placeholder:text-slate-400"
+                  />
+                </div>
                 <button
-                  onClick={handleSearch}
-                  className="w-full sm:w-auto flex-1 sm:flex-none px-8 py-3 rounded-xl bg-[#006194] hover:bg-[#005080] text-white font-semibold flex items-center justify-center gap-2 shadow-lg shadow-[#006194]/25 transition-all duration-300 hover:-translate-y-0.5 cursor-pointer"
+                  type="submit"
+                  className="w-full sm:w-auto px-8 py-2.5 rounded-xl bg-[#006194] hover:bg-[#005080] text-white font-semibold flex items-center justify-center gap-2 shadow-lg shadow-[#006194]/25 transition-all duration-300 hover:-translate-y-0.5 cursor-pointer shrink-0"
                 >
                   <LuSearch className="w-4 h-4" />
                   Search Homes
                 </button>
-                <span className="text-sm text-white/50 hidden sm:inline">
-                  or browse <a href="/properties" className="text-[#006194] hover:underline">all properties</a>
+                <span className="text-sm text-white/50 hidden lg:inline shrink-0">
+                  or browse <Link href="/properties" className="text-[#006194] hover:underline font-medium text-white/80">all properties</Link>
                 </span>
               </div>
-            </div>
+            </form>
           </motion.div>
 
           {/* Trust Highlights Ribbon */}

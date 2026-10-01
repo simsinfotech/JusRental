@@ -9,6 +9,10 @@ export async function fetchProperties(filters?: PropertyFilters): Promise<Proper
     .eq('available', true)
     .eq('status', 'active');
 
+  if (filters?.q?.trim()) {
+    const qClean = filters.q.trim();
+    query = query.or(`title.ilike.%${qClean}%,location.ilike.%${qClean}%,area.ilike.%${qClean}%,description.ilike.%${qClean}%`);
+  }
   if (filters?.type) {
     query = query.eq('type', filters.type);
   }
@@ -26,8 +30,9 @@ export async function fetchProperties(filters?: PropertyFilters): Promise<Proper
   if (filters?.budgetMax) {
     query = query.lte('price', filters.budgetMax);
   }
-  if (filters?.area) {
-    query = query.eq('area', filters.area);
+  if (filters?.area?.trim()) {
+    const areaClean = filters.area.trim();
+    query = query.or(`area.ilike.%${areaClean}%,location.ilike.%${areaClean}%`);
   }
   if (filters?.furnished) {
     query = query.eq('furnished', filters.furnished);

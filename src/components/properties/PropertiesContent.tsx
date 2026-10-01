@@ -23,6 +23,7 @@ interface PropertiesContentProps {
   allAreas: string[];
   allTypes: string[];
   initialFilters: {
+    q?: string;
     type: string;
     bhk: string;
     budgetMin: string;

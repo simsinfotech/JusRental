@@ -64,6 +64,7 @@ export interface ContactFormData {
 }
 
 export interface PropertyFilters {
+  q?: string;
   type?: string;
   bhk?: string;
   budgetMin?: number;

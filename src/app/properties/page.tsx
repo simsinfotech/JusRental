@@ -11,6 +11,7 @@ export default async function PropertiesPage({ searchParams }: PropertiesPagePro
   const params = await searchParams;
 
   const filters = {
+    q: params.q,
     type: params.type,
     bhk: params.bhk,
     budgetMin: params.budgetMin ? parseInt(params.budgetMin) : undefined,
@@ -30,7 +31,7 @@ export default async function PropertiesPage({ searchParams }: PropertiesPagePro
     <>
       <PageHero
         title="Browse Properties"
-        subtitle="Explore 1200+ verified rental homes across North Bangalore. Filter by area, budget, and more."
+        subtitle="Explore verified rental homes across Bangalore. Filter by area, budget, and more."
         breadcrumbs={[{ label: 'Properties' }]}
       />
       <Suspense>
@@ -39,6 +40,7 @@ export default async function PropertiesPage({ searchParams }: PropertiesPagePro
           allAreas={allAreas}
           allTypes={allTypes}
           initialFilters={{
+            q: params.q || '',
             type: params.type || '',
             bhk: params.bhk || '',
             budgetMin: params.budgetMin || '',

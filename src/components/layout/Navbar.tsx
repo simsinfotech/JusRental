@@ -129,17 +129,34 @@ export function Navbar() {
 
             {/* Actions */}
             <div className="flex items-center gap-2">
-              {/* Search button */}
-              <button
-                onClick={() => router.push('/properties')}
-                className={`hidden lg:inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm border transition-colors cursor-pointer ${
-                showSolidBg
-                  ? 'border-slate-200 text-[#707881] hover:bg-slate-50'
-                  : 'border-white/15 text-white/60 hover:bg-white/10'
-              }`}>
-                <LuSearch className="w-3.5 h-3.5" />
-                <span>Search...</span>
-              </button>
+              {/* Search Form */}
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  const formEl = e.currentTarget;
+                  const input = (formEl.elements.namedItem('navSearch') as HTMLInputElement)?.value;
+                  if (input?.trim()) {
+                    router.push(`/properties?q=${encodeURIComponent(input.trim())}`);
+                  } else {
+                    router.push('/properties');
+                  }
+                }}
+                className="hidden lg:flex items-center"
+              >
+                <div className="relative">
+                  <LuSearch className={`absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 ${showSolidBg ? 'text-slate-400' : 'text-white/60'}`} />
+                  <input
+                    name="navSearch"
+                    type="text"
+                    placeholder="Search properties..."
+                    className={`pl-9 pr-3 py-1.5 rounded-lg text-sm border focus:outline-none focus:ring-2 transition-all w-44 focus:w-60 ${
+                      showSolidBg
+                        ? 'bg-slate-50 border-slate-200 text-[#131b2e] placeholder:text-slate-400 focus:bg-white focus:ring-[#006194]/20 focus:border-[#006194]'
+                        : 'bg-white/10 border-white/15 text-white placeholder:text-white/50 focus:bg-white/20 focus:ring-white/30 focus:border-white/40'
+                    }`}
+                  />
+                </div>
+              </form>
 
               <div className="hidden md:flex items-center gap-2">
                 {/* List Property */}
