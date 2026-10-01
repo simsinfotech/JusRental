@@ -7,7 +7,6 @@ import { LuMapPin, LuCalendar, LuHouse, LuCompass, LuUsers, LuChevronRight, LuSh
 import { getPropertyWhatsAppURL, WHATSAPP_NUMBER } from '@/lib/constants';
 import { PropertyCard } from '@/components/properties/PropertyCard';
 import { createSupabaseBrowser } from '@/lib/supabase-browser';
-import { getUserLocation } from '@/lib/user-location';
 import type { Property } from '@/types';
 
 const amenityIcons: Record<string, React.ElementType> = {
@@ -100,10 +99,9 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
     };
 
     const resolvedDate = resolveDate(selectedDate);
-    const { city: userCity, area: userArea } = await getUserLocation();
 
     try {
-      // 1. Send to Google Sheets via API
+      // 1. Send to Google Sheets via API (city/area captured server-side from IP)
       const res = await fetch('/api/leads/capture', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -117,8 +115,6 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
           propertyArea: property.area,
           preferredDate: `${resolvedDate} (${selectedDate})`,
           preferredTime: selectedSlot,
-          userCity,
-          userArea,
         }),
       });
       if (!res.ok) {

@@ -1,5 +1,6 @@
 'use server';
 
+import { headers } from 'next/headers';
 import { supabaseAdmin } from '@/lib/supabase-server';
 import { sendToGoogleSheets } from '@/lib/google-sheets';
 
@@ -18,12 +19,15 @@ export async function submitListProperty(
   const bhk = formData.get('bhk') as string;
   const area = formData.get('area') as string;
   const plan = formData.get('plan') as string;
-  const userCity = (formData.get('userCity') as string) || '';
-  const userArea = (formData.get('userArea') as string) || '';
 
   if (!name || !phone) {
     return { success: false, error: 'Please fill in all required fields.' };
   }
+
+  // Get user location from Vercel's IP geolocation headers
+  const h = await headers();
+  const userCity = decodeURIComponent(h.get('x-vercel-ip-city') || '');
+  const userRegion = decodeURIComponent(h.get('x-vercel-ip-country-region') || '');
 
   const { error } = await supabaseAdmin
     .from('js_property_listing_requests')
@@ -51,7 +55,7 @@ export async function submitListProperty(
     propertyArea: area || '',
     plan: plan || 'free',
     city: userCity,
-    area: userArea,
+    area: userRegion,
   });
 
   return { success: true };

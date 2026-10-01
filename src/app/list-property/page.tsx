@@ -10,7 +10,6 @@ import { GlassCard } from '@/components/ui/GlassCard';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { WHATSAPP_NUMBER, WHATSAPP_URL } from '@/lib/constants';
 import { submitListProperty, type ListPropertyFormState } from '@/lib/actions/list-property';
-import { getUserLocation } from '@/lib/user-location';
 
 const benefits = [
   { icon: LuUsers, title: '5,000+ Verified Tenants', desc: 'Access our large pool of pre-screened, KYC-verified tenants.' },
@@ -63,11 +62,6 @@ export default function ListPropertyPage() {
 
   const [state, formAction, isPending] = useActionState(submitListProperty, initialState);
   const [submitted, setSubmitted] = useState(false);
-  const [userLocation, setUserLocation] = useState({ city: '', area: '' });
-
-  useEffect(() => {
-    getUserLocation().then(setUserLocation);
-  }, []);
 
   useEffect(() => {
     if (state.success) {
@@ -238,8 +232,6 @@ export default function ListPropertyPage() {
               )}
               <form id="list-property-form" action={formAction} className="space-y-4">
                 <input type="hidden" name="plan" value="free" />
-                <input type="hidden" name="userCity" value={userLocation.city} />
-                <input type="hidden" name="userArea" value={userLocation.area} />
                 <div>
                   <label className="text-sm font-medium mb-1.5 block">Your Name *</label>
                   <input

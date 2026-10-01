@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { LuX, LuUser, LuPhone, LuMail, LuSend } from 'react-icons/lu';
-import { getUserLocation } from '@/lib/user-location';
 
 interface LeadPopupProps {
   isOpen: boolean;
@@ -20,14 +19,11 @@ export function LeadPopup({ isOpen, onClose }: LeadPopupProps) {
     setErrorMessage('');
 
     const formData = new FormData(e.currentTarget);
-    const { city: userCity, area: userArea } = await getUserLocation();
     const data = {
       name: formData.get('name') as string,
       phone: formData.get('phone') as string,
       email: formData.get('email') as string,
       source: 'Lead Popup',
-      userCity,
-      userArea,
     };
 
     try {

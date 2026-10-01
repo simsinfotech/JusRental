@@ -7,7 +7,6 @@ import { PageHero } from '@/components/layout/PageHero';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { WHATSAPP_NUMBER } from '@/lib/constants';
 import { submitBookVisit, type BookVisitFormState } from '@/lib/actions/book-visit';
-import { getUserLocation } from '@/lib/user-location';
 
 const initialState: BookVisitFormState = { success: false };
 
@@ -18,11 +17,6 @@ function BookVisitContent() {
 
   const [state, formAction, isPending] = useActionState(submitBookVisit, initialState);
   const [submitted, setSubmitted] = useState(false);
-  const [userLocation, setUserLocation] = useState({ city: '', area: '' });
-
-  useEffect(() => {
-    getUserLocation().then(setUserLocation);
-  }, []);
 
   useEffect(() => {
     if (state.success) {
@@ -90,8 +84,6 @@ function BookVisitContent() {
               )}
               <form id="book-visit-form" action={formAction} className="space-y-5">
                 <input type="hidden" name="propertyId" value={propertyId} />
-                <input type="hidden" name="userCity" value={userLocation.city} />
-                <input type="hidden" name="userArea" value={userLocation.area} />
 
                 <div>
                   <label className="text-sm font-medium mb-1.5 block">Full Name *</label>

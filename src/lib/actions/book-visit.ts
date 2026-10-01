@@ -1,5 +1,6 @@
 'use server';
 
+import { headers } from 'next/headers';
 import { supabaseAdmin } from '@/lib/supabase-server';
 import { sendToGoogleSheets } from '@/lib/google-sheets';
 
@@ -19,12 +20,15 @@ export async function submitBookVisit(
   const preferredTime = formData.get('preferredTime') as string;
   const message = formData.get('message') as string;
   const propertyId = formData.get('propertyId') as string;
-  const userCity = (formData.get('userCity') as string) || '';
-  const userArea = (formData.get('userArea') as string) || '';
 
   if (!name || !phone) {
     return { success: false, error: 'Please fill in all required fields.' };
   }
+
+  // Get user location from Vercel's IP geolocation headers
+  const h = await headers();
+  const city = decodeURIComponent(h.get('x-vercel-ip-city') || '');
+  const area = decodeURIComponent(h.get('x-vercel-ip-country-region') || '');
 
   const { error } = await supabaseAdmin
     .from('js_book_visit_requests')
@@ -52,8 +56,8 @@ export async function submitBookVisit(
     preferredDate: preferredDate || '',
     preferredTime: preferredTime || '',
     message: message || '',
-    city: userCity,
-    area: userArea,
+    city,
+    area,
   });
 
   return { success: true };

@@ -1,5 +1,6 @@
 'use server';
 
+import { headers } from 'next/headers';
 import { supabaseAdmin } from '@/lib/supabase-server';
 import { sendToGoogleSheets } from '@/lib/google-sheets';
 
@@ -17,12 +18,15 @@ export async function submitContactForm(
   const phone = formData.get('phone') as string;
   const subject = formData.get('subject') as string;
   const message = formData.get('message') as string;
-  const userCity = (formData.get('userCity') as string) || '';
-  const userArea = (formData.get('userArea') as string) || '';
 
   if (!name || !phone || !subject || !message) {
     return { success: false, error: 'Please fill in all required fields.' };
   }
+
+  // Get user location from Vercel's IP geolocation headers
+  const h = await headers();
+  const city = decodeURIComponent(h.get('x-vercel-ip-city') || '');
+  const area = decodeURIComponent(h.get('x-vercel-ip-country-region') || '');
 
   const { error } = await supabaseAdmin
     .from('js_contact_submissions')
@@ -47,8 +51,8 @@ export async function submitContactForm(
     email: email || '',
     subject,
     message,
-    city: userCity,
-    area: userArea,
+    city,
+    area,
   });
 
   return { success: true };

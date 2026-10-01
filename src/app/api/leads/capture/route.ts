@@ -7,25 +7,27 @@ export async function POST(request: NextRequest) {
     name, phone, email, source,
     propertyTitle, propertyLocation, propertyArea,
     preferredDate, preferredTime,
-    userCity, userArea,
   } = await request.json();
 
   if (!name || !phone || !email) {
     return NextResponse.json({ error: 'All fields are required' }, { status: 400 });
   }
 
+  // Get user location from Vercel's IP geolocation headers (server-side, always available)
+  const city = request.headers.get('x-vercel-ip-city') || '';
+  const area = request.headers.get('x-vercel-ip-country-region') || '';
+
   // Build payload for Google Sheets
   const payload: Record<string, string> = { name, phone, email };
   if (source) payload.source = source;
   if (propertyTitle) {
-    // Combine property title with location for the Property column
     const parts = [propertyTitle, propertyLocation, propertyArea].filter(Boolean);
     payload.propertyTitle = parts.join(' - ');
   }
   if (preferredDate) payload.preferredDate = preferredDate;
   if (preferredTime) payload.preferredTime = preferredTime;
-  if (userCity) payload.city = userCity;
-  if (userArea) payload.area = userArea;
+  if (city) payload.city = decodeURIComponent(city);
+  if (area) payload.area = decodeURIComponent(area);
 
   // Send to Google Sheets
   await sendToGoogleSheets(payload);
@@ -37,8 +39,8 @@ export async function POST(request: NextRequest) {
     propertyArea && `Area: ${propertyArea}`,
     preferredDate && `Date: ${preferredDate}`,
     preferredTime && `Time: ${preferredTime}`,
-    userCity && `User City: ${userCity}`,
-    userArea && `User Area: ${userArea}`,
+    city && `User City: ${decodeURIComponent(city)}`,
+    area && `User Region: ${decodeURIComponent(area)}`,
   ].filter(Boolean).join(', ');
 
   supabaseAdmin
