@@ -48,7 +48,7 @@ export function Footer() {
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
               <Image
-                src="/images/logo.png"
+                src="/images/logo.webp"
                 alt="JusRental"
                 width={180}
                 height={46}
@@ -65,7 +65,7 @@ export function Footer() {
                 <LuShieldCheck className="w-3 h-3" />
                 100% Verified
               </span>
-              <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-[#006194]/10 text-[#006194] text-xs font-medium">
+              <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-[#006194]/20 text-[#4da8d4] text-xs font-medium">
                 <LuBadgePercent className="w-3 h-3" />
                 Zero Brokerage
               </span>
@@ -93,7 +93,7 @@ export function Footer() {
             <ul className="space-y-2.5">
               {footerLinks.tenants.map((link) => (
                 <li key={link.label}>
-                  <Link href={link.href} className="text-sm text-white/50 hover:text-white transition-colors">
+                  <Link href={link.href} className="text-sm text-white/60 hover:text-white transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -107,7 +107,7 @@ export function Footer() {
             <ul className="space-y-2.5">
               {footerLinks.owners.map((link) => (
                 <li key={link.label}>
-                  <Link href={link.href} className="text-sm text-white/50 hover:text-white transition-colors">
+                  <Link href={link.href} className="text-sm text-white/60 hover:text-white transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -121,7 +121,7 @@ export function Footer() {
             <ul className="space-y-2.5">
               {footerLinks.company.map((link) => (
                 <li key={link.label}>
-                  <Link href={link.href} className="text-sm text-white/50 hover:text-white transition-colors">
+                  <Link href={link.href} className="text-sm text-white/60 hover:text-white transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -134,26 +134,26 @@ export function Footer() {
             <h4 className="font-semibold mb-4 font-[family-name:var(--font-heading)] text-white">Bangalore Hub</h4>
             <ul className="space-y-3">
               <li>
-                <span className="flex items-start gap-2 text-sm text-white/50">
-                  <LuMapPin className="w-4 h-4 mt-0.5 shrink-0 text-white/40" />
+                <span className="flex items-start gap-2 text-sm text-white/60">
+                  <LuMapPin className="w-4 h-4 mt-0.5 shrink-0 text-white/60" />
                   Bengaluru 560077, Karnataka, India
                 </span>
               </li>
               <li>
-                <a href={WHATSAPP_URL} className="flex items-start gap-2 text-sm text-white/50 hover:text-white transition-colors">
-                  <LuPhone className="w-4 h-4 mt-0.5 shrink-0 text-white/40" />
+                <a href={WHATSAPP_URL} className="flex items-start gap-2 text-sm text-white/60 hover:text-white transition-colors">
+                  <LuPhone className="w-4 h-4 mt-0.5 shrink-0 text-white/60" />
                   +91 90363 17765
                 </a>
               </li>
               <li>
-                <a href="mailto:hello@jusrental.com" className="flex items-start gap-2 text-sm text-white/50 hover:text-white transition-colors">
-                  <LuMail className="w-4 h-4 mt-0.5 shrink-0 text-white/40" />
+                <a href="mailto:hello@jusrental.com" className="flex items-start gap-2 text-sm text-white/60 hover:text-white transition-colors">
+                  <LuMail className="w-4 h-4 mt-0.5 shrink-0 text-white/60" />
                   hello@jusrental.com
                 </a>
               </li>
               <li>
-                <span className="flex items-start gap-2 text-sm text-white/50">
-                  <LuClock className="w-4 h-4 mt-0.5 shrink-0 text-white/40" />
+                <span className="flex items-start gap-2 text-sm text-white/60">
+                  <LuClock className="w-4 h-4 mt-0.5 shrink-0 text-white/60" />
                   Mon - Sat, 9AM - 7PM
                 </span>
               </li>
@@ -163,7 +163,7 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-white/40">
+          <p className="text-sm text-white/60">
             &copy; {new Date().getFullYear()} JusRental. All rights reserved.
           </p>
           <div className="flex flex-wrap gap-4 md:gap-6">
@@ -171,7 +171,7 @@ export function Footer() {
               <Link
                 key={link.label}
                 href={link.href}
-                className="text-xs text-white/40 hover:text-white/70 transition-colors"
+                className="text-xs text-white/60 hover:text-white/70 transition-colors"
               >
                 {link.label}
               </Link>

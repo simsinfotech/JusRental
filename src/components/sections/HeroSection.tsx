@@ -114,32 +114,25 @@ export function HeroSection() {
 
         {/* Content */}
         <div className="relative z-10 flex flex-col items-center justify-center min-h-screen w-full px-4 sm:px-6 lg:px-8 pt-28 sm:pt-36 pb-12 sm:pb-16 box-border">
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            animate="visible"
-            className="text-center max-w-4xl mx-auto mb-6 sm:mb-10"
-          >
+          <div className="text-center max-w-4xl mx-auto mb-6 sm:mb-10 animate-[fadeInUp_0.6s_ease-out_both]">
             {/* Main Headline */}
-            <motion.h1
-              variants={fadeInUp}
+            <h1
               className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold font-[family-name:var(--font-heading)] leading-[1.15] sm:leading-[1.08] text-white mb-3 sm:mb-6 tracking-tight"
             >
               Homes That Feel{' '}
               <span className="bg-gradient-to-r text-white">
                 Like Yours
               </span>
-            </motion.h1>
+            </h1>
 
             {/* Subtitle */}
-            <motion.p
-              variants={fadeInUp}
-              className="text-xs sm:text-base md:text-xl text-white/80 leading-relaxed max-w-2xl mx-auto px-2"
+            <p
+              className="text-xs sm:text-base md:text-xl text-white/80 leading-relaxed max-w-2xl mx-auto px-2 animate-[fadeInUp_0.6s_ease-out_0.15s_both]"
             >
               Discover verified rental homes in Bangalore. AI-matched to your needs,
               zero brokerage, and hassle-free move-in across 25+ neighborhoods.
-            </motion.p>
-          </motion.div>
+            </p>
+          </div>
 
           {/* ─── Search Console ─── */}
           <motion.div
@@ -152,12 +145,13 @@ export function HeroSection() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-2 sm:gap-2.5 md:gap-3">
                 {/* City */}
                 <div>
-                  <label className="text-[11px] sm:text-xs font-semibold text-white/70 uppercase tracking-wider mb-1 block">
+                  <label htmlFor="hero-city" className="text-[11px] sm:text-xs font-semibold text-white/70 uppercase tracking-wider mb-1 block">
                     City
                   </label>
                   <div className="relative">
                     <LuMapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                     <select
+                      id="hero-city"
                       className={selectClasses}
                       defaultValue="Bangalore"
                     >
@@ -173,12 +167,13 @@ export function HeroSection() {
 
                 {/* Property Type */}
                 <div>
-                  <label className="text-[11px] sm:text-xs font-semibold text-white/70 uppercase tracking-wider mb-1 block">
+                  <label htmlFor="hero-type" className="text-[11px] sm:text-xs font-semibold text-white/70 uppercase tracking-wider mb-1 block">
                     Property Type
                   </label>
                   <div className="relative">
                     <LuHouse className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                     <select
+                      id="hero-type"
                       value={selectedType}
                       onChange={(e) => setSelectedType(e.target.value)}
                       className={selectClasses}
@@ -194,12 +189,13 @@ export function HeroSection() {
 
                 {/* Area */}
                 <div>
-                  <label className="text-[11px] sm:text-xs font-semibold text-white/70 uppercase tracking-wider mb-1 block">
+                  <label htmlFor="hero-area" className="text-[11px] sm:text-xs font-semibold text-white/70 uppercase tracking-wider mb-1 block">
                     Area
                   </label>
                   <div className="relative">
                     <LuMapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                     <select
+                      id="hero-area"
                       value={selectedLocation}
                       onChange={(e) => setSelectedLocation(e.target.value)}
                       className={selectClasses}
@@ -215,12 +211,13 @@ export function HeroSection() {
 
                 {/* BHK */}
                 <div>
-                  <label className="text-[11px] sm:text-xs font-semibold text-white/70 uppercase tracking-wider mb-1 block">
+                  <label htmlFor="hero-bhk" className="text-[11px] sm:text-xs font-semibold text-white/70 uppercase tracking-wider mb-1 block">
                     BHK Type
                   </label>
                   <div className="relative">
                     <LuBuilding2 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                     <select
+                      id="hero-bhk"
                       value={selectedBhk}
                       onChange={(e) => setSelectedBhk(e.target.value)}
                       className={selectClasses}
@@ -236,12 +233,13 @@ export function HeroSection() {
 
                 {/* Budget */}
                 <div>
-                  <label className="text-[11px] sm:text-xs font-semibold text-white/70 uppercase tracking-wider mb-1 block">
+                  <label htmlFor="hero-budget" className="text-[11px] sm:text-xs font-semibold text-white/70 uppercase tracking-wider mb-1 block">
                     Budget
                   </label>
                   <div className="relative">
                     <LuIndianRupee className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                     <select
+                      id="hero-budget"
                       value={selectedBudget}
                       onChange={(e) => setSelectedBudget(e.target.value)}
                       className={selectClasses}

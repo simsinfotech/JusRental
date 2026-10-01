@@ -56,7 +56,7 @@ export function Navbar() {
             <div className="flex items-center gap-3">
               <Link href="/" className="flex items-center gap-2 group">
                 <Image
-                  src="/images/logo.png"
+                  src="/images/logo.webp"
                   alt="JusRental"
                   width={180}
                   height={46}
@@ -176,6 +176,7 @@ export function Navbar() {
                 {isLoggedIn ? (
                   <Link
                     href="/admin"
+                    aria-label="My Account"
                     className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${
                       showSolidBg
                         ? 'bg-[#006194]/10 text-[#006194] hover:bg-[#006194]/20'
@@ -187,6 +188,7 @@ export function Navbar() {
                 ) : (
                   <Link
                     href="/login"
+                    aria-label="Login"
                     className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${
                       showSolidBg
                         ? 'bg-slate-100 text-[#3f4850] hover:bg-slate-200'
