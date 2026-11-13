@@ -21,6 +21,7 @@ export interface Property {
   postedDate: string;
   verificationFee: number;
   concierge: string;
+  ownerId?: string;
   seoTitle?: string;
   seoDescription?: string;
   seoKeywords?: string;

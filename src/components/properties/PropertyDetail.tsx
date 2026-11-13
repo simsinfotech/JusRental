@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { LuMapPin, LuCalendar, LuHouse, LuCompass, LuUsers, LuChevronRight, LuShare2, LuHeart, LuWifi, LuDumbbell, LuCar, LuZap, LuWaves, LuShield, LuDroplets, LuAirVent, LuArrowUpDown, LuSchool, LuHospital, LuTrainFront, LuShoppingBag, LuTreePine, LuUtensilsCrossed, LuMessageCircle, LuShieldCheck, LuCamera, LuExternalLink, LuPhone, LuCircleCheckBig, LuSparkles, LuMaximize2, LuBuilding2, LuX, LuChevronLeft } from 'react-icons/lu';
 import { getPropertyWhatsAppURL, WHATSAPP_NUMBER } from '@/lib/constants';
 import { PropertyCard } from '@/components/properties/PropertyCard';
+import { OwnerDetailsCard } from '@/components/properties/OwnerDetailsCard';
 import { createSupabaseBrowser } from '@/lib/supabase-browser';
 import type { Property } from '@/types';
 
@@ -633,6 +634,11 @@ export function PropertyDetail({ property, similar }: PropertyDetailProps) {
                   <LuPhone className="w-5 h-5" />
                 </a>
               </div>
+
+              {/* Owner Details Card */}
+              {property.ownerId && (
+                <OwnerDetailsCard ownerId={property.ownerId} propertyId={property.id} />
+              )}
 
               {/* Safety Capsule */}
               <div className="p-3 rounded-xl bg-[#f2f3ff] flex items-center justify-between text-[#3f4850] text-sm">

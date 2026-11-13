@@ -132,6 +132,7 @@ export function mapDbProperty(row: DbProperty): Property {
     postedDate: row.posted_date,
     verificationFee: row.verification_fee ?? 599,
     concierge: row.concierge_name ?? 'JusRental Team',
+    ownerId: row.owner_id,
     seoTitle: row.seo_title ?? '',
     seoDescription: row.seo_description ?? '',
     seoKeywords: row.seo_keywords ?? '',
